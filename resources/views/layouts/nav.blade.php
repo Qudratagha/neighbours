@@ -72,9 +72,9 @@
                             </ul>
                         </li>
 
-                        <li aria-haspopup="true"><a  class="sub-icon @if(request()->route()->action['as'] == 'poultry.index') active @endif ||@if(request()->route()->action['as'] == 'poultry_daily.indexDaily') active @endif  "><i class="typcn typcn-arrow-move-outline"></i> Poultry <i class="fa fa-angle-down horizontal-icon"></i></a>
+                        <li aria-haspopup="true"><a href="{{route('poultry.index')}}" class="sub-icon @if(request()->route()->action['as'] == 'poultry.index') active @endif ||@if(request()->route()->action['as'] == 'poultry_daily.indexDaily') active @endif  "><i class="typcn typcn-arrow-move-outline"></i> Poultry <i class="fa fa-angle-down horizontal-icon"></i></a>
                             <ul class="sub-menu">
-                                <li aria-haspopup="true"><a href="{{route('poultry.index')}}"  class="sub-icon @if(request()->route()->action['as'] == 'poultry.index') active @endif">Poultry</a></li>
+{{--                                <li aria-haspopup="true"><a href="{{route('poultry.index')}}"  class="sub-icon @if(request()->route()->action['as'] == 'poultry.index') active @endif">Poultry</a></li>--}}
                                 <li aria-haspopup="true"><a href="{{route('poultry_daily.indexDaily')}}"  class="sub-icon @if(request()->route()->action['as'] == 'poultry_daily.indexDaily') active @endif">Poultry Daily</a></li>
                             </ul>
                         </li>

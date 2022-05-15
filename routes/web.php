@@ -32,6 +32,8 @@ Route::resource('/poultry', PoultryController::class);
 Route::get('poultry_daily',[\App\Http\Controllers\PoultryController::class, 'indexDaily'])->name('poultry_daily.indexDaily');
 Route::post('/poultry_daily',[\App\Http\Controllers\PoultryController::class, 'storeDaily'])->name('poultry_daily.storeDaily');
 
+Route::delete('/poultry_daily/{poultry_daily}',[\App\Http\Controllers\Poultrycontroller::class,'eggdel'])->name('poultry_daily.eggdel');
+
 //cultivation
 Route::resource('/cultivation', CultivationController::class);
 

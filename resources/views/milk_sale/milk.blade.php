@@ -45,20 +45,21 @@
             <tr>
                 <th class="wd-15p">ID</th>
                 <th class="wd-25p">Date</th>
-
                 <th class="wd-15p">Quantity</th>
                 <th class="wd-15p">Total Amount</th>
                 <th class="wd-15p">Description</th>
             </tr>
             </thead>
             <tbody>
-{{--            @foreach($transactions as $t)--}}
-{{--                <tr>--}}
-{{--                    <td>{{$loop->iteration}}</td>--}}
-{{--                    <td>{{$t->date ?? ''}}</td>--}}
-{{--                    <td>{{$t->quantity ?? ''}} Liters</td>--}}
-{{--                </tr>--}}
-{{--            @endforeach--}}
+            @foreach($soldMilk as $t)
+                <tr>
+                    <td>{{$loop->iteration}}</td>
+                    <td>{{$t->date ?? ''}}</td>
+                    <td>{{$t->quantity ?? ''}} Liters</td>
+                    <td></td>
+                    <td>{{$t->description ?? ''}} Liters</td>
+                </tr>
+            @endforeach
             </tbody>
         </table>
     </div>

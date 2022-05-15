@@ -9,7 +9,7 @@
             <div class="page-header">
                 <ol class="breadcrumb"><!-- breadcrumb -->
                     <li class="breadcrumb-item"><a href="{{route('cattle.index','cow')}}">All Cows</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">{{ __('Sale Cow') }}</li>
+                    <li class="breadcrumb-item active" aria-current="page">{{ __('Milk Cow') }}</li>
                 </ol><!-- End breadcrumb -->
             </div>
             <!-- End page-header -->

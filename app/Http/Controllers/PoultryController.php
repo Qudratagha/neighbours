@@ -22,10 +22,11 @@ class PoultryController extends Controller
         $poultries = Poultry::all();
         return view('poultry.index',compact('poultry_types','poultry_statuses', 'poultries'));
     }
+
     public function indexDaily(Poultry $poultry)
     {
-        $eggs = Transaction::where('sub_head_id', 15 )->get();
-        $hens = Transaction::where('sub_head_id', 16 )->get();
+        $eggs = Transaction::where('sub_head_id', 16 )->get();
+        $hens = Transaction::where('sub_head_id', 17 )->get();
         $chicks = Transaction::where('sub_head_id', 17 )->get();
         $vaccines = Vaccination::where('sub_head_id', 20 )->get();
         $medicines = Medicines::where('sub_head_id', 21 )->get();
@@ -41,6 +42,7 @@ class PoultryController extends Controller
         Poultry::create($request->all());
         return redirect(route('poultry.index'))->with('message', 'Entry Created');
     }
+
     public function show(Poultry $poultry)
     {
         return view('poultry.view');
@@ -53,20 +55,30 @@ class PoultryController extends Controller
         $poultries = Poultry::all();
         return view('poultry.edit',compact('poultry','poultry_types','poultry_statuses','poultries'));
     }
+
     public function update(Request $request, Poultry $poultry)
     {
         $poultry->update($request->all());
         return redirect(route('poultry.index'))->with('message', 'Edit Successfully');
     }
+
     public function destroy(Poultry $poultry)
     {
         $poultry->delete();
         return redirect(route('poultry.index'))->with('message', 'Entry Deleted');
     }
+
+    public function eggdel($poultry_daily)
+    {
+        $eggt = Transaction::where('id',$poultry_daily);
+        $eggt->delete();
+        return redirect()->back()->with('message', 'Entry Deleted');
+    }
     public function storeDaily(Request $request)
     {
         if (isset($_POST['deleteEgg']))
         {
+            dd($request);
             return "sss";
             $eggt = Transaction::where('id',15);
             $eggt->delete();
@@ -85,6 +97,7 @@ class PoultryController extends Controller
            $request['account_head_id'] = 4;
            $sub_head_id = AccountHead::where('name', "eggs")->pluck('id')->last();
            $request['sub_head_id'] = $sub_head_id;
+
            Transaction::Create($request->except('submitEgg'));
            return redirect()->back()->with('message', 'Eggs Sold');
        }

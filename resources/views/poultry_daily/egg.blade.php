@@ -64,9 +64,9 @@
                     <td>{{$egg->amount ?? ''}} </td>
                     <td>{{$egg->description ?? ''}}</td>
                     <td>
-                        <form method="POST" action="{{ route('poultry_daily.storeDaily',$egg->id ) }}">
-                            @csrf
+                        <form method="POST" action="{{ route('poultry_daily.eggdel',$egg->id ) }}">
                             @method('DELETE')
+                            @csrf
                             <button type="submit" name="deleteEgg" class="btn btn-sm btn-danger" data-toggle="tooltip" title="Delete"><i class="fe fe-trash"></i></button>
                         </form>
                     </td>

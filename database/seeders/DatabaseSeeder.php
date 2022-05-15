@@ -28,7 +28,7 @@ class DatabaseSeeder extends Seeder
 //            CultivationSeeder::class,
             CattleTypeSeeder::class,
             PoultryTypeSeeder::class,
-//            PoultryStatusSeeder::class,
+            PoultryStatusSeeder::class,
 //            PoultrySeeder::class,
 //            DrySeeder::class,
 //            DeadSeeder::class,

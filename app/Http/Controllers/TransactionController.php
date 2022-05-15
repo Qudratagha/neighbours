@@ -23,12 +23,13 @@ class TransactionController extends Controller
     {
 //      $cows = Cattle::with('account_head.transactionsSubHead')->where('cattle_type_id',1)->get();
 //      dd($cows);
-//        $cows = Cattle::with(['account_head.transactionsSubHead' => function($query) {
-//            return $query->where('account_head_id',13);
+//        $cows = Cattle::with(['account_head.transactionSubHeads' => function($query) {
+//            return $query->where('account_head_id',17);
 //        }])->where('cattle_type_id',1)->get();
+
         $cows = Cattle::where('cattle_type_id',1)->get();
 
-        $soldCow = Transaction::where('account_head_id',13)->get();
+        $soldCow = Transaction::where('account_head_id',17)->get();
 
 //        dd($cows);
 //        $soldcowarr = [];
@@ -47,12 +48,12 @@ class TransactionController extends Controller
 //            else $soldCow = [null];
 //        }
 //       dd($soldcowarr);
-        return view('cow_sale.index', compact('cows','soldCow'));
+        return view('cow_sale.index', compact('cows', 'soldCow'));
     }
 
     public function indexMilkSale()
     {
-        $soldMilk  = Transaction::whereRaw("account_head_id = 13 AND sub_head_id = 15")->get();
+        $soldMilk  = Transaction::whereRaw("account_head_id = 15 AND sub_head_id = 15")->get();
         return view('milk_sale.index',compact('soldMilk'));
     }
 
@@ -73,7 +74,7 @@ class TransactionController extends Controller
         {
             $cow = $request->cow_serial;
             $request['transaction_type_id'] = 1;
-            $request['account_head_id'] = 13;
+            $request['account_head_id'] = 17;
             $request['quantity'] = 1;
             $sub_head_id = AccountHead::where('name', "cow#$cow")->pluck('id')->last();
             $request['sub_head_id'] = $sub_head_id;
@@ -86,7 +87,7 @@ class TransactionController extends Controller
         if (isset($_POST['submitMilkSale']))
         {
             $request['transaction_type_id'] = 1;
-            $request['account_head_id'] = 13;
+            $request['account_head_id'] = 15;
             $request['sub_head_id'] = 15;
 
             Transaction::create($request->except('submitMilkSale'));

@@ -10,7 +10,7 @@
             <div class="page-header">
                 <ol class="breadcrumb"><!-- breadcrumb -->
                     <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Dashboard</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">{{ __('Dashboard') }}</li>
+                    <li class="breadcrumb-item active" aria-current="page">{{ __('Poultry') }}</li>
                 </ol><!-- End breadcrumb -->
                 <div class="ml-auto">
                     <div class="input-group">
@@ -38,7 +38,7 @@
                                         <th>Quantity</th>
                                         <th>Poultry Type</th>
                                         <th>Poultry Status</th>
-                                        <th>Edit Delete</th>
+                                        <th>Actions</th>
                                     </tr>
                                     </thead>
                                     <tbody>

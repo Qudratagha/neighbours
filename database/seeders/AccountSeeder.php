@@ -73,9 +73,29 @@ class AccountSeeder extends Seeder
                 'parent_id' => '5'
             ],
             [
-                'name'      => 'milk',
+                'name'      => 'milk sale',
                 'parent_id' => '13'
-            ]
+            ],
+            [
+                'name'      => 'cow sale',
+                'parent_id' => '13'
+            ],
+            [
+                'name'      => 'goat/sheep sale',
+                'parent_id' => '13'
+            ],
+            [
+                'name'      => 'egg sale',
+                'parent_id' => '13'
+            ],
+            [
+                'name'      => 'hen sale',
+                'parent_id' => '13'
+            ],
+            [
+                'name'      => 'chick sale',
+                'parent_id' => '13'
+            ],
         ]);
 
 //        $account =
