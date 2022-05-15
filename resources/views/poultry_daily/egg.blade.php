@@ -52,7 +52,7 @@
                 <th class="wd-15p">Egg Quantity</th>
                 <th class="wd-15p">Amount</th>
                 <th class="wd-15p">Detail</th>
-                <th class="wd-15p">Delete</th>
+                <th class="wd-15p">Delete Egg</th>
             </tr>
             </thead>
             <tbody>
