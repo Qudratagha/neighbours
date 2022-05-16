@@ -4,12 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Models\Rate;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class RateController extends Controller
 {
     public function index()
     {
-        return view('/rates.index');
+        $rates = Rate::groupBy('name')->where('status', 1)->get();
+
+        return view('/rates.index', compact('rates'));
     }
 
     public function create()
@@ -17,57 +20,37 @@ class RateController extends Controller
         return view('/rates.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
+        if($request->input('name','milk')){
+
+            Rate::where('name', $request->input('name','milk'))->where('status', 1)->update(['status'=>0]);
+        }
+        if($request->input('name','egg')){
+
+            Rate::where('name', $request->input('name','egg'))->where('status', 1)->update(['status'=>0]);
+        }
+
+        Rate::create($request->all());
+        return redirect()->back()->with('message','Rate Add Successfully');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Rate  $rate
-     * @return \Illuminate\Http\Response
-     */
     public function show(Rate $rate)
     {
-        //
+
+        return view('rates.show',['rate'=>$rate]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Rate  $rate
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Rate $rate)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Rate  $rate
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, Rate $rate)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Rate  $rate
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Rate $rate)
     {
         //

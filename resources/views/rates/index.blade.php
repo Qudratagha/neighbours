@@ -38,23 +38,23 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-{{--                                    @foreach($cows as $cow)--}}
-{{--                                        <tr>--}}
-{{--                                            <td>{{$loop->iteration}}</td>--}}
-{{--                                            <td>{{date('d-m-Y', strtotime($cow->date))}}</td>--}}
-{{--                                            <td>{{$cow->name}}</td>--}}
-{{--                                            <td>{{$cow->rate}}</td>--}}
-{{--                                            <td>--}}
-{{--                                                <a href="{{route('cow_daily.show',$cow->id)}}" class="btn btn-sm btn-primary" data-toggle="tooltip" title="View"><i class="fe fe-eye"></i></a>--}}
-{{--                                                <a href="{{route('cattle.edit',['cow',$cow->id])}}" class="btn btn-sm btn-success" data-toggle="tooltip" title="Edit"><i class="fe fe-edit-3"></i></a>--}}
-{{--                                                <form action="{{ route('cattle.destroy',$cow->id ) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this?');" style="display: inline-block;">--}}
-{{--                                                    @csrf--}}
-{{--                                                    @method('DELETE')--}}
-{{--                                                    <button type="submit" class="btn btn-sm btn-danger" data-toggle="tooltip" title="Delete"><i class="fe fe-trash-2"></i></button>--}}
-{{--                                                </form>--}}
-{{--                                            </td>--}}
-{{--                                        </tr>--}}
-{{--                                    @endforeach--}}
+                                    @foreach($rates as $rate)
+                                        <tr>
+                                            <td>{{$loop->iteration}}</td>
+                                            <td>{{date('d-m-Y', strtotime($rate->created_at))}}</td>
+                                            <td>{{$rate->name}}</td>
+                                            <td>{{$rate->rate}}</td>
+                                            <td>
+                                                <a href="{{route('rates.show',$rate->id)}}" class="btn btn-sm btn-primary" data-toggle="tooltip" title="View"><i class="fe fe-eye"></i></a>
+                                                <a href="{{route('rates.edit',$rate->id)}}" class="btn btn-sm btn-success" data-toggle="tooltip" title="Edit"><i class="fe fe-edit-3"></i></a>
+                                                <form action="{{ route('cattle.destroy',$rate->id ) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this?');" style="display: inline-block;">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-sm btn-danger" data-toggle="tooltip" title="Delete"><i class="fe fe-trash-2"></i></button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    @endforeach
                                     </tbody>
                                 </table>
                             </div>

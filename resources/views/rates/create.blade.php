@@ -35,11 +35,12 @@
                                         </div>
                                         <div class="form-group">
                                             <label class="form-label">Rate</label>
+                                            <input type="hidden" value="1" name="status">
                                             <input type="text" class="form-control" name="rate" placeholder="Enter Rate">
                                         </div>
                                     </div>
                                 </div>
-                                <button type="submit" name="submit" class="btn btn-primary">Submit</button>
+                                <button type="submit" class="btn btn-primary">Submit</button>
                                 <a href="{{route('rates.index')}}" type="button" class="btn btn-danger">Back</a>
                             </form>
                         </div>
