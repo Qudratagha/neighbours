@@ -40,7 +40,11 @@ class PoultryController extends Controller
     {
         $request['account_head_id'] = 8;
         Poultry::create($request->all());
-        return redirect(route('poultry.index'))->with('message', 'Entry Created');
+
+        $dbChickQuantity = Poultry::whereRaw("poultry_type_id=3 AND poultry_status_id=3")->sum('quantity') ;
+
+        dd($dbChickQuantity);
+        return redirect(route('poultry.index'))->with('message', ' Entry Created');
     }
 
     public function show(Poultry $poultry)
@@ -76,14 +80,7 @@ class PoultryController extends Controller
     }
     public function storeDaily(Request $request)
     {
-        if (isset($_POST['deleteEgg']))
-        {
-            dd($request);
-            return "sss";
-            $eggt = Transaction::where('id',15);
-            $eggt->delete();
-            return redirect()->back()->with('message', 'Entry Deleted');
-        }
+
        $accountHeadData = [];
        if (isset($_POST['submitEgg']))
        {
@@ -112,6 +109,7 @@ class PoultryController extends Controller
             $request['transaction_type_id'] = 1;
             $request['account_head_id'] = 4;
             $sub_head_id = AccountHead::where('name', "hen")->pluck('id')->last();
+
             $request['sub_head_id'] = $sub_head_id;
             Transaction::Create($request->except('submitHen'));
             return redirect()->back()->with('message', 'Hen Sold');
