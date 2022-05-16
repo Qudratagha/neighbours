@@ -44,7 +44,15 @@
                                                             </div>
                                                             <div class="form-group">
                                                                 <label for="message-text" class="form-control-label">Goats Quantity</label>
-                                                                <input type="text" class="form-control" id="quantity" name="quantity" required>
+                                                                <select name="quantity" class="form-control custom-select"  id="quantity" >
+                                                                    @foreach($goats as $goat)
+                                                                        <option value="{{$goat->serial_no}}">{{$goat->serial_no}}</option>
+                                                                    @endforeach
+                                                                </select>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="message-text" class="form-control-label">Amount</label>
+                                                                <input type="number" class="form-control" id="amount" name="amount" required>
                                                             </div>
                                                             <div class="form-group">
                                                                 <label for="message-text" class="form-control-label">Description</label>
@@ -52,7 +60,7 @@
                                                             </div>
                                                             <div class="modal-footer">
                                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                                <button type="submit" name="submitGoat" class="btn btn-primary">Sale Goat</button>
+                                                                <button type="submit" name="submitGoatSale" class="btn btn-primary">Sale Goat</button>
                                                             </div>
                                                         </form>
                                                     </div>
