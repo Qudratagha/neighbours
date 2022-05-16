@@ -80,3 +80,6 @@ Route::post('/milk_sale',[\App\Http\Controllers\TransactionController::class, 's
 Route::get('/goat_sale',[\App\Http\Controllers\TransactionController::class, 'indexGoatSale'])->name('goat_sale.index');
 Route::post('/goat_sale',[\App\Http\Controllers\TransactionController::class, 'store'])->name('goat_sale.store');
 Route::get('/goat_sale/{goat_sale}',[\App\Http\Controllers\TransactionController::class, 'showCowSale'])->name('goat_sale.show');
+
+//rate
+Route::resource('/rates', \App\Http\Controllers\RateController::class);
