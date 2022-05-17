@@ -7,6 +7,7 @@ use App\Models\Cattle;
 use App\Models\Delivery;
 use App\Models\Medicines;
 use App\Models\Pregnant;
+use App\Models\Rate;
 use App\Models\Sick;
 use App\Models\Transaction;
 use App\Models\Vaccination;
@@ -86,6 +87,11 @@ class TransactionController extends Controller
 //        sale milk
         if (isset($_POST['submitMilkSale']))
         {
+            $quantity = $request->quantity;
+            $rate = Rate::where('name','milk')->where('status',1)->get('rate')->last();
+            $rate = ($rate->rate)*($quantity);
+
+            $request['amount'] = $rate;
             $request['transaction_type_id'] = 1;
             $request['account_head_id'] = 15;
             $request['sub_head_id'] = 15;

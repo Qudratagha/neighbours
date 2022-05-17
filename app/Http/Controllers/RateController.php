@@ -5,14 +5,20 @@ namespace App\Http\Controllers;
 use App\Models\Rate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Response;
 
 class RateController extends Controller
 {
     public function index()
     {
-        $rates = Rate::groupBy('name')->where('status', 1)->get();
+        $rates = Rate::recentRate()->get();
+        if ($rates)
+        {
+            return view('/rates.index', compact('rates'));
+        }
+        else return view('/rates.index');
 
-        return view('/rates.index', compact('rates'));
+
     }
 
     public function create()
@@ -37,8 +43,9 @@ class RateController extends Controller
 
     public function show(Rate $rate)
     {
-
-        return view('rates.show',['rate'=>$rate]);
+        $name = $rate->name;
+        $rates = Rate::where('name',$name)->get();
+        return view('rates.show',['rates'=>$rates, 'rate'=>$rate]);
     }
 
     public function edit(Rate $rate)

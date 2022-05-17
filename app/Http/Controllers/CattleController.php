@@ -107,22 +107,15 @@ class CattleController extends Controller
 
         //store milk
         if (isset($_POST['submitMilk'])) {
-            $cow_daily = $request->cow_id;
-
-            $accountHeadData = array
-            (
-                'name' => "cow#$cow_daily",
-                'parent_id' => 4
-            );
-            AccountHead::updateOrCreate($accountHeadData);
+            $cowSerial = $request->serial_no;
 
             $request['transaction_type_id'] = 3;
-            $request['account_head_id'] = 1;
-            $sub_head_id = AccountHead::where('name', "cow#$cow_daily")->pluck('id')->last();
+            $request['account_head_id'] = 21;
+            $sub_head_id = AccountHead::where('name', "cow#$cowSerial")->pluck('id')->last();
 
             $request['sub_head_id'] = $sub_head_id;
 
-            Transaction::create($request->except(['cow_id', 'submitMilk']));
+            Transaction::create($request->except(['serial_no', 'submitMilk']));
 
             return redirect()->back()->with('message', 'Goat Added Successfully');
         }
@@ -141,11 +134,12 @@ class CattleController extends Controller
     public function cowDaily(Cattle $cow_daily)
     {
         $cowID = $cow_daily->id;
-        $sub_head_id = AccountHead::where('name',"cow#$cowID")->pluck('id')->last();
+        $cow_serial = $cow_daily->serial_no;
+        $sub_head_id = AccountHead::where('name',"cow#$cow_serial")->pluck('id')->last();
 
         if ($sub_head_id != '')
         {
-            $transactions = Transaction::whereRaw("account_head_id = 1 AND sub_head_id = $sub_head_id")->get();
+            $transactions = Transaction::whereRaw("account_head_id = 21 AND sub_head_id = $sub_head_id")->get();
         }
         else $transactions = [null];
 

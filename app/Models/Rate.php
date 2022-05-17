@@ -10,4 +10,9 @@ class Rate extends Model
     use HasFactory;
 
     protected $guarded = [];
+
+    public function scopeRecentRate($q)
+    {
+        return $q->where('status', 1);
+    }
 }
