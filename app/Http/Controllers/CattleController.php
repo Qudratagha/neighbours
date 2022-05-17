@@ -27,8 +27,10 @@ class CattleController extends Controller
 {
     public function index(String $cattle_type)
     {
+        $goats = Cattle::goats()->get();
+        dd($goats);
         $goats = Cattle::whereIn('cattle_type_id' , [2,3] )->get();
-        $cows = Cattle::where('cattle_type_id',1)->get();
+        $cows = Cattle::cows()->get();
 
         if ($cattle_type == 'cow' || $cattle_type == 'goat')
         {

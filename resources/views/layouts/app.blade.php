@@ -43,6 +43,10 @@
     <link href="/assets/plugins/iconfonts/icons.css" rel="stylesheet" />
     <link  href="/assets/fonts/fonts/font-awesome.min.css" rel="stylesheet">
 
+    <!---Select 2--->
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
+
     <!-- Data table css -->
     <link href="/assets/plugins/datatable/dataTables.bootstrap4.min.css" rel="stylesheet" />
     <link href="/assets/plugins/datatable/responsivebootstrap4.min.css" rel="stylesheet" />
@@ -147,6 +151,10 @@
 <script src="/assets/plugins/datatable/datatable.js"></script>
 
 <script src="/assets/plugins/datatable/dataTables.responsive.min.js"></script>
+
+<!---Select 2--->
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
 
 <!-- Custom js-->
 <script src="/assets/js/custom.js"></script>

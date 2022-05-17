@@ -41,6 +41,14 @@ class Cattle extends Model
         return $this->belongsTo(CattleType::class,'cattle_type_id', 'id');
     }
 
+    public function scopeGoats($q) {
+        return $q->where('cattle_type_id',2);
+    }
+
+    public function scopeCows($q) {
+        return $q->where('cattle_type_id',1);
+    }
+
     public function account_head(){
         return $this->belongsTo(AccountHead::class,'account_head_id', 'id');
     }

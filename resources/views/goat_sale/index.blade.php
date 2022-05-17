@@ -44,7 +44,7 @@
                                                             </div>
                                                             <div class="form-group">
                                                                 <label for="message-text" class="form-control-label">Goats Quantity</label>
-                                                                <select name="quantity" class="form-control custom-select"  id="quantity" >
+                                                                <select name="quantity[]" class="form-control "  id="quantity" multiple="multiple">
                                                                     @foreach($goats as $goat)
                                                                         <option value="{{$goat->serial_no}}">{{$goat->serial_no}}</option>
                                                                     @endforeach
@@ -79,13 +79,13 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        {{--            @foreach($transactions as $t)--}}
-                                        {{--                <tr>--}}
-                                        {{--                    <td>{{$loop->iteration}}</td>--}}
-                                        {{--                    <td>{{$t->date ?? ''}}</td>--}}
-                                        {{--                    <td>{{$t->quantity ?? ''}} Liters</td>--}}
-                                        {{--                </tr>--}}
-                                        {{--            @endforeach--}}
+                                            @foreach($transaction as $t)
+                                                <tr>
+                                                    <td>{{$loop->iteration}}</td>
+                                                    <td>{{$t->date ?? ''}}</td>
+                                                    <td>{{$t->quantity ?? ''}}</td>
+                                                </tr>
+                                            @endforeach
                                         </tbody>
                                     </table>
                                 </div>
@@ -108,5 +108,9 @@
                 $(this).toggleClass('active');
             });
         });
+
+        $(function(){
+            $('#quantity').select2();
+        })
     </script>
 @endsection
