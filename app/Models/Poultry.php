@@ -17,6 +17,18 @@ class Poultry extends Model
     public function poultryType(){
         return $this->belongsTo(PoultryType::class,'poultry_type_id','id');
     }
+    public function scopeType($q, $value) {
+        return $q->where('poultry_type_id',$value);
+    }
+    public function scopeHens($q) {
+        return $q->where('poultry_type_id',1);
+    }
+    public function scopeChicks($q) {
+        return $q->where('poultry_type_id',2);
+    }
+    public function scopeEggs($q) {
+        return $q->where('poultry_type_id',3);
+    }
     public function poultryStatus(){
         return $this->belongsTo(PoultryStatus::class,'poultry_status_id','id');
     }

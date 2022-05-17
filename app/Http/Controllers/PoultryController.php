@@ -10,21 +10,37 @@ use App\Models\PoultryStatus;
 use App\Models\PoultryType;
 use App\Models\Transaction;
 use App\Models\Vaccination;
+use Illuminate\Foundation\Console\PolicyMakeCommand;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use phpDocumentor\Reflection\Types\Integer;
+use Illuminate\Http\Response;
+
 
 class PoultryController extends Controller
 {
     public function index()
     {
+        $eggs = Poultry::type(3)->get();
+
+        $eggincdates =  Poultry::where('quantity','>',0)->get()->pluck('created_at');
+        $eggincquans =  Poultry::where('quantity','>',0)->get()->pluck('quantity');
+
         $poultry_types = PoultryType::all();
         $poultry_statuses = PoultryStatus::all();
         $poultries = Poultry::all();
-        return view('poultry.index',compact('poultry_types','poultry_statuses', 'poultries'));
+        return view('poultry.index',compact('poultry_types','poultry_statuses', 'poultries', 'eggincdates','eggincquans'));
+    }
+    public function getDateQuantity($date)
+    {
+        $dateQuantity = Poultry::where('created_at',$date)->pluck('quantity')->first();
+        return  response()->json($dateQuantity);
     }
 
     public function indexDaily(Poultry $poultry)
     {
+
+
         $eggs = Transaction::where('sub_head_id', 16 )->get();
         $hens = Transaction::where('sub_head_id', 17 )->get();
         $chicks = Transaction::where('sub_head_id', 17 )->get();
@@ -34,16 +50,23 @@ class PoultryController extends Controller
     }
     public function create()
     {
-        //
+
     }
     public function store(Request $request)
     {
         $request['account_head_id'] = 8;
+        $pti =  $request->poultry_type_id;
+        $psi =  $request->poultry_status_id;
+        if ($pti =='3' && $psi =='3')
+            {
+                $request['status'] = 'incubated';
+            }
+        else
+            {
+                $request['status'] = 'collected';
+            }
         Poultry::create($request->all());
-
-        $dbChickQuantity = Poultry::whereRaw("poultry_type_id=3 AND poultry_status_id=3")->sum('quantity') ;
-
-        dd($dbChickQuantity);
+        $dbChickQuantity = Poultry::whereRaw("poultry_type_id=3 AND poultry_status_id=3 AND status='incubated'")->sum('quantity') ;
         return redirect(route('poultry.index'))->with('message', ' Entry Created');
     }
 

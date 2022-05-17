@@ -83,10 +83,7 @@
                 <div class="modal-body">
                     <form method="post" action="{{route('poultry.store')}}" >
                         @csrf
-                        <div class="form-group">
-                            <label for="quantity" class="form-control-label">Quantity:</label>
-                            <input type="number" class="form-control" name="quantity" id="quantity" required>
-                        </div>
+
                         <div class="form-group ">
                             <label class="form-label">Poultry Type</label>
                             <select name="poultry_type_id" class="form-control select2 custom-select" required onchange="change_status(this.value);">
@@ -98,10 +95,49 @@
                         </div>
                         <div class="form-group ">
                             <label class="form-label">Poultry Status</label>
-                            <select name="poultry_status_id" id="poultry_status_id" class="form-control select2 custom-select" required>
-
-                            </select>
+                            <select name="poultry_status_id" id="poultry_status_id" class="form-control select2 custom-select" required></select>
                         </div>
+
+                        <div class="form-group" id="incubatedDate">
+
+                        </div>
+
+
+                        <div id="append">
+
+                        </div>
+
+
+                        {{--                        <div class="form-group ">--}}
+{{--                            <label class="form-label">Incubation Date</label>--}}
+{{--                            <select name="incubationDate" class="form-control select2 custom-select" required>--}}
+{{--                                <option value="">Please Select Incubation Date</option>--}}
+{{--                                @foreach($eggincdates as $eggincdate)--}}
+{{--                                    <option value="" >{{$eggincdate}}</option>--}}
+{{--                                @endforeach--}}
+{{--                            </select>--}}
+{{--                        </div>--}}
+
+
+{{--                        <div class="form-group ">--}}
+{{--                            <label class="form-label">Incubation Quantity</label>--}}
+{{--                            <select name="incubationDate" class="form-control select2 custom-select" required>--}}
+{{--                                <option value="">Please Select Incubation Date</option>--}}
+{{--                                @foreach($eggincquans as $eggincquan)--}}
+{{--                                    <option value="" >{{$eggincquan}}</option>--}}
+{{--                                @endforeach--}}
+{{--                            </select>--}}
+{{--                        </div>--}}
+
+
+                        <div class="form-group">
+                            <label for="quantity" class="form-control-label"> selection Quantity:</label>
+                            <input type="number" class="form-control" name="quantity" id="quantity" required>
+                            <div id="testing" class="invalid-feedback" style="display: block !important;">
+                            </div>
+                        </div>
+
+
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                             <button type="submit" class="btn btn-primary">Submit </button>
@@ -115,9 +151,48 @@
 @section('more-script')
     <script>
         @parent
+        $(document).ready(function(){
+            $eggincdate = 0;
+            $("#poultry_status_id").change(function(){
+
+                if (this.value == 2)
+                {
+                    $('#incubatedDate').html('<label class="form-label">Incubation Date</label>\n' +
+                        '                            <select id="mySelect" class="form-control dates">\n' +
+                        '                                <option value="">Please Select Incubation Date</option>--}}\n' +
+                        '                                    @foreach($eggincdates as $eggincdate)\n' +
+                        '                                        <option value={{$eggincdate}} >{{$eggincdate}}</option>\n' +
+                        '                                    @endforeach\n' +
+                        '                            </select>')
+                } else {
+                    $('#incubatedDate').html('');
+                }
+                $(document).ready(function() {
+
+                        $('#mySelect').change(function(e){
+                            var date = this.value;
+                            console.log(this.value);
+                            $.ajax({
+                                url: "{{  route('poultry.getDateQuantity',"") }}/"+date,
+                                method: 'get',
+                                success: function(result){
+                                    $('#testing').html('Your Total Incubated Eggs = '+result);
+                                    $('#quantity').change(function () {
+                                        if(this.value > result)
+                                        {
+                                            alert('Please do not exceed the Available Quantity');
+                                        }
+                                    })
+                                }});
+                        });
+
+                    });
+                })
+            });
+
+
         $(document).ready(function() {
             $('#mytable').DataTable( {
-
             });
         });
 

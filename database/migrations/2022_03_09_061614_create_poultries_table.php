@@ -19,6 +19,7 @@ return new class extends Migration
             $table->unsignedBigInteger('poultry_type_id');
             $table->unsignedBigInteger('poultry_status_id');
             $table->unsignedBigInteger('account_head_id')->nullable();
+            $table->string('status');
             $table->timestamps();
 
             $table->foreign('poultry_type_id')->references('id')->on('poultry_types');
