@@ -28,7 +28,6 @@ class TransactionController extends Controller
 //        }])->where('cattle_type_id',1)->get();
 
         $cows = Cattle::where('cattle_type_id',1)->get();
-
         $soldCow = Transaction::where('account_head_id',17)->get();
 
 //        dd($cows);
@@ -59,12 +58,14 @@ class TransactionController extends Controller
 
     public function indexGoatSale()
     {
-        return view('goat_sale.index');
+        $goats = Cattle::where('cattle_type_id', [2,3])->get();
+        $transaction = Transaction::all();
+        return view('goat_sale.index', compact('goats', 'transaction'));
     }
 
     public function create()
     {
-        //
+
     }
 
     public function store(Request $request)
@@ -92,6 +93,21 @@ class TransactionController extends Controller
 
             Transaction::create($request->except('submitMilkSale'));
             return redirect()->back()->with('message', 'Milk Sold Successfully');
+        }
+
+        //Sale Goat
+        if (isset($_POST['submitGoatSale']))
+        {
+            $request['transaction_type_id'] = 1;
+            $request['account_head_id'] = 17;
+            $all_Qtys = $request->quantity;
+            foreach ($all_Qtys as $key => $qty){
+                $request['quantity'] = $qty;
+                $sub_head_id = AccountHead::where('name', "goat#$qty")->pluck('id')->first();
+                $request['sub_head_id'] = $sub_head_id;
+                Transaction::create($request->except('submitGoatSale'));
+            }
+            return redirect()->back()->with('message', 'Goat Sold Successfully');
         }
     }
 
