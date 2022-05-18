@@ -180,22 +180,24 @@ class CattleController extends Controller
         }
     }
 
-    public function update(UpdateCattleRequest $request, Cattle $cattle_id)
+    public function update(UpdateCattleRequest $request, String $cattle_type, Cattle $cattle_id)
     {
-        if (isset($_POST['submitCow']))
+        //update cow
+        if (isset($_POST['updateCow']))
         {
-            $request['cattle_type_id']=$request->submitCow;
+            $request['cattle_type_id']=$request->updateCow;
             $request['account_head_id'] = 6;
-            $cattle_id->update($request->all());
-            return redirect()->back()->with('message', 'Cow Updated Successfully');
+            $cattle_id->update($request->except('updateCow'));
+            return CattleController::index($cattle_type);
         }
 
-        //store goat
-        if (isset($_POST['submitGoat']))
+        //update goat
+        if (isset($_POST['updateGoat']))
         {
+            $request['cattle_type_id']=$request->updateGoat;
             $request['account_head_id'] = 7;
-            $cattle_id->update($request->all());
-            return redirect()->back()->with('message', 'Goat Updated Successfully');
+            $cattle_id->update($request->except('updateCow'));
+            return CattleController::index($cattle_type);
         }
     }
 

@@ -45,7 +45,7 @@
                                                             </div>
                                                             <div class="form-group">
                                                                 <?php
-                                                                $totalMilk = \App\Models\Transaction::where('account_head_id',21)->sum('quantity');
+                                                                $totalMilk = \App\Models\Transaction::milkStock();
                                                                 ?>
                                                                 <label for="message-text" class="form-control-label">Quantity</label>
                                                                 <input type="number" class="form-control" id="quantity" name="quantity" required>

@@ -54,6 +54,8 @@ class TransactionController extends Controller
 
     public function indexMilkSale()
     {
+        $milkStock = Transaction::milkStock();
+
         $soldMilk  = Transaction::whereRaw("account_head_id = 15 AND sub_head_id = 15")->get();
         return view('milk_sale.index',compact('soldMilk'));
     }
@@ -89,6 +91,9 @@ class TransactionController extends Controller
         {
             $quantity = $request->quantity;
             $rate = Rate::where('name','milk')->where('status',1)->get('rate')->last();
+            if (!$rate){
+                return redirect()->back()->with('message', 'Please Add Milk Rate First');
+            }
             $rate = ($rate->rate)*($quantity);
 
             $request['amount'] = $rate;
@@ -97,7 +102,8 @@ class TransactionController extends Controller
             $request['sub_head_id'] = 15;
 
             Transaction::create($request->except('submitMilkSale'));
-            return redirect()->back()->with('message', 'Milk Sold Successfully');
+            return redirect()->back()->with('message', 'Milk Sold Successful');
+
         }
     }
 
