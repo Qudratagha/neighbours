@@ -16,11 +16,9 @@ class ModuleSeeder extends Seeder
     public function run()
     {
         $aryModules = [
-            ['id' => 1, 'moduleCode' => 'COW','moduleName' => 'Cow Module'],
-            ['id' => 2, 'moduleCode' => 'GOAT','moduleName' => 'Goat Module'],
-            ['id' => 3, 'moduleCode' => 'SHEEP', 'moduleName' => 'Sheep Module'],
-            ['id' => 4, 'moduleCode' => 'POULTRY','moduleName' => 'Poultry Module'],
-            ['id' => 5, 'moduleCode' => 'CULTIVATION','moduleName' => 'Cultivation Module'],
+            ['id' => 1, 'moduleCode' => 'CATTLE','moduleName' => 'Cattle Module'],
+            ['id' => 2, 'moduleCode' => 'POULTRY','moduleName' => 'Poultry Module'],
+            ['id' => 3, 'moduleCode' => 'CULTIVATION','moduleName' => 'Cultivation Module'],
         ];
         foreach ($aryModules as $module) {
             DB::table('modules')->insert(['moduleCode' => $module['moduleCode'],'moduleName' => $module['moduleName'],'id' => $module['id']]);
