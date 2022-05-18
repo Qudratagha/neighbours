@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('access_levels', function (Blueprint $table) {
+        Schema::create('accessLevel', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->timestamps();
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('access_levels');
+        Schema::dropIfExists('accessLevel');
     }
 };
