@@ -20,13 +20,18 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
 use phpDocumentor\Reflection\Types\String_;
 use function Symfony\Component\HttpFoundation\all;
+use Symfony\Component\HttpFoundation\Response;
+use Gate;
 
 //use Yajra\DataTables\DataTables;
 
 class CattleController extends Controller
 {
+
+
     public function index(String $cattle_type)
     {
+        abort_if(Gate::denies('cattle read'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         $goats = Cattle::goats()->get();
         $goats = Cattle::whereIn('cattle_type_id' , [2,3] )->get();
         $cows = Cattle::cows()->get();
