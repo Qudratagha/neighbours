@@ -1,4 +1,4 @@
-@extends('layouts.nav')
+    @extends('layouts.nav')
 @section('title', 'Goat/Sheep')
 @section('app-content', 'app-content')
 

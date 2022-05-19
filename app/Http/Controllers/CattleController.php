@@ -28,7 +28,6 @@ class CattleController extends Controller
     public function index(String $cattle_type)
     {
         $goats = Cattle::goats()->get();
-        dd($goats);
         $goats = Cattle::whereIn('cattle_type_id' , [2,3] )->get();
         $cows = Cattle::cows()->get();
 
@@ -217,10 +216,10 @@ class CattleController extends Controller
         }
     }
 
-    public function destroy(Cattle $cow)
+    public function destroy(String $cattle_type, Cattle $cattle)
     {
-        $cow->delete();
-        return redirect(route('cow.index'));
+        $cattle->cattles()->delete();
+        return redirect(route('cattle'.$cattle_type.'index'));
     }
 
 }
