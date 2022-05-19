@@ -20,7 +20,7 @@
                                 <li class="nav-item dropdown header-option m-2">
                                     <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
                                         <i class="fe fe-user mr-2"></i>
-{{--                                            {{ Auth::user()->name }}--}}
+                                            {{ Auth::user()->name }}
                                         <i class="mr-2"></i>
                                     </a>
 

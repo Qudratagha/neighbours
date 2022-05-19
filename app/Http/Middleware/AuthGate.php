@@ -21,15 +21,15 @@ class AuthGate
         $user = \Auth::user();
 
         $rawSQL = "
-			SELECT LOWER(CONCAT_WS('_',privilege.privilegeCode,accessLevel.accessLevel)) AS permission
+			SELECT LOWER(CONCAT_WS('_',privilege.privilegeCode,accessLevel.name)) AS permission
 			FROM userRole
-			INNER JOIN rolePrivilege ON rolePrivilege.roleID = userRole.roleID
-			INNER JOIN privilege ON privilege.privilegeID = rolePrivilege.privilegeID
-			INNER JOIN accessLevel ON accessLevel.accessLevelID = privilege.accessLevelID
-			WHERE userRole.userID = ";
+			INNER JOIN rolePrivilege ON rolePrivilege.role_id = userRole.role_id
+			INNER JOIN privilege ON privilege.id = rolePrivilege.privilege_id
+			INNER JOIN accessLevel ON accessLevel.id = privilege.access_level_id
+			WHERE userRole.user_id = ";
 
         if (!app()->runningInConsole() && $user) {
-            $rawSQL .= $user->userID;
+            $rawSQL .= $user->id;
             $userPermissions = DB::select($rawSQL);
 
 

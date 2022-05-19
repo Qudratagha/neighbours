@@ -16,6 +16,7 @@ use App\Models\Transaction;
 use App\Models\Vaccination;
 use Dflydev\DotAccessData\Data;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
 use phpDocumentor\Reflection\Types\String_;
@@ -27,11 +28,15 @@ use Gate;
 
 class CattleController extends Controller
 {
-
+ public function __construct()
+{
+    $this->middleware('auth');
+    $this->middleware('auth.gates');
+}
 
     public function index(String $cattle_type)
     {
-        abort_if(Gate::denies('cattle read'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(Gate::denies('cattle_read'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         $goats = Cattle::goats()->get();
         $goats = Cattle::whereIn('cattle_type_id' , [2,3] )->get();
         $cows = Cattle::cows()->get();
@@ -44,6 +49,8 @@ class CattleController extends Controller
 
     public function create(string $cattle_type)
     {
+        abort_if(Gate::denies('cattle_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
         $goats = Cattle::whereIn('cattle_type_id', [2,3])->get();
         $cows = Cattle::where('cattle_type_id',1)->get();
 
@@ -147,6 +154,7 @@ class CattleController extends Controller
 
     public function show(Cattle $cattle)
     {
+        abort_if(Gate::denies('cattle_read'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
     }
 
@@ -157,6 +165,8 @@ class CattleController extends Controller
     //Cow Daily Entries Show
     public function cowDaily(Cattle $cow_daily)
     {
+        abort_if(Gate::denies('cattle_read'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
         $cowID = $cow_daily->id;
         $sub_head_id = AccountHead::where('name',"cow#$cowID")->pluck('id')->last();
 
@@ -179,6 +189,8 @@ class CattleController extends Controller
     // Goat Daily Entries Show
     public function goatDaily(Cattle $goat_daily)
     {
+        abort_if(Gate::denies('cattle_read'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
         $goatID = $goat_daily->id;
         $sub_head_id = AccountHead::where('name',"goat#$goatID")->pluck('id')->last();
 
@@ -193,6 +205,8 @@ class CattleController extends Controller
 
     public function edit(String $cattle_type, Cattle $cattle_id)
     {
+        abort_if(Gate::denies('cattle_update'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
         $goats = Cattle::whereIn('cattle_type_id', [2,3])->get();
         $cows = Cattle::where('cattle_type_id',1)->get();
 
@@ -223,6 +237,8 @@ class CattleController extends Controller
 
     public function destroy(String $cattle_type, Cattle $cattle)
     {
+        abort_if(Gate::denies('cattle_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
         $cattle->cattles()->delete();
         return redirect(route('cattle'.$cattle_type.'index'));
     }
