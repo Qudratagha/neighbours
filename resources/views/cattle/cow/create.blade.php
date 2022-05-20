@@ -31,8 +31,8 @@
                                             <input type="text" onfocus= "(this. type='date')" class="form-control" name="date" value="<?php echo date('Y-m-d');?>">
                                         </div>
                                         <div class="form-group">
-                                            <label class="form-label">Cow Serial</label>
-                                            <input type="number" class="form-control" name="serial_no" placeholder="Enter Serial No">
+                                            <label class="form-label required">Cow Serial</label>
+                                            <input type="number" class="form-control " name="serial_no" placeholder="Enter Serial No">
                                         </div>
                                         <div class="form-group">
                                             <label class="form-label">Date Of Birth</label>
@@ -43,7 +43,7 @@
                                             <select name="parent_id" id="parent_id" class="form-control">
                                                 <option value="">Choose Parent</option>
                                                 @foreach($cows as $cow)
-                                                    <option value="{{$cow->parent_id}}">{{$cow->serial_no}}</option>
+                                                    <option value="{{$cow->id}}">{{$cow->serial_no}}</option>
                                                 @endforeach
                                             </select>
                                         </div>

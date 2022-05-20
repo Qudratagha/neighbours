@@ -32,8 +32,8 @@
                                         <th class="wd-15p">ID</th>
                                         <th class="wd-25p">Date</th>
                                         <th class="wd-15p">Cow-Serial</th>
-                                        <th class="wd-25p">Dry</th>
-                                        <th class="wd-25p">Dead</th>
+                                        <th class="wd-15p">Breed</th>
+                                        <th class="wd-15p">Parent</th>
                                         <th class="wd-25p" style="width: 200px; !important;">Actions</th>
                                     </tr>
                                     </thead>
@@ -43,8 +43,11 @@
                                         <td>{{$loop->iteration}}</td>
                                         <td>{{date('d-m-Y', strtotime($cow->date))}}</td>
                                         <td>{{$cow->serial_no ?? 'Null'}}</td>
-                                        <td>{{($cow->dry_date == '') ? 'Not Dry' : 'Dry'}}</td>
-                                        <td>{{($cow->dead_date == '') ? 'Alive' : 'Dead'}}</td>
+                                        <td>{{$cow->breed ?? 'Null'}}</td>
+                                        <td>{{$cow->cattleParent->serial_no ?? ''}}</td>
+
+
+                                        @if( !($cow->dead_date || $cow->dry_date || $cow->saleStatus==1))
                                         <td>
                                             <form action="{{route('cattle.store',$cow->id)}}" method="POST" onsubmit="return confirm('Are you sure you want to DRY cow with serial no: {{$cow->id}} ?');" style="display: inline-block;">
                                                 @csrf
@@ -68,6 +71,18 @@
                                                 <button type="submit" class="btn btn-sm btn-danger" data-toggle="tooltip" title="Delete"><i class="fe fe-trash-2"></i></button>
                                             </form>
                                         </td>
+                                            @else
+                                            <td>
+                                                <a href="{{route('cattle.show',['cow',$cow->id])}}" class="btn btn-sm btn-primary" data-toggle="tooltip" title="View"><i class="fe fe-eye"></i></a>
+                                                @if($cow->dead_date)
+                                                    Dead
+                                                @elseif ($cow->dry_date)
+                                                    Dry
+                                                @elseif ($cow->saleStatus == 1)
+                                                    Sold
+                                                @endif
+                                            </td>
+                                            @endif
                                     </tr>
                                     @endforeach
                                     </tbody>

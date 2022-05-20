@@ -54,6 +54,11 @@
             background-color: #1753fc;
             color: white;
         }
+        .required:after{
+            content:'*';
+            color:red;
+            padding-left:5px;
+        }
     </style>
 </head>
 <body class="@yield('body-class') ">

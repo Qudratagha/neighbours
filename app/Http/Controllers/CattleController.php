@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
 use phpDocumentor\Reflection\Types\String_;
 use function Symfony\Component\HttpFoundation\all;
+use function Symfony\Component\HttpKernel\HttpCache\load;
 
 //use Yajra\DataTables\DataTables;
 
@@ -100,6 +101,7 @@ class CattleController extends Controller
 
         //store goat
         if (isset($_POST['submitGoat'])) {
+
             $request['account_head_id'] = 7;
             Cattle::create($request->except('submitGoat'));
             return redirect()->back()->with('message', 'Goat Added Successfully');
@@ -121,12 +123,30 @@ class CattleController extends Controller
         }
     }
 
-    public function show(Cattle $cattle)
+    public function show(String $cattle_type, Cattle $cattle )
     {
 
-    }
-
-    public function showDaily(Cattle $cow_daily){
+        if ($cattle->dead_date)
+        {
+            if ($cattle_type == 'cow' || $cattle_type == 'goat')
+            {
+                return view("cattle.$cattle_type.showDead",compact('cattle','cattle_type'));
+            }
+        }
+        elseif ($cattle->dry_date)
+        {
+            if ($cattle_type == 'cow' || $cattle_type == 'goat')
+            {
+                return view("cattle.$cattle_type.showDry",compact('cattle','cattle_type'));
+            }
+        }
+        elseif ($cattle->saleStatus == 1)
+        {
+            if ($cattle_type == 'cow' || $cattle_type == 'goat')
+            {
+                return view("cattle.$cattle_type.showSold",compact('cattle','cattle_type'));
+            }
+        }
 
     }
 
@@ -194,9 +214,9 @@ class CattleController extends Controller
         //update goat
         if (isset($_POST['updateGoat']))
         {
-            $request['cattle_type_id']=$request->updateGoat;
+         //   dd($request);
             $request['account_head_id'] = 7;
-            $cattle_id->update($request->except('updateCow'));
+            $cattle_id->update($request->except('updateGoat'));
             return CattleController::index($cattle_type);
         }
     }

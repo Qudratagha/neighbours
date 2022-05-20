@@ -107,6 +107,7 @@
 @section('more-script')
     <script>
         var milkQty = {{$totalMilk}};
+
         $(function() {
             $('.act').click(function() {
                 $(this).toggleClass('active');

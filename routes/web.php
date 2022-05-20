@@ -41,7 +41,7 @@ Route::resource('/cultivation', CultivationController::class);
 Route::get('/cattle/{cattle_type}',[\App\Http\Controllers\CattleController::class,'index'])->name('cattle.index');
 Route::get('/cattle/{cattle_type}/create',[\App\Http\Controllers\CattleController::class,'create'])->name('cattle.create');
 Route::post('/cattle/{cattle_type}',[\App\Http\Controllers\CattleController::class,'store'])->name('cattle.store');
-Route::get('/cattle/{cattle_type}/view',[\App\Http\Controllers\CattleController::class,'show'])->name('cattle.show');
+Route::get('/cattle/{cattle_type}/{cattle}',[\App\Http\Controllers\CattleController::class,'show'])->name('cattle.show');
 Route::get('/cattle/{cattle_type}/{cattle_id}/edit',[\App\Http\Controllers\CattleController::class,'edit'])->name('cattle.edit');
 Route::put('/cattle/{cattle_type}/{cattle_id}',[\App\Http\Controllers\CattleController::class,'update'])->name('cattle.update');
 Route::delete('/cattle/{cattle_type}',[\App\Http\Controllers\CattleController::class,'destroy'])->name('cattle.destroy');

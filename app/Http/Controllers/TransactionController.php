@@ -75,13 +75,16 @@ class TransactionController extends Controller
         //        sale cow
         if (isset($_POST['submitCowSale']))
         {
+
             $cow = $request->cow_serial;
             $request['transaction_type_id'] = 1;
-            $request['account_head_id'] = 17;
+            $request['account_head_id'] = 16;
             $request['quantity'] = 1;
             $sub_head_id = AccountHead::where('name', "cow#$cow")->pluck('id')->last();
             $request['sub_head_id'] = $sub_head_id;
-            Transaction::create($request->except('submitCowSale','cow_serial'));
+            $request['saleStatus'] = 1;
+            Cattle::where('serial_no',$request->cow_serial)->update(['saleStatus'=>1,'date'=>now()]);
+            Transaction::create($request->except('submitCowSale','cow_serial','saleStatus'));
 
             return redirect()->back()->with('message', 'Cow Sold Successfully');
         }
@@ -92,7 +95,7 @@ class TransactionController extends Controller
             $quantity = $request->quantity;
             $rate = Rate::where('name','milk')->where('status',1)->get('rate')->last();
             if (!$rate){
-                return redirect()->back()->with('message', 'Please Add Milk Rate First');
+                return redirect()->back()->with('errorMessage', 'Please Add Milk Rate First');
             }
             $rate = ($rate->rate)*($quantity);
 

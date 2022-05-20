@@ -66,14 +66,14 @@
                                         </div>
                                         <div class="form-group">
                                             <label class="form-label">Date Of Birth</label>
-                                            <input type="date" class="form-control" name="dob">
+                                            <input type="text" onfocus= "(this. type='date')" class="form-control" name="dob" value="<?php echo date('Y-m-d');?>">
                                         </div>
                                         <div class="form-group">
                                             <label class="form-label">Parent</label>
                                             <select name="parent_id" id="parent_id" class="form-control">
                                                 <option value="">Choose Parent</option>
-                                                @foreach($cows as $cow)
-                                                    <option value="{{$cow->parent_id}}">{{$cow->serial_no}}</option>
+                                                @foreach($goats as $goat)
+                                                    <option value="{{$goat->id}}">{{$goat->serial_no}}</option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -81,7 +81,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="form-label">Entry In Farm</label>
-                                            <input type="date" class="form-control" name="entry_in_farm" >
+                                            <input type="text" onfocus= "(this. type='date')" class="form-control" name="entry_in_farm" value="<?php echo date('Y-m-d');?>">
                                         </div>
                                         <div class="form-group">
                                             <label class="form-label">Age</label>

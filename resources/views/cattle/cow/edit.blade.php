@@ -42,13 +42,10 @@
                                             <label class="form-label">Parent</label>
                                             <select name="parent_id" id="parent_id" class="form-control">
                                                 <option value="">Choose Parent</option>
-                                                <option value="">1</option>
-                                                <option value="">2</option>
-                                                <option value="">3</option>
-                                                <option value="">4</option>
-                                                <option value="">5</option>
                                                 @foreach($cows as $cow)
-                                                    <option value="{{$cow->parent_id}}">{{$cow->serial_no}}</option>
+                                                    @if($cow->parent_id)
+                                                        <option value="{{$cow->parent_id}}">{{$cow->serial_no}}</option>
+                                                    @endif
                                                 @endforeach
                                             </select>
                                         </div>
