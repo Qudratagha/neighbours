@@ -94,7 +94,6 @@ class CattleController extends Controller
         //store cow
         if (isset($_POST['submitCow']))
         {
-
             $cow_daily = $request->serial_no;
 
             $accountHeadData = array
@@ -114,6 +113,7 @@ class CattleController extends Controller
         //store goat
         if (isset($_POST['submitGoat']))
         {
+
             $goat_daily = $request->serial_no;
             $accountHeadData = array
             (
@@ -206,8 +206,8 @@ class CattleController extends Controller
     public function edit(String $cattle_type, Cattle $cattle_id)
     {
         abort_if(Gate::denies('cattle_update'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-
 //        dd($cattle_id);
+
         $goats = Cattle::whereIn('cattle_type_id', [2,3])->get();
         $cows = Cattle::where('cattle_type_id',1)->get();
 
@@ -217,7 +217,7 @@ class CattleController extends Controller
         }
     }
 
-    public function update(UpdateCattleRequest $request, Cattle $cattle_id)
+    public function update(UpdateCattleRequest $request,Cattle $cattle_id)
     {
         if (isset($_POST['submitCow']))
         {
@@ -230,6 +230,7 @@ class CattleController extends Controller
         //store goat
         if (isset($_POST['submitGoat']))
         {
+            dd($request->all());
             $request['account_head_id'] = 7;
             $cattle_id->update($request->all());
             return redirect()->back()->with('message', 'Goat Updated Successfully');

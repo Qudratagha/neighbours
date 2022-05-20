@@ -79,9 +79,10 @@
                                             <select name="parent_id" id="parent_id" class="form-control">
                                                 <option value="">Choose Parent</option>
                                                 @foreach($goats as $goat)
-                                                    <option value="{{$goat->parent_id}}" @selected($cattle_id->parent_id)>{{$goat->serial_no}}</option>
+                                                    <option value="{{$goat->id}}" {{$goat->id == $cattle_id->parent_id ? 'selected' : ''}}></option>{{$goat->serial_no}}</option>
                                                 @endforeach
                                             </select>
+{{--                                                {{dd($cattle_id->parent_id)}}--}}
                                         </div>
                                         <div class="form-group">
                                             <label class="form-label">Entry In Farm</label>
