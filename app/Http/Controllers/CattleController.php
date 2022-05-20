@@ -207,6 +207,7 @@ class CattleController extends Controller
     {
         abort_if(Gate::denies('cattle_update'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
+//        dd($cattle_id);
         $goats = Cattle::whereIn('cattle_type_id', [2,3])->get();
         $cows = Cattle::where('cattle_type_id',1)->get();
 

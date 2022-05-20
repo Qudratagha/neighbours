@@ -43,10 +43,10 @@
                                                                 <input type="text" onfocus= "(this. type='date')" class="form-control" name="date" value="<?php echo date('Y-m-d');?>" required>
                                                             </div>
                                                             <div class="form-group">
-                                                                <label for="message-text" class="form-control-label">Goats Quantity</label>
-                                                                <select name="quantity[]" class="form-control "  id="quantity" multiple="multiple">
+                                                                <label for="message-text" class="form-label">Goats Quantity</label>
+                                                                <select class="form-control quantity" name="quantity[]" multiple="multiple">
                                                                     @foreach($goats as $goat)
-                                                                        <option value="{{$goat->serial_no}}">{{$goat->serial_no}}</option>
+                                                                        <option value="{{$goat->quantity}}">{{$goat->serial_no}}</option>
                                                                     @endforeach
                                                                 </select>
                                                             </div>
@@ -89,17 +89,13 @@
                                         </tbody>
                                     </table>
                                 </div>
-                                <!-- table-wrapper -->
                             </div>
-
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        {{--      end side app --}}
     </div>
-    {{--   end container area--}}
 @endsection
 @section('more-script')
     <script>
@@ -110,7 +106,9 @@
         });
 
         $(function(){
-            $('#quantity').select2();
+            $('.quantity').select2({
+                tags: true
+            });
         })
     </script>
 @endsection

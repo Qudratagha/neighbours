@@ -42,13 +42,13 @@
                                         <div class="form-group">
                                             <label for="cattle_name" class="form-label">Select Cattle Type</label>
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="cattle_type" id="1" value="1">
+                                                <input class="form-check-input" type="radio" name="cattle_type" id="1" value="1" {!! ($cattle_id->cattle_type_id == 2 ? 'checked' : '') !!} >
                                                 <label class="form-check-label" for="flexRadioDefault1">
                                                     Goat
                                                 </label>
                                             </div>
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="cattle_type" id="0" value="0">
+                                                <input class="form-check-input" type="radio" name="cattle_type" id="0" value="0" {!! ($cattle_id->cattle_type_id == 3 ? 'checked' : '') !!}>
                                                 <label class="form-check-label" for="flexRadioDefault1">
                                                     Sheep
                                                 </label>
@@ -58,13 +58,13 @@
                                         <div class="form-group">
                                             <label for="gender" class="form-label">Select Gender</label>
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="gender" id="1" value="1">
+                                                <input class="form-check-input" type="radio" name="gender" id="1" value="1" {!! ($cattle_id->gender == 1 ? 'checked' : '') !!}>
                                                 <label class="form-check-label" for="flexRadioDefault1">
                                                     Male
                                                 </label>
                                             </div>
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="gender" id="0" value="0">
+                                                <input class="form-check-input" type="radio" name="gender" id="0" value="0" {!! ($cattle_id->gender == 0 ? 'checked' : '') !!}>
                                                 <label class="form-check-label" for="flexRadioDefault1">
                                                     Female
                                                 </label>
@@ -78,8 +78,8 @@
                                             <label class="form-label">Parent</label>
                                             <select name="parent_id" id="parent_id" class="form-control">
                                                 <option value="">Choose Parent</option>
-                                                @foreach($cows as $cow)
-                                                    <option value="{{$cow->parent_id}}">{{$cow->serial_no}}</option>
+                                                @foreach($goats as $goat)
+                                                    <option value="{{$goat->parent_id}}" @selected($cattle_id->parent_id)>{{$goat->serial_no}}</option>
                                                 @endforeach
                                             </select>
                                         </div>
