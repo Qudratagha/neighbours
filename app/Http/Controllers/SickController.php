@@ -52,6 +52,7 @@ class SickController extends Controller
 
     public function destroy(Sick $sick)
     {
-        //
+        $sick->delete();
+        return redirect()->back()->with('errorMessage','Sick Entry Deleted');
     }
 }

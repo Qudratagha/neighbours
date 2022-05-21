@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\AccountHead;
 use App\Models\Cattle;
 use App\Models\Delivery;
+use App\Models\Insemination;
 use App\Models\Medicines;
 use App\Models\Pregnant;
 use App\Models\Rate;
@@ -28,7 +29,7 @@ class TransactionController extends Controller
 //            return $query->where('account_head_id',17);
 //        }])->where('cattle_type_id',1)->get();
 
-        $cows = Cattle::where('cattle_type_id',1)->get();
+        $cows = Cattle::where('cattle_type_id',1)->where('saleStatus',0)->get();
 
         $soldCow = Transaction::where('account_head_id',17)->get();
 
@@ -75,7 +76,6 @@ class TransactionController extends Controller
         //        sale cow
         if (isset($_POST['submitCowSale']))
         {
-
             $cow = $request->cow_serial;
             $request['transaction_type_id'] = 1;
             $request['account_head_id'] = 16;
@@ -115,18 +115,19 @@ class TransactionController extends Controller
 
     }
 
-    public function edit(Transaction $transactions)
+    public function edit(Transaction $transaction)
     {
-        //
+
     }
 
-    public function update(Request $request, Transaction $transactions)
+    public function update(Request $request, Transaction $cow_daily)
     {
-        //
+
     }
 
-    public function destroy(Transaction $transactions)
+    public function destroy(Transaction $transaction)
     {
-        //
+        $transaction->delete();
+        return redirect()->back()->with('errorMessage','Milk Entry Deleted');
     }
 }

@@ -82,9 +82,7 @@ class CattleController extends Controller
         //store cow
         if (isset($_POST['submitCow']))
         {
-
             $cow_daily = $request->serial_no;
-
             $accountHeadData = array
             (
                 'name' => "cow#$cow_daily",
@@ -93,6 +91,18 @@ class CattleController extends Controller
             AccountHead::updateOrCreate($accountHeadData);
 
             $accountHeadId = AccountHead::where('name',"cow#$cow_daily")->pluck('id')->last();
+
+
+            if ($request->age){
+               Transaction::create([
+                   'date' => $request->date,
+                   'transaction_type_id' => 2,
+                   'account_head_id' => 17,
+                   'sub_head_id' => $accountHeadId,
+                   'quantity' => 1,
+                   'amount' => 500000
+               ]);
+            }
             $request['cattle_type_id'] = $request->submitCow;
             $request['account_head_id'] = $accountHeadId;
             Cattle::create($request->except('submitCow'));
@@ -101,8 +111,27 @@ class CattleController extends Controller
 
         //store goat
         if (isset($_POST['submitGoat'])) {
+            $goat_serial = $request->serial_no;
 
-            $request['account_head_id'] = 7;
+            $accountHeadData = array
+            (
+                'name' => "goat#$goat_serial",
+                'parent_id' => 7
+            );
+            AccountHead::updateOrCreate($accountHeadData);
+            $accountHeadId = AccountHead::where('name',"goat#$goat_serial")->pluck('id')->last();
+
+            if ($request->age){
+                Transaction::create([
+                    'date' => $request->date,
+                    'transaction_type_id' => 2,
+                    'account_head_id' => 18,
+                    'sub_head_id' => $accountHeadId,
+                    'quantity' => 1,
+                    'amount' => 500000
+                ]);
+            }
+            $request['account_head_id'] = $accountHeadId;
             Cattle::create($request->except('submitGoat'));
             return redirect()->back()->with('message', 'Goat Added Successfully');
         }
@@ -151,7 +180,7 @@ class CattleController extends Controller
     }
 
     //Cow Daily Entries Show
-    public function cowDaily(Cattle $cow_daily)
+    public static function cowDaily(Cattle $cow_daily)
     {
         $cowID = $cow_daily->id;
         $cow_serial = $cow_daily->serial_no;
@@ -163,7 +192,7 @@ class CattleController extends Controller
         }
         else $transactions = [null];
 
-        $sicks          =   Sick::where('cattle_id',$cowID)->get();
+        $sicks = $cow_daily->sicks()->get();
         $medicines      =   Medicines::where('sub_head_id',$sub_head_id)->get();
         $pregnants      =   Pregnant::where('cattle_id',$cowID)->get();
         $deliveries     =   Delivery::where('cattle_id',$cowID)->get();
@@ -221,10 +250,10 @@ class CattleController extends Controller
         }
     }
 
-    public function destroy(Cattle $cow)
+    public function destroy(String $cattle_type, Cattle $cattle)
     {
-        $cow->delete();
-        return redirect(route('cow.index'));
+        $cattle->delete();
+        return CattleController::index($cattle_type);
     }
 
 }
