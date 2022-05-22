@@ -148,7 +148,7 @@ class CattleController extends Controller
 
             Transaction::create($request->except(['serial_no', 'submitMilk']));
 
-            return redirect()->back()->with('message', 'Goat Added Successfully');
+            return redirect()->back()->with('message', 'Milk Added Successfully');
         }
     }
 

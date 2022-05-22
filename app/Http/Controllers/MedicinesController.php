@@ -21,7 +21,6 @@ class MedicinesController extends Controller
 
     public function store(Request $request)
     {
-
         //Submit Goat Medicine
         if (isset($_POST['submitGoat']))
         {
@@ -31,7 +30,6 @@ class MedicinesController extends Controller
             Medicines::create($request->except(['cattle_id','submitGoat']));
             return redirect()->back()->with('message','Medicine Added.');
         }
-
         //Submit Cow Medicine
         if (isset($_POST['submitCow']))
         {

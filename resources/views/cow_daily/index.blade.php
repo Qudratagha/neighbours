@@ -164,7 +164,7 @@
                                                                     </button>
                                                                 </div>
                                                                 <div class="modal-body">
-                                                                    <form method="POST" action="{{route('sick.store')}}">
+                                                                    <form method="POST" action="{{route('sickCow.store')}}">
                                                                         @csrf
                                                                         <div class="form-group">
                                                                             <label for="recipient-name" class="form-control-label">Date</label>
@@ -208,13 +208,26 @@
                                                             <td>{{$sick->date ?? ''}}</td>
                                                             <td>{{($sick->is_sick == 1) ? 'Is Sick' : 'Not Sick'}}</td>
                                                             <td>{{$sick->treatment ?? ''}}</td>
+
+                                                            @if($sick->cattle_id && $sick->is_sick == 0)
                                                             <td>
-                                                                <form action="{{ route('sick.destroy', $sick->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this?');" style="display: inline-block;">
+                                                                <form action="{{ route('sickCow.destroy', $sick->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this?');" style="display: inline-block;">
                                                                     @csrf
                                                                     @method('DELETE')
                                                                     <button type="submit" class="btn btn-sm btn-danger" data-toggle="tooltip" title="Delete"><i class="fe fe-trash-2"></i></button>
                                                                 </form>
+                                                                <form action="{{route('sickCow.store')}}" method="POST"  style="display: inline-block;">
+                                                                    @csrf
+                                                                    <input type="hidden" name="is_sick" value="0">
+                                                                    <input type="hidden" name="date" value="<?php echo date('Y-m-d')?>">
+                                                                    <input type="hidden" name="sick_id" value="{{$sick->id}}">
+                                                                    <input type="hidden" name="cattle_id" value="{{$cow_daily->id}}">
+                                                                    <button type="submit" name="submitHealthyCow" class="btn btn-sm btn-success" data-toggle="tooltip" title="Healthy"><i class="fe fe-heart"></i></button>
+                                                                </form>
                                                             </td>
+                                                            @else
+                                                                <td>hello</td>
+                                                            @endif
                                                         </tr>
                                                     @endforeach
                                                     </tbody>
@@ -240,7 +253,7 @@
                                                                     </button>
                                                                 </div>
                                                                 <div class="modal-body">
-                                                                    <form method="POST" action="{{route('medicine.store')}}">
+                                                                    <form method="POST" action="{{route('medicineCow.store')}}">
                                                                         @csrf
                                                                         <div class="form-group">
                                                                             <label for="recipient-name" class="form-control-label">Date</label>
