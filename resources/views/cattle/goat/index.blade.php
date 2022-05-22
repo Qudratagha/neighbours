@@ -33,9 +33,9 @@
                                         <th class="wd-25p">Date</th>
                                         <th class="wd-25p">Cattle Type</th>
                                         <th class="wd-25p">Serial-No</th>
+                                        <th class="wd-25p">Breed</th>
                                         <th class="wd-15p">Gender</th>
-                                        <th class="wd-25p">Dry</th>
-                                        <th class="wd-25p">Dead</th>
+                                        <th class="wd-15p">Parent</th>
                                         <th class="wd-25p" style="width: 200px">Actions</th>
 
                                     </tr>
@@ -47,9 +47,10 @@
                                             <td>{{date('d-m-Y', strtotime($goat->date)) ?? ''}}</td>
                                             <td>{{$goat->cattleType->name}}</td>
                                             <td>{{$goat->serial_no ?? 'Null'}}</td>
+                                            <td>{{$goat->breed ?? 'Null'}}</td>
                                             <td>{{($goat->gender == 1) ? 'Male' : 'female' }}</td>
-                                            <td>{{($goat->dry_date == '') ? 'Not Dry' : 'Dry'}}</td>
-                                            <td>{{($goat->dead_date == '') ? 'Alive' : 'Dead'}}</td>
+                                            <td>{{$goat->cattleParent->serial_no ?? ''}}</td>
+                                        @if(!($goat->dead_date||$goat->dry_date||$goat->saleStatus==1))
                                             <td>
                                                 <form action="{{route('cattle.store',$goat->id)}}" method="POST" onsubmit="return confirm('Are you sure you want to DRY cow with serial no: {{$goat->id}} ?');" style="display: inline-block;">
                                                     @csrf
@@ -67,12 +68,25 @@
 
                                                 <a href="{{route('goat_daily.show',$goat->id)}}" class="btn btn-sm btn-primary" data-toggle="tooltip" title="View"><i class="fe fe-eye"></i></a>
                                                 <a href="{{route('cattle.edit',['goat',$goat->id])}}" class="btn btn-sm btn-success" data-toggle="tooltip" title="Edit"><i class="fe fe-edit-3"></i></a>
-                                                <form action="{{ route('cattle.destroy',$goat->id ) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this?');" style="display: inline-block;">
+                                                <form action="{{ route('cattle.destroy',['goat',$goat->id] ) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this?');" style="display: inline-block;">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-sm btn-danger" data-toggle="tooltip" title="Delete"><i class="fe fe-trash-2"></i></button>
                                                 </form>
                                             </td>
+                                            @else
+                                                <td>
+                                                    <a href="{{route('cattle.show',['goat',$goat->id])}}" class="btn btn-sm btn-primary" data-toggle="tooltip" title="View"><i class="fe fe-eye"></i></a>
+                                                    @if($goat->dead_date)
+                                                        Dead
+                                                        @elseif ($goat->dry_date)
+                                                        Dry
+                                                    @elseif ($goat->saleStatus==1)
+                                                        Sold
+                                                    @endif
+                                                </td>
+                                                @endif
+
                                         </tr>
                                     @endforeach
                                     </tbody>

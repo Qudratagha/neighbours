@@ -28,4 +28,15 @@ class Transaction extends Model
     {
         return $this->belongsTo(TransactionType::class,'transaction_type_id','id');
     }
+
+    public static function milkStock()
+    {
+        $totalMilk = Transaction::where('account_head_id',21)->sum('quantity');
+
+        $soldMilk = Transaction::where('account_head_id',15)->sum('quantity');
+
+        $stockMilk = $totalMilk - $soldMilk;
+
+        return $stockMilk;
+    }
 }

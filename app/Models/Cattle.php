@@ -33,8 +33,12 @@ class Cattle extends Model
         return $this->hasMany(Sick::class,'cattle_id','id');
     }
 
-    public function cattles(){
+    public function cattleChildren(){
         return $this->hasMany(Cattle::class,'parent_id', 'id');
+    }
+
+    public function cattleParent(){
+        return $this->belongsTo(Cattle::class,'parent_id', 'id');
     }
 
     public function cattleType(){
@@ -52,17 +56,4 @@ class Cattle extends Model
     public function account_head(){
         return $this->belongsTo(AccountHead::class,'account_head_id', 'id');
     }
-
-//    public function dead(){
-//        return $this->belongsTo(Dead::class,'cattle_id','id');
-//    }
-//    public function dry(){
-//        return $this->belongsTo(Dry::class,'cattle_id', 'id');
-//    }
-
-//    public function feed(){
-//        return $this->belongsTo(Feed::class,'cattle_id', 'id');
-//    }
-
-
 }

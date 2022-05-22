@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\AccountHead;
 use App\Models\Cattle;
 use App\Models\Delivery;
+use App\Models\Insemination;
 use App\Models\Medicines;
 use App\Models\Pregnant;
+use App\Models\Rate;
 use App\Models\Sick;
 use App\Models\Transaction;
 use App\Models\Vaccination;
@@ -27,7 +29,7 @@ class TransactionController extends Controller
 //            return $query->where('account_head_id',17);
 //        }])->where('cattle_type_id',1)->get();
 
-        $cows = Cattle::where('cattle_type_id',1)->get();
+        $cows = Cattle::where('cattle_type_id',1)->where('saleStatus',0)->get();
         $soldCow = Transaction::where('account_head_id',17)->get();
 
 //        dd($cows);
@@ -52,6 +54,8 @@ class TransactionController extends Controller
 
     public function indexMilkSale()
     {
+        $milkStock = Transaction::milkStock();
+
         $soldMilk  = Transaction::whereRaw("account_head_id = 15 AND sub_head_id = 15")->get();
         return view('milk_sale.index',compact('soldMilk'));
     }
@@ -75,11 +79,13 @@ class TransactionController extends Controller
         {
             $cow = $request->cow_serial;
             $request['transaction_type_id'] = 1;
-            $request['account_head_id'] = 17;
+            $request['account_head_id'] = 16;
             $request['quantity'] = 1;
             $sub_head_id = AccountHead::where('name', "cow#$cow")->pluck('id')->last();
             $request['sub_head_id'] = $sub_head_id;
-            Transaction::create($request->except('submitCowSale','cow_serial'));
+            $request['saleStatus'] = 1;
+            Cattle::where('serial_no',$request->cow_serial)->update(['saleStatus'=>1,'date'=>now()]);
+            Transaction::create($request->except('submitCowSale','cow_serial','saleStatus'));
 
             return redirect()->back()->with('message', 'Cow Sold Successfully');
         }
@@ -87,12 +93,21 @@ class TransactionController extends Controller
 //        sale milk
         if (isset($_POST['submitMilkSale']))
         {
+            $quantity = $request->quantity;
+            $rate = Rate::where('name','milk')->where('status',1)->get('rate')->last();
+            if (!$rate){
+                return redirect()->back()->with('errorMessage', 'Please Add Milk Rate First');
+            }
+            $rate = ($rate->rate)*($quantity);
+
+            $request['amount'] = $rate;
             $request['transaction_type_id'] = 1;
             $request['account_head_id'] = 15;
             $request['sub_head_id'] = 15;
 
             Transaction::create($request->except('submitMilkSale'));
-            return redirect()->back()->with('message', 'Milk Sold Successfully');
+            return redirect()->back()->with('message', 'Milk Sold Successful');
+
         }
 
         //Sale Goat
@@ -116,18 +131,19 @@ class TransactionController extends Controller
 
     }
 
-    public function edit(Transaction $transactions)
+    public function edit(Transaction $transaction)
     {
-        //
+
     }
 
-    public function update(Request $request, Transaction $transactions)
+    public function update(Request $request, Transaction $cow_daily)
     {
-        //
+
     }
 
-    public function destroy(Transaction $transactions)
+    public function destroy(Transaction $transaction)
     {
-        //
+        $transaction->delete();
+        return redirect()->back()->with('errorMessage','Milk Entry Deleted');
     }
 }

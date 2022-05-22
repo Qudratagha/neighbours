@@ -21,8 +21,14 @@
                                     <input type="text" onfocus= "(this. type='date')" class="form-control" name="date" value="<?php echo date('Y-m-d');?>" required>
                                 </div>
                                 <div class="form-group">
+                                    <?php
+                                    $totalMilk = \App\Models\Transaction::where('account_head_id',21)->sum('quantity');
+                                    ?>
                                     <label for="message-text" class="form-control-label">Quantity</label>
-                                    <input type="text" class="form-control" id="quantity" name="quantity" required>
+                                    <input type="number" class="form-control" id="quantity" name="quantity" required>
+                                    <div class="invalid-feedback" style="display: block !important;">
+                                        Total Quantity Available is {{$totalMilk}} Liters
+                                    </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="message-text" class="form-control-label">Description</label>
@@ -56,8 +62,8 @@
                     <td>{{$loop->iteration}}</td>
                     <td>{{$t->date ?? ''}}</td>
                     <td>{{$t->quantity ?? ''}} Liters</td>
-                    <td></td>
-                    <td>{{$t->description ?? ''}} Liters</td>
+                    <td> Rs/- {{$t->amount ?? ''}}</td>
+                    <td>{{$t->description ?? ''}}</td>
                 </tr>
             @endforeach
             </tbody>

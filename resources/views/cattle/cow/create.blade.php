@@ -32,7 +32,35 @@
                                             <option value="1">Entry In Farm</option>
                                             <option value="2">Date Of Birth</option>
                                         </select>
-
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="form-label">Enter Date</label>
+                                            <input type="text" onfocus= "(this. type='date')" class="form-control" name="date" value="<?php echo date('Y-m-d');?>">
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="form-label required">Cow Serial</label>
+                                            <input type="number" class="form-control " name="serial_no" placeholder="Enter Serial No">
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="form-label">Date Of Birth</label>
+                                            <input type="text" onfocus= "(this. type='date')" class="form-control" name="dob" value="<?php echo date('Y-m-d');?>">
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="form-label">Parent</label>
+                                            <select name="parent_id" id="parent_id" class="form-control">
+                                                <option value="">Choose Parent</option>
+                                                @foreach($cows as $cow)
+                                                    <option value="{{$cow->id}}">{{$cow->serial_no}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="form-label">Entry In Farm</label>
+                                            <input type="text" onfocus= "(this. type='date')" class="form-control" name="entry_in_farm" value="<?php echo date('Y-m-d');?>">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
 
                                     </div>
                                 </div>
