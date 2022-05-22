@@ -12,10 +12,10 @@ class RolePrivilege extends Model
     protected $guarded= [];
 
     public function role(){
-        return $this->belongsTo('App\Models\Role', 'role_id', 'role_id');
+        return $this->belongsTo('App\Models\Role', 'role_id', 'id');
     }
 
     public function privilege(){
-        return $this->belongsTo('App\Models\Privilege', 'privilege_id', 'privilege_id');
+        return $this->belongsTo('App\Models\Privilege', 'privilege_id', 'id');
     }
 }

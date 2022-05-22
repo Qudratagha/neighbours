@@ -46,7 +46,7 @@ class Cattle extends Model
     }
 
     public function scopeGoats($q) {
-        return $q->where('cattle_type_id',2);
+        return $q->whereIn('cattle_type_id',[2,3]);
     }
 
     public function scopeCows($q) {

@@ -7,6 +7,8 @@ use App\Models\Cattle;
 use App\Http\Requests\StoreCattleRequest;
 use App\Http\Requests\UpdateCattleRequest;
 use App\Models\Insemination;
+use App\Models\Role;
+use App\Models\UserRole;
 use Carbon\Traits\Localization;
 use App\Models\Delivery;
 use App\Models\Medicines;
@@ -15,6 +17,7 @@ use App\Models\Sick;
 use App\Models\Transaction;
 use App\Models\Vaccination;
 use Dflydev\DotAccessData\Data;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -38,9 +41,7 @@ class CattleController extends Controller
 
     public function index(String $cattle_type)
     {
-//        dd(\Auth::user()->name);
         $goats = Cattle::goats()->get();
-        $goats = Cattle::whereIn('cattle_type_id' , [2,3] )->get();
         $cows = Cattle::cows()->get();
 
         if ($cattle_type == 'cow' || $cattle_type == 'goat')
@@ -115,12 +116,12 @@ class CattleController extends Controller
                    'account_head_id' => 17,
                    'sub_head_id' => $accountHeadId,
                    'quantity' => 1,
-                   'amount' => 500000
+                   'amount' => $request->amount
                ]);
             }
             $request['cattle_type_id'] = $request->submitCow;
             $request['account_head_id'] = $accountHeadId;
-            Cattle::create($request->except('submitCow'));
+            Cattle::create($request->except('submitCow','amount'));
             return redirect()->back()->with('message', 'Cow Added Successfully');
         }
 
@@ -293,7 +294,7 @@ class CattleController extends Controller
     public function destroy(String $cattle_type, Cattle $cattle)
     {
 
-        abort_if(Gate::denies('cattle_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(Gate::denies("$cattle_type-delete"), Response::HTTP_FORBIDDEN, '403 Forbidden');
         $cattle->delete();
         return CattleController::index($cattle_type);
     }

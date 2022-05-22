@@ -14,11 +14,15 @@ class AccessLevel extends Model
     protected $guarded = [];
 
     public function privilege(){
-        return $this->hasMany('App\Models\Privilege', 'id', 'id');
+        return $this->hasMany('App\Models\Privilege', 'privilege_id', 'id');
     }
 
     public function modules(){
         return $this->belongsToMany('App\Models\Module', 'privilege', 'id', 'id');
+    }
+
+    public function roles(){
+        return $this->belongsToMany('App\Models\Role', 'rolePrivilege', 'access_level_id', 'role_id');
     }
 
 }
