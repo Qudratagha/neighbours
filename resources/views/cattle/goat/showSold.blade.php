@@ -36,6 +36,7 @@
                                         <th style="font-weight: 600">Weight</th>
                                         <th style="font-weight: 600">Height</th>
                                         <th style="font-weight: 600">Sold Date</th>
+{{--                                        <th style="font-weight: 600">Sold Amount</th>--}}
 
                                     </center>
                                 </tr>

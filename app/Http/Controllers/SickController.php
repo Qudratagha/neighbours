@@ -23,8 +23,20 @@ class SickController extends Controller
     {
         if (isset($_POST['submitGoat']))
         {
+            if (Sick::where('cattle_id', $request->cattle_id )->where('is_sick',1)->exists())
+            {
+                return redirect()->back()->with('errorMessage','This Goat is already sick');
+            }
             Sick::create($request->except('submitGoat'));
             return redirect()->back()->with('message','Sick Data Added.');
+        }
+        if (Sick::where('cattle_id', $request->cattle_id )->where('is_sick',1)->exists())
+        {
+            if (isset($_POST['submitHealthyGoat']))
+            {
+                Sick::create($request->except('submitHealthyGoat','sick_id'));
+                return redirect()->back()->with('message', 'Now Your Goat is Healthy');
+            }
         }
 
         if (isset($_POST['submitCow']))
@@ -69,6 +81,6 @@ class SickController extends Controller
     public function destroy(Sick $sick)
     {
         $sick->delete();
-        return redirect()->back()->with('errorMessage','Sick Entry Deleted');
+        return redirect()->back()->with('message','Sick Entry Deleted');
     }
 }

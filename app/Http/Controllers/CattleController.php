@@ -39,10 +39,9 @@ class CattleController extends Controller
     public function index(String $cattle_type)
     {
 //        dd(\Auth::user()->name);
+//        dd($cattle_type);
         $goats = Cattle::goats()->get();
-        $goats = Cattle::whereIn('cattle_type_id' , [2,3] )->get();
         $cows = Cattle::cows()->get();
-
         if ($cattle_type == 'cow' || $cattle_type == 'goat')
         {
             abort_if(Gate::denies("$cattle_type-read"), Response::HTTP_FORBIDDEN, '403 Forbidden');
@@ -55,7 +54,6 @@ class CattleController extends Controller
 
         $goats = Cattle::whereIn('cattle_type_id', [2,3])->get();
         $cows = Cattle::where('cattle_type_id',1)->get();
-
         if ($cattle_type == 'cow' || $cattle_type == 'goat')
         {
             abort_if(Gate::denies("$cattle_type-create"), Response::HTTP_FORBIDDEN, '403 Forbidden');
@@ -148,6 +146,7 @@ class CattleController extends Controller
                 'name' => "goat#$goat_serial",
                 'parent_id' => 7
             );
+//            dd($accountHeadData );
             AccountHead::updateOrCreate($accountHeadData);
             $accountHeadId = AccountHead::where('name',"goat#$goat_serial")->pluck('id')->last();
 
@@ -157,7 +156,7 @@ class CattleController extends Controller
                     'transaction_type_id' => 2,
                     'account_head_id' => 18,
                     'sub_head_id' => $accountHeadId,
-                    'quantity' => 1,
+                    'quantity' => $request->serial_no,
                     'amount' => $request->amount
                 ]);
             }
@@ -257,7 +256,7 @@ class CattleController extends Controller
 
     public function edit(String $cattle_type, Cattle $cattle_id)
     {
-        abort_if(Gate::denies('cattle_update'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(Gate::denies("$cattle_type-update"), Response::HTTP_FORBIDDEN, '403 Forbidden');
 //        dd($cattle_id);
 
         $goats = Cattle::whereIn('cattle_type_id', [2,3])->get();
