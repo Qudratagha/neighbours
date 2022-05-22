@@ -6,19 +6,27 @@ use App\Models\Rate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Response;
+use Gate;
 
 class RateController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('auth.gates');
+    }
+
     public function index()
     {
+        abort_if(Gate::denies("rate-read"), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
         $rates = Rate::recentRate()->get();
         if ($rates)
         {
             return view('/rates.index', compact('rates'));
         }
         else return view('/rates.index');
-
-
     }
 
     public function create()

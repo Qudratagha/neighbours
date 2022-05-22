@@ -15,7 +15,8 @@ class UserRoleSeeder extends Seeder
     public function run()
     {
         $aryUserRoles = [
-            ['user_id' => 1,'role_id' => 1]
+            ['user_id' => 1,'role_id' => 1],
+            ['user_id' => 2,'role_id' => 2]
         ];
         foreach ($aryUserRoles as $userRole) {
             \Illuminate\Support\Facades\DB::table('userRole')->insert(['role_id' => $userRole['role_id'],'user_id' => $userRole['user_id']]);

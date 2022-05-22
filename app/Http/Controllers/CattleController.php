@@ -29,34 +29,36 @@ use function Symfony\Component\HttpKernel\HttpCache\load;
 
 class CattleController extends Controller
 {
- public function __construct()
-{
-    $this->middleware('auth');
-    $this->middleware('auth.gates');
-}
+
+     public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('auth.gates');
+    }
 
     public function index(String $cattle_type)
     {
-        abort_if(Gate::denies('cattle_read'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+//        dd(\Auth::user()->name);
         $goats = Cattle::goats()->get();
         $goats = Cattle::whereIn('cattle_type_id' , [2,3] )->get();
         $cows = Cattle::cows()->get();
 
         if ($cattle_type == 'cow' || $cattle_type == 'goat')
         {
+            abort_if(Gate::denies("$cattle_type-read"), Response::HTTP_FORBIDDEN, '403 Forbidden');
             return view("cattle.$cattle_type.index",compact('goats','cows'));
         }
     }
 
     public function create(string $cattle_type)
     {
-        abort_if(Gate::denies('cattle_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $goats = Cattle::whereIn('cattle_type_id', [2,3])->get();
         $cows = Cattle::where('cattle_type_id',1)->get();
 
         if ($cattle_type == 'cow' || $cattle_type == 'goat')
         {
+            abort_if(Gate::denies("$cattle_type-create"), Response::HTTP_FORBIDDEN, '403 Forbidden');
             return view("cattle.$cattle_type.create",compact('goats','cows'));
         }
     }
@@ -122,7 +124,7 @@ class CattleController extends Controller
             return redirect()->back()->with('message', 'Cow Added Successfully');
         }
 
-        //store goat
+
 
 //        if (isset($_POST['submitGoat']))
 //        {
@@ -137,7 +139,7 @@ class CattleController extends Controller
 //
 //            $accountHeadId = AccountHead::where('name',"goat#$goat_daily")->pluck('id')->last();
 //            $request['cattle_type_id'] = 2;
-
+        //store goat
         if (isset($_POST['submitGoat'])) {
             $goat_serial = $request->serial_no;
 
@@ -156,12 +158,12 @@ class CattleController extends Controller
                     'account_head_id' => 18,
                     'sub_head_id' => $accountHeadId,
                     'quantity' => 1,
-                    'amount' => 500000
+                    'amount' => $request->amount
                 ]);
             }
 
             $request['account_head_id'] = $accountHeadId;
-            Cattle::create($request->except('submitGoat'));
+            Cattle::create($request->except('submitGoat','amount'));
             return redirect()->back()->with('message', 'Goat Added Successfully');
         }
 
@@ -183,12 +185,12 @@ class CattleController extends Controller
 
     public function show(String $cattle_type, Cattle $cattle )
     {
-        abort_if(Gate::denies('cattle_read'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         if ($cattle->dead_date)
         {
             if ($cattle_type == 'cow' || $cattle_type == 'goat')
             {
+                abort_if(Gate::denies("$cattle_type-read"), Response::HTTP_FORBIDDEN, '403 Forbidden');
                 return view("cattle.$cattle_type.showDead",compact('cattle','cattle_type'));
             }
         }
@@ -196,6 +198,7 @@ class CattleController extends Controller
         {
             if ($cattle_type == 'cow' || $cattle_type == 'goat')
             {
+                abort_if(Gate::denies("$cattle_type-read"), Response::HTTP_FORBIDDEN, '403 Forbidden');
                 return view("cattle.$cattle_type.showDry",compact('cattle','cattle_type'));
             }
         }
@@ -203,6 +206,7 @@ class CattleController extends Controller
         {
             if ($cattle_type == 'cow' || $cattle_type == 'goat')
             {
+                abort_if(Gate::denies("$cattle_type-read"), Response::HTTP_FORBIDDEN, '403 Forbidden');
                 return view("cattle.$cattle_type.showSold",compact('cattle','cattle_type'));
             }
         }
@@ -212,7 +216,7 @@ class CattleController extends Controller
     //Cow Daily Entries Show
     public static function cowDaily(Cattle $cow_daily)
     {
-        abort_if(Gate::denies('cattle_read'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(Gate::denies('cow-read'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $cowID = $cow_daily->id;
         $cow_serial = $cow_daily->serial_no;
@@ -237,7 +241,7 @@ class CattleController extends Controller
     // Goat Daily Entries Show
     public function goatDaily(Cattle $goat_daily)
     {
-        abort_if(Gate::denies('cattle_read'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(Gate::denies('goat-read'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $goatID = $goat_daily->id;
         $sub_head_id = AccountHead::where('name',"goat#$goatID")->pluck('id')->last();

@@ -7,17 +7,27 @@ use Illuminate\Database\Seeder;
 
 class UserSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
     public function run()
     {
-        \Illuminate\Support\Facades\DB::table('users')->insert([
-            'name' => 'Umair',
-            'email' => 'umair@gmail.com',
-            'password' => \Illuminate\Support\Facades\Hash::make('umair123'),
-        ]);
+        $aryUserRoles = [
+            [
+                'name' => 'umair',
+                'email' => 'umair@gmail.com',
+                'password' => \Illuminate\Support\Facades\Hash::make('umair123')
+            ],
+            [
+                'name' => 'cow',
+                'email' => 'cow@gmail.com',
+                'password' => \Illuminate\Support\Facades\Hash::make('cow123')
+            ]
+        ];
+        foreach ($aryUserRoles as $userRole) {
+            \Illuminate\Support\Facades\DB::table('users')->insert(
+                [
+                    'name' => $userRole['name'],
+                    'email' => $userRole['email'],
+                    'password' => $userRole['password']
+                ]);
+        }
     }
 }

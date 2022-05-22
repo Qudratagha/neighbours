@@ -13,9 +13,18 @@ use App\Models\Sick;
 use App\Models\Transaction;
 use App\Models\Vaccination;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Gate;
 
 class TransactionController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('auth.gates');
+    }
+
     public function index()
     {
 
@@ -28,6 +37,7 @@ class TransactionController extends Controller
 //        $cows = Cattle::with(['account_head.transactionSubHeads' => function($query) {
 //            return $query->where('account_head_id',17);
 //        }])->where('cattle_type_id',1)->get();
+        abort_if(Gate::denies('cow-read'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $cows = Cattle::where('cattle_type_id',1)->where('saleStatus',0)->get();
         $soldCow = Transaction::where('account_head_id',17)->get();
@@ -54,14 +64,16 @@ class TransactionController extends Controller
 
     public function indexMilkSale()
     {
-        $milkStock = Transaction::milkStock();
+        abort_if(Gate::denies("cow-read"), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
+        $milkStock = Transaction::milkStock();
         $soldMilk  = Transaction::whereRaw("account_head_id = 15 AND sub_head_id = 15")->get();
         return view('milk_sale.index',compact('soldMilk'));
     }
 
     public function indexGoatSale()
     {
+        abort_if(Gate::denies("goat-read"), Response::HTTP_FORBIDDEN, '403 Forbidden');
         $goats = Cattle::where('cattle_type_id', [2,3])->get();
         $transaction = Transaction::all();
         return view('goat_sale.index', compact('goats', 'transaction'));
@@ -74,6 +86,7 @@ class TransactionController extends Controller
 
     public function store(Request $request)
     {
+
         //        sale cow
         if (isset($_POST['submitCowSale']))
         {
