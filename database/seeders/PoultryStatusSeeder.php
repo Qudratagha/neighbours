@@ -15,7 +15,7 @@ class PoultryStatusSeeder extends Seeder
      */
     public function run()
     {
-        $poultry = ['Die', 'Alive', 'Incubated','Collected', 'Purchase', 'Sick'];
+        $poultry = ['Die', 'Alive', 'Incubated','Collected','Converted To Hen', 'Purchase', 'Sick','Healthy'];
         foreach ($poultry as $poultries){
             DB::table('poultry_statuses')->insert(['name'=>$poultries]);
         }

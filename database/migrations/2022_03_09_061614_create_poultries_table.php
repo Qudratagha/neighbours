@@ -16,11 +16,12 @@ return new class extends Migration
         Schema::create('poultries', function (Blueprint $table) {
             $table->id();
             $table->integer('quantity');
+            $table->integer('remaining_quantity')->default(0);
             $table->unsignedBigInteger('poultry_type_id');
             $table->unsignedBigInteger('poultry_status_id');
             $table->unsignedBigInteger('account_head_id')->nullable();
             $table->string('status');
-            $table->timestamps();
+            $table->date('created_at');
 
             $table->foreign('poultry_type_id')->references('id')->on('poultry_types');
             $table->foreign('poultry_status_id')->references('id')->on('poultry_statuses');

@@ -10,6 +10,7 @@ use App\Models\PoultryStatus;
 use App\Models\PoultryType;
 use App\Models\Transaction;
 use App\Models\Vaccination;
+use Dflydev\DotAccessData\Data;
 use Illuminate\Foundation\Console\PolicyMakeCommand;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -21,11 +22,9 @@ class PoultryController extends Controller
 {
     public function index()
     {
-        $eggs = Poultry::type(3)->get();
-
-        $eggincdates =  Poultry::where('quantity','>',0)->get()->pluck('created_at');
+        $eggincdates =  Poultry::where('status',3)->distinct('created_at')->pluck('created_at');
+//        dd($eggincdates);
         $eggincquans =  Poultry::where('quantity','>',0)->get()->pluck('quantity');
-
         $poultry_types = PoultryType::all();
         $poultry_statuses = PoultryStatus::all();
         $poultries = Poultry::all();
@@ -33,13 +32,23 @@ class PoultryController extends Controller
     }
     public function getDateQuantity($date)
     {
-        $dateQuantity = Poultry::where('created_at',$date)->pluck('quantity')->first();
+        $dateQuantity = Poultry::where('created_at',$date)->where('poultry_type_id',3)->where('poultry_status_id',3)->sum('quantity');
+//        $dateQuantity = Poultry::where('created_at',$date)->where('poultry_type_id',3)->where('poultry_status_id',3)->where('quantity','>',0)->pluck('remaining_quantity')->last();
         return  response()->json($dateQuantity);
+//        return view('/poultry.test',compact('dateQuantity'));
     }
-
+    public function totalEggs()
+    {
+        $eggscollected = Poultry::where('poultry_type_id',3)->where('poultry_type_id',3)->sum('quantity');
+        $totalQty = $eggscollected / 12;
+        $qtyindzn = floor($totalQty);
+        return response()->json($qtyindzn);
+    }
     public function indexDaily(Poultry $poultry)
     {
-
+        $eggscollected = Poultry::where('poultry_type_id',3)->sum('quantity');
+        $totalQty = $eggscollected / 12;
+        $qtyindzn = floor($totalQty);
 
         $eggs = Transaction::where('sub_head_id', 16 )->get();
         $hens = Transaction::where('sub_head_id', 17 )->get();
@@ -54,20 +63,23 @@ class PoultryController extends Controller
     }
     public function store(Request $request)
     {
+
         $request['account_head_id'] = 8;
         $pti =  $request->poultry_type_id;
         $psi =  $request->poultry_status_id;
-        if ($pti =='3' && $psi =='3')
-            {
-                $request['status'] = 'incubated';
-            }
-        else
-            {
-                $request['status'] = 'collected';
-            }
-        Poultry::create($request->all());
-        $dbChickQuantity = Poultry::whereRaw("poultry_type_id=3 AND poultry_status_id=3 AND status='incubated'")->sum('quantity') ;
-        return redirect(route('poultry.index'))->with('message', ' Entry Created');
+        $request['remaining_quantity'] = 0;
+        $request['status'] = $psi;
+
+        if ($request['quantity'] == 0)
+        {
+            return redirect(route('poultry.index'))->with('alert', 'Yoyr quantity must be greater than zero ');
+        }
+        else{
+            Poultry::create($request->except('updatedDate'));
+
+            return redirect(route('poultry.index'))->with('message', ' Entry Created');
+        }
+
     }
 
     public function show(Poultry $poultry)

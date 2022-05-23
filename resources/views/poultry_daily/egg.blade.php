@@ -18,11 +18,26 @@
                                 <div class="form-group">
                                     <label for="recipient-name" class="form-control-label">Date</label>
 {{--                                    <input type="hidden" name="cow_id" value="{{$cow_daily->id}}">--}}
-                                    <input type="text" onfocus= "(this. type='date')" class="form-control" name="date" value="<?php echo date('Y-m-d');?>" required>
+                                    <input type="text" id="test1" onfocus= "(this. type='date')" class="form-control" name="date" value="<?php echo date('Y-m-d');?>" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="message-text" class="form-control-label">Quantity</label>
-                                    <input type="text" class="form-control" id="quantity" name="quantity" required>
+                                    <input type="text"  class="form-control" id="quantity" name="quantity" required>
+                                    <?php
+                                    $eggscollected = \App\Models\Poultry::where('poultry_type_id',3)->where('poultry_status_id',4)->sum('quantity');
+                                    $totalQty = $eggscollected / 12;
+                                    $qtyindzn = floor($totalQty);
+
+
+                                    ?>
+
+
+                                    <div id="testing" class="invalid-feedback" style="display: block !important;">
+                                        {{$qtyindzn}}
+                                    </div>
+
+
+
                                 </div>
                                 <div class="form-group">
                                     <label for="message-text" class="form-control-label">Description</label>
@@ -77,3 +92,48 @@
     </div>
     <!-- table-wrapper -->
 </div>
+
+
+
+
+@section('more-script')
+    @parent
+
+    <script>
+        var qtyindzn = {{$qtyindzn}};
+
+        $('#quantity').change(function()
+        {
+            // console.log(this.value);
+            if(this.value > qtyindzn)
+            {
+                alert('Please do not exceed the Available Quantity');
+                $('#quantity').val(qtyindzn);
+            }
+        });
+
+    {{--$(document).ready(function() {--}}
+
+    {{--    $('#test1').change(function (e) {--}}
+
+    {{--        $.ajax({--}}
+    {{--            url: "{{route('poultry_daily.totalEggs')}}",--}}
+    {{--            method: 'get',--}}
+    {{--            success: function (result) {--}}
+    {{--                console.log(result);--}}
+    {{--                $('#testing').html('Your Total Incubated Eggs = ' + result +' Dozen');--}}
+    {{--                $('#quantity').change(function () {--}}
+    {{--                    // console.log(this.value);--}}
+    {{--                    if (this.value > result) {--}}
+    {{--                        alert('Please do not exceed the Available Quantity');--}}
+    {{--                        $('#quantity').val(result);--}}
+    {{--                    }--}}
+    {{--                });--}}
+    {{--            }--}}
+    {{--        });--}}
+
+
+    {{--    });--}}
+    {{--});--}}
+</script>
+@endsection
