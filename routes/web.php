@@ -52,14 +52,18 @@ Route::post('/cow_daily',[\App\Http\Controllers\CattleController::class, 'store'
 Route::get('/cow_daily/{cow_daily}',[\App\Http\Controllers\CattleController::class, 'cowDaily'])->name('cow_daily.show');
 Route::post('/cow_daily/sick',[\App\Http\Controllers\SickController::class, 'store'])->name('sickCow.store');
 Route::post('/cow_daily/medicine',[\App\Http\Controllers\MedicinesController::class, 'store'])->name('medicineCow.store');
-Route::post('/cow_daily/pregnant',[\App\Http\Controllers\PregnantController::class, 'store'])->name('pregnant.store');
-Route::post('/cow_daily/delivery',[\App\Http\Controllers\DeliveryController::class, 'store'])->name('delivery.store');
+Route::post('/cow_daily/pregnant',[\App\Http\Controllers\PregnantController::class, 'store'])->name('pregnantCow.store');
+Route::post('/cow_daily/delivery',[\App\Http\Controllers\DeliveryController::class, 'store'])->name('deliveryCow.store');
 Route::post('/cow_daily/vaccination',[\App\Http\Controllers\VaccinationController::class, 'store'])->name('vaccination.store');
 Route::post('/cow_daily/insemination',[\App\Http\Controllers\InseminationController::class, 'store'])->name('insemination.store');
 
 Route::delete('/cow_daily/{transaction}',[\App\Http\Controllers\TransactionController::class, 'destroy'])->name('cow_daily.destroy');
 Route::delete('/cow_daily_sick/{sick}',[\App\Http\Controllers\SickController::class, 'destroy'])->name('sickCow.destroy');
-Route::delete('/cow_daily_medicine/{medicine}',[\App\Http\Controllers\MedicinesController::class, 'destroy'])->name('medicine.destroy');
+Route::delete('/cow_daily_medicine/{medicine}',[\App\Http\Controllers\MedicinesController::class, 'destroy'])->name('medicineCow.destroy');
+Route::delete('/cow_daily_insemination/{insemination}',[\App\Http\Controllers\InseminationController::class, 'destroy'])->name('inseminationCow.destroy');
+Route::delete('/cow_daily_pregnant/{pregnant}',[\App\Http\Controllers\PregnantController::class, 'destroy'])->name('pregnantCow.destroy');
+Route::delete('/cow_daily_delivery/{delivery}',[\App\Http\Controllers\DeliveryController::class, 'destroy'])->name('deliveryCow.destroy');
+Route::delete('/cow_daily_vaccination/{vaccination}',[\App\Http\Controllers\VaccinationController::class, 'destroy'])->name('vaccinationCow.destroy');
 
 //goat_daily
 Route::get('/goat_daily',[\App\Http\Controllers\CattleController::class, 'index'])->name('goat_daily.index');

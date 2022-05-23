@@ -45,21 +45,14 @@ class VaccinationController extends Controller
 
         if (isset($_POST['submitCow']))
         {
-            $cowID = $request->cow_id;
-
-            $accountHeadData = array
-            (
-                'name' => "cow#$cowID",
-                'parent_id' => 4
-            );
-            AccountHead::updateOrCreate($accountHeadData);
+            $cowID = $request->serial_no;
 
             $sub_head_id = AccountHead::where('name', "cow#$cowID")->pluck('id')->last();
 
             if ($sub_head_id != '')
             {
                 $request['sub_head_id'] = $sub_head_id;
-                Vaccination::create($request->except(['cow_id','submitCow']));
+                Vaccination::create($request->except(['serial_no','submitCow']));
                 return redirect()->back()->with('message', 'Vaccination Added');
             }
             else return redirect()->back()->with('message', 'Please Add Milk Data First');
@@ -83,6 +76,7 @@ class VaccinationController extends Controller
 
     public function destroy(Vaccination $vaccination)
     {
-        //
+        $vaccination->delete();
+        return redirect()->back()->with('errorMessage','Vaccination Entry Deleted');
     }
 }

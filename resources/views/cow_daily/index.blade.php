@@ -67,10 +67,10 @@
                                             <li><a class="active" href="#tab11" id="hov" data-toggle="tab">Milk</a></li>
                                             <li class="act"><a href="#tab21" id="hov" data-toggle="tab">Sick</a></li>
                                             <li class="act"><a href="#tab31" id="hov" data-toggle="tab">Medicine</a></li>
-                                            <li class="act"><a href="#tab41" id="hov" data-toggle="tab">Pregnant</a></li>
-                                            <li class="act"><a href="#tab51" id="hov" data-toggle="tab">Delivery</a></li>
-                                            <li class="act"><a href="#tab61" id="hov" data-toggle="tab">Vaccination</a></li>
-                                            <li class="act"><a href="#tab71" id="hov" data-toggle="tab">Insemination</a></li>
+                                            <li class="act"><a href="#tab41" id="hov" data-toggle="tab">Insemination</a></li>
+                                            <li class="act"><a href="#tab51" id="hov" data-toggle="tab">Pregnant</a></li>
+                                            <li class="act"><a href="#tab61" id="hov" data-toggle="tab">Delivery</a></li>
+                                            <li class="act"><a href="#tab71" id="hov" data-toggle="tab">Vaccination</a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -209,7 +209,6 @@
                                                             <td>{{($sick->is_sick == 1) ? 'Is Sick' : 'Not Sick'}}</td>
                                                             <td>{{$sick->treatment ?? ''}}</td>
 
-                                                            @if($sick->cattle_id && $sick->is_sick == 0)
                                                             <td>
                                                                 <form action="{{ route('sickCow.destroy', $sick->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this?');" style="display: inline-block;">
                                                                     @csrf
@@ -225,9 +224,6 @@
                                                                     <button type="submit" name="submitHealthyCow" class="btn btn-sm btn-success" data-toggle="tooltip" title="Healthy"><i class="fe fe-heart"></i></button>
                                                                 </form>
                                                             </td>
-                                                            @else
-                                                                <td>hello</td>
-                                                            @endif
                                                         </tr>
                                                     @endforeach
                                                     </tbody>
@@ -298,7 +294,7 @@
                                                             <td>{{$medicine->name ?? ''}}</td>
                                                             <td>{{$medicine->description ?? ''}}</td>
                                                             <td>
-                                                                <form action="{{ route('medicine.destroy', $medicine->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this?');" style="display: inline-block;">
+                                                                <form action="{{ route('medicineCow.destroy', $medicine->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this?');" style="display: inline-block;">
                                                                     @csrf
                                                                     @method('DELETE')
                                                                     <button type="submit" class="btn btn-sm btn-danger" data-toggle="tooltip" title="Delete"><i class="fe fe-trash-2"></i></button>
@@ -314,196 +310,6 @@
 
 
                                         <div class="tab-pane" id="tab41">
-                                            <div class="float-right mb-3">
-                                                <div class="input-group">
-                                                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#pregnantData">Add Pregnant Info</button>
-                                                    <!-- Message Modal -->
-                                                    <div class="modal fade" id="pregnantData" tabindex="-1" role="dialog"  aria-hidden="true">
-                                                        <div class="modal-dialog" role="document">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header">
-                                                                    <h5 class="modal-title" id="example-Modal3">Add Pregnant Detail</h5>
-                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                        <span aria-hidden="true">&times;</span>
-                                                                    </button>
-                                                                </div>
-                                                                <div class="modal-body">
-                                                                    <form method="POST" action="{{route('pregnant.store')}}">
-                                                                        @csrf
-                                                                        <div class="form-group">
-                                                                            <label for="recipient-name" class="form-control-label">Date</label>
-                                                                            <input type="hidden" name="cattle_id" value="{{$cow_daily->id}}">
-                                                                            <input type="text" onfocus= "(this. type='date')" class="form-control" name="date" value="<?php echo date('Y-m-d');?>" required>
-                                                                        </div>
-                                                                        <div class="form-group">
-                                                                            <label for="message-text" class="form-control-label">Pregnant</label>
-                                                                            <input type="checkbox" class="form-control" id="is_pregnant" name="is_pregnant" value="1">
-                                                                        </div>
-                                                                        <div class="modal-footer">
-                                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                                            <button type="submit" name="submitCow" class="btn btn-primary">Submit</button>
-                                                                        </div>
-                                                                    </form>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="table-responsive">
-                                                <table id="" class="table table-striped table-bordered text-nowrap w-100 display">
-                                                    <thead>
-                                                    <tr>
-                                                        <th class="wd-15p">ID</th>
-                                                        <th class="wd-25p">Date</th>
-                                                        <th class="wd-15p">Pregnant</th>
-                                                    </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                    @foreach($pregnants as $pregnant)
-                                                        <tr>
-                                                            <td>{{$loop->iteration}}</td>
-                                                            <td>{{$pregnant->date ?? ''}}</td>
-                                                            <td>{{($pregnant->is_pregnant == 1) ? 'Is Pregnant' : 'Not Pregnant'}}</td>
-                                                        </tr>
-                                                    @endforeach
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                            <!-- table-wrapper -->
-                                        </div>
-
-
-
-                                        <div class="tab-pane" id="tab51">
-                                            <div class="float-right mb-3">
-                                                <div class="input-group">
-                                                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#deliveryData">Add Delivery Info</button>
-                                                    <!-- Message Modal -->
-                                                    <div class="modal fade" id="deliveryData" tabindex="-1" role="dialog"  aria-hidden="true">
-                                                        <div class="modal-dialog" role="document">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header">
-                                                                    <h5 class="modal-title" id="example-Modal3">Add Delivery Detail</h5>
-                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                        <span aria-hidden="true">&times;</span>
-                                                                    </button>
-                                                                </div>
-                                                                <div class="modal-body">
-                                                                    <form method="POST" action="{{route('delivery.store')}}">
-                                                                        @csrf
-                                                                        <div class="form-group">
-                                                                            <label for="recipient-name" class="form-control-label">Date</label>
-                                                                            <input type="hidden" name="cattle_id" value="{{$cow_daily->id}}">
-                                                                            <input type="text" onfocus= "(this. type='date')" class="form-control" name="date" value="<?php echo date('Y-m-d');?>" required>
-                                                                        </div>
-                                                                        <div class="form-group">
-                                                                            <label for="message-text" class="form-control-label">Delivery</label>
-                                                                            <input type="checkbox" class="form-control" id="is_delivered" name="is_delivered" value="1">
-                                                                        </div>
-                                                                        <div class="modal-footer">
-                                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                                            <button type="submit" name="submitCow" class="btn btn-primary">Submit</button>
-                                                                        </div>
-                                                                    </form>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="table-responsive">
-                                                <table id="" class="table table-striped table-bordered text-nowrap w-100 display">
-                                                    <thead>
-                                                    <tr>
-                                                        <th class="wd-15p">ID</th>
-                                                        <th class="wd-25p">Date</th>
-                                                        <th class="wd-15p">Delivery</th>
-                                                    </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                    @foreach($deliveries as $delivery)
-                                                        <tr>
-                                                            <td>{{$loop->iteration}}</td>
-                                                            <td>{{$delivery->date ?? ''}}</td>
-                                                            <td>{{($delivery->is_delivered == 1) ? 'Is Delivered' : 'Not Delivered'}}</td>
-                                                        </tr>
-                                                    @endforeach
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                            <!-- table-wrapper -->
-                                        </div>
-
-
-                                        <div class="tab-pane" id="tab61">
-                                            <div class="float-right mb-3">
-                                                <div class="input-group">
-                                                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#vaccinationData">Add Vaccination Info</button>
-                                                    <!-- Message Modal -->
-                                                    <div class="modal fade" id="vaccinationData" tabindex="-1" role="dialog"  aria-hidden="true">
-                                                        <div class="modal-dialog" role="document">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header">
-                                                                    <h5 class="modal-title" id="example-Modal3">Add Vaccination Detail</h5>
-                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                        <span aria-hidden="true">&times;</span>
-                                                                    </button>
-                                                                </div>
-                                                                <div class="modal-body">
-                                                                    <form method="POST" action="{{route('vaccination.store')}}">
-                                                                        @csrf
-                                                                        <div class="form-group">
-                                                                            <label for="recipient-name" class="form-control-label">Date</label>
-                                                                            <input type="hidden" name="cow_id" value="{{$cow_daily->id}}">
-                                                                            <input type="text" onfocus= "(this. type='date')" class="form-control" name="date" value="<?php echo date('Y-m-d');?>" required>
-                                                                        </div>
-                                                                        <div class="form-group">
-                                                                            <label for="message-text" class="form-control-label">Name</label>
-                                                                            <input type="text" class="form-control" id="name" name="name">
-                                                                        </div>
-                                                                        <div class="form-group">
-                                                                            <label for="message-text" class="form-control-label">Description</label>
-                                                                            <input type="text" class="form-control" id="description" name="description">
-                                                                        </div>
-                                                                        <div class="modal-footer">
-                                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                                            <button type="submit" name="submitCow" class="btn btn-primary">Submit</button>
-                                                                        </div>
-                                                                    </form>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="table-responsive">
-                                                <table id="" class="table table-striped table-bordered text-nowrap w-100 display">
-                                                    <thead>
-                                                    <tr>
-                                                        <th class="wd-15p">ID</th>
-                                                        <th class="wd-25p">Date</th>
-                                                        <th class="wd-15p">Vaccination</th>
-                                                        <th class="wd-15p">Description</th>
-                                                    </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                    @foreach($vaccinations as $vaccination)
-                                                        <tr>
-                                                            <td>{{$loop->iteration}}</td>
-                                                            <td>{{$vaccination->date ?? ''}}</td>
-                                                            <td>{{$vaccination->name ?? ''}}</td>
-                                                            <td>{{$vaccination->description ?? ''}}</td>
-                                                        </tr>
-                                                    @endforeach
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                            <!-- table-wrapper -->
-                                        </div>
-
-
-                                        <div class="tab-pane" id="tab71">
                                             <div class="float-right mb-3">
                                                 <div class="input-group">
                                                     <button type="button" class="btn btn-info" data-toggle="modal" data-target="#inseminationData">Add Insemination Info</button>
@@ -547,6 +353,7 @@
                                                         <th class="wd-15p">ID</th>
                                                         <th class="wd-25p">Date</th>
                                                         <th class="wd-15p">Insemination</th>
+                                                        <th style="width: 5%">Action</th>
                                                     </tr>
                                                     </thead>
                                                     <tbody>
@@ -555,6 +362,13 @@
                                                             <td>{{$loop->iteration}}</td>
                                                             <td>{{$insemination->date ?? ''}}</td>
                                                             <td>{{($insemination->is_inseminated == 1) ? 'Is Inseminated' : 'Not Inseminated'}}</td>
+                                                            <td>
+                                                                <form action="{{ route('inseminationCow.destroy', $insemination->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this?');" style="display: inline-block;">
+                                                                    @csrf
+                                                                    @method('DELETE')
+                                                                    <button type="submit" class="btn btn-sm btn-danger" data-toggle="tooltip" title="Delete"><i class="fe fe-trash-2"></i></button>
+                                                                </form>
+                                                            </td>
                                                         </tr>
                                                     @endforeach
                                                     </tbody>
@@ -563,6 +377,227 @@
                                             <!-- table-wrapper -->
                                         </div>
 
+
+                                        <div class="tab-pane" id="tab51">
+                                            <div class="float-right mb-3">
+                                                <div class="input-group">
+                                                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#pregnantData">Add Pregnant Info</button>
+                                                    <!-- Message Modal -->
+                                                    <div class="modal fade" id="pregnantData" tabindex="-1" role="dialog"  aria-hidden="true">
+                                                        <div class="modal-dialog" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="example-Modal3">Add Pregnant Detail</h5>
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <form method="POST" action="{{route('pregnantCow.store')}}">
+                                                                        @csrf
+                                                                        <div class="form-group">
+                                                                            <label for="recipient-name" class="form-control-label">Date</label>
+                                                                            <input type="hidden" name="cattle_id" value="{{$cow_daily->id}}">
+                                                                            <input type="text" onfocus= "(this. type='date')" class="form-control" name="date" value="<?php echo date('Y-m-d');?>" required>
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label for="message-text" class="form-control-label">Pregnant</label>
+                                                                            <input type="checkbox" class="form-control" id="is_pregnant" name="is_pregnant" value="1">
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                            <button type="submit" name="submitCowPregnant" class="btn btn-primary">Submit</button>
+                                                                        </div>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="table-responsive">
+                                                <table id="" class="table table-striped table-bordered text-nowrap w-100 display">
+                                                    <thead>
+                                                    <tr>
+                                                        <th class="wd-15p">ID</th>
+                                                        <th class="wd-25p">Date</th>
+                                                        <th class="wd-15p">Pregnant</th>
+                                                        <th style="width: 5%">Action</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    @foreach($pregnants as $pregnant)
+                                                        <tr>
+                                                            <td>{{$loop->iteration}}</td>
+                                                            <td>{{$pregnant->date ?? ''}}</td>
+                                                            <td>{{($pregnant->is_pregnant == 1) ? 'Is Pregnant' : 'Not Pregnant'}}</td>
+                                                            <td>
+                                                                <form action="{{ route('pregnantCow.destroy', $pregnant->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this?');" style="display: inline-block;">
+                                                                    @csrf
+                                                                    @method('DELETE')
+                                                                    <button type="submit" class="btn btn-sm btn-danger" data-toggle="tooltip" title="Delete"><i class="fe fe-trash-2"></i></button>
+                                                                </form>
+                                                            </td>
+                                                        </tr>
+                                                    @endforeach
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <!-- table-wrapper -->
+                                        </div>
+
+
+
+                                        <div class="tab-pane" id="tab61">
+                                            <div class="float-right mb-3">
+                                                <div class="input-group">
+                                                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#deliveryData">Add Delivery Info</button>
+                                                    <!-- Message Modal -->
+                                                    <div class="modal fade" id="deliveryData" tabindex="-1" role="dialog"  aria-hidden="true">
+                                                        <div class="modal-dialog" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="example-Modal3">Add Delivery Detail</h5>
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <form method="POST" action="{{route('deliveryCow.store')}}">
+                                                                        @csrf
+                                                                        <div class="form-group">
+                                                                            <label for="recipient-name" class="form-control-label">Date</label>
+                                                                            <input type="hidden" name="cattle_id" value="{{$cow_daily->id}}">
+                                                                            <input type="text" onfocus= "(this. type='date')" class="form-control" name="date" value="<?php echo date('Y-m-d');?>" required>
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label for="message-text" class="form-control-label">Delivery</label>
+                                                                            <input type="checkbox" class="form-control" id="is_delivered" name="is_delivered" value="1">
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                            <button type="submit" name="submitCowDelivery" class="btn btn-primary">Submit</button>
+                                                                        </div>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="table-responsive">
+                                                <table id="" class="table table-striped table-bordered text-nowrap w-100 display">
+                                                    <thead>
+                                                    <tr>
+                                                        <th class="wd-15p">ID</th>
+                                                        <th class="wd-25p">Date</th>
+                                                        <th class="wd-15p">Delivery</th>
+                                                        <th class="wd-15p">Action</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    @foreach($deliveries as $delivery)
+                                                        <tr>
+                                                            <td>{{$loop->iteration}}</td>
+                                                            <td>{{$delivery->date ?? ''}}</td>
+                                                            <td>{{($delivery->is_delivered == 1) ? 'Is Delivered' : 'Not Delivered'}}</td>
+                                                            <td>
+                                                            <form action="{{ route('deliveryCow.destroy', $delivery->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this?');" style="display: inline-block;">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <button type="submit" class="btn btn-sm btn-danger" data-toggle="tooltip" title="Delete"><i class="fe fe-trash-2"></i></button>
+                                                            </form>
+                                                            <form action="{{route('deliveryCow.store')}}" method="POST"  style="display: inline-block;">
+                                                                @csrf
+                                                                <input type="hidden" name="is_sick" value="0">
+                                                                <input type="hidden" name="date" value="<?php echo date('Y-m-d')?>">
+                                                                <input type="hidden" name="pregnant_id" value="{{$delivery->id}}">
+                                                                <input type="hidden" name="cattle_id" value="{{$cow_daily->id}}">
+                                                                <button type="submit" name="submitDeliveredCow" class="btn btn-sm btn-success" data-toggle="tooltip" title="Healthy"><i class="fe fe-heart"></i></button>
+                                                            </form>
+                                                            </td>
+                                                        </tr>
+                                                    @endforeach
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <!-- table-wrapper -->
+                                        </div>
+
+
+                                        <div class="tab-pane" id="tab71">
+                                            <div class="float-right mb-3">
+                                                <div class="input-group">
+                                                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#vaccinationData">Add Vaccination Info</button>
+                                                    <!-- Message Modal -->
+                                                    <div class="modal fade" id="vaccinationData" tabindex="-1" role="dialog"  aria-hidden="true">
+                                                        <div class="modal-dialog" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="example-Modal3">Add Vaccination Detail</h5>
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <form method="POST" action="{{route('vaccination.store')}}">
+                                                                        @csrf
+                                                                        <div class="form-group">
+                                                                            <label for="recipient-name" class="form-control-label">Date</label>
+                                                                            <input type="hidden" name="serial_no" value="{{$cow_daily->serial_no}}">
+                                                                            <input type="text" onfocus= "(this. type='date')" class="form-control" name="date" value="<?php echo date('Y-m-d');?>" required>
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label for="message-text" class="form-control-label">Name</label>
+                                                                            <input type="text" class="form-control" id="name" name="name">
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label for="message-text" class="form-control-label">Description</label>
+                                                                            <input type="text" class="form-control" id="description" name="description">
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                            <button type="submit" name="submitCow" class="btn btn-primary">Submit</button>
+                                                                        </div>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="table-responsive">
+                                                <table id="" class="table table-striped table-bordered text-nowrap w-100 display">
+                                                    <thead>
+                                                    <tr>
+                                                        <th class="wd-15p">ID</th>
+                                                        <th class="wd-25p">Date</th>
+                                                        <th class="wd-15p">Vaccination</th>
+                                                        <th class="wd-15p">Description</th>
+                                                        <th style="width: 5%;">Action</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    @foreach($vaccinations as $vaccination)
+                                                        <tr>
+                                                            <td>{{$loop->iteration}}</td>
+                                                            <td>{{$vaccination->date ?? ''}}</td>
+                                                            <td>{{$vaccination->name ?? ''}}</td>
+                                                            <td>{{$vaccination->description ?? ''}}</td>
+                                                            <td>
+                                                                <form action="{{ route('vaccinationCow.destroy', $vaccination->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this?');" style="display: inline-block;">
+                                                                    @csrf
+                                                                    @method('DELETE')
+                                                                    <button type="submit" class="btn btn-sm btn-danger" data-toggle="tooltip" title="Delete"><i class="fe fe-trash-2"></i></button>
+                                                                </form>
+                                                            </td>
+                                                        </tr>
+                                                    @endforeach
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <!-- table-wrapper -->
+                                        </div>
                                     </div>
                                 </div>
                             </div>

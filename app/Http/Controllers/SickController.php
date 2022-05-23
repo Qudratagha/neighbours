@@ -29,7 +29,7 @@ class SickController extends Controller
 
         if (isset($_POST['submitCow']))
         {
-            if (Sick::where('cattle_id', $request->cattle_id )->where('is_sick',1)->exists())
+            if (Sick::where('cattle_id', $request->cattle_id )->where('is_sick',1)->where('date',$request->date)->exists())
             {
                     return redirect()->back()->with('errorMessage','This Cow is already sick');
             }

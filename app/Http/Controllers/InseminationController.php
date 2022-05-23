@@ -23,23 +23,24 @@ class InseminationController extends Controller
         return redirect()->back()->with('message','Insemination data inserted');
     }
 
-    public function show(Insemination $insermination)
+    public function show(Insemination $insemination)
     {
         //
     }
 
-    public function edit(Insemination $insermination)
+    public function edit(Insemination $insemination)
     {
         //
     }
 
-    public function update(Request $request, Insemination $insermination)
+    public function update(Request $request, Insemination $insemination)
     {
         //
     }
 
-    public function destroy(Insemination $insermination)
+    public function destroy(Insemination $insemination)
     {
-        //
+        $insemination->delete();
+        return redirect()->back()->with('errorMessage','Insemination Entry Deleted');
     }
 }
