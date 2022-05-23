@@ -49,7 +49,7 @@
                                             <td>{{$goat->serial_no ?? 'Null'}}</td>
                                             <td>{{$goat->breed ?? 'Null'}}</td>
                                             <td>{{($goat->gender == 1) ? 'Male' : 'female' }}</td>
-                                            <td>{{$goat->cattleParent->serial_no ?? ''}}</td>
+                                            <td>{{$goat->parent->serial_no ?? ''}}</td>
                                         @if(!($goat->dead_date||$goat->dry_date||$goat->saleStatus==1))
                                             <td>
                                                 <form action="{{route('cattle.store',$goat->id)}}" method="POST" onsubmit="return confirm('Are you sure you want to DRY cow with serial no: {{$goat->id}} ?');" style="display: inline-block;">

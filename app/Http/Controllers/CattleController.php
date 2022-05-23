@@ -38,8 +38,6 @@ class CattleController extends Controller
 
     public function index(String $cattle_type)
     {
-//        dd(\Auth::user()->name);
-//        dd($cattle_type);
         $goats = Cattle::goats()->get();
         $cows = Cattle::cows()->get();
         if ($cattle_type == 'cow' || $cattle_type == 'goat')
@@ -52,7 +50,7 @@ class CattleController extends Controller
     public function create(string $cattle_type)
     {
 
-        $goats = Cattle::whereIn('cattle_type_id', [2,3])->get();
+        $goats = Cattle::goats()->where('saleStatus', 0)->where('dry_date', null)->where('dead_date', null)->get();
         $cows = Cattle::where('cattle_type_id',1)->get();
         if ($cattle_type == 'cow' || $cattle_type == 'goat')
         {
@@ -149,8 +147,9 @@ class CattleController extends Controller
 //            dd($accountHeadData );
             AccountHead::updateOrCreate($accountHeadData);
             $accountHeadId = AccountHead::where('name',"goat#$goat_serial")->pluck('id')->last();
-
+//dd($request->serial_no);
             if ($request->age){
+
                 Transaction::create([
                     'date' => $request->date,
                     'transaction_type_id' => 2,
@@ -203,10 +202,12 @@ class CattleController extends Controller
         }
         elseif ($cattle->saleStatus == 1)
         {
+            $transaction = Transaction::where('transaction_type_id', 1)->get();
+
             if ($cattle_type == 'cow' || $cattle_type == 'goat')
             {
                 abort_if(Gate::denies("$cattle_type-read"), Response::HTTP_FORBIDDEN, '403 Forbidden');
-                return view("cattle.$cattle_type.showSold",compact('cattle','cattle_type'));
+                return view("cattle.$cattle_type.showSold",compact('cattle','cattle_type', 'transaction'));
             }
         }
 
@@ -243,21 +244,22 @@ class CattleController extends Controller
         abort_if(Gate::denies('goat-read'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $goatID = $goat_daily->id;
-        $sub_head_id = AccountHead::where('name',"goat#$goatID")->pluck('id')->last();
-
+        $serial = $goat_daily->serial_no;
+        $sub_head_id = AccountHead::where('name',"goat#$serial")->pluck('id')->last();
         $sicks          =   Sick::where('cattle_id',$goatID)->get();
         $medicines      =   Medicines::where('sub_head_id',$sub_head_id)->get();
         $pregnants      =   Pregnant::where('cattle_id',$goatID)->get();
         $deliveries     =   Delivery::where('cattle_id',$goatID)->get();
-        $vaccinations   =   Vaccination::where('sub_head_id',$sub_head_id)->get();
+        $vaccinations   =   Vaccination::where('sub_head_id',$goatID)->get();
 
         return view('goat_daily.index',compact('goat_daily','sicks','medicines','pregnants','deliveries','vaccinations'));
     }
 
     public function edit(String $cattle_type, Cattle $cattle_id)
+
     {
-        abort_if(Gate::denies("$cattle_type-update"), Response::HTTP_FORBIDDEN, '403 Forbidden');
 //        dd($cattle_id);
+        abort_if(Gate::denies("$cattle_type-update"), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $goats = Cattle::whereIn('cattle_type_id', [2,3])->get();
         $cows = Cattle::where('cattle_type_id',1)->get();
@@ -284,7 +286,7 @@ class CattleController extends Controller
         if (isset($_POST['updateGoat']))
         {
             $request['account_head_id'] = 7;
-            $cattle_id->update($request->except('updateGoat'));
+            $cattle_id->update($request->except('updateGoat', 'cattle_type'));
             return CattleController::index($cattle_type);
         }
     }
@@ -292,7 +294,10 @@ class CattleController extends Controller
     public function destroy(String $cattle_type, Cattle $cattle)
     {
 
-        abort_if(Gate::denies('cattle_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(Gate::denies("$cattle_type-delete"), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        $cattle->deliveries()->delete();
+        $cattle->pregnants()->delete();
+        $cattle->sicks()->delete();
         $cattle->delete();
         return CattleController::index($cattle_type);
     }

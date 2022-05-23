@@ -79,7 +79,6 @@
                                             <th class="wd-25p">Date</th>
                                             <th class="wd-15p">Goat Quantity</th>
                                             <th class="wd-15p">Sold Amount</th>
-                                            <th>Status</th>
                                         </tr>
                                         </thead>
                                         <tbody>

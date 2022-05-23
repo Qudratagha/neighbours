@@ -35,8 +35,8 @@
                                         <th style="font-weight: 600">Breed</th>
                                         <th style="font-weight: 600">Weight</th>
                                         <th style="font-weight: 600">Height</th>
+                                        <th style="font-weight: 600">Sold Amount</th>
                                         <th style="font-weight: 600">Sold Date</th>
-{{--                                        <th style="font-weight: 600">Sold Amount</th>--}}
 
                                     </center>
                                 </tr>
@@ -58,6 +58,7 @@
                                     <td>{{$cattle->breed}}</td>
                                     <td>{{$cattle->weight}}</td>
                                     <td>{{$cattle->height}}</td>
+                                    <td>{{$transaction->amount}}</td>
                                     <td>{{$cattle->date}}</td>
                                 </tr>
                                 </tbody>

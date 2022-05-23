@@ -60,6 +60,9 @@ Route::post('/cow_daily/insemination',[\App\Http\Controllers\InseminationControl
 Route::delete('/cow_daily/{transaction}',[\App\Http\Controllers\TransactionController::class, 'destroy'])->name('cow_daily.destroy');
 Route::delete('/cow_daily_sick/{sick}',[\App\Http\Controllers\SickController::class, 'destroy'])->name('sickCow.destroy');
 Route::delete('/cow_daily_medicine/{medicine}',[\App\Http\Controllers\MedicinesController::class, 'destroy'])->name('medicine.destroy');
+Route::delete('/cow_daily_pregnant/{pregnant}',[\App\Http\Controllers\PregnantController::class, 'destroy'])->name('pregnant.destroy');
+Route::delete('/cow_daily_delivery/{delivery}',[\App\Http\Controllers\DeliveryController::class, 'destroy'])->name('delivery.destroy');
+Route::delete('/cow_daily_delivery/{vaccination}',[\App\Http\Controllers\VaccinationController::class, 'destroy'])->name('vaccination.destroy');
 
 //goat_daily
 Route::get('/goat_daily',[\App\Http\Controllers\CattleController::class, 'index'])->name('goat_daily.index');

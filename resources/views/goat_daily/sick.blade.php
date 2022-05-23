@@ -56,7 +56,7 @@
                 <tr>
                     <td>{{$loop->iteration}}</td>
                     <td>{{$sick->date ?? ''}}</td>
-                    <td>{{$sick->is_sick == 1 ? 'Is Sick' : ''}}</td>
+                    <td>{{$sick->is_sick == 1 ? 'Is Sick' : 'Healthy'}}</td>
                     <td>{{$sick->treatment ?? ''}}</td>
                     @if($sick->cattle_id || $sick->is_sick == 1)
                         <td>

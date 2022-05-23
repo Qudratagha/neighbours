@@ -50,6 +50,13 @@
                     <td>{{$loop->iteration}}</td>
                     <td>{{$delivery->date ?? ''}}</td>
                     <td>{{($delivery->is_delivered == 1) ? 'Is Delivered' : 'Not Delivered'}}</td>
+                    <td>
+                        <form action="{{ route('delivery.destroy', $delivery->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this?');" style="display: inline-block;">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-sm btn-danger" data-toggle="tooltip" title="Delete"><i class="fe fe-trash-2"></i></button>
+                        </form>
+                    </td>
                 </tr>
             @endforeach
             </tbody>

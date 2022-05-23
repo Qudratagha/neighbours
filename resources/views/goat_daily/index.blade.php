@@ -54,8 +54,10 @@
                                         <ul class="nav panel-tabs">
                                             <li><a class="active" href="#tab11" id="hov" data-toggle="tab">Sick</a></li>
                                             <li class="act"><a href="#tab21" id="hov" data-toggle="tab">Medicine</a></li>
-                                            <li class="act"><a href="#tab31" id="hov" data-toggle="tab">Pregnant</a></li>
+                                            @if($goat_daily->gender == 0)
+                                                <li class="act"><a href="#tab31" id="hov" data-toggle="tab">Pregnant</a></li>
                                             <li class="act"><a href="#tab41" id="hov" data-toggle="tab">Delivery</a></li>
+                                            @endif
                                             <li class="act"><a href="#tab51" id="hov" data-toggle="tab">Vaccination</a></li>
                                         </ul>
                                     </div>
@@ -67,11 +69,11 @@
 
                                         @include('goat_daily.medicine')
 {{--                                        End div 21 --}}
-
-                                        @include('goat_daily.pregnant')
+                                        @if($goat_daily->gender == 0)
+                                            @include('goat_daily.pregnant')
 {{--                                        End div 31 --}}
-
                                         @include('goat_daily.delivery')
+                                        @endif
 {{--                                        End div 41 --}}
 
                                         @include('goat_daily.vaccination')

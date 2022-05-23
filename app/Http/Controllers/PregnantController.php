@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cattle;
 use App\Models\Pregnant;
 use Illuminate\Http\Request;
 
@@ -9,6 +10,7 @@ class PregnantController extends Controller
 {
     public function index()
     {
+//        $cattle = Cattle::all();
         return view('cow_daily.pregnant');
     }
 
@@ -21,9 +23,14 @@ class PregnantController extends Controller
     {
         if (isset($_POST['submitGoat']))
         {
+            if (Pregnant::where('cattle_id', $request->cattle_id)->where('is_pregnant', 1)->exists()){
+                return redirect()->back()->with('errorMessage', 'This Goat is Already Pregnant');
+            }
             Pregnant::create($request->except('submitGoat'));
             return redirect()->back()->with('message', 'Pregnant Data Added');
         }
+
+
         if (isset($_POST['submitCow']))
         {
             Pregnant::create($request->except('submitCow'));
@@ -48,6 +55,8 @@ class PregnantController extends Controller
 
     public function destroy(Pregnant $pregnant)
     {
-        //
+        $pregnant->delete();
+        return redirect()->back()->with('errorMessage','Pregnant Entry Deleted');
+
     }
 }
