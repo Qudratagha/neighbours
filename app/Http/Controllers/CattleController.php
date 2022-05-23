@@ -144,10 +144,8 @@ class CattleController extends Controller
                 'name' => "goat#$goat_serial",
                 'parent_id' => 7
             );
-//            dd($accountHeadData );
             AccountHead::updateOrCreate($accountHeadData);
             $accountHeadId = AccountHead::where('name',"goat#$goat_serial")->pluck('id')->last();
-//dd($request->serial_no);
             if ($request->age){
 
                 Transaction::create([
@@ -250,7 +248,8 @@ class CattleController extends Controller
         $medicines      =   Medicines::where('sub_head_id',$sub_head_id)->get();
         $pregnants      =   Pregnant::where('cattle_id',$goatID)->get();
         $deliveries     =   Delivery::where('cattle_id',$goatID)->get();
-        $vaccinations   =   Vaccination::where('sub_head_id',$goatID)->get();
+        $vaccinations   =   Vaccination::all();
+//        dd($vaccinations);
 
         return view('goat_daily.index',compact('goat_daily','sicks','medicines','pregnants','deliveries','vaccinations'));
     }
@@ -258,10 +257,9 @@ class CattleController extends Controller
     public function edit(String $cattle_type, Cattle $cattle_id)
 
     {
-//        dd($cattle_id);
         abort_if(Gate::denies("$cattle_type-update"), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $goats = Cattle::whereIn('cattle_type_id', [2,3])->get();
+        $goats = Cattle::goats()->get();
         $cows = Cattle::where('cattle_type_id',1)->get();
 
         if ($cattle_type == 'cow' || $cattle_type == 'goat')

@@ -57,7 +57,7 @@
                                     <td>{{$cattle->breed}}</td>
                                     <td>{{$cattle->weight}}</td>
                                     <td>{{$cattle->height}}</td>
-                                    <td>{{$cattle->dead_date}}</td>
+                                    <td>{{$cattle->dry_date}}</td>
                                 </tr>
                                 </tbody>
                             </table>

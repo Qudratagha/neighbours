@@ -83,6 +83,7 @@ class VaccinationController extends Controller
 
     public function destroy(Vaccination $vaccination)
     {
-        //
+        $vaccination->delete();
+        return redirect()->back()->with('errorMessage', 'Vaccination Data Deleted');
     }
 }

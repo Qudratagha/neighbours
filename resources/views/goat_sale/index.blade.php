@@ -46,7 +46,7 @@
                                                                 <label for="message-text" class="form-label">Goats Quantity</label>
                                                                 <select class="form-control form-select quantity" name="quantity[]" multiple="multiple" style="width: 100%; outline: 0; border: 2px solid black; border-radius: 4px;">
                                                                     @foreach($goats as $goat)
-                                                                        @if($goat->saleStatus == 0)
+                                                                        @if( $goat->dead_date == null && $goat->dry_date == null && $goat->saleStatus == 0)
                                                                             <option value="{{$goat->serial_no}}">{{$goat->serial_no}}</option>
                                                                         @endif
                                                                     @endforeach
