@@ -42,7 +42,7 @@ class CattleController extends Controller
     public function index(String $cattle_type)
     {
         $goats = Cattle::goats()->get();
-        $cows = Cattle::cows()->get();
+        $cows = Cattle::where('cattle_type_id',1)->get();
 
         if ($cattle_type == 'cow' || $cattle_type == 'goat')
         {
@@ -55,7 +55,8 @@ class CattleController extends Controller
     {
 
         $goats = Cattle::whereIn('cattle_type_id', [2,3])->get();
-        $cows = Cattle::where('cattle_type_id',1)->get();
+        $cows = Cattle::cows()->where('saleStatus',0)->where('dry_date',null)->where('dead_date',null)->get();
+
 
         if ($cattle_type == 'cow' || $cattle_type == 'goat')
         {
@@ -258,11 +259,12 @@ class CattleController extends Controller
 
     public function edit(String $cattle_type, Cattle $cattle_id)
     {
-        abort_if(Gate::denies('cattle_update'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(Gate::denies("$cattle_type-update"), Response::HTTP_FORBIDDEN, '403 Forbidden');
 //        dd($cattle_id);
 
         $goats = Cattle::whereIn('cattle_type_id', [2,3])->get();
-        $cows = Cattle::where('cattle_type_id',1)->get();
+        $cows = Cattle::cows()->where('saleStatus',0)->where('dry_date',null)->where('dead_date',null)->get();
+
 
         if ($cattle_type == 'cow' || $cattle_type == 'goat')
         {
@@ -273,6 +275,7 @@ class CattleController extends Controller
     public function update(UpdateCattleRequest $request, String $cattle_type, Cattle $cattle_id)
 
     {
+        abort_if(Gate::denies("$cattle_type-update"), Response::HTTP_FORBIDDEN, '403 Forbidden');
         //update cow
         if (isset($_POST['updateCow']))
         {

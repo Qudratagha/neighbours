@@ -33,12 +33,13 @@ class Cattle extends Model
         return $this->hasMany(Sick::class,'cattle_id','id');
     }
 
-    public function cattleChildren(){
-        return $this->hasMany(Cattle::class,'parent_id', 'id');
+    public function children()
+    {
+        return $this->hasMany(Cattle::class, 'parent_id', 'id');
     }
-
-    public function cattleParent(){
-        return $this->belongsTo(Cattle::class,'parent_id', 'id');
+    public function parent()
+    {
+        return $this->belongsTo(Cattle::class, 'parent_id');
     }
 
     public function cattleType(){

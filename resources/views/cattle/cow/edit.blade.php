@@ -41,9 +41,9 @@
                                         <div class="form-group">
                                             <label class="form-label">Parent</label>
                                             <select name="parent_id" id="parent_id" class="form-control">
-                                                <option value="">Choose Parent</option>
-                                                @foreach($cows as $cow)
-                                                    @if($cow->parent_id)
+                                                <option value="">{{$cattle_id->parent->serial_no}}</option>
+                                            @foreach($cows as $cow)
+                                                @if($cow->parent_id)
                                                         <option value="{{$cow->parent_id}}">{{$cow->serial_no}}</option>
                                                     @endif
                                                 @endforeach

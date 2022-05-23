@@ -44,7 +44,7 @@
                                         <td>{{date('d-m-Y', strtotime($cow->date))}}</td>
                                         <td>{{$cow->serial_no ?? 'Null'}}</td>
                                         <td>{{$cow->breed ?? 'Null'}}</td>
-                                        <td>{{$cow->cattleParent->serial_no ?? ''}}</td>
+                                        <td>{{$cow->parent->serial_no ?? ''}}</td>
 
 
                                         @if( !($cow->dead_date || $cow->dry_date || $cow->saleStatus==1))
