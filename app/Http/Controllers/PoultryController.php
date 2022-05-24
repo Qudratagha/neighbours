@@ -24,16 +24,39 @@ class PoultryController extends Controller
     }
 
     public function index()
+
     {
         abort_if(Gate::denies("poultry-read"), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
+        $eggincdates =  Poultry::where('status',3)->distinct('created_at')->pluck('created_at');
+//        dd($eggincdates);
+        $eggincquans =  Poultry::where('quantity','>',0)->get()->pluck('quantity');
+
         $poultry_types = PoultryType::all();
         $poultry_statuses = PoultryStatus::all();
         $poultries = Poultry::all();
-        return view('poultry.index',compact('poultry_types','poultry_statuses', 'poultries'));
+        return view('poultry.index',compact('poultry_types','poultry_statuses', 'poultries', 'eggincdates','eggincquans'));
     }
-
+    public function getDateQuantity($date)
+    {
+        $dateQuantity = Poultry::where('created_at',$date)->where('poultry_type_id',3)->where('poultry_status_id',3)->sum('quantity');
+//        $dateQuantity = Poultry::where('created_at',$date)->where('poultry_type_id',3)->where('poultry_status_id',3)->where('quantity','>',0)->pluck('remaining_quantity')->last();
+        return  response()->json($dateQuantity);
+//        return view('/poultry.test',compact('dateQuantity'));
+    }
+    public function totalEggs()
+    {
+        $eggscollected = Poultry::where('poultry_type_id',3)->where('poultry_type_id',3)->sum('quantity');
+        $totalQty = $eggscollected / 12;
+        $qtyindzn = floor($totalQty);
+        return response()->json($qtyindzn);
+    }
     public function indexDaily(Poultry $poultry)
     {
+        $eggscollected = Poultry::where('poultry_type_id',3)->sum('quantity');
+        $totalQty = $eggscollected / 12;
+        $qtyindzn = floor($totalQty);
+
         $eggs = Transaction::where('sub_head_id', 16 )->get();
         $hens = Transaction::where('sub_head_id', 17 )->get();
         $chicks = Transaction::where('sub_head_id', 17 )->get();
@@ -43,13 +66,26 @@ class PoultryController extends Controller
     }
     public function create()
     {
-        //
+
     }
     public function store(Request $request)
     {
+
         $request['account_head_id'] = 8;
-        Poultry::create($request->all());
-        return redirect(route('poultry.index'))->with('message', 'Entry Created');
+        $pti =  $request->poultry_type_id;
+        $psi =  $request->poultry_status_id;
+        $request['remaining_quantity'] = 0;
+        $request['status'] = $psi;
+
+        if ($request['quantity'] == 0)
+        {
+            return redirect(route('poultry.index'))->with('errorMessage', 'Your quantity must be greater than zero ');
+        }
+        else
+            {
+                Poultry::create($request->except('updatedDate'));
+                return redirect(route('poultry.index'))->with('message', ' Entry Created');
+            }
     }
 
     public function show(Poultry $poultry)
@@ -85,14 +121,7 @@ class PoultryController extends Controller
     }
     public function storeDaily(Request $request)
     {
-        if (isset($_POST['deleteEgg']))
-        {
-            dd($request);
-            return "sss";
-            $eggt = Transaction::where('id',15);
-            $eggt->delete();
-            return redirect()->back()->with('message', 'Entry Deleted');
-        }
+
        $accountHeadData = [];
        if (isset($_POST['submitEgg']))
        {
@@ -121,6 +150,7 @@ class PoultryController extends Controller
             $request['transaction_type_id'] = 1;
             $request['account_head_id'] = 4;
             $sub_head_id = AccountHead::where('name', "hen")->pluck('id')->last();
+
             $request['sub_head_id'] = $sub_head_id;
             Transaction::Create($request->except('submitHen'));
             return redirect()->back()->with('message', 'Hen Sold');

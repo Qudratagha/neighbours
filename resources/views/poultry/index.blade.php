@@ -49,14 +49,22 @@
                                                 <td>{{$poultry->quantity}}</td>
                                                 <td>{{$poultry->poultryType->name}}</td>
                                                 <td>{{$poultry->poultryStatus->name}}</td>
+
+                                                <?php
+                                                $lastEntry = \App\Models\Poultry::orderBy('id', 'desc')->pluck('id')->first();
+                                                ?>
+                                                @if ($lastEntry == $poultry->id)
                                                 <td>
                                                     <form action="{{route('poultry.destroy', $poultry->id)}}" method="POST">
-                                                        @csrf
-                                                        @method("DELETE")
-                                                        <a href="{{route('poultry.edit',$poultry->id)}}" class="btn btn-sm btn-success" data-toggle="tooltip" title="Edit"><i class="fe fe-edit-3"></i></a>
-                                                        <button type="submit" class="btn btn-sm btn-danger" data-toggle="tooltip" title="Delete"><i class="fe fe-trash-2"></i></button>
+                                                    @csrf
+                                                    @method("DELETE")
+                                                    <a href="{{route('poultry.edit',$poultry->id)}}" class="btn btn-sm btn-success" data-toggle="tooltip" title="Edit"><i class="fe fe-edit-3"></i></a>
+                                                    <button type="submit" class="btn btn-sm btn-danger" data-toggle="tooltip" title="Delete"><i class="fe fe-trash-2"></i></button>
                                                     </form>
                                                 </td>
+                                            @else
+                                                    <td></td>
+                                            @endif
                                         @endforeach
                                     </tbody>
                                 </table>
@@ -83,13 +91,14 @@
                 <div class="modal-body">
                     <form method="post" action="{{route('poultry.store')}}" >
                         @csrf
+
                         <div class="form-group">
-                            <label for="quantity" class="form-control-label">Quantity:</label>
-                            <input type="number" class="form-control" name="quantity" id="quantity" required>
+                            <label class="form-label">Entry In Farm</label>
+                            <input type="text" name="created_at" onfocus= "(this. type='date')" class="form-control" name="entry_in_farm" value="<?php echo date('Y-m-d');?>">
                         </div>
                         <div class="form-group ">
                             <label class="form-label">Poultry Type</label>
-                            <select name="poultry_type_id" class="form-control select2 custom-select" required onchange="change_status(this.value);">
+                            <select name="poultry_type_id" id="poultry_type_id" class="form-control select2 custom-select" required onchange="change_status(this.value);">
                                 <option value="">Please Select Poultry Type</option>
                                 @foreach($poultry_types as $poultry_type)
                                     <option value="{{$poultry_type->id}}" >{{$poultry_type->name}}</option>
@@ -98,10 +107,99 @@
                         </div>
                         <div class="form-group ">
                             <label class="form-label">Poultry Status</label>
-                            <select name="poultry_status_id" id="poultry_status_id" class="form-control select2 custom-select" required>
-
-                            </select>
+                            <select name="poultry_status_id" id="poultry_status_id" class="form-control select2 custom-select" required></select>
                         </div>
+
+
+
+
+
+
+
+                        <div class="form-group" id="incubatedDate"></div>
+
+                        <div class="form-group">
+                            <label for="quantity" class="form-control-label">Quantity:</label>
+                            <input type="number" class="form-control" name="quantity" id="quantity" required>
+                            <?php
+
+                            //      Hens calculation Starts
+
+                            $totalPurchaseHen = \App\Models\Poultry:: totalPurchaseHen();
+                            $totalDieHen = \App\Models\Poultry:: totalDieHen();
+                            $totalSickHen = \App\Models\Poultry:: totalSickHen();
+                            $totalHealthyHen = \App\Models\Poultry:: totalHealthyHen();
+                            $totalPurchaseSickHealthy = \App\Models\Poultry:: totalPurchaseSickHealthy();
+//                            dd($totalPurchaseSickHealthy);
+                            $totalEggsCollected = \App\Models\Poultry:: totalHenEggs();
+
+                            $totalEggsToBeIncubated = \App\Models\Poultry:: totalEggsToBeIncubated();
+
+
+                            if ($totalPurchaseHen > $totalDieHen){
+                                $purchaseMdie = $totalPurchaseHen - $totalDieHen;
+                            }
+                            else{
+                                $purchaseMdie = 0;
+                            }
+                            $purchasePhealthy =   $totalPurchaseHen + $totalHealthyHen;
+
+                            if ($totalPurchaseHen > $totalSickHen && $totalPurchaseHen > $totalDieHen  ){
+                                $purchaseMsick = $totalPurchaseHen - $totalDieHen;
+                            }
+                            else{
+                                $purchaseMsick = 0;
+                            }
+                            if ($totalSickHen > $totalHealthyHen && $totalPurchaseHen > $totalDieHen ){
+                                $sickMhealthy = $totalSickHen - $totalHealthyHen;
+                            }
+                            else{
+                                $sickMhealthy = 0;
+                            }
+
+
+
+//                            $totalSickHen = \App\Models\Poultry::where('poultry_type_id',1)->where('poultry_status_id',7)->pluck('remaining_quantity')->last();
+                            $totalHen = \App\Models\Poultry::where('poultry_type_id',1)->where('poultry_status_id',6)->pluck('remaining_quantity')->last();
+                            $totalRemainingHen = $totalHen - $totalSickHen;
+//                            if ($totalSickHen == NULL)
+//                            {
+//                                $totalSickHen = 0;
+//                            }
+                            $totalHen = \App\Models\Poultry::where('poultry_type_id',1)->where('poultry_status_id',6)->pluck('remaining_quantity')->last();
+                            if ($totalHen == NULL)
+                            {
+                                $totalHen = 0;
+                            }
+                            if ($totalRemainingHen == NULL)
+                            {
+                                $totalRemainingHen = 0;
+                            }
+                            //      Hens calculation Ends
+                            //      Eggs calculation Starts
+                            $totalEggs = \App\Models\Poultry::where('poultry_type_id',3)->where('poultry_status_id',4)->pluck('remaining_quantity')->last();
+                            if ($totalEggs == NULL)
+                            {
+                                $totalEggs = 0;
+                            }
+                            //      Hens calculation Ends
+                            //      Chicks calculation Starts
+                            $totalChicks = \App\Models\Poultry::where('poultry_type_id',2)->where('poultry_status_id',4)->pluck('remaining_quantity')->last();
+                            if ($totalChicks == NULL)
+                            {
+                                $totalChicks = 0;
+                            }
+
+                            //      Chicks calculation Ends
+
+
+                            ?>
+{{--                            {{dd($totalHealthyHen)}}--}}
+                            <div id="totalHen" class="invalid-feedback" style="display: block !important;"></div>
+                            <div id="testing" class="invalid-feedback" style="display: block !important;"></div>
+                        </div>
+
+
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                             <button type="submit" class="btn btn-primary">Submit </button>
@@ -114,10 +212,145 @@
 @endsection
 @section('more-script')
     <script>
-        @parent
+        let totalPurchaseHen = {{$totalPurchaseHen}};
+        let purchaseMdie = {{$purchaseMdie}};
+        let totalSickHen = {{$totalSickHen}};
+
+        let sickMhealthy = {{$sickMhealthy}};
+
+
+        let totalPurchaseSickHealthy = {{$totalPurchaseSickHealthy}};
+
+        let purchaseMsick = {{$purchaseMsick}};
+
+        let purchasePhealthy = {{$purchasePhealthy}};
+
+
+        // Eggs calculation
+        let totalEggsCollected = {{$totalEggsCollected}};
+        let totalEggsToBeIncubated = {{$totalEggsToBeIncubated}};
+
+        let totalhens = {{$totalHen}};
+        let totalsickhensRemaining = {{$totalRemainingHen}};
+        {{--let totalSickHen = {{$totalSickHen}};--}}
+
+        let totalEggs = {{$totalEggs}};
+        let totalChicks = {{$totalChicks}};
+        var newQty = 0;
+        var current_poultry_status = 0;
+        var alertMsg = "";
+        var validationMsg = "";
+        $(function(){
+
+            $('#quantity').change(function () {
+                if(this.value > newQty && current_poultry_status != 6)
+                {
+                    alert(alertMsg);
+                    $('#quantity').val(newQty);
+                }
+            });
+            $("#poultry_status_id").change(function(){
+                current_poultry_status = this.value;
+                alertMsg = 'Please do not exceed the Available Quantity';
+                let pti = $("#poultry_type_id").val();
+
+                if (this.value == 4 && pti == 2)
+                {
+                    $('#incubatedDate').html('<label class="form-label">Incubation Date</label>\n' +
+                        '                            <select id="mySelect" name="updatedDate" class="form-control dates">\n' +
+                        '                                <option value="">Please Select Incubation Date</option>\n' +
+                        '                                    @foreach($eggincdates as $eggincdate)\n' +
+                        '                                        <option value={{$eggincdate}} >{{$eggincdate}}</option>\n' +
+                        '                                    @endforeach\n' +
+                        '                            </select>');
+                } else {
+                    $('#incubatedDate').html('');
+                }
+                $('#mySelect').change(function(e){
+
+                    var date = this.value;
+                    // console.log(this.value);
+                    $.ajax({
+                        url: "{{  route('poultry.getDateQuantity',"") }}/"+date,
+                        method: 'get',
+                        success: function(result){
+                            $('#testing').html('Your Total Incubated Eggs = '+result);
+                            newQty = result;
+                        }
+                    });
+                });
+
+                switch (this.value != 0 || pti != 0)
+                {
+                    //      Hen calculation Starts
+
+                    case this.value == 1 && pti == 1:
+                        {
+                            newQty = purchaseMdie;
+                            validationMsg = 'Total Purchase Minus Die Hens = ' + purchaseMdie;
+                            break;
+                        }
+                    case this.value == 7 && pti == 1:
+                        {
+                            newQty = totalPurchaseSickHealthy;
+                            validationMsg = 'Total Purchase Sick Healthy Hens = ' + totalPurchaseSickHealthy;
+                            break;
+                        }
+                    case this.value == 8 && pti == 1:
+                        {
+                            newQty = sickMhealthy;
+                            validationMsg = 'Total Sick Hens = ' + sickMhealthy;
+                            break;
+                        }
+                    //      Hen calculation Ends
+                    //      Egg calculation Starts
+                    case this.value == 3 && pti == 4:
+                    {
+                        newQty = totalEggs;
+                        validationMsg = 'Total Hens = ' + totalEggs;
+                        break;
+                    }
+
+                    //      Egg calculation Ends
+
+                    case this.value == 4 && pti == 3:
+                        {
+                            newQty = totalEggsCollected;
+                            validationMsg = 'Total Eggs To Be Collected = ' + totalEggsCollected;
+                            break;
+                        }
+                    case this.value == 3 && pti == 3:
+                    {
+                        newQty = totalEggsToBeIncubated;
+                        validationMsg = 'Total Eggs To Be Incubated = ' + totalEggsToBeIncubated;
+                        break;
+                    }
+                    //      Eggs calculation Ends
+                    //      Chick calculation Starts
+
+                    //      Chick calculation Ends
+
+
+                }
+                //      Chick calculation Starts
+                if (this.value == 1 && pti == 2)
+                {
+                    newQty = totalChicks;
+                    validationMsg = 'Total Hens = ' + totalChicks;
+                }
+                if (this.value == 7 && pti == 2)
+                {
+                    newQty = totalChicks;
+                    validationMsg = 'Total Hens = ' + totalChicks;
+                }
+                $('#totalHen').html(validationMsg);
+            });
+                //      Hens calculation Starts
+                //      Chick calculation Ends
+                });
+
         $(document).ready(function() {
             $('#mytable').DataTable( {
-
             });
         });
 
@@ -126,19 +359,19 @@
                 'name' : 'Hen',
                 'status' : [
                     { id: 1, value: 'Die'},
-                    { id: 5,value: 'Purchase'},
-                    { id: 6, value: 'Sick'},
-
+                    { id: 6,value: 'Purchase'},
+                    { id: 7, value: 'Sick'},
+                    { id: 8, value: 'Healthy'},
                 ]
             },
             'poultry_2' : {
                 'name' : 'Chicks',
                 'status' : [
                     { id : 1, value: 'Die' },
-                    { id : 2, value: 'Collected' },
-                    { id : 4, value: 'Converted To Hen' },
-                    { id : 6, value: 'Sick'},
-
+                    { id : 4, value: 'Collected' },
+                    { id : 5, value: 'Converted To Hen' },
+                    { id : 7, value: 'Sick'},
+                    { id: 8, value: 'Healthy'},
                 ]
             },
             'poultry_3' : {
@@ -158,6 +391,10 @@
             });
             $('#poultry_status_id').html(strOptions);
         }
+
+        @if(session()->has('alert'))
+            alert('{{ session('alert') }}');
+        @endif
     </script>
 @endsection
 

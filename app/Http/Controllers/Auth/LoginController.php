@@ -35,6 +35,9 @@ class LoginController extends Controller
             case 'Cow Supervisor':
                 return '/cattle/cow';
                 break;
+            case 'Poultry Supervisor':
+                return '/poultry';
+                break;
             default:
                 return '/login';
                 break;

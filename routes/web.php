@@ -28,11 +28,15 @@ Auth::routes();
 Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard');
 
 //poultry
+
 Route::resource('/poultry', PoultryController::class);
+Route::get('/poultry/getDateQuantity/{date}', [\App\Http\Controllers\PoultryController::class,'getDateQuantity'])->name('poultry.getDateQuantity');
 
 //poultry_daily
 Route::get('poultry_daily',[\App\Http\Controllers\PoultryController::class, 'indexDaily'])->name('poultry_daily.indexDaily');
 Route::post('/poultry_daily',[\App\Http\Controllers\PoultryController::class, 'storeDaily'])->name('poultry_daily.storeDaily');
+//Route::get('/poultry_daily/totalEggs', [\App\Http\Controllers\PoultryController::class,'totalEggs'])->name('poultry_daily.totalEggs');
+
 
 Route::delete('/poultry_daily/{poultry_daily}',[\App\Http\Controllers\Poultrycontroller::class,'eggdel'])->name('poultry_daily.eggdel');
 

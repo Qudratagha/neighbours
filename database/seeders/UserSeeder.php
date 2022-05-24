@@ -19,6 +19,11 @@ class UserSeeder extends Seeder
                 'name' => 'cow',
                 'email' => 'cow@gmail.com',
                 'password' => \Illuminate\Support\Facades\Hash::make('cow123')
+            ],
+            [
+                'name' => 'poultry',
+                'email' => 'poultry@gmail.com',
+                'password' => \Illuminate\Support\Facades\Hash::make('poultry123')
             ]
         ];
         foreach ($aryUserRoles as $userRole) {

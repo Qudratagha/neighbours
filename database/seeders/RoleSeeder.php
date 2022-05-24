@@ -18,7 +18,9 @@ class RoleSeeder extends Seeder
         $aryRoles = [
             ['id' => 1, 'name' => 'Super Admin', 'description' => 'Role for Super Admin'],
 
-            ['id' => 2, 'name' => 'Cow Supervisor', 'description' => 'Role for Cow Supervisor']
+            ['id' => 2, 'name' => 'Cow Supervisor', 'description' => 'Role for Cow Supervisor'],
+
+            ['id' => 3, 'name' => 'Poultry Supervisor', 'description' => 'Role for Poultry Supervisor']
         ];
         foreach ($aryRoles as $role) {
             DB::table('role')->insert([
