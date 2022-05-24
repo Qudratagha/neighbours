@@ -81,8 +81,16 @@ class AccountSeeder extends Seeder
                 'parent_id' => '13'
             ],
             [
+                'name'      => 'cow purchase',
+                'parent_id' => '12'
+            ],
+            [
                 'name'      => 'goat/sheep sale',
                 'parent_id' => '13'
+            ],
+            [
+                'name'      => 'goat/sheep purchase',
+                'parent_id' => '12'
             ],
             [
                 'name'      => 'egg sale',
@@ -96,6 +104,10 @@ class AccountSeeder extends Seeder
                 'name'      => 'chick sale',
                 'parent_id' => '13'
             ],
+            [
+                'name'      => 'milk collection',
+                'parent_id' => '6'
+            ]
         ]);
 
 //        $account =

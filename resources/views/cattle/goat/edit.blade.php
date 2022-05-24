@@ -35,20 +35,32 @@
                                                             <i class="fa fa-calendar tx-16 lh-0 op-6"></i>
                                                         </div>
                                                     </div>
-                                                    <input class="form-control fc-datepicker" placeholder="MM/DD/YYYY" type="date">
+                                                    <input type="text" onfocus= "(this. type='date')" class="form-control" name="date" value="{{$cattle_id->date}}">
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="form-group">
+                                            <label class="form-label">Goat/Sheep Serial</label>
+                                            <input type="number" class="form-control" name="serial_no" placeholder="Enter Serial No" value="{{$cattle_id->serial_no}}">
+                                        </div>
+                                        <div class="form-group">
                                             <label for="cattle_name" class="form-label">Select Cattle Type</label>
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="cattle_type" id="1" value="1">
+<<<<<<< HEAD
+                                                <input class="form-check-input" type="radio" name="cattle_type" id="1" value="1" {!! ($cattle_id->cattle_type_id == 2 ? 'checked' : '') !!} >
+=======
+                                                <input class="form-check-input" type="radio" name="cattle_type_id" id="1" value="2">
+>>>>>>> 52ea3b1177ed9194253ba5af7b209b6d59cb78d9
                                                 <label class="form-check-label" for="flexRadioDefault1">
                                                     Goat
                                                 </label>
                                             </div>
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="cattle_type" id="0" value="0">
+<<<<<<< HEAD
+                                                <input class="form-check-input" type="radio" name="cattle_type" id="0" value="0" {!! ($cattle_id->cattle_type_id == 3 ? 'checked' : '') !!}>
+=======
+                                                <input class="form-check-input" type="radio" name="cattle_type_id" id="0" value="3">
+>>>>>>> 52ea3b1177ed9194253ba5af7b209b6d59cb78d9
                                                 <label class="form-check-label" for="flexRadioDefault1">
                                                     Sheep
                                                 </label>
@@ -58,13 +70,13 @@
                                         <div class="form-group">
                                             <label for="gender" class="form-label">Select Gender</label>
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="gender" id="1" value="1">
+                                                <input class="form-check-input" type="radio" name="gender" id="1" value="1" {!! ($cattle_id->gender == 1 ? 'checked' : '') !!}>
                                                 <label class="form-check-label" for="flexRadioDefault1">
                                                     Male
                                                 </label>
                                             </div>
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="gender" id="0" value="0">
+                                                <input class="form-check-input" type="radio" name="gender" id="0" value="0" {!! ($cattle_id->gender == 0 ? 'checked' : '') !!}>
                                                 <label class="form-check-label" for="flexRadioDefault1">
                                                     Female
                                                 </label>
@@ -72,20 +84,28 @@
                                         </div>
                                         <div class="form-group">
                                             <label class="form-label">Date Of Birth</label>
-                                            <input type="date" class="form-control" name="dob" placeholder="Enter Date Of Birth" value="{{$cattle_id->dob}}">
+                                            <input type="text" onfocus= "(this. type='date')" class="form-control" name="dob" placeholder="Date of Birth" value="{{$cattle_id->dob}}">
                                         </div>
                                         <div class="form-group">
                                             <label class="form-label">Parent</label>
                                             <select name="parent_id" id="parent_id" class="form-control">
                                                 <option value="">Choose Parent</option>
-                                                @foreach($cows as $cow)
-                                                    <option value="{{$cow->parent_id}}">{{$cow->serial_no}}</option>
+                                                @foreach($goats as $goat)
+<<<<<<< HEAD
+                                                    <option value="{{$goat->id}}" {{$goat->id == $cattle_id->parent_id ? 'selected' : ''}}></option>{{$goat->serial_no}}</option>
                                                 @endforeach
+=======
+                                                    @if($goat->parent_id)
+                                                    <option value="{{$goat->parent_id}}">{{$goat->serial_no}}</option>
+                                                    @endif
+                                                        @endforeach
+>>>>>>> 52ea3b1177ed9194253ba5af7b209b6d59cb78d9
                                             </select>
+{{--                                                {{dd($cattle_id->parent_id)}}--}}
                                         </div>
                                         <div class="form-group">
                                             <label class="form-label">Entry In Farm</label>
-                                            <input type="date" class="form-control" name="entry_in_farm" placeholder="Entry In Farm" value="{{$cattle_id->entry_in_farm}}">
+                                            <input type="text" onfocus= "(this. type='date')" class="form-control" name="entry_in_farm" placeholder="Entry In Farm" value="{{$cattle_id->entry_in_farm}}">
                                         </div>
                                     </div>
                                     <div class="col-md-6">

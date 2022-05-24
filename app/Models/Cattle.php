@@ -33,28 +33,28 @@ class Cattle extends Model
         return $this->hasMany(Sick::class,'cattle_id','id');
     }
 
-    public function cattles(){
-        return $this->hasMany(Cattle::class,'parent_id', 'id');
+    public function children()
+    {
+        return $this->hasMany(Cattle::class, 'parent_id', 'id');
+    }
+    public function parent()
+    {
+        return $this->belongsTo(Cattle::class, 'parent_id');
     }
 
     public function cattleType(){
         return $this->belongsTo(CattleType::class,'cattle_type_id', 'id');
     }
 
+    public function scopeGoats($q) {
+        return $q->whereIn('cattle_type_id',[2,3]);
+    }
+
+    public function scopeCows($q) {
+        return $q->where('cattle_type_id',1);
+    }
+
     public function account_head(){
         return $this->belongsTo(AccountHead::class,'account_head_id', 'id');
     }
-
-//    public function dead(){
-//        return $this->belongsTo(Dead::class,'cattle_id','id');
-//    }
-//    public function dry(){
-//        return $this->belongsTo(Dry::class,'cattle_id', 'id');
-//    }
-
-//    public function feed(){
-//        return $this->belongsTo(Feed::class,'cattle_id', 'id');
-//    }
-
-
 }

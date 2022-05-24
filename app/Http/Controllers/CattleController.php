@@ -7,6 +7,8 @@ use App\Models\Cattle;
 use App\Http\Requests\StoreCattleRequest;
 use App\Http\Requests\UpdateCattleRequest;
 use App\Models\Insemination;
+use App\Models\Role;
+use App\Models\UserRole;
 use Carbon\Traits\Localization;
 use App\Models\Delivery;
 use App\Models\Medicines;
@@ -15,34 +17,50 @@ use App\Models\Sick;
 use App\Models\Transaction;
 use App\Models\Vaccination;
 use Dflydev\DotAccessData\Data;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
 use phpDocumentor\Reflection\Types\String_;
 use function Symfony\Component\HttpFoundation\all;
 
+use Symfony\Component\HttpFoundation\Response;
+use Gate;
+use function Symfony\Component\HttpKernel\HttpCache\load;
 //use Yajra\DataTables\DataTables;
 
 class CattleController extends Controller
 {
+
+     public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('auth.gates');
+    }
+
     public function index(String $cattle_type)
     {
-        $goats = Cattle::whereIn('cattle_type_id' , [2,3] )->get();
+        $goats = Cattle::goats()->get();
         $cows = Cattle::where('cattle_type_id',1)->get();
 
         if ($cattle_type == 'cow' || $cattle_type == 'goat')
         {
+            abort_if(Gate::denies("$cattle_type-read"), Response::HTTP_FORBIDDEN, '403 Forbidden');
             return view("cattle.$cattle_type.index",compact('goats','cows'));
         }
     }
 
     public function create(string $cattle_type)
     {
+
         $goats = Cattle::whereIn('cattle_type_id', [2,3])->get();
-        $cows = Cattle::where('cattle_type_id',1)->get();
+        $cows = Cattle::cows()->where('saleStatus',0)->where('dry_date',null)->where('dead_date',null)->get();
+
 
         if ($cattle_type == 'cow' || $cattle_type == 'goat')
         {
+            abort_if(Gate::denies("$cattle_type-create"), Response::HTTP_FORBIDDEN, '403 Forbidden');
             return view("cattle.$cattle_type.create",compact('goats','cows'));
         }
     }
@@ -81,9 +99,7 @@ class CattleController extends Controller
         //store cow
         if (isset($_POST['submitCow']))
         {
-
             $cow_daily = $request->serial_no;
-
             $accountHeadData = array
             (
                 'name' => "cow#$cow_daily",
@@ -92,64 +108,129 @@ class CattleController extends Controller
             AccountHead::updateOrCreate($accountHeadData);
 
             $accountHeadId = AccountHead::where('name',"cow#$cow_daily")->pluck('id')->last();
+
+
+            if ($request->age){
+               Transaction::create([
+                   'date' => $request->date,
+                   'transaction_type_id' => 2,
+                   'account_head_id' => 17,
+                   'sub_head_id' => $accountHeadId,
+                   'quantity' => 1,
+                   'amount' => $request->amount
+               ]);
+            }
             $request['cattle_type_id'] = $request->submitCow;
             $request['account_head_id'] = $accountHeadId;
-            Cattle::create($request->except('submitCow'));
+            Cattle::create($request->except('submitCow','amount'));
             return redirect()->back()->with('message', 'Cow Added Successfully');
         }
 
+
+
+//        if (isset($_POST['submitGoat']))
+//        {
+//
+//            $goat_daily = $request->serial_no;
+//            $accountHeadData = array
+//            (
+//                'name' => "goat#$goat_daily",
+//                'parent_id' => 7
+//            );
+//            AccountHead::updateOrCreate($accountHeadData);
+//
+//            $accountHeadId = AccountHead::where('name',"goat#$goat_daily")->pluck('id')->last();
+//            $request['cattle_type_id'] = 2;
         //store goat
         if (isset($_POST['submitGoat'])) {
-            $request['account_head_id'] = 7;
-            Cattle::create($request->except('submitGoat'));
+            $goat_serial = $request->serial_no;
+
+            $accountHeadData = array
+            (
+                'name' => "goat#$goat_serial",
+                'parent_id' => 7
+            );
+            AccountHead::updateOrCreate($accountHeadData);
+            $accountHeadId = AccountHead::where('name',"goat#$goat_serial")->pluck('id')->last();
+
+            if ($request->age){
+                Transaction::create([
+                    'date' => $request->date,
+                    'transaction_type_id' => 2,
+                    'account_head_id' => 18,
+                    'sub_head_id' => $accountHeadId,
+                    'quantity' => 1,
+                    'amount' => $request->amount
+                ]);
+            }
+
+            $request['account_head_id'] = $accountHeadId;
+            Cattle::create($request->except('submitGoat','amount'));
             return redirect()->back()->with('message', 'Goat Added Successfully');
         }
 
         //store milk
         if (isset($_POST['submitMilk'])) {
-            $cow_daily = $request->cow_id;
-
-            $accountHeadData = array
-            (
-                'name' => "cow#$cow_daily",
-                'parent_id' => 4
-            );
-            AccountHead::updateOrCreate($accountHeadData);
+            $cowSerial = $request->serial_no;
 
             $request['transaction_type_id'] = 3;
-            $request['account_head_id'] = 1;
-            $sub_head_id = AccountHead::where('name', "cow#$cow_daily")->pluck('id')->last();
+            $request['account_head_id'] = 21;
+            $sub_head_id = AccountHead::where('name', "cow#$cowSerial")->pluck('id')->last();
 
             $request['sub_head_id'] = $sub_head_id;
 
-            Transaction::create($request->except(['cow_id', 'submitMilk']));
+            Transaction::create($request->except(['serial_no', 'submitMilk']));
 
-            return redirect()->back()->with('message', 'Goat Added Successfully');
+            return redirect()->back()->with('message', 'Milk Added Successfully');
         }
     }
 
-    public function show(Cattle $cattle)
+    public function show(String $cattle_type, Cattle $cattle )
     {
 
-    }
-
-    public function showDaily(Cattle $cow_daily){
+        if ($cattle->dead_date)
+        {
+            if ($cattle_type == 'cow' || $cattle_type == 'goat')
+            {
+                abort_if(Gate::denies("$cattle_type-read"), Response::HTTP_FORBIDDEN, '403 Forbidden');
+                return view("cattle.$cattle_type.showDead",compact('cattle','cattle_type'));
+            }
+        }
+        elseif ($cattle->dry_date)
+        {
+            if ($cattle_type == 'cow' || $cattle_type == 'goat')
+            {
+                abort_if(Gate::denies("$cattle_type-read"), Response::HTTP_FORBIDDEN, '403 Forbidden');
+                return view("cattle.$cattle_type.showDry",compact('cattle','cattle_type'));
+            }
+        }
+        elseif ($cattle->saleStatus == 1)
+        {
+            if ($cattle_type == 'cow' || $cattle_type == 'goat')
+            {
+                abort_if(Gate::denies("$cattle_type-read"), Response::HTTP_FORBIDDEN, '403 Forbidden');
+                return view("cattle.$cattle_type.showSold",compact('cattle','cattle_type'));
+            }
+        }
 
     }
 
     //Cow Daily Entries Show
-    public function cowDaily(Cattle $cow_daily)
+    public static function cowDaily(Cattle $cow_daily)
     {
+        abort_if(Gate::denies('cow-read'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
         $cowID = $cow_daily->id;
-        $sub_head_id = AccountHead::where('name',"cow#$cowID")->pluck('id')->last();
+        $cow_serial = $cow_daily->serial_no;
+        $sub_head_id = AccountHead::where('name',"cow#$cow_serial")->pluck('id')->last();
 
         if ($sub_head_id != '')
         {
-            $transactions = Transaction::whereRaw("account_head_id = 1 AND sub_head_id = $sub_head_id")->get();
+            $transactions = Transaction::whereRaw("account_head_id = 21 AND sub_head_id = $sub_head_id")->get();
         }
         else $transactions = [null];
 
-        $sicks          =   Sick::where('cattle_id',$cowID)->get();
+        $sicks = $cow_daily->sicks()->get();
         $medicines      =   Medicines::where('sub_head_id',$sub_head_id)->get();
         $pregnants      =   Pregnant::where('cattle_id',$cowID)->get();
         $deliveries     =   Delivery::where('cattle_id',$cowID)->get();
@@ -162,8 +243,9 @@ class CattleController extends Controller
     // Goat Daily Entries Show
     public function goatDaily(Cattle $goat_daily)
     {
-        $goatID = $goat_daily->id;
+        abort_if(Gate::denies('goat-read'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
+        $goatID = $goat_daily->id;
         $sub_head_id = AccountHead::where('name',"goat#$goatID")->pluck('id')->last();
 
         $sicks          =   Sick::where('cattle_id',$goatID)->get();
@@ -177,8 +259,12 @@ class CattleController extends Controller
 
     public function edit(String $cattle_type, Cattle $cattle_id)
     {
+        abort_if(Gate::denies("$cattle_type-update"), Response::HTTP_FORBIDDEN, '403 Forbidden');
+//        dd($cattle_id);
+
         $goats = Cattle::whereIn('cattle_type_id', [2,3])->get();
-        $cows = Cattle::where('cattle_type_id',1)->get();
+        $cows = Cattle::cows()->where('saleStatus',0)->where('dry_date',null)->where('dead_date',null)->get();
+
 
         if ($cattle_type == 'cow' || $cattle_type == 'goat')
         {
@@ -186,29 +272,34 @@ class CattleController extends Controller
         }
     }
 
-    public function update(UpdateCattleRequest $request, Cattle $cattle_id)
+    public function update(UpdateCattleRequest $request, String $cattle_type, Cattle $cattle_id)
+
     {
-        if (isset($_POST['submitCow']))
+        abort_if(Gate::denies("$cattle_type-update"), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        //update cow
+        if (isset($_POST['updateCow']))
         {
-            $request['cattle_type_id']=$request->submitCow;
+            $request['cattle_type_id']=$request->updateCow;
             $request['account_head_id'] = 6;
-            $cattle_id->update($request->all());
-            return redirect()->back()->with('message', 'Cow Updated Successfully');
+            $cattle_id->update($request->except('updateCow'));
+            return CattleController::index($cattle_type);
         }
 
-        //store goat
-        if (isset($_POST['submitGoat']))
+        //update goat
+        if (isset($_POST['updateGoat']))
         {
             $request['account_head_id'] = 7;
-            $cattle_id->update($request->all());
-            return redirect()->back()->with('message', 'Goat Updated Successfully');
+            $cattle_id->update($request->except('updateGoat'));
+            return CattleController::index($cattle_type);
         }
     }
 
-    public function destroy(Cattle $cow)
+    public function destroy(String $cattle_type, Cattle $cattle)
     {
-        $cow->delete();
-        return redirect(route('cow.index'));
+
+        abort_if(Gate::denies("$cattle_type-delete"), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        $cattle->delete();
+        return CattleController::index($cattle_type);
     }
 
 }

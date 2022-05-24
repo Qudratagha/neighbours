@@ -24,10 +24,18 @@ class PregnantController extends Controller
             Pregnant::create($request->except('submitGoat'));
             return redirect()->back()->with('message', 'Pregnant Data Added');
         }
-        if (isset($_POST['submitCow']))
+
+        if (isset($_POST['submitCowPregnant']))
         {
-            Pregnant::create($request->except('submitCow'));
-            return redirect()->back()->with('message', 'Pregnant Data Added');
+            if (Pregnant::where('cattle_id', $request->cattle_id )->where('is_pregnant',1)->where('date',$request->date)->exists())
+            {
+                return redirect()->back()->with('errorMessage','This Cow is already Pregnant');
+            }
+            else
+            {
+                Pregnant::create($request->except('submitCowPregnant'));
+                return redirect()->back()->with('message','Pregnant Cow Data Added.');
+            }
         }
     }
 
@@ -48,6 +56,7 @@ class PregnantController extends Controller
 
     public function destroy(Pregnant $pregnant)
     {
-        //
+        $pregnant->delete();
+        return redirect()->back()->with('errorMessage','Pregnant Entry Deleted');
     }
 }

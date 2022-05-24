@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name='viewport' content='width=device-width, initial-scale=1.0, user-scalable=0'>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+
     <meta content="Hogo– Creative Admin Multipurpose Responsive Bootstrap4 Dashboard HTML Template" name="description">
     <meta content="Spruko Technologies Private Limited" name="author">
     <meta name="keywords" content="html admin template, bootstrap admin template premium, premium responsive admin template, admin dashboard template bootstrap, bootstrap simple admin template premium, web admin template, bootstrap admin template, premium admin template html5, best bootstrap admin template, premium admin panel template, admin template"/>
@@ -43,6 +45,10 @@
     <link href="/assets/plugins/iconfonts/icons.css" rel="stylesheet" />
     <link  href="/assets/fonts/fonts/font-awesome.min.css" rel="stylesheet">
 
+    <!---Select 2--->
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
+
     <!-- Data table css -->
     <link href="/assets/plugins/datatable/dataTables.bootstrap4.min.css" rel="stylesheet" />
     <link href="/assets/plugins/datatable/responsivebootstrap4.min.css" rel="stylesheet" />
@@ -53,6 +59,11 @@
         #hov:hover {
             background-color: #1753fc;
             color: white;
+        }
+        .required:after{
+            content:'*';
+            color:red;
+            padding-left:5px;
         }
     </style>
 </head>
@@ -147,6 +158,10 @@
 <script src="/assets/plugins/datatable/datatable.js"></script>
 
 <script src="/assets/plugins/datatable/dataTables.responsive.min.js"></script>
+
+<!---Select 2--->
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
 
 <!-- Custom js-->
 <script src="/assets/js/custom.js"></script>

@@ -19,14 +19,15 @@ return new class extends Migration
             $table->unsignedBigInteger('cattle_type_id');
             $table->unsignedBigInteger('account_head_id')->nullable();
             $table->integer('serial_no')->nullable();
-            $table->dateTime('dob')->nullable();
-            $table->dateTime('entry_in_farm')->nullable();
+            $table->date('dob')->nullable();
+            $table->date('entry_in_farm')->nullable();
             $table->integer('age')->nullable();
             $table->string('breed', 45);
             $table->boolean('gender')->default('0');
             $table->integer('weight')->nullable();
             $table->integer('height')->nullable();
-            $table->dateTime('date')->nullable();
+            $table->date('date')->nullable();
+            $table->boolean('saleStatus')->default(0);
             $table->date('dry_date')->nullable();
             $table->date('dead_date')->nullable();
 

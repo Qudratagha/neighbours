@@ -43,8 +43,16 @@
                                                                 <input type="text" onfocus= "(this. type='date')" class="form-control" name="date" value="<?php echo date('Y-m-d');?>" required>
                                                             </div>
                                                             <div class="form-group">
-                                                                <label for="message-text" class="form-control-label">Goats Quantity</label>
-                                                                <input type="text" class="form-control" id="quantity" name="quantity" required>
+                                                                <label for="message-text" class="form-label">Goats Quantity</label>
+                                                                <select class="form-control form-select quantity" name="quantity[]" multiple="multiple" style="width: 100%; outline: 0; border: 2px solid black; border-radius: 4px;">
+                                                                    @foreach($goats as $goat)
+                                                                        <option value="{{$goat->serial_no}}">{{$goat->serial_no}}</option>
+                                                                    @endforeach
+                                                                </select>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="message-text" class="form-control-label">Amount</label>
+                                                                <input type="number" class="form-control" id="amount" name="amount" required>
                                                             </div>
                                                             <div class="form-group">
                                                                 <label for="message-text" class="form-control-label">Description</label>
@@ -52,7 +60,7 @@
                                                             </div>
                                                             <div class="modal-footer">
                                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                                <button type="submit" name="submitGoat" class="btn btn-primary">Sale Goat</button>
+                                                                <button type="submit" name="submitGoatSale" class="btn btn-primary">Sale Goat</button>
                                                             </div>
                                                         </form>
                                                     </div>
@@ -68,30 +76,28 @@
                                             <th class="wd-15p">ID</th>
                                             <th class="wd-25p">Date</th>
                                             <th class="wd-15p">Goat Quantity</th>
+                                            <th>Status</th>
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        {{--            @foreach($transactions as $t)--}}
-                                        {{--                <tr>--}}
-                                        {{--                    <td>{{$loop->iteration}}</td>--}}
-                                        {{--                    <td>{{$t->date ?? ''}}</td>--}}
-                                        {{--                    <td>{{$t->quantity ?? ''}} Liters</td>--}}
-                                        {{--                </tr>--}}
-                                        {{--            @endforeach--}}
+                                            @foreach($transaction as $t)
+                                                <tr>
+                                                    <td>{{$loop->iteration}}</td>
+                                                    <td>{{$t->date ?? ''}}</td>
+                                                    <td>{{$t->quantity ?? ''}}</td>
+                                                    <td></td>
+                                                </tr>
+                                            @endforeach
                                         </tbody>
                                     </table>
                                 </div>
-                                <!-- table-wrapper -->
                             </div>
-
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        {{--      end side app --}}
     </div>
-    {{--   end container area--}}
 @endsection
 @section('more-script')
     <script>
@@ -100,5 +106,11 @@
                 $(this).toggleClass('active');
             });
         });
+
+        $(function(){
+            $('.quantity').select2({
+                tags: true
+            });
+        })
     </script>
 @endsection

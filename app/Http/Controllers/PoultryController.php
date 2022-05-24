@@ -10,21 +10,25 @@ use App\Models\PoultryStatus;
 use App\Models\PoultryType;
 use App\Models\Transaction;
 use App\Models\Vaccination;
-use Dflydev\DotAccessData\Data;
-use Illuminate\Foundation\Console\PolicyMakeCommand;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use phpDocumentor\Reflection\Types\Integer;
-use Illuminate\Http\Response;
-
+use Symfony\Component\HttpFoundation\Response;
+use Gate;
 
 class PoultryController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
         $eggincdates =  Poultry::where('status',3)->distinct('created_at')->pluck('created_at');
 //        dd($eggincdates);
         $eggincquans =  Poultry::where('quantity','>',0)->get()->pluck('quantity');
+        abort_if(Gate::denies("poultry read"), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
         $poultry_types = PoultryType::all();
         $poultry_statuses = PoultryStatus::all();
         $poultries = Poultry::all();
