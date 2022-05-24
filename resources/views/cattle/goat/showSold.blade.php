@@ -35,6 +35,7 @@
                                         <th style="font-weight: 600">Breed</th>
                                         <th style="font-weight: 600">Weight</th>
                                         <th style="font-weight: 600">Height</th>
+                                        <th style="font-weight: 600">Sold Amount</th>
                                         <th style="font-weight: 600">Sold Date</th>
 
                                     </center>
@@ -57,6 +58,7 @@
                                     <td>{{$cattle->breed}}</td>
                                     <td>{{$cattle->weight}}</td>
                                     <td>{{$cattle->height}}</td>
+                                    <td>{{$transaction->pluck('amount')->last()}}</td>
                                     <td>{{$cattle->date}}</td>
                                 </tr>
                                 </tbody>

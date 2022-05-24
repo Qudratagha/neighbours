@@ -70,10 +70,11 @@ class TransactionController extends Controller
 
     public function indexGoatSale()
     {
+
         abort_if(Gate::denies("goat-read"), Response::HTTP_FORBIDDEN, '403 Forbidden');
-        $goats = Cattle::where('cattle_type_id', [2,3])->get();
-        $transaction = Transaction::all();
-        return view('goat_sale.index', compact('goats', 'transaction'));
+        $goats = Cattle::goats()->where('saleStatus', 0)->get();
+        $transaction = Transaction::where('sub_head_id', 18)->where('account_head_id', 7)->where('transaction_type_id', 1)->get();
+        return view('goat_sale.index', compact('goats','transaction'));
     }
 
     public function create()
@@ -123,15 +124,17 @@ class TransactionController extends Controller
         //Sale Goat
         if (isset($_POST['submitGoatSale']))
         {
+            Cattle::where('serial_no', $request->quantity)->update(['saleStatus'=> 1, 'date'=> now()]);
             $request['transaction_type_id'] = 1;
-            $request['account_head_id'] = 17;
+            $request['account_head_id'] = 7;
             $all_Qtys = $request->quantity;
-            foreach ($all_Qtys as $key => $qty){
-                $request['quantity'] = $qty;
-                $sub_head_id = AccountHead::where('name', "goat#$qty")->pluck('id')->first();
-                $request['sub_head_id'] = $sub_head_id;
-                Transaction::create($request->except('submitGoatSale'));
-            }
+//            $stringQuantity = collect($all_Qtys)->implode("-");
+            $totalQuantity = count($all_Qtys);
+            $request['quantity'] = $totalQuantity;
+            $request['saleStatus'] = 1;
+            $request['sub_head_id'] = 18;
+            Transaction::create($request->except('submitGoatSale', 'saleStatus'));
+
             return redirect()->back()->with('message', 'Goat Sold Successfully');
         }
     }

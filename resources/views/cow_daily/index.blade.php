@@ -278,15 +278,16 @@
                                             <div class="table-responsive">
                                                 <table id="" class="table table-striped table-bordered text-nowrap w-100 display">
                                                     <thead>
-                                                    <tr>
-                                                        <th class="wd-15p">ID</th>
-                                                        <th class="wd-25p">Date</th>
-                                                        <th class="wd-15p">Medicine</th>
-                                                        <th class="wd-15p">Description</th>
-                                                        <th style="width: 5px">Action</th>
-                                                    </tr>
+                                                        <tr>
+                                                            <th class="wd-15p">ID</th>
+                                                            <th class="wd-25p">Date</th>
+                                                            <th class="wd-15p">Medicine</th>
+                                                            <th class="wd-15p">Description</th>
+                                                            <th style="width: 5px">Action</th>
+                                                        </tr>
                                                     </thead>
                                                     <tbody>
+<<<<<<< HEAD
                                                     @foreach($medicines as $medicine)
                                                         <tr>
                                                             <td>{{$loop->iteration}}</td>
@@ -302,6 +303,23 @@
                                                             </td>
                                                         </tr>
                                                     @endforeach
+=======
+                                                        @foreach($medicines as $medicine)
+                                                            <tr>
+                                                                <td>{{$loop->iteration}}</td>
+                                                                <td>{{$medicine->date ?? ''}}</td>
+                                                                <td>{{$medicine->name ?? ''}}</td>
+                                                                <td>{{$medicine->description ?? ''}}</td>
+                                                                <td>
+                                                                    <form action="{{ route('medicine.destroy', $medicine->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this?');" style="display: inline-block;">
+                                                                        @csrf
+                                                                        @method('DELETE')
+                                                                        <button type="submit" class="btn btn-sm btn-danger" data-toggle="tooltip" title="Delete"><i class="fe fe-trash-2"></i></button>
+                                                                    </form>
+                                                                </td>
+                                                            </tr>
+                                                        @endforeach
+>>>>>>> umair
                                                     </tbody>
                                                 </table>
                                             </div>

@@ -26,9 +26,12 @@
                                 <tr>
                                     <center>
                                         <th style="font-weight: 600">Goat-Serial</th>
-                                        <th style="font-weight: 600">Date-of-Birth</th>
-                                        <th style="font-weight: 600">Entry-in-Farm</th>
-                                        <th style="font-weight: 600">Age</th>
+                                        @if($goat_daily->dob != null )
+                                            <th style="font-weight: 600">Date-of-Birth</th>
+                                        @else
+                                            <th style="font-weight: 600">Entry-in-Farm</th>
+                                            <th style="font-weight: 600">Age</th>
+                                        @endif
                                         <th style="font-weight: 600">Breed</th>
                                         <th style="font-weight: 600">Weight</th>
                                         <th style="font-weight: 600">Height</th>
@@ -38,9 +41,12 @@
                                 <tbody>
                                 <tr>
                                     <td>{{$goat_daily->serial_no}}</td>
-                                    <td>{{date('d-m-Y', strtotime($goat_daily->dob)) ?? ''}}</td>
-                                    <td>{{date('d-m-Y', strtotime($goat_daily->entry_in_farm)) ?? ''}}</td>
-                                    <td>{{$goat_daily->age}}</td>
+                                    @if($goat_daily->dob != null)
+                                        <td>{{date('d-m-Y', strtotime($goat_daily->dob)) ?? ''}}</td>
+                                    @else
+                                        <td>{{date('d-m-Y', strtotime($goat_daily->entry_in_farm)) ?? ''}}</td>
+                                        <td>{{$goat_daily->age}}</td>
+                                    @endif
                                     <td>{{$goat_daily->breed}}</td>
                                     <td>{{$goat_daily->weight}}</td>
                                     <td>{{$goat_daily->height}}</td>
@@ -54,8 +60,10 @@
                                         <ul class="nav panel-tabs">
                                             <li><a class="active" href="#tab11" id="hov" data-toggle="tab">Sick</a></li>
                                             <li class="act"><a href="#tab21" id="hov" data-toggle="tab">Medicine</a></li>
-                                            <li class="act"><a href="#tab31" id="hov" data-toggle="tab">Pregnant</a></li>
-                                            <li class="act"><a href="#tab41" id="hov" data-toggle="tab">Delivery</a></li>
+                                            @if($goat_daily->gender == 0)
+                                                <li class="act"><a href="#tab31" id="hov" data-toggle="tab">Pregnant</a></li>
+                                                <li class="act"><a href="#tab41" id="hov" data-toggle="tab">Delivery</a></li>
+                                            @endif
                                             <li class="act"><a href="#tab51" id="hov" data-toggle="tab">Vaccination</a></li>
                                         </ul>
                                     </div>
@@ -67,11 +75,11 @@
 
                                         @include('goat_daily.medicine')
 {{--                                        End div 21 --}}
-
-                                        @include('goat_daily.pregnant')
+                                        @if($goat_daily->gender == 0)
+                                            @include('goat_daily.pregnant')
 {{--                                        End div 31 --}}
-
                                         @include('goat_daily.delivery')
+                                        @endif
 {{--                                        End div 41 --}}
 
                                         @include('goat_daily.vaccination')

@@ -46,7 +46,9 @@
                                                                 <label for="message-text" class="form-label">Goats Quantity</label>
                                                                 <select class="form-control form-select quantity" name="quantity[]" multiple="multiple" style="width: 100%; outline: 0; border: 2px solid black; border-radius: 4px;">
                                                                     @foreach($goats as $goat)
-                                                                        <option value="{{$goat->serial_no}}">{{$goat->serial_no}}</option>
+                                                                        @if( $goat->dead_date == null && $goat->dry_date == null && $goat->saleStatus == 0)
+                                                                            <option value="{{$goat->serial_no}}">{{$goat->serial_no}}</option>
+                                                                        @endif
                                                                     @endforeach
                                                                 </select>
                                                             </div>
@@ -76,7 +78,7 @@
                                             <th class="wd-15p">ID</th>
                                             <th class="wd-25p">Date</th>
                                             <th class="wd-15p">Goat Quantity</th>
-                                            <th>Status</th>
+                                            <th class="wd-15p">Sold Amount</th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -85,6 +87,7 @@
                                                     <td>{{$loop->iteration}}</td>
                                                     <td>{{$t->date ?? ''}}</td>
                                                     <td>{{$t->quantity ?? ''}}</td>
+                                                    <td>{{$t->amount}}</td>
                                                     <td></td>
                                                 </tr>
                                             @endforeach
