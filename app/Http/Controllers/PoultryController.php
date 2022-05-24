@@ -20,14 +20,17 @@ class PoultryController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->middleware('auth.gates');
     }
 
     public function index()
+
     {
+        abort_if(Gate::denies("poultry-read"), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
         $eggincdates =  Poultry::where('status',3)->distinct('created_at')->pluck('created_at');
 //        dd($eggincdates);
         $eggincquans =  Poultry::where('quantity','>',0)->get()->pluck('quantity');
-        abort_if(Gate::denies("poultry read"), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $poultry_types = PoultryType::all();
         $poultry_statuses = PoultryStatus::all();
@@ -76,14 +79,13 @@ class PoultryController extends Controller
 
         if ($request['quantity'] == 0)
         {
-            return redirect(route('poultry.index'))->with('alert', 'Yoyr quantity must be greater than zero ');
+            return redirect(route('poultry.index'))->with('errorMessage', 'Your quantity must be greater than zero ');
         }
-        else{
-            Poultry::create($request->except('updatedDate'));
-
-            return redirect(route('poultry.index'))->with('message', ' Entry Created');
-        }
-
+        else
+            {
+                Poultry::create($request->except('updatedDate'));
+                return redirect(route('poultry.index'))->with('message', ' Entry Created');
+            }
     }
 
     public function show(Poultry $poultry)
