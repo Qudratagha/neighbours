@@ -44,10 +44,6 @@ class RolePrivilegeSeeder extends Seeder
             ['role_id' => 2,'privilege_id' => 1],
             ['role_id' => 2,'privilege_id' => 2],
 
-<<<<<<< HEAD
-            ['role_id' => 3,'privilege_id' => 9],
-            ['role_id' => 3,'privilege_id' => 10]
-=======
             ['role_id' => 3, 'privilege_id'=> 5],
             ['role_id' => 3, 'privilege_id'=> 6],
 
@@ -55,8 +51,8 @@ class RolePrivilegeSeeder extends Seeder
             ['role_id' => 4, 'privilege_id'=> 10],
 
             ['role_id' => 5, 'privilege_id'=> 13],
-            ['role_id' => 5, 'privilege_id'=> 14],
->>>>>>> umair
+            ['role_id' => 5, 'privilege_id'=> 14]
+
         ];
         foreach ($aryRolePrivileges as $rolePrivilege) {
             DB::table('rolePrivilege')->insert(

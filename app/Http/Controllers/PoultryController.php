@@ -14,6 +14,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Symfony\Component\HttpFoundation\Response;
 use Gate;
+use function Symfony\Component\Mime\Header\get;
 
 class PoultryController extends Controller
 {
@@ -34,14 +35,20 @@ class PoultryController extends Controller
 
         $poultry_types = PoultryType::all();
         $poultry_statuses = PoultryStatus::all();
-        $poultries = Poultry::all();
+
+
+        $poultries = Poultry::orderBy('id','Desc')->get();
         return view('poultry.index',compact('poultry_types','poultry_statuses', 'poultries', 'eggincdates','eggincquans'));
     }
     public function getDateQuantity($date)
     {
         $dateQuantity = Poultry::where('created_at',$date)->where('poultry_type_id',3)->where('poultry_status_id',3)->sum('quantity');
+        $chickscollected = Poultry::where('created_at',$date)->where('poultry_type_id',2)->where('poultry_status_id',4)->sum('quantity');
+
+        $dateTotalChicks = $dateQuantity - $chickscollected;
+
 //        $dateQuantity = Poultry::where('created_at',$date)->where('poultry_type_id',3)->where('poultry_status_id',3)->where('quantity','>',0)->pluck('remaining_quantity')->last();
-        return  response()->json($dateQuantity);
+        return  response()->json($dateTotalChicks);
 //        return view('/poultry.test',compact('dateQuantity'));
     }
     public function totalEggs()
@@ -82,10 +89,10 @@ class PoultryController extends Controller
             return redirect(route('poultry.index'))->with('errorMessage', 'Your quantity must be greater than zero ');
         }
         else
-            {
-                Poultry::create($request->except('updatedDate'));
-                return redirect(route('poultry.index'))->with('message', ' Entry Created');
-            }
+        {
+            Poultry::create($request->except('updatedDate'));
+            return redirect(route('poultry.index'))->with('message', ' Entry Created');
+        }
     }
 
     public function show(Poultry $poultry)
@@ -122,23 +129,23 @@ class PoultryController extends Controller
     public function storeDaily(Request $request)
     {
 
-       $accountHeadData = [];
-       if (isset($_POST['submitEgg']))
-       {
-           $accountHeadData = array
-           (
-               'name' => "eggs",
-               'parent_id' => 8
-           );
-           AccountHead::updateOrCreate($accountHeadData);
-           $request['transaction_type_id'] = 1;
-           $request['account_head_id'] = 4;
-           $sub_head_id = AccountHead::where('name', "eggs")->pluck('id')->last();
-           $request['sub_head_id'] = $sub_head_id;
+        $accountHeadData = [];
+        if (isset($_POST['submitEgg']))
+        {
+            $accountHeadData = array
+            (
+                'name' => "eggs",
+                'parent_id' => 8
+            );
+            AccountHead::updateOrCreate($accountHeadData);
+            $request['transaction_type_id'] = 1;
+            $request['account_head_id'] = 4;
+            $sub_head_id = AccountHead::where('name', "eggs")->pluck('id')->last();
+            $request['sub_head_id'] = $sub_head_id;
 
-           Transaction::Create($request->except('submitEgg'));
-           return redirect()->back()->with('message', 'Eggs Sold');
-       }
+            Transaction::Create($request->except('submitEgg'));
+            return redirect()->back()->with('message', 'Eggs Sold');
+        }
         if (isset($_POST['submitHen']))
         {
             $accountHeadData = array

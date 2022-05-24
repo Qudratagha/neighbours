@@ -58,8 +58,8 @@ Route::post('/cow_daily/sick',[\App\Http\Controllers\SickController::class, 'sto
 Route::post('/cow_daily/medicine',[\App\Http\Controllers\MedicinesController::class, 'store'])->name('medicineCow.store');
 Route::post('/cow_daily/pregnant',[\App\Http\Controllers\PregnantController::class, 'store'])->name('pregnantCow.store');
 Route::post('/cow_daily/delivery',[\App\Http\Controllers\DeliveryController::class, 'store'])->name('deliveryCow.store');
-Route::post('/cow_daily/vaccination',[\App\Http\Controllers\VaccinationController::class, 'store'])->name('vaccination.store');
-Route::post('/cow_daily/insemination',[\App\Http\Controllers\InseminationController::class, 'store'])->name('insemination.store');
+Route::post('/cow_daily/vaccination',[\App\Http\Controllers\VaccinationController::class, 'store'])->name('vaccinationCow.store');
+Route::post('/cow_daily/insemination',[\App\Http\Controllers\InseminationController::class, 'store'])->name('inseminationCow.store');
 
 Route::delete('/cow_daily/{transaction}',[\App\Http\Controllers\TransactionController::class, 'destroy'])->name('cow_daily.destroy');
 Route::delete('/cow_daily_sick/{sick}',[\App\Http\Controllers\SickController::class, 'destroy'])->name('sickCow.destroy');
