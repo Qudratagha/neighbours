@@ -47,6 +47,8 @@
                 <th class="wd-25p">Date</th>
                 <th class="wd-15p">Sick</th>
                 <th class="wd-15p">Treatment</th>
+                <th class="wd-15p">Actions</th>
+
             </tr>
             </thead>
             <tbody>
@@ -54,8 +56,25 @@
                 <tr>
                     <td>{{$loop->iteration}}</td>
                     <td>{{$sick->date ?? ''}}</td>
-                    <td>{{$sick->is_sick ?? ''}}</td>
+                    <td>{{$sick->is_sick == 1 ? 'Is Sick' : 'Healthy'}}</td>
                     <td>{{$sick->treatment ?? ''}}</td>
+                    @if($sick->cattle_id || $sick->is_sick == 1)
+                        <td>
+                            <form action="{{ route('sickCow.destroy', $sick->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this?');" style="display: inline-block;">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-sm btn-danger" data-toggle="tooltip" title="Delete"><i class="fe fe-trash-2"></i></button>
+                            </form>
+                            <form action="{{route('sick.store')}}" method="POST"  style="display: inline-block;">
+                                @csrf
+                                <input type="hidden" name="is_sick" value="0">
+                                <input type="hidden" name="date" value="<?php echo date('Y-m-d')?>">
+                                <input type="hidden" name="sick_id" value="{{$sick->id}}">
+                                <input type="hidden" name="cattle_id" value="{{$goat_daily->id}}">
+                                <button type="submit" name="submitHealthyGoat" class="btn btn-sm btn-success" data-toggle="tooltip" title="Healthy"><i class="fe fe-heart"></i></button>
+                            </form>
+                        </td>
+                    @endif
                 </tr>
             @endforeach
             </tbody>

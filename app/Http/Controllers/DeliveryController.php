@@ -22,6 +22,9 @@ class DeliveryController extends Controller
     {
         if (isset($_POST['submitGoat']))
         {
+            if (Delivery::where('cattle_id', $request->cattle_id)->where('is_delivered', 1)->exists()){
+                return redirect()->back()->with('errorMessage', 'This Goat Is Already in Delivery Process');
+            }
             Delivery::create($request->except('submitGoat'));
             return redirect()->back()->with('message', 'Delivery Data Added');
         }
@@ -68,6 +71,10 @@ class DeliveryController extends Controller
     public function destroy(Delivery $delivery)
     {
         $delivery->delete();
+<<<<<<< HEAD
         return redirect()->back()->with('errorMessage','Delivery Entry Deleted');
+=======
+        return redirect()->back()->with('errorMessage', 'Delivery Data Deleted');
+>>>>>>> umair
     }
 }

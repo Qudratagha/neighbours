@@ -17,7 +17,7 @@
                                 @csrf
                                 <div class="form-group">
                                     <label for="recipient-name" class="form-control-label">Date</label>
-                                    <input type="hidden" name="cattle_id" value="{{$goat_daily->id}}">
+                                    <input type="hidden" name="serial_no" value="{{$goat_daily->serial_no}}">
                                     <input type="text" onfocus= "(this. type='date')" class="form-control" name="date" value="<?php echo date('Y-m-d');?>" required>
                                 </div>
                                 <div class="form-group">
@@ -56,6 +56,13 @@
                     <td>{{$vaccination->date ?? ''}}</td>
                     <td>{{$vaccination->name ?? ''}}</td>
                     <td>{{$vaccination->description ?? ''}}</td>
+                    <td>
+                        <form action="{{ route('vaccination.destroy', $vaccination->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this?');" style="display: inline-block;">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-sm btn-danger" data-toggle="tooltip" title="Delete"><i class="fe fe-trash-2"></i></button>
+                        </form>
+                    </td>
                 </tr>
             @endforeach
             </tbody>

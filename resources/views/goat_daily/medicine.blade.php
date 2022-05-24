@@ -17,7 +17,7 @@
                                 @csrf
                                 <div class="form-group">
                                     <label for="recipient-name" class="form-control-label">Date</label>
-                                    <input type="hidden" name="cattle_id" value="{{$goat_daily->id}}">
+                                    <input type="hidden" name="cattle_id" value="{{$goat_daily->serial_no}}">
                                     <input type="text" onfocus= "(this. type='date')" class="form-control" name="date" value="<?php echo date('Y-m-d');?>" required>
                                 </div>
                                 <div class="form-group">
@@ -42,22 +42,31 @@
     <div class="table-responsive">
         <table id="" class="table table-striped table-bordered text-nowrap w-100 display">
             <thead>
-            <tr>
-                <th class="wd-15p">ID</th>
-                <th class="wd-25p">Date</th>
-                <th class="wd-15p">Medicine</th>
-                <th class="wd-15p">Description</th>
-            </tr>
+                <tr>
+                    <th class="wd-15p">ID</th>
+                    <th class="wd-25p">Date</th>
+                    <th class="wd-15p">Medicine</th>
+                    <th class="wd-15p">Description</th>
+                    <th class="wd-15p">Actions</th>
+
+                </tr>
             </thead>
             <tbody>
-            @foreach($medicines as $medicine)
-                <tr>
-                    <td>{{$loop->iteration}}</td>
-                    <td>{{$medicine->date ?? ''}}</td>
-                    <td>{{$medicine->name ?? ''}}</td>
-                    <td>{{$medicine->description ?? ''}}</td>
-                </tr>
-            @endforeach
+                @foreach($medicines as $medicine)
+                    <tr>
+                        <td>{{$loop->iteration}}</td>
+                        <td>{{$medicine->date}}</td>
+                        <td>{{$medicine->name }}</td>
+                        <td>{{$medicine->description}}</td>
+                        <td>
+                            <form action="{{ route('medicine.destroy', $medicine->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this?');" style="display: inline-block;">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-sm btn-danger" data-toggle="tooltip" title="Delete"><i class="fe fe-trash-2"></i></button>
+                            </form>
+                        </td>
+                    </tr>
+                @endforeach
             </tbody>
         </table>
     </div>
