@@ -25,7 +25,7 @@
                                 @csrf
                                 @method('PUT')
                                 <div class="row">
-                                    @if($cattle_id->parent_id == null)
+                                    @if($cattle_id->dob == null)
                                         <h3 class="col-md-12">Entry In Farm Selected</h3>
                                         <div class="col-md-6">
                                             <div class="form-group">

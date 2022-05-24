@@ -62,7 +62,7 @@
                                             '<i class="fa fa-calendar tx-16 lh-0 op-6"></i>\n' +
                                         '</div>\n' +
                                     '</div>\n' +
-                                    '<input type="text" onfocus= "(this. type=\'entry_in_farm\')" class="form-control" name="entry_in_farm">\n' +
+                                    '<input type="text" onfocus= "(this. type=\'date\')" class="form-control" name="entry_in_farm" value="<?php echo date('Y-m-d')?>">\n' +
                                 '</div>\n' +
                             '</div>\n' +
                         '</div>' +
@@ -96,10 +96,19 @@
                             '</label>\n' +
                         '</div>\n' +
                     '</div>' +
-                    '<div class="form-group">\n' +
-                        '<label class="form-label">Enter Date</label>\n' +
-                        '<input type="text" onfocus= "(this. type=\'date\')" class="form-control" name="date">\n'+
-                    '</div>\n' +
+                    '<div class = "form-group">' +
+                        '<label class="form-label">Entry Date</label>' +
+                        '<div class="wd-200 mg-b-30">' +
+                            '<div class="input-group">' +
+                                '<div class="input-group-prepend">' +
+                                    '<div class="input-group-text">' +
+                                        '<i class="fa fa-calendar tx-16 lh-0 op-6"></i>' +
+                                    '</div>' +
+                                '</div>' +
+                                '<input type="text" onfocus= "(this. type=\'date\')" class="form-control" name="date" value="<?php echo date('Y-m-d')?>">' +
+                            '</div>' +
+                        '</div>' +
+                    '</div>'+
                     '<div class="form-group">\n' +
                         '<label class="form-label">Serial No.</label>\n' +
                         '<input type="number" class="form-control" name="serial_no" placeholder="Serial No.">\n' +

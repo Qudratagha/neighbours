@@ -137,6 +137,7 @@ class CattleController extends Controller
 //            $request['cattle_type_id'] = 2;
         //store goat
         if (isset($_POST['submitGoat'])) {
+//            dd($request->all());
             $goat_serial = $request->serial_no;
 
             $accountHeadData = array
@@ -149,7 +150,7 @@ class CattleController extends Controller
             if ($request->age){
 
                 Transaction::create([
-                    'date' => $request->date,
+                    'date' => $request->entry_in_farm,
                     'transaction_type_id' => 2,
                     'account_head_id' => 18,
                     'sub_head_id' => $accountHeadId,
@@ -200,8 +201,8 @@ class CattleController extends Controller
         }
         elseif ($cattle->saleStatus == 1)
         {
-            $transaction = Transaction::where('transaction_type_id', 1)->get();
-
+            $transaction = Transaction::where('transaction_type_id', 1)->where('sub_head_id',18)->where('account_head_id', 7)->get();
+//            dd($transaction);
             if ($cattle_type == 'cow' || $cattle_type == 'goat')
             {
                 abort_if(Gate::denies("$cattle_type-read"), Response::HTTP_FORBIDDEN, '403 Forbidden');
@@ -248,8 +249,7 @@ class CattleController extends Controller
         $medicines      =   Medicines::where('sub_head_id',$sub_head_id)->get();
         $pregnants      =   Pregnant::where('cattle_id',$goatID)->get();
         $deliveries     =   Delivery::where('cattle_id',$goatID)->get();
-        $vaccinations   =   Vaccination::all();
-//        dd($vaccinations);
+        $vaccinations   =   Vaccination::where('sub_head_id', $sub_head_id)->get();
 
         return view('goat_daily.index',compact('goat_daily','sicks','medicines','pregnants','deliveries','vaccinations'));
     }

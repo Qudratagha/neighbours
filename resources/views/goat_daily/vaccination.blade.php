@@ -17,7 +17,7 @@
                                 @csrf
                                 <div class="form-group">
                                     <label for="recipient-name" class="form-control-label">Date</label>
-                                    <input type="hidden" name="cattle_id" value="{{$goat_daily->id}}">
+                                    <input type="hidden" name="serial_no" value="{{$goat_daily->serial_no}}">
                                     <input type="text" onfocus= "(this. type='date')" class="form-control" name="date" value="<?php echo date('Y-m-d');?>" required>
                                 </div>
                                 <div class="form-group">

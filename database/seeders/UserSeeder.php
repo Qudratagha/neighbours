@@ -20,11 +20,11 @@ class UserSeeder extends Seeder
                 'email' => 'cow@gmail.com',
                 'password' => \Illuminate\Support\Facades\Hash::make('cow123')
             ],
-            [
-            'name' => 'goat',
-            'email' => 'goat@gmail.com',
-            'password' => \Illuminate\Support\Facades\Hash::make('goat123')
-            ],
+                [
+                'name' => 'goat',
+                'email' => 'goat@gmail.com',
+                'password' => \Illuminate\Support\Facades\Hash::make('goat123')
+                ],
             [
                 'name' => 'poultry',
                 'email' => 'poultry@gmail.com',

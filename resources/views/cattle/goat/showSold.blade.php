@@ -58,7 +58,7 @@
                                     <td>{{$cattle->breed}}</td>
                                     <td>{{$cattle->weight}}</td>
                                     <td>{{$cattle->height}}</td>
-                                    <td>{{$transaction->amount}}</td>
+                                    <td>{{$transaction->pluck('amount')->last()}}</td>
                                     <td>{{$cattle->date}}</td>
                                 </tr>
                                 </tbody>

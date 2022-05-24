@@ -23,21 +23,21 @@ class VaccinationController extends Controller
     {
         if (isset($_POST['submitGoat']))
         {
-            $goatID = $request->cattle_id;
+//            dd($request->all());
+            $goatID = $request->serial_no;
 
-            $accountHeadData = array
-            (
-                'name' => "goat#$goatID",
-                'parent_id' => 4
-            );
-            AccountHead::updateOrCreate($accountHeadData);
+//            $accountHeadData = array
+//            (
+//                'name' => "goat#$goatID",
+//                'parent_id' => 4
+//            );
+//            AccountHead::updateOrCreate($accountHeadData);
 
             $sub_head_id = AccountHead::where('name', "goat#$goatID")->pluck('id')->last();
-
             if ($sub_head_id != '')
             {
                 $request['sub_head_id'] = $sub_head_id;
-                Vaccination::create($request->except(['cattle_id','submitGoat']));
+                Vaccination::create($request->except(['serial_no','submitGoat']));
                 return redirect()->back()->with('message', 'Vaccination Added');
             }
             else return redirect()->back()->with('message', 'Please Add Milk Data First');
