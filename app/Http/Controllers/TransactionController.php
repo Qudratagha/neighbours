@@ -124,15 +124,20 @@ class TransactionController extends Controller
         //Sale Goat
         if (isset($_POST['submitGoatSale']))
         {
-            Cattle::where('serial_no', $request->quantity)->update(['saleStatus'=> 1, 'date'=> now()]);
+            foreach ($request->quantity as $quantity)
+            {
+                Cattle::where('serial_no', $quantity)->update(['saleStatus'=> 1, 'date'=> now()]);
+            }
             $request['transaction_type_id'] = 1;
             $request['account_head_id'] = 7;
+
             $all_Qtys = $request->quantity;
-//            $stringQuantity = collect($all_Qtys)->implode("-");
+//          $stringQuantity = collect($all_Qtys)->implode("-");
             $totalQuantity = count($all_Qtys);
             $request['quantity'] = $totalQuantity;
             $request['saleStatus'] = 1;
             $request['sub_head_id'] = 18;
+
             Transaction::create($request->except('submitGoatSale', 'saleStatus'));
 
             return redirect()->back()->with('message', 'Goat Sold Successfully');

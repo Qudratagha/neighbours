@@ -27,8 +27,9 @@ use function Symfony\Component\HttpFoundation\all;
 
 use Symfony\Component\HttpFoundation\Response;
 use Gate;
-use function Symfony\Component\HttpKernel\HttpCache\load;
 //use Yajra\DataTables\DataTables;
+use function Symfony\Component\HttpKernel\HttpCache\load;
+
 
 class CattleController extends Controller
 {

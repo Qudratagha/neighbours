@@ -37,7 +37,8 @@ class PoultryController extends Controller
         $poultry_statuses = PoultryStatus::all();
 
 
-        $poultries = Poultry::orderBy('id','Desc')->get();
+        $poultries = Poultry::get();
+//        dd($poultries);
         return view('poultry.index',compact('poultry_types','poultry_statuses', 'poultries', 'eggincdates','eggincquans'));
     }
     public function getDateQuantity($date)
