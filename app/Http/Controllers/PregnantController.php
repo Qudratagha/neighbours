@@ -30,12 +30,8 @@ class PregnantController extends Controller
             return redirect()->back()->with('message', 'Pregnant Data Added');
         }
 
-<<<<<<< HEAD
         if (isset($_POST['submitCowPregnant']))
-=======
 
-        if (isset($_POST['submitCow']))
->>>>>>> umair
         {
             if (Pregnant::where('cattle_id', $request->cattle_id )->where('is_pregnant',1)->where('date',$request->date)->exists())
             {
@@ -68,9 +64,5 @@ class PregnantController extends Controller
     {
         $pregnant->delete();
         return redirect()->back()->with('errorMessage','Pregnant Entry Deleted');
-<<<<<<< HEAD
-=======
-
->>>>>>> umair
     }
 }

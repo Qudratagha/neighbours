@@ -42,12 +42,7 @@ class CattleController extends Controller
     public function index(String $cattle_type)
     {
         $goats = Cattle::goats()->get();
-<<<<<<< HEAD
-        $cows = Cattle::where('cattle_type_id',1)->get();
-
-=======
         $cows = Cattle::cows()->get();
->>>>>>> umair
         if ($cattle_type == 'cow' || $cattle_type == 'goat')
         {
             abort_if(Gate::denies("$cattle_type-read"), Response::HTTP_FORBIDDEN, '403 Forbidden');
@@ -58,15 +53,8 @@ class CattleController extends Controller
     public function create(string $cattle_type)
     {
 
-<<<<<<< HEAD
-        $goats = Cattle::whereIn('cattle_type_id', [2,3])->get();
-        $cows = Cattle::cows()->where('saleStatus',0)->where('dry_date',null)->where('dead_date',null)->get();
-
-
-=======
         $goats = Cattle::goats()->where('saleStatus', 0)->where('dry_date', null)->where('dead_date', null)->get();
         $cows = Cattle::where('cattle_type_id',1)->get();
->>>>>>> umair
         if ($cattle_type == 'cow' || $cattle_type == 'goat')
         {
             abort_if(Gate::denies("$cattle_type-create"), Response::HTTP_FORBIDDEN, '403 Forbidden');
@@ -134,9 +122,6 @@ class CattleController extends Controller
             Cattle::create($request->except('submitCow','amount'));
             return redirect()->back()->with('message', 'Cow Added Successfully');
         }
-
-
-
 //        if (isset($_POST['submitGoat']))
 //        {
 //
@@ -151,7 +136,8 @@ class CattleController extends Controller
 //            $accountHeadId = AccountHead::where('name',"goat#$goat_daily")->pluck('id')->last();
 //            $request['cattle_type_id'] = 2;
         //store goat
-        if (isset($_POST['submitGoat'])) {
+        if (isset($_POST['submitGoat']))
+        {
 //            dd($request->all());
             $goat_serial = $request->serial_no;
 
@@ -256,7 +242,6 @@ class CattleController extends Controller
     public function goatDaily(Cattle $goat_daily)
     {
         abort_if(Gate::denies('goat-read'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-
         $goatID = $goat_daily->id;
         $serial = $goat_daily->serial_no;
         $sub_head_id = AccountHead::where('name',"goat#$serial")->pluck('id')->last();
@@ -270,22 +255,11 @@ class CattleController extends Controller
     }
 
     public function edit(String $cattle_type, Cattle $cattle_id)
-<<<<<<< HEAD
-    {
-        abort_if(Gate::denies("$cattle_type-update"), Response::HTTP_FORBIDDEN, '403 Forbidden');
-//        dd($cattle_id);
-
-        $goats = Cattle::whereIn('cattle_type_id', [2,3])->get();
-        $cows = Cattle::cows()->where('saleStatus',0)->where('dry_date',null)->where('dead_date',null)->get();
-
-=======
-
     {
         abort_if(Gate::denies("$cattle_type-update"), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $goats = Cattle::goats()->get();
         $cows = Cattle::where('cattle_type_id',1)->get();
->>>>>>> umair
 
         if ($cattle_type == 'cow' || $cattle_type == 'goat')
         {
@@ -317,14 +291,10 @@ class CattleController extends Controller
 
     public function destroy(String $cattle_type, Cattle $cattle)
     {
-
         abort_if(Gate::denies("$cattle_type-delete"), Response::HTTP_FORBIDDEN, '403 Forbidden');
-<<<<<<< HEAD
-=======
         $cattle->deliveries()->delete();
         $cattle->pregnants()->delete();
         $cattle->sicks()->delete();
->>>>>>> umair
         $cattle->delete();
         return CattleController::index($cattle_type);
     }

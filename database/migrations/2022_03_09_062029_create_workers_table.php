@@ -20,7 +20,6 @@ return new class extends Migration
             $table->unsignedBigInteger('account_head_id');
             $table->string('name');
             $table->integer('salary')->nullable();
-
             $table->timestamps();
 
             $table->foreign('module_id')->on('modules')->references('id');

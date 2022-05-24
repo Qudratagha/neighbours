@@ -23,15 +23,7 @@ class VaccinationController extends Controller
     {
         if (isset($_POST['submitGoat']))
         {
-//            dd($request->all());
             $goatID = $request->serial_no;
-
-//            $accountHeadData = array
-//            (
-//                'name' => "goat#$goatID",
-//                'parent_id' => 4
-//            );
-//            AccountHead::updateOrCreate($accountHeadData);
 
             $sub_head_id = AccountHead::where('name', "goat#$goatID")->pluck('id')->last();
             if ($sub_head_id != '')
@@ -77,10 +69,6 @@ class VaccinationController extends Controller
     public function destroy(Vaccination $vaccination)
     {
         $vaccination->delete();
-<<<<<<< HEAD
         return redirect()->back()->with('errorMessage','Vaccination Entry Deleted');
-=======
-        return redirect()->back()->with('errorMessage', 'Vaccination Data Deleted');
->>>>>>> umair
     }
 }

@@ -71,10 +71,6 @@ class DeliveryController extends Controller
     public function destroy(Delivery $delivery)
     {
         $delivery->delete();
-<<<<<<< HEAD
-        return redirect()->back()->with('errorMessage','Delivery Entry Deleted');
-=======
         return redirect()->back()->with('errorMessage', 'Delivery Data Deleted');
->>>>>>> umair
     }
 }
