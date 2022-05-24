@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 use Gate;
 
@@ -15,6 +16,9 @@ class DashboardController extends Controller
     }
     public function index()
     {
+//        $role = Auth::user()->roles->pluck('name')->last();
+////        dd($role);
+
         abort_if(Gate::denies('dashboard-read'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         return view('dashboard');
     }

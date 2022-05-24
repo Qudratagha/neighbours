@@ -20,12 +20,12 @@ class PoultryController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->middleware('auth.gates');
     }
 
     public function index()
     {
-        abort_if(Gate::denies("poultry read"), Response::HTTP_FORBIDDEN, '403 Forbidden');
-
+        abort_if(Gate::denies("poultry-read"), Response::HTTP_FORBIDDEN, '403 Forbidden');
         $poultry_types = PoultryType::all();
         $poultry_statuses = PoultryStatus::all();
         $poultries = Poultry::all();

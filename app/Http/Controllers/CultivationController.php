@@ -6,16 +6,21 @@ use App\Models\Cultivation;
 use App\Models\CultivationType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Gate;
+use Symfony\Component\HttpFoundation\Response;
 
 class CultivationController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
-     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('auth.gates');
+    }
+
     public function index()
     {
+        abort_if(Gate::denies("cultivation-read"), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
         $cultivation_types = CultivationType::all();
 //        DB::table('cultivation_types')->select('name')->get();
         $cultivations = Cultivation::all();
