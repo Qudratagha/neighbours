@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AccountHead;
 use App\Models\Cultivation;
 use App\Models\CultivationType;
+use App\Models\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -17,7 +19,6 @@ class CultivationController extends Controller
     public function index()
     {
         $cultivation_types = CultivationType::all();
-//        DB::table('cultivation_types')->select('name')->get();
         $cultivations = Cultivation::all();
         return view('cultivation.index', compact('cultivation_types', 'cultivations'));
 
@@ -35,11 +36,25 @@ class CultivationController extends Controller
 
     public function store(Request $request)
     {
-        $request['account_head_id'] = 8;
-        Cultivation::create($request->all());
+        if (isset($_POST['addCultivation'])){
+//            dd($request->all());
 
-        return redirect(route('cultivation.index'));
+            $request['account_head_id'] = 8;
+            Cultivation::create($request->except('addCultivation'));
+            return redirect()->back()->with('message', 'Cultivation Added Successfully');
+        }
+
+        if (isset($_POST['collectCultivation'])){
+            $request['transaction_type_id'] = 3;
+            $request['account_head_id'] = 9;
+            $request['sub_head_id'] = 24;
+
+            Transaction::create($request->except(['cultivation_type', 'collectCultivation']));
+            return redirect()->back()->with('message', 'Cultivation Collected Successfully');
+        }
+
     }
+
 
     /**
      * Display the specified resource.

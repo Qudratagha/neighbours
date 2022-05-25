@@ -34,9 +34,6 @@ Route::post('/poultry_daily',[\App\Http\Controllers\PoultryController::class, 's
 
 Route::delete('/poultry_daily/{poultry_daily}',[\App\Http\Controllers\Poultrycontroller::class,'eggdel'])->name('poultry_daily.eggdel');
 
-//cultivation
-Route::resource('/cultivation', CultivationController::class);
-
 //cattle
 Route::get('/cattle/{cattle_type}',[\App\Http\Controllers\CattleController::class,'index'])->name('cattle.index');
 Route::get('/cattle/{cattle_type}/create',[\App\Http\Controllers\CattleController::class,'create'])->name('cattle.create');
@@ -90,3 +87,6 @@ Route::get('/goat_sale/{goat_sale}',[\App\Http\Controllers\TransactionController
 
 //rate
 Route::resource('/rates', \App\Http\Controllers\RateController::class);
+
+//cultivation
+Route::resource('/cultivation', CultivationController::class);
