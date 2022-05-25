@@ -55,12 +55,14 @@
                                         @if(!($goat->dead_date||$goat->dry_date||$goat->saleStatus==1))
                                             <td>
                                                 @can('goat-create')
+                                                    @if($goat->gender == 0)
                                                     <form action="{{route('cattle.store',$goat->id)}}" method="POST" onsubmit="return confirm('Are you sure you want to DRY cow with serial no: {{$goat->id}} ?');" style="display: inline-block;">
                                                         @csrf
                                                         <input type="hidden" onfocus= "(this. type='date')" class="form-control" name="dry_date" value="<?php echo date('Y-m-d');?>">
                                                         <input type="hidden" name="cattle_id" value="{{$goat->id}}">
                                                         <button type="submit" name="submitDryGoat" class="btn btn-sm btn-outline-danger" data-toggle="tooltip" title="Dry"><span>Dry</span></button>
                                                     </form>
+                                                    @endif
                                                 @endcan
                                                 @can('goat-create')
                                                     <form action="{{ route('cattle.store',$goat->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to DEAD cow with serial no: {{$goat->id}} ?');" style="display: inline-block;">
@@ -89,7 +91,7 @@
                                                     <a href="{{route('cattle.show',['goat',$goat->id])}}" class="btn btn-sm btn-primary" data-toggle="tooltip" title="View"><i class="fe fe-eye"></i></a>
                                                     @if($goat->dead_date)
                                                         Dead
-                                                        @elseif ($goat->dry_date)
+                                                    @elseif ($goat->dry_date)
                                                         Dry
                                                     @elseif ($goat->saleStatus==1)
                                                         Sold

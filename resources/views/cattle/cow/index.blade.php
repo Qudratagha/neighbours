@@ -49,12 +49,14 @@
 
                                         @if( !($cow->dead_date || $cow->dry_date || $cow->saleStatus==1))
                                         <td>
+
                                             <form action="{{route('cattle.store',$cow->id)}}" method="POST" onsubmit="return confirm('Are you sure you want to DRY cow with serial no: {{$cow->id}} ?');" style="display: inline-block;">
                                                 @csrf
                                                 <input type="hidden" onfocus= "(this. type='date')" class="form-control" name="dry_date" value="<?php echo date('Y-m-d');?>">
                                                 <input type="hidden" name="cattle_id" value="{{$cow->id}}">
                                                 <button type="submit" name="submitDry" class="btn btn-sm btn-outline-danger" data-toggle="tooltip" title="Dry"><span>Dry</span></button>
                                             </form>
+
 
                                             <form action="{{ route('cattle.store',$cow->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to DEAD cow with serial no: {{$cow->id}} ?');" style="display: inline-block;">
                                                 @csrf
@@ -80,6 +82,8 @@
                                                 <a href="{{route('cattle.show',['cow',$cow->id])}}" class="btn btn-sm btn-primary" data-toggle="tooltip" title="View"><i class="fe fe-eye"></i></a>
                                                 @if($cow->dead_date)
                                                     Dead
+                                                @elseif ($cow->dry_date && $cow->saleStatus == 1)
+                                                    Dry And Sold
                                                 @elseif ($cow->dry_date)
                                                     Dry
                                                 @elseif ($cow->saleStatus == 1)
