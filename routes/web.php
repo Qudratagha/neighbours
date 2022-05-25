@@ -95,3 +95,45 @@ Route::get('/goat_sale/{goat_sale}',[\App\Http\Controllers\TransactionController
 
 //rate
 Route::resource('/rates', \App\Http\Controllers\RateController::class);
+
+
+
+//cow_expenditure
+Route::get('/cow_expenditure',[\App\Http\Controllers\TransactionController::class, 'indexCowExpenditure'])->name('cow_expenditure.index');
+Route::get('/cow_expenditure_create',[\App\Http\Controllers\TransactionController::class, 'createCowExpenditure'])->name('cow_expenditure.create');
+Route::post('/cow_expenditure',[\App\Http\Controllers\TransactionController::class, 'storeCowExpenditure'])->name('cow_expenditure.store');
+Route::get('/cow_expenditure/{transaction}/edit',[\App\Http\Controllers\TransactionController::class, 'editCowExpenditure'])->name('cow_expenditure.edit');
+Route::put('/cow_expenditure_update/{transaction}',[\App\Http\Controllers\TransactionController::class, 'updateCowExpenditure'])->name('cow_expenditure.update');
+Route::delete('/cow_expenditure/{transaction}',[\App\Http\Controllers\TransactionController::class, 'destroyCowExpenditure'])->name('cow_expenditure.destroy');
+
+//poultry_expenditure
+Route::get('/poultry_expenditure',[\App\Http\Controllers\TransactionController::class, 'indexPoultryExpenditure'])->name('poultry_expenditure.index');
+Route::get('/poultry_expenditure_create',[\App\Http\Controllers\TransactionController::class, 'createPoultryExpenditure'])->name('poultry_expenditure.create');
+Route::post('/poultry_expenditure',[\App\Http\Controllers\TransactionController::class, 'storePoultryExpenditure'])->name('poultry_expenditure.store');
+Route::get('/poultry_expenditure/{transaction}/edit',[\App\Http\Controllers\TransactionController::class, 'editPoultryExpenditure'])->name('poultry_expenditure.edit');
+Route::put('/poultry_expenditure_update/{transaction}',[\App\Http\Controllers\TransactionController::class, 'updatePoultryExpenditure'])->name('poultry_expenditure.update');
+Route::delete('/poultry_expenditure/{transaction}',[\App\Http\Controllers\TransactionController::class, 'destroyPoultryExpenditure'])->name('poultry_expenditure.destroy');
+
+//goat_expenditure
+Route::get('/goat_expenditure',[\App\Http\Controllers\TransactionController::class, 'indexGoatExpenditure'])->name('goat_expenditure.index');
+Route::get('/goat_expenditure_create',[\App\Http\Controllers\TransactionController::class, 'createGoatExpenditure'])->name('goat_expenditure.create');
+Route::post('/goat_expenditure',[\App\Http\Controllers\TransactionController::class, 'storeGoatExpenditure'])->name('goat_expenditure.store');
+Route::get('/goat_expenditure/{transaction}/edit',[\App\Http\Controllers\TransactionController::class, 'editGoatExpenditure'])->name('goat_expenditure.edit');
+Route::put('/goat_expenditure_update/{transaction}',[\App\Http\Controllers\TransactionController::class, 'updateGoatExpenditure'])->name('goat_expenditure.update');
+Route::delete('/goat_expenditure/{transaction}',[\App\Http\Controllers\TransactionController::class, 'destroyGoatExpenditure'])->name('goat_expenditure.destroy');
+
+//cultivation_expenditure
+Route::get('/cultivation_expenditure',[\App\Http\Controllers\TransactionController::class, 'indexCultivationExpenditure'])->name('cultivation_expenditure.index');
+Route::get('/cultivation_expenditure_create',[\App\Http\Controllers\TransactionController::class, 'createCultivationExpenditure'])->name('cultivation_expenditure.create');
+Route::post('/cultivation_expenditure',[\App\Http\Controllers\TransactionController::class, 'storeCultivationExpenditure'])->name('cultivation_expenditure.store');
+Route::get('/cultivation_expenditure/{transaction}/edit',[\App\Http\Controllers\TransactionController::class, 'editCultivationExpenditure'])->name('cultivation_expenditure.edit');
+Route::put('/cultivation_expenditure_update/{transaction}',[\App\Http\Controllers\TransactionController::class, 'updateCultivationExpenditure'])->name('cultivation_expenditure.update');
+Route::delete('/cultivation_expenditure/{transaction}',[\App\Http\Controllers\TransactionController::class, 'destroyCultivationExpenditure'])->name('cultivation_expenditure.destroy');
+
+//expenditure
+Route::get('/expenditure',[\App\Http\Controllers\TransactionController::class, 'indexExpenditure'])->name('expenditure.index');
+Route::get('/expenditure_create',[\App\Http\Controllers\TransactionController::class, 'createExpenditure'])->name('expenditure.create');
+Route::post('/expenditure',[\App\Http\Controllers\TransactionController::class, 'storeExpenditure'])->name('expenditure.store');
+Route::get('/expenditure/{transaction}/edit',[\App\Http\Controllers\TransactionController::class, 'editExpenditure'])->name('expenditure.edit');
+Route::put('/expenditure_update/{transaction}',[\App\Http\Controllers\TransactionController::class, 'updateExpenditure'])->name('expenditure.update');
+Route::delete('/expenditure/{transaction}',[\App\Http\Controllers\TransactionController::class, 'destroyExpenditure'])->name('expenditure.destroy');

@@ -10,7 +10,7 @@
                     <a class="header-brand" href="{{route('dashboard')}}">
                         <img src="{{asset('assets/images/brand/NFMS.png')}}" class="header-brand-img main-logo" alt="Hogo logo">
                      </a><!-- logo-->
-{{--                        <a aria-label="Hide Sidebar" class="app-sidebar__toggle" data-toggle="sidebar" href=""></a>--}}
+                    {{--<a aria-label="Hide Sidebar" class="app-sidebar__toggle" data-toggle="sidebar" href=""></a>--}}
                     <a id="horizontal-navtoggle" class="animated-arrow hor-toggle"><span></span></a>
 
                     <div class="d-flex order-lg-2 ml-auto header-rightmenu">
@@ -96,15 +96,21 @@
                         @endcanany
 
                         {{-- Expenditure  --}}
-                        <li aria-haspopup="true"><a href="#" class="sub-icon "><i class="typcn typcn-cog-outline"></i> Expenditure <i class="fa fa-angle-down horizontal-icon"></i></a>
+                        @canany('dashboard-read')
+                        <li aria-haspopup="true"><a href="{{route('expenditure.index')}}" class="sub-icon @if(request()->route()->action['as'] == 'expenditure.index'||
+                                                                                                                request()->route()->action['as'] == 'cow_expenditure.index'||
+                                                                                                                request()->route()->action['as'] == 'goat_expenditure.index'||
+                                                                                                                request()->route()->action['as'] == 'poultry_expenditure.index'||
+                                                                                                                request()->route()->action['as'] == 'cultivation_expenditure.index') active @endif ">
+                                                                                                                <i class="typcn typcn-cog-outline"></i> Expenditure <i class="fa fa-angle-down horizontal-icon"></i></a>
                             <ul class="sub-menu">
-                                <li href="#" aria-haspopup="true" class="sub-icon"><a>Cow</a></li>
-                                <li href="#" aria-haspopup="true" class="sub-icon"><a>Poultry</a></li>
-                                <li href="#" aria-haspopup="true" class="sub-icon"><a>Goat/Sheep</a></li>
-                                <li href="#" aria-haspopup="true" class="sub-icon"><a>Cultivation </a></li>
-                                <li href="#" aria-haspopup="true" class="sub-icon"><a>Form Expenditure</a></li>
+                                <li aria-haspopup="true" class="sub-icon"><a href="{{route('cow_expenditure.index')}}">Cow</a></li>
+                                <li aria-haspopup="true" class="sub-icon"><a href="{{route('goat_expenditure.index')}}">Goat/Sheep</a></li>
+                                <li aria-haspopup="true" class="sub-icon"><a href="{{route('poultry_expenditure.index')}}">Poultry</a></li>
+                                <li aria-haspopup="true" class="sub-icon"><a href="{{route('cultivation_expenditure.index')}}">Cultivation </a></li>
                             </ul>
                         </li>
+                        @endcanany
 
                     </ul>
                 </nav>
