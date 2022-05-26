@@ -62,18 +62,16 @@ Route::post('/cow_daily/insemination',[\App\Http\Controllers\InseminationControl
 
 Route::delete('/cow_daily/{transaction}',[\App\Http\Controllers\TransactionController::class, 'destroy'])->name('cow_daily.destroy');
 Route::delete('/cow_daily_sick/{sick}',[\App\Http\Controllers\SickController::class, 'destroy'])->name('sickCow.destroy');
-<<<<<<< HEAD
+
 Route::delete('/cow_daily_medicine/{medicine}',[\App\Http\Controllers\MedicinesController::class, 'destroy'])->name('medicineCow.destroy');
 Route::delete('/cow_daily_insemination/{insemination}',[\App\Http\Controllers\InseminationController::class, 'destroy'])->name('inseminationCow.destroy');
 Route::delete('/cow_daily_pregnant/{pregnant}',[\App\Http\Controllers\PregnantController::class, 'destroy'])->name('pregnantCow.destroy');
 Route::delete('/cow_daily_delivery/{delivery}',[\App\Http\Controllers\DeliveryController::class, 'destroy'])->name('deliveryCow.destroy');
 Route::delete('/cow_daily_vaccination/{vaccination}',[\App\Http\Controllers\VaccinationController::class, 'destroy'])->name('vaccinationCow.destroy');
-=======
 Route::delete('/cow_daily_medicine/{medicine}',[\App\Http\Controllers\MedicinesController::class, 'destroy'])->name('medicine.destroy');
 Route::delete('/cow_daily_pregnant/{pregnant}',[\App\Http\Controllers\PregnantController::class, 'destroy'])->name('pregnant.destroy');
 Route::delete('/cow_daily_delivery/{delivery}',[\App\Http\Controllers\DeliveryController::class, 'destroy'])->name('delivery.destroy');
 Route::delete('/cow_daily_vaccination/{vaccination}',[\App\Http\Controllers\VaccinationController::class, 'destroy'])->name('vaccination.destroy');
->>>>>>> umair
 
 //goat_daily
 Route::get('/goat_daily',[\App\Http\Controllers\CattleController::class, 'index'])->name('goat_daily.index');
@@ -104,3 +102,5 @@ Route::resource('/rates', \App\Http\Controllers\RateController::class);
 
 //cultivation
 Route::resource('/cultivation', CultivationController::class);
+Route::get('/cultivation_collect', [\App\Http\Controllers\CultivationController::class, 'collectCultivation'])->name('collect.collectCultivation');
+Route::get('cultivation_sale', [\App\Http\Controllers\CultivationController::class, 'saleCultivation'])->name('sale.saleCultivation');

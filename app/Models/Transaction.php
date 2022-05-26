@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use function Symfony\Component\ErrorHandler\traceAt;
 
 class Transaction extends Model
 {
@@ -38,5 +39,53 @@ class Transaction extends Model
         $stockMilk = $totalMilk - $soldMilk;
 
         return $stockMilk;
+    }
+
+    public static function wheatStock(){
+
+        $totalWheat = Transaction::where('transaction_type_id', 3)
+            ->where('account_head_id', 9)
+            ->where('sub_head_id', 27)
+            ->sum('quantity');
+
+        $soldWheat = Transaction::where('transaction_type_id', 1)
+            ->where('account_head_id', 13)
+            ->where('sub_head_id', 16)
+            ->sum('quantity');
+
+        $stockWheat = $totalWheat - $soldWheat;
+        return $stockWheat;
+    }
+
+    public static function cornStock(){
+
+        $totalWheat = Transaction::where('transaction_type_id', 3)
+            ->where('account_head_id', 9)
+            ->where('sub_head_id', 28)
+            ->sum('quantity');
+
+        $soldWheat = Transaction::where('transaction_type_id', 1)
+            ->where('account_head_id', 13)
+            ->where('sub_head_id', 18)
+            ->sum('quantity');
+
+        $stockWheat = $totalWheat - $soldWheat;
+        return $stockWheat;
+    }
+
+    public static function cucumberStock(){
+
+        $totalCorn = Transaction::where('transaction_type_id', 3)
+            ->where('account_head_id', 9)
+            ->where('sub_head_id', 29)
+            ->sum('quantity');
+
+        $soldCorn = Transaction::where('transaction_type_id', 1)
+            ->where('account_head_id', 13)
+            ->where('sub_head_id', 17)
+            ->sum('quantity');
+
+        $stockCorn = $totalCorn - $soldCorn;
+        return $stockCorn;
     }
 }

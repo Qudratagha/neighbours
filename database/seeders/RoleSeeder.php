@@ -17,17 +17,11 @@ class RoleSeeder extends Seeder
     {
         $aryRoles = [
             ['id' => 1, 'name' => 'Super Admin', 'description' => 'Role for Super Admin'],
-<<<<<<< HEAD
-
-            ['id' => 2, 'name' => 'Cow Supervisor', 'description' => 'Role for Cow Supervisor'],
-
-            ['id' => 3, 'name' => 'Poultry Supervisor', 'description' => 'Role for Poultry Supervisor']
-=======
             ['id' => 2, 'name' => 'Cow Supervisor', 'description' => 'Role for Cow Supervisor'],
             ['id' => 3, 'name' => 'Goat Supervisor', 'description' => 'Role for Goat Supervisor'],
             ['id' => 4, 'name' => 'Poultry Supervisor', 'description' => 'Role for Poultry Supervisor'],
             ['id' => 5, 'name' => 'Cultivation Supervisor', 'description' => 'Role for Cultivation Supervisor']
->>>>>>> umair
+
         ];
         foreach ($aryRoles as $role) {
             DB::table('role')->insert([

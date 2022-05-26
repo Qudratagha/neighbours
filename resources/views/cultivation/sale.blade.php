@@ -38,37 +38,29 @@
                                         <th>ID</th>
                                         <th>Cultivation Type</th>
                                         <th>Quantity</th>
+                                        <th>Amount</th>
                                         <th>Description</th>
                                         <th>Date</th>
-                                        <th>Edit Delete</th>
+                                        <th>Actions</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    @foreach($cultivations as $cultivation)
+                                    @foreach($transactions as $transaction)
                                         <tr>
-                                            <td>{{$cultivation->id}}</td>
-                                            <td>{{$cultivation->cultivationTypes->name}}</td>
-                                            <td>{{$cultivation->fertilizer}}</td>
-                                            <td>{{$cultivation->total_area_cultivated}}</td>
-                                            <td>{{date('Y-m-d', strtotime($cultivation->created_at))}}</td>
+                                            <td>{{$transaction->id}}</td>
+                                            <td>{{$transaction->accountSubHead->name}}</td>
+                                            <td>{{$transaction->quantity}}</td>
+                                            <td>{{$transaction->amount}}</td>
+                                            <td>{{$transaction->description}}</td>
+                                            <td>{{$transaction->date}}</td>
                                             <td>
-                                                <a href="{{route('cultivation.edit', $cultivation->id)}}" class="btn btn-sm btn-success" data-toggle="tooltip" title="Edit"><i class="fe fe-edit-3"></i></a>
-                                                <form action="{{ route('cultivation.destroy',$cultivation->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this?');" style="display: inline-block;">
+                                                <a href="{{route('cultivation.edit', $transaction->id)}}" class="btn btn-sm btn-success" data-toggle="tooltip" title="Edit"><i class="fe fe-edit-3"></i></a>
+                                                <form action="{{ route('cultivation.destroy',$transaction->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this?');" style="display: inline-block;">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-sm btn-danger" data-toggle="tooltip" title="Delete"><i class="fe fe-trash-2"></i></button>
                                                 </form>
                                             </td>
-
-                                            {{--                                            <td><a href="{{route('users.show',$user->user_id)}}" class="btn btn-success">View</a></td>--}}
-                                            {{--                                            <td><a href="{{route('users.edit',$user->user_id)}}" class="btn btn-success">Edit</a></td>--}}
-                                            {{--                                            <td>--}}
-                                            {{--                                                <form action="{{route('users.destroy', $user->user_id)}}" method="POST">--}}
-                                            {{--                                                    @csrf--}}
-                                            {{--                                                    @method("DELETE")--}}
-                                            {{--                                                    <button class="btn btn-danger" onclick="return confirm('Are you sure?')" >Dlt</button>--}}
-                                            {{--                                                </form>--}}
-                                            {{--                                            </td>--}}
                                         </tr>
                                     @endforeach
                                     </tbody>
@@ -99,7 +91,7 @@
                         @csrf
                         <div class="form-group">
                             <label class="form-label">Cultivation Type</label>
-                            <select class="form-control select2 custom-select" name="cultivation_type_id">
+                            <select class="form-control select2 custom-select" id="cultivationType" name="cultivation_type_id">
                                 <option value="">Please Select Cultivation Type</option>
                                 @foreach($cultivation_types as $cultivation_type)
                                     <option value="{{$cultivation_type->id}}" >{{$cultivation_type->name}}</option>
@@ -108,66 +100,32 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="fertilizer" class="form-control-label">Fertilizer Name:</label>
-                            <input type="text" name="fertilizer" class="form-control">
+                            <?php
+                                $totalWheat = App\Models\Transaction::wheatStock();
+                                $totalCorn = App\Models\Transaction::cornStock();
+                                $totalCucumber = App\Models\Transaction::cucumberStock();
+                            ?>
+                            <label for="quantity" class="form-control-label">Quantity:</label>
+                            <input type="number" name="quantity" class="form-control" id="quantity">
+                                <div class="invalid-feedback" id="available" style="display: block !important;">
+
+                                </div>
                         </div>
                         <div class="form-group">
-                            <label for="total_Area_cultivated" class="form-control-label">Total Aera Cultivated:</label>
-                            <input type="number" name="total_Area_cultivated" class="form-control">
+                            <label for="amount" class="form-control-label">Amount:</label>
+                            <input type="number" name="amount" class="form-control">
                         </div>
-                        <div class="form-group">
-                            <label for="created_at" class="form-control-label">Select Date:</label>
-                            <input type="date" name="created_at" class="form-control">
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Close</button>
-                            <button type="submit" name="addCultivation" class="btn btn-outline-success">Submit </button>
-                        </div>
-                    </form>
-                </div>
-
-            </div>
-        </div>
-    </div>
-    <!-- Collect cultivation Modal -->
-
-    <div class="modal fade" id="collect-cultivation" tabindex="-1" role="dialog"  aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="example-Modal3">Collect Cultivation</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form method="post" action="{{route('cultivation.store')}}">
-                        @csrf
-                        <div class="form-group">
-                            <label class="form-label">Cultivation Type</label>
-                            <select class="form-control select2 custom-select" name="cultivation_type">
-                                <option value="">Please Select Cultivation Type</option>
-                                @foreach($cultivation_types as $cultivation_type)
-                                    <option value="{{$cultivation_type->name}}" >{{$cultivation_type->name}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-
                         <div class="form-group">
                             <label for="date" class="form-control-label">Select Date:</label>
                             <input type="date" name="date" class="form-control">
                         </div>
                         <div class="form-group">
-                            <label for="total-collection" class="form-control-label">Total Collection:</label>
-                            <input type="text" name="quantity" class="form-control" placeholder="Enter Collection In Kg">
-                        </div>
-                        <div class="form-group">
                             <label for="description" class="form-control-label">Description:</label>
-                            <input type="text" name="description" class="form-control" placeholder="Enter Description">
+                            <input type="text" name="description" class="form-control">
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Close</button>
-                            <button type="submit" name="collectCultivation" class="btn btn-outline-success">Submit </button>
+                            <button type="submit" name="saleCultivation" class="btn btn-outline-success">Submit </button>
                         </div>
                     </form>
                 </div>
@@ -179,10 +137,43 @@
 @section('more-script')
     <script>
         @parent
+            var  wheatQty = {{$totalWheat}};
+            var  cornQty = {{$totalCorn}};
+            var  cucumberQty = {{$totalCucumber}};
         $(document).ready(function() {
             $('#mytable').DataTable( {
             });
         });
+
+        $(function () {
+            $('#cultivationType').on('change', function() {
+                if(this.value == 1){
+                    $('#available').html("Total Stock Available Of Wheat " + wheatQty + " kg" );
+
+                }
+
+                if (this.value == 2){
+                    $('#available').html("Total Stock Available Of Corn " + cornQty + " kg" );
+
+                }
+
+                if(this.value == 3){
+                    $('#available').html("Total Stock Available Of Cucumber " + cucumberQty + " kg" );
+
+                }
+            });
+        });
+
+        // $('#quantity').change(function () {
+        // if(this.value == 1){
+        //     if(this.value > wheatQty)
+        //     {
+        //         alert('Please do not exceed the Available Stock');
+        //         $(this).val(wheatQty);
+        //     }
+        // }
+        //
+        // })
     </script>
 @endsection
 

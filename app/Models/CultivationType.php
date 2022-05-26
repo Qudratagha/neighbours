@@ -12,10 +12,9 @@ class CultivationType extends Model
     protected $table = "cultivation_types";
     protected $primaryKey = "id";
     public $timestamps = false;
-
-
     protected $guarded = [];
-    public function cultivations(){
+
+    public function cultivation(){
         return $this->hasMany(Cultivation::class,'cultivation_type_id','id');
     }
 

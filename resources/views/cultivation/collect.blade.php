@@ -1,5 +1,5 @@
 @extends('layouts.nav')
-@section('title', 'Cultivation')
+@section('title', 'Cultivation Collect')
 @section('margin', 'my-md-5')
 @section('app-content', 'app-content')
 
@@ -16,7 +16,7 @@
                 <div class="ml-auto">
 
                     <div class="input-group">
-                        <button type="button" class="btn btn-outline-info " data-toggle="modal" data-target="#add-cultivation">Add Cultivation</button>
+                        <button type="button" class="btn btn-outline-success " data-toggle="modal" data-target="#collect-cultivation">Collect Cultivation</button>
                     </div>
                 </div>
             </div>
@@ -35,41 +35,30 @@
                                     <thead>
                                     <tr>
                                         <th>ID</th>
-                                        <th>C_type id/ Name</th>
-                                        <th>Fertilizer Name</th>
-                                        <th>Total Area Cultivated</th>
+                                        <th>Cultivation Type</th>
+                                        <th>Quantity</th>
+                                        <th>Description</th>
                                         <th>Date</th>
                                         <th>Actions</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach($cultivations as $cultivation)
-                                            <tr>
-                                                <td>{{$cultivation->id}}</td>
-                                                <td>{{$cultivation->cultivationTypes->name}}</td>
-                                                <td>{{$cultivation->fertilizer}}</td>
-                                                <td>{{$cultivation->total_area_cultivated}}</td>
-                                                <td>{{date('Y-m-d', strtotime($cultivation->created_at))}}</td>
-                                                <td>
-                                                    <a href="{{route('cultivation.edit', $cultivation->id)}}" class="btn btn-sm btn-success" data-toggle="tooltip" title="Edit"><i class="fe fe-edit-3"></i></a>
-                                                    <form action="{{ route('cultivation.destroy',$cultivation->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this?');" style="display: inline-block;">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button type="submit" class="btn btn-sm btn-danger" data-toggle="tooltip" title="Delete"><i class="fe fe-trash-2"></i></button>
-                                                    </form>
-                                                </td>
-
-    {{--                                            <td><a href="{{route('users.show',$user->user_id)}}" class="btn btn-success">View</a></td>--}}
-    {{--                                            <td><a href="{{route('users.edit',$user->user_id)}}" class="btn btn-success">Edit</a></td>--}}
-    {{--                                            <td>--}}
-    {{--                                                <form action="{{route('users.destroy', $user->user_id)}}" method="POST">--}}
-    {{--                                                    @csrf--}}
-    {{--                                                    @method("DELETE")--}}
-    {{--                                                    <button class="btn btn-danger" onclick="return confirm('Are you sure?')" >Dlt</button>--}}
-    {{--                                                </form>--}}
-    {{--                                            </td>--}}
-                                            </tr>
-                                        @endforeach
+                                    @foreach($collectCultivation as $collect)
+                                        <tr>
+                                            <td>{{$collect->id}}</td>
+                                            <td>{{$collect->accountSubHead->name}}</td>
+                                            <td>{{$collect->quantity}}</td>
+                                            <td>{{$collect->description}}</td>
+                                            <td>{{$collect->date}}</td>
+                                            <td>
+                                                <a href="{{route('cultivation.edit', $collect->id)}}" class="btn btn-sm btn-success" data-toggle="tooltip" title="Edit"><i class="fe fe-edit-3"></i></a>
+                                                <form action="{{ route('cultivation.destroy',$collect->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this?');" style="display: inline-block;">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-sm btn-danger" data-toggle="tooltip" title="Delete"><i class="fe fe-trash-2"></i></button>
+                                                </form>
+                                            </td>
+                                    @endforeach
                                     </tbody>
                                 </table>
                             </div>
@@ -82,13 +71,14 @@
         {{--      end side app --}}
     </div>
     {{--   end container area--}}
-    <!-- Modal -->
-    <!-- Add cultivation Modal -->
-    <div class="modal fade" id="add-cultivation" tabindex="-1" role="dialog"  aria-hidden="true">
+
+    <!-- Collect cultivation Modal -->
+
+    <div class="modal fade" id="collect-cultivation" tabindex="-1" role="dialog"  aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="example-Modal3">Add Cultivation</h5>
+                    <h5 class="modal-title" id="example-Modal3">Collect Cultivation</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -107,20 +97,20 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="fertilizer" class="form-control-label">Fertilizer Name:</label>
-                            <input type="text" name="fertilizer" class="form-control">
+                            <label for="date" class="form-control-label">Select Date:</label>
+                            <input type="date" name="date" class="form-control">
                         </div>
                         <div class="form-group">
-                            <label for="total_Area_cultivated" class="form-control-label">Total Aera Cultivated:</label>
-                            <input type="number" name="total_Area_cultivated" class="form-control">
+                            <label for="total-collection" class="form-control-label">Total Collection:</label>
+                            <input type="text" name="quantity" class="form-control" placeholder="Enter Collection In Kg">
                         </div>
                         <div class="form-group">
-                            <label for="created_at" class="form-control-label">Select Date:</label>
-                            <input type="date" name="created_at" class="form-control">
+                            <label for="description" class="form-control-label">Description:</label>
+                            <input type="text" name="description" class="form-control" placeholder="Enter Description">
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Close</button>
-                            <button type="submit" name="addCultivation" class="btn btn-outline-success">Submit </button>
+                            <button type="submit" name="collectCultivation" class="btn btn-outline-success">Submit </button>
                         </div>
                     </form>
                 </div>
@@ -128,7 +118,6 @@
             </div>
         </div>
     </div>
-
 @endsection
 @section('more-script')
     <script>

@@ -11,10 +11,7 @@ class Cultivation extends Model
     protected $table = "cultivations";
     protected $primaryKey = "id";
     public $timestamps = false;
-
-
     protected $guarded = [];
-
 
     public function cultivationTypes(){
         return $this->belongsTo(CultivationType::class,'cultivation_type_id','id');
@@ -23,4 +20,6 @@ class Cultivation extends Model
     public function accountHead(){
         return $this->belongsTo(AccountHead::class,'account_head_id','id');
     }
+
+
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Console\Kernel;
 use App\Models\AccountHead;
 use App\Models\Cultivation;
 use App\Models\CultivationType;
@@ -42,22 +43,75 @@ class CultivationController extends Controller
     public function store(Request $request)
     {
         if (isset($_POST['addCultivation'])){
-//            dd($request->all());
-
-            $request['account_head_id'] = 8;
+            $cultivation_type_id = $request['cultivation_type_id'];
+//            if ($cultivation_type_id == 1){
+//                $request['sub_head_id'] = 27;
+//            }elseif ($cultivation_type_id == 2){
+//                $request['sub_head_id'] = 28;
+//
+//            }elseif ($cultivation_type_id == 3){
+//                $request['sub_head_id'] = 29;
+//
+//            }
+//            AccountHead::updateOrCreate($accountHeadData);
+            $request['account_head_id'] = 9;
             Cultivation::create($request->except('addCultivation'));
             return redirect()->back()->with('message', 'Cultivation Added Successfully');
         }
 
         if (isset($_POST['collectCultivation'])){
+            $cultivation_type_id = $request['cultivation_type_id'];
+            if ($cultivation_type_id == 1){
+                $request['sub_head_id'] = 27;
+            }elseif ($cultivation_type_id == 2){
+                $request['sub_head_id'] = 28;
+
+            }elseif ($cultivation_type_id == 3){
+                $request['sub_head_id'] = 29;
+
+            }
             $request['transaction_type_id'] = 3;
             $request['account_head_id'] = 9;
-            $request['sub_head_id'] = 24;
-
-            Transaction::create($request->except(['cultivation_type', 'collectCultivation']));
+            Transaction::create($request->except(['cultivation_type_id', 'collectCultivation']));
             return redirect()->back()->with('message', 'Cultivation Collected Successfully');
         }
 
+        //Sale Cultivation
+        if (isset($_POST['saleCultivation'])){
+
+            $request['transaction_type_id'] = 1;
+            $cultivation_type_id = $request['cultivation_type_id'];
+            if ($cultivation_type_id == 1){
+                $request['account_head_id'] = 13;
+                $request['sub_head_id'] = 16;
+            }elseif ($cultivation_type_id == 2){
+                $request['account_head_id'] = 13;
+                $request['sub_head_id'] = 18;
+
+            }elseif ($cultivation_type_id == 3){
+                $request['account_head_id'] = 13;
+                $request['sub_head_id'] = 17;
+
+            }
+
+            Transaction::create($request->except('saleCultivation', 'cultivation_type_id'));
+            return redirect()->back()->with('message', 'Cucumber Sold Successfully');
+        }
+
+    }
+
+    //Collect Cultivation
+    public function collectCultivation(){
+        $collectCultivation = Transaction::where('transaction_type_id', 3)->get();
+        $cultivation_types = CultivationType::all();
+        return view('cultivation.collect', compact('collectCultivation', 'cultivation_types'));
+    }
+
+    //Sale Cultivation
+    public function saleCultivation(){
+        $transactions = Transaction::where('transaction_type_id', 1)->get();
+        $cultivation_types = CultivationType::all();
+        return view('cultivation.sale', compact('cultivation_types', 'transactions'));
     }
 
 
