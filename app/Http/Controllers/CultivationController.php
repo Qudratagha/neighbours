@@ -30,11 +30,7 @@ class CultivationController extends Controller
 
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function create()
     {
         //
@@ -42,23 +38,14 @@ class CultivationController extends Controller
 
     public function store(Request $request)
     {
+        //Add Cultivation
         if (isset($_POST['addCultivation'])){
-            $cultivation_type_id = $request['cultivation_type_id'];
-//            if ($cultivation_type_id == 1){
-//                $request['sub_head_id'] = 27;
-//            }elseif ($cultivation_type_id == 2){
-//                $request['sub_head_id'] = 28;
-//
-//            }elseif ($cultivation_type_id == 3){
-//                $request['sub_head_id'] = 29;
-//
-//            }
-//            AccountHead::updateOrCreate($accountHeadData);
             $request['account_head_id'] = 9;
             Cultivation::create($request->except('addCultivation'));
             return redirect()->back()->with('message', 'Cultivation Added Successfully');
         }
 
+        //Collect Cultivation
         if (isset($_POST['collectCultivation'])){
             $cultivation_type_id = $request['cultivation_type_id'];
             if ($cultivation_type_id == 1){
@@ -102,7 +89,7 @@ class CultivationController extends Controller
 
     //Collect Cultivation
     public function collectCultivation(){
-        $collectCultivation = Transaction::where('transaction_type_id', 3)->get();
+        $collectCultivation = Transaction::where('transaction_type_id', 3)->where('account_head_id', 9)->get();
         $cultivation_types = CultivationType::all();
         return view('cultivation.collect', compact('collectCultivation', 'cultivation_types'));
     }
@@ -115,52 +102,51 @@ class CultivationController extends Controller
     }
 
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Cultivation  $cultivation
-     * @return \Illuminate\Http\Response
-     */
+
     public function show(Cultivation $cultivation)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Cultivation  $cultivation
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
-     */
+
     public function edit(Cultivation $cultivation)
     {
         $cultivation_types = CultivationType::all();
-
-//        $cultivations = Cultivation::all();
         return view('cultivation.edit',compact('cultivation','cultivation_types'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Cultivation  $cultivation
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
-     */
+    // Update Cultivation
     public function update(Request $request, Cultivation $cultivation)
     {
         $cultivation->update($request->all());
         return redirect(route('cultivation.index'));
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Cultivation  $cultivation
-     * @return \Illuminate\Http\Response
-     */
+    // Delete Cultivation
     public function destroy(Cultivation $cultivation)
     {
-        //
+        $cultivation->delete();
+        return redirect(route('cultivation.index'));
     }
+
+    // Edit Collect Cultivation
+    public function editCollect(Transaction $cultivation){
+
+        $cultivation_types = CultivationType::all();
+        return view('cultivation.editCollect', compact('cultivation', 'cultivation_types'));
+    }
+
+    // Update Collect Cultivation
+    public function updateCollect(Request $request, Transaction $cultivation){
+        $cultivation->update($request->except('cultivation_type_id'));
+        return redirect()->back()->with('Message', 'Collect Cultivation Updated');
+
+    }
+
+    // Delete Collect Cultivation
+    public function destroyCollect(Transaction $cultivation){
+        $cultivation->delete();
+        return redirect()->back()->with('errorMessage', 'Collect Cultivation Deleted');
+    }
+
 }

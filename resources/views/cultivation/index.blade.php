@@ -35,7 +35,7 @@
                                     <thead>
                                     <tr>
                                         <th>ID</th>
-                                        <th>C_type id/ Name</th>
+                                        <th>Cultivation Type</th>
                                         <th>Fertilizer Name</th>
                                         <th>Total Area Cultivated</th>
                                         <th>Date</th>
@@ -48,7 +48,7 @@
                                                 <td>{{$cultivation->id}}</td>
                                                 <td>{{$cultivation->cultivationTypes->name}}</td>
                                                 <td>{{$cultivation->fertilizer}}</td>
-                                                <td>{{$cultivation->total_area_cultivated}}</td>
+                                                <td>{{$cultivation->total_area_cultivated}} Acr</td>
                                                 <td>{{date('Y-m-d', strtotime($cultivation->created_at))}}</td>
                                                 <td>
                                                     <a href="{{route('cultivation.edit', $cultivation->id)}}" class="btn btn-sm btn-success" data-toggle="tooltip" title="Edit"><i class="fe fe-edit-3"></i></a>
@@ -58,16 +58,6 @@
                                                         <button type="submit" class="btn btn-sm btn-danger" data-toggle="tooltip" title="Delete"><i class="fe fe-trash-2"></i></button>
                                                     </form>
                                                 </td>
-
-    {{--                                            <td><a href="{{route('users.show',$user->user_id)}}" class="btn btn-success">View</a></td>--}}
-    {{--                                            <td><a href="{{route('users.edit',$user->user_id)}}" class="btn btn-success">Edit</a></td>--}}
-    {{--                                            <td>--}}
-    {{--                                                <form action="{{route('users.destroy', $user->user_id)}}" method="POST">--}}
-    {{--                                                    @csrf--}}
-    {{--                                                    @method("DELETE")--}}
-    {{--                                                    <button class="btn btn-danger" onclick="return confirm('Are you sure?')" >Dlt</button>--}}
-    {{--                                                </form>--}}
-    {{--                                            </td>--}}
                                             </tr>
                                         @endforeach
                                     </tbody>

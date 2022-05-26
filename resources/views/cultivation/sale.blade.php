@@ -49,12 +49,11 @@
                                         <tr>
                                             <td>{{$transaction->id}}</td>
                                             <td>{{$transaction->accountSubHead->name}}</td>
-                                            <td>{{$transaction->quantity}}</td>
+                                            <td>{{$transaction->quantity}} Kg</td>
                                             <td>{{$transaction->amount}}</td>
                                             <td>{{$transaction->description}}</td>
                                             <td>{{$transaction->date}}</td>
                                             <td>
-                                                <a href="{{route('cultivation.edit', $transaction->id)}}" class="btn btn-sm btn-success" data-toggle="tooltip" title="Edit"><i class="fe fe-edit-3"></i></a>
                                                 <form action="{{ route('cultivation.destroy',$transaction->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this?');" style="display: inline-block;">
                                                     @csrf
                                                     @method('DELETE')
@@ -125,7 +124,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Close</button>
-                            <button type="submit" name="saleCultivation" class="btn btn-outline-success">Submit </button>
+                            <button type="submit" id="btn" name="saleCultivation" class="btn btn-outline-success">Submit </button>
                         </div>
                     </form>
                 </div>
@@ -149,31 +148,59 @@
             $('#cultivationType').on('change', function() {
                 if(this.value == 1){
                     $('#available').html("Total Stock Available Of Wheat " + wheatQty + " kg" );
+                    $('#quantity').change(function () {
+                        if(this.value > wheatQty)
+                        {
+                            alert('Please do not exceed the Available Stock');
+                            $(this).val(wheatQty);
+                            $('#btn').prop('disabled', true);
 
+                        }else {
+
+                            $('#btn').prop('disabled', false);
+                        }
+
+                    });
                 }
 
                 if (this.value == 2){
                     $('#available').html("Total Stock Available Of Corn " + cornQty + " kg" );
+                    $('#quantity').change(function () {
+                        if(this.value > cornQty)
+                        {
+                            alert('Please do not exceed the Available Stock');
+                            $(this).val(cornQty);
+                            $('#btn').prop('disabled', true);
 
+                        }else {
+
+                            $('#btn').prop('disabled', false);
+                        }
+                    });
                 }
+
 
                 if(this.value == 3){
                     $('#available').html("Total Stock Available Of Cucumber " + cucumberQty + " kg" );
+                    $('#quantity').change(function () {
+                        if(this.value > cucumberQty)
+                        {
+                            alert('Please do not exceed the Available Stock');
+                            $(this).val(cucumberQty);
+                            $('#btn').prop('disabled', true);
 
+                        }else {
+
+                            $('#btn').prop('disabled', false);
+                        }
+
+                    });
                 }
             });
+
+
         });
 
-        // $('#quantity').change(function () {
-        // if(this.value == 1){
-        //     if(this.value > wheatQty)
-        //     {
-        //         alert('Please do not exceed the Available Stock');
-        //         $(this).val(wheatQty);
-        //     }
-        // }
-        //
-        // })
     </script>
 @endsection
 

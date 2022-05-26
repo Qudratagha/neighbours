@@ -102,5 +102,12 @@ Route::resource('/rates', \App\Http\Controllers\RateController::class);
 
 //cultivation
 Route::resource('/cultivation', CultivationController::class);
-Route::get('/cultivation_collect', [\App\Http\Controllers\CultivationController::class, 'collectCultivation'])->name('collect.collectCultivation');
-Route::get('cultivation_sale', [\App\Http\Controllers\CultivationController::class, 'saleCultivation'])->name('sale.saleCultivation');
+
+//Cultivation Collect
+Route::get('/cultivation_collect', [App\Http\Controllers\CultivationController::class, 'collectCultivation'])->name('cultivation.collectCultivation');
+Route::get('/cultivation_collect/{cultivation}/editCollect', [App\Http\Controllers\CultivationController::class, 'editCollect'])->name('cultivation.editCollect');
+Route::put('/cultivation_collect/{cultivation}', [App\Http\Controllers\CultivationController::class, 'updateCollect'])->name('cultivation.updateCollect');
+Route::delete('/cultivation_collect/{cultivation}', [App\Http\Controllers\CultivationController::class, 'destroyCollect'])->name('cultivation.destroyCollect');
+
+//Sale Cultivation
+Route::get('cultivation_sale', [App\Http\Controllers\CultivationController::class, 'saleCultivation'])->name('cultivation.saleCultivation');

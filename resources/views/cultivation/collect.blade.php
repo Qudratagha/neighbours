@@ -47,12 +47,12 @@
                                         <tr>
                                             <td>{{$collect->id}}</td>
                                             <td>{{$collect->accountSubHead->name}}</td>
-                                            <td>{{$collect->quantity}}</td>
+                                            <td>{{$collect->quantity}}  kg</td>
                                             <td>{{$collect->description}}</td>
                                             <td>{{$collect->date}}</td>
                                             <td>
-                                                <a href="{{route('cultivation.edit', $collect->id)}}" class="btn btn-sm btn-success" data-toggle="tooltip" title="Edit"><i class="fe fe-edit-3"></i></a>
-                                                <form action="{{ route('cultivation.destroy',$collect->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this?');" style="display: inline-block;">
+                                                <a href="{{route('cultivation.editCollect', $collect->id)}}" class="btn btn-sm btn-success" data-toggle="tooltip" title="Edit"><i class="fe fe-edit-3"></i></a>
+                                                <form action="{{ route('cultivation.destroyCollect',$collect->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this?');" style="display: inline-block;">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-sm btn-danger" data-toggle="tooltip" title="Delete"><i class="fe fe-trash-2"></i></button>
