@@ -49,7 +49,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label class="form-label">Description</label>
-                                            <input type="number" class="form-control" name="description" placeholder="Enter Description" value="{{$transaction->description}}">
+                                            <input type="text" class="form-control" name="description" placeholder="Enter Description" value="{{$transaction->description}}">
                                         </div>
                                     </div>
                                 </div>

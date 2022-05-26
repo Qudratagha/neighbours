@@ -53,7 +53,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label class="form-label">Description</label>
-                                            <input type="number" class="form-control" name="description" placeholder="Enter Description">
+                                            <input type="text" class="form-control" name="description" placeholder="Enter Description">
                                         </div>
                                     </div>
                                 </div>

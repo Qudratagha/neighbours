@@ -53,14 +53,18 @@ class CattleController extends Controller
 
     public function create(string $cattle_type)
     {
-
         $goats = Cattle::goats()->where('saleStatus', 0)->where('dry_date', null)->where('dead_date', null)->get();
-        $cows = Cattle::where('cattle_type_id',1)->get();
+        $cows = Cattle::where('cattle_type_id',1)->where('dry_date', null)->where('dead_date', null)->get();
         if ($cattle_type == 'cow' || $cattle_type == 'goat')
         {
             abort_if(Gate::denies("$cattle_type-create"), Response::HTTP_FORBIDDEN, '403 Forbidden');
             return view("cattle.$cattle_type.create",compact('goats','cows'));
         }
+    }
+
+    public function createCowExpenditurePurchase()
+    {
+        return view('cow_expenditure.purchase');
     }
 
     public function store(StoreCattleRequest $request)
@@ -97,6 +101,7 @@ class CattleController extends Controller
         //store cow
         if (isset($_POST['submitCow']))
         {
+
             $cow_daily = $request->serial_no;
             $accountHeadData = array
             (
@@ -112,7 +117,7 @@ class CattleController extends Controller
                Transaction::create([
                    'date' => $request->date,
                    'transaction_type_id' => 2,
-                   'account_head_id' => 17,
+                   'account_head_id' => 6,
                    'sub_head_id' => $accountHeadId,
                    'quantity' => 1,
                    'amount' => $request->amount

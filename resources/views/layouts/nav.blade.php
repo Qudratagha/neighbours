@@ -98,18 +98,32 @@
                         {{-- Expenditure  --}}
                         @canany('dashboard-read')
                         <li aria-haspopup="true"><a href="{{route('expenditure.index')}}" class="sub-icon @if(request()->route()->action['as'] == 'expenditure.index'||
-                                                                                                                request()->route()->action['as'] == 'cow_expenditure.index'||
-                                                                                                                request()->route()->action['as'] == 'goat_expenditure.index'||
-                                                                                                                request()->route()->action['as'] == 'poultry_expenditure.index'||
-                                                                                                                request()->route()->action['as'] == 'cultivation_expenditure.index') active @endif ">
-                                                                                                                <i class="typcn typcn-cog-outline"></i> Expenditure <i class="fa fa-angle-down horizontal-icon"></i></a>
+                                                                                                                                                                        request()->route()->action['as'] == 'cow_expenditure.index'||
+                                                                                                                                                                        request()->route()->action['as'] == 'goat_expenditure.index'||
+                                                                                                                                                                        request()->route()->action['as'] == 'poultry_expenditure.index'||
+                                                                                                                                                                        request()->route()->action['as'] == 'cultivation_expenditure.index'||
+                                                                                                                                                                        request()->route()->action['as'] == 'cow_expenditure_purchase.create') active @endif ">
+                                                                                                                                                                        <i class="typcn typcn-cog-outline"></i> Expenditure <i class="fa fa-angle-down horizontal-icon"></i></a>
                             <ul class="sub-menu">
-                                <li aria-haspopup="true" class="sub-icon"><a href="{{route('cow_expenditure.index')}}">Cow</a></li>
-                                <li aria-haspopup="true" class="sub-icon"><a href="{{route('goat_expenditure.index')}}">Goat/Sheep</a></li>
+                                <li aria-haspopup="true" class="sub-menu-sub"><a href="{{route('cow_expenditure.index')}}">Cow</a>
+                                    <ul class="sub-menu">
+                                        <li aria-haspopup="true"><a href="{{route('cow_expenditure_purchase.create')}}">Purchase Cow</a></li>
+                                    </ul>
+                                </li>
+                                <li aria-haspopup="true" class="sub-menu-sub"><a href="{{route('goat_expenditure.index')}}">Goat/Sheep</a>
+                                    <ul class="sub-menu">
+                                        <li aria-haspopup="true"><a href="{{route('goat_expenditure.index')}}">Purchase Goat/Sheep</a></li>
+                                    </ul>
+                                </li>
                                 <li aria-haspopup="true" class="sub-icon"><a href="{{route('poultry_expenditure.index')}}">Poultry</a></li>
                                 <li aria-haspopup="true" class="sub-icon"><a href="{{route('cultivation_expenditure.index')}}">Cultivation </a></li>
                             </ul>
                         </li>
+                        @endcanany
+
+                        {{-- Worker  --}}
+                        @canany('dashboard-read')
+                            <li aria-haspopup="true"><a href="{{route('worker.index')}}" class="sub-icon @if(request()->route()->action['as'] == 'worker.index') active @endif"><i class="typcn typcn-arrow-move-outline"></i> Worker </a></li>
                         @endcanany
 
                     </ul>

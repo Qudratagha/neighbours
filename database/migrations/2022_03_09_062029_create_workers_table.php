@@ -16,17 +16,15 @@ return new class extends Migration
         Schema::create('workers', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('module_id');
-            $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('account_head_id');
             $table->string('name');
-            $table->integer('salary')->nullable();
+            $table->string('phone')->nullable();
+            $table->string('address')->nullable();
             $table->timestamps();
 
             $table->foreign('module_id')->on('modules')->references('id');
-            $table->foreign('user_id')->on('users')->references('id');
             $table->foreign('account_head_id')->on('account_heads')->references('id');
-
-        });
+    });
     }
 
     /**

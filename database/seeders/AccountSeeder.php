@@ -60,10 +60,55 @@ class AccountSeeder extends Seeder
                 'name'      => 'Cash',
                 'parent_id' => '1'
             ],
-
             [
-                'name'      => 'FARM Salaries',
+                'name'      => 'Purchase',
                 'parent_id' => '5'
+            ],
+            [
+                'name'      => 'Sales',
+                'parent_id' => '4'
+            ],
+            [
+                'name'      => 'milk sale',
+                'parent_id' => '13'
+            ],
+            [
+                'name'      => 'cow sale',
+                'parent_id' => '13'
+            ],
+            [
+                'name'      => 'cow purchase',
+                'parent_id' => '12'
+            ],
+            [
+                'name'      => 'goat/sheep sale',
+                'parent_id' => '13'
+            ],
+            [
+                'name'      => 'goat/sheep purchase',
+                'parent_id' => '12'
+            ],
+            [
+                'name'      => 'egg sale',
+                'parent_id' => '13'
+            ],
+            [
+                'name'      => 'hen sale',
+                'parent_id' => '13'
+            ],
+            [
+                'name'      => 'chick sale',
+                'parent_id' => '13'
+            ],
+            [
+                'name'      => 'milk collection',
+                'parent_id' => '6'
+            ],
+
+            //Expenditure
+            [
+            'name'      => 'FARM Salaries',
+            'parent_id' => '5'
             ],
             [
                 'name'      => 'FARM Purchases',
@@ -74,19 +119,7 @@ class AccountSeeder extends Seeder
                 'parent_id' => '5'
             ],
             [
-                'name'      => 'FARM AI-kit',
-                'parent_id' => '5'
-            ],
-            [
-                'name'      => 'FARM Feeders',
-                'parent_id' => '5'
-            ],
-            [
                 'name'      => 'FARM Vaccines',
-                'parent_id' => '5'
-            ],
-            [
-                'name'      => 'FARM Medicine',
                 'parent_id' => '5'
             ],
             [
@@ -135,7 +168,15 @@ class AccountSeeder extends Seeder
                 'parent_id' => '5'
             ],
             [
+                'name'      => 'Cow PackingMaterial',
+                'parent_id' => '5'
+            ],
+            [
                 'name'      => 'Cow utilities',
+                'parent_id' => '5'
+            ],
+            [
+                'name'      => 'Cow Transportation',
                 'parent_id' => '5'
             ],
             [
@@ -156,10 +197,6 @@ class AccountSeeder extends Seeder
                 'parent_id' => '5'
             ],
             [
-                'name'      => 'Goat/Sheep AI-kit',
-                'parent_id' => '5'
-            ],
-            [
                 'name'      => 'Goat/Sheep Feeders',
                 'parent_id' => '5'
             ],
@@ -168,11 +205,11 @@ class AccountSeeder extends Seeder
                 'parent_id' => '5'
             ],
             [
-                'name'      => 'Goat/Sheep Medicine',
+                'name'      => 'Goat/Sheep Sheds',
                 'parent_id' => '5'
             ],
             [
-                'name'      => 'Goat/Sheep Sheds',
+                'name'      => 'Goat/Sheep FeedingTray',
                 'parent_id' => '5'
             ],
             [
@@ -183,7 +220,6 @@ class AccountSeeder extends Seeder
                 'name'      => 'Goat/Sheep Others',
                 'parent_id' => '5'
             ],
-
             [
                 'name'      => 'Poultry Salaries',
                 'parent_id' => '5'
@@ -197,11 +233,7 @@ class AccountSeeder extends Seeder
                 'parent_id' => '5'
             ],
             [
-                'name'      => 'Poultry AI-kit',
-                'parent_id' => '5'
-            ],
-            [
-                'name'      => 'Poultry Feeders',
+                'name'      => 'Poultry FeedingTray',
                 'parent_id' => '5'
             ],
             [
@@ -209,11 +241,15 @@ class AccountSeeder extends Seeder
                 'parent_id' => '5'
             ],
             [
-                'name'      => 'Poultry Medicine',
+                'name'      => 'Poultry Sheds',
                 'parent_id' => '5'
             ],
             [
-                'name'      => 'Poultry Sheds',
+                'name'      => 'Poultry Material',
+                'parent_id' => '5'
+            ],
+            [
+                'name'      => 'Poultry Transportation',
                 'parent_id' => '5'
             ],
             [
@@ -230,31 +266,35 @@ class AccountSeeder extends Seeder
                 'parent_id' => '5'
             ],
             [
-                'name'      => 'Cultivation Purchases',
+                'name'      => 'Cultivation Purchase',
                 'parent_id' => '5'
             ],
             [
-                'name'      => 'Cultivation Medicines',
+                'name'      => 'Cultivation Machine',
                 'parent_id' => '5'
             ],
             [
-                'name'      => 'Cultivation AI-kit',
+                'name'      => 'Cultivation TubeWell',
                 'parent_id' => '5'
             ],
             [
-                'name'      => 'Cultivation Feeders',
+                'name'      => 'Cultivation Spray',
                 'parent_id' => '5'
             ],
             [
-                'name'      => 'Cultivation Vaccines',
+                'name'      => 'Cultivation Plastic',
                 'parent_id' => '5'
             ],
             [
-                'name'      => 'Cultivation Medicine',
+                'name'      => 'Cultivation TunnelRepair',
                 'parent_id' => '5'
             ],
             [
-                'name'      => 'Cultivation Sheds',
+                'name'      => 'Cultivation PackingMaterial',
+                'parent_id' => '5'
+            ],
+            [
+                'name'      => 'Poultry Transportation',
                 'parent_id' => '5'
             ],
             [
@@ -264,48 +304,8 @@ class AccountSeeder extends Seeder
             [
                 'name'      => 'Cultivation Others',
                 'parent_id' => '5'
-            ],
-
-            [
-                'name'      => 'Sales',
-                'parent_id' => '4'
-            ],
-            [
-                'name'      => 'milk sale',
-                'parent_id' => '13'
-            ],
-            [
-                'name'      => 'cow sale',
-                'parent_id' => '13'
-            ],
-            [
-                'name'      => 'cow purchase',
-                'parent_id' => '12'
-            ],
-            [
-                'name'      => 'goat/sheep sale',
-                'parent_id' => '13'
-            ],
-            [
-                'name'      => 'goat/sheep purchase',
-                'parent_id' => '12'
-            ],
-            [
-                'name'      => 'egg sale',
-                'parent_id' => '13'
-            ],
-            [
-                'name'      => 'hen sale',
-                'parent_id' => '13'
-            ],
-            [
-                'name'      => 'chick sale',
-                'parent_id' => '13'
-            ],
-            [
-                'name'      => 'milk collection',
-                'parent_id' => '6'
             ]
+            //Expenditure End
         ]);
 
 //        $account =

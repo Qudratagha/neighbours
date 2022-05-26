@@ -39,7 +39,8 @@ class TransactionController extends Controller
     public function indexCowExpenditure()
     {
         $cowExpenses = Transaction::where('transaction_type_id',2)
-            ->where('account_head_id',6)->get();
+            ->where('account_head_id',6)
+            ->get();
         return view('cow_expenditure.index',compact('cowExpenses'));
     }
 
@@ -348,9 +349,10 @@ class TransactionController extends Controller
         return redirect()->back()->with('errorMessage','FARM Expenditure Entry Deleted');
     }
 
-    public function destroyCowExpenditure(Transaction $transaction)
+    public function destroyCowExpenditure(Transaction $transaction, Cattle $cattle)
     {
         $transaction->delete();
+        $transaction->accountSubHead()->delete();
         return redirect()->back()->with('errorMessage','Cow Expenditure Entry Deleted');
     }
 
