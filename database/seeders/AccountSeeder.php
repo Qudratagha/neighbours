@@ -107,6 +107,11 @@ class AccountSeeder extends Seeder
             [
                 'name'      => 'milk collection',
                 'parent_id' => '6'
+            ],
+
+            [
+                'name'      => 'cultivation collection',
+                'parent_id' => '9'
             ]
         ]);
 

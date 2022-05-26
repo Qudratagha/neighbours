@@ -172,7 +172,6 @@ class CattleController extends Controller
             $request['transaction_type_id'] = 3;
             $request['account_head_id'] = 21;
             $sub_head_id = AccountHead::where('name', "cow#$cowSerial")->pluck('id')->last();
-
             $request['sub_head_id'] = $sub_head_id;
 
             Transaction::create($request->except(['serial_no', 'submitMilk']));
@@ -245,7 +244,7 @@ class CattleController extends Controller
         $goatID = $goat_daily->id;
         $serial = $goat_daily->serial_no;
         $sub_head_id = AccountHead::where('name',"goat#$serial")->pluck('id')->last();
-        $sicks          =   Sick::where('cattle_id',$goatID)->get();
+        $sicks          =   Sick::where('cattle_i   d',$goatID)->get();
         $medicines      =   Medicines::where('sub_head_id',$sub_head_id)->get();
         $pregnants      =   Pregnant::where('cattle_id',$goatID)->get();
         $deliveries     =   Delivery::where('cattle_id',$goatID)->get();

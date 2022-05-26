@@ -88,7 +88,11 @@
 
                         {{--                            Cultivation  --}}
                         @canany('cultivation-read')
-                        <li aria-haspopup="true"><a href="{{route('cultivation.index')}}" class="sub-icon @if(request()->route()->action['as'] == 'cultivation.index') active @endif"><i class="typcn typcn-arrow-move-outline"></i> Cultivation </a></li>
+                            <li aria-haspopup="true"><a href="{{route('cultivation.index')}}" class="sub-icon @if(request()->route()->action['as'] == 'cultivation.index') active @endif"><i class="typcn typcn-th-large-outline hor-icon"></i> Cultivation <i class="fa fa-angle-down horizontal-icon"></i>                                                                  </a>
+                                <ul class="sub-menu">
+                                    <li aria-haspopup="true"><a href="{{route('cultivation.index')}}"  class="sub-icon @if(request()->route()->action['as'] == 'cultivation.index') active @endif">Cultivation Sale</a></li>
+                                </ul>
+                            </li>
                         @endcanany
 
                         {{--                            rates  --}}
