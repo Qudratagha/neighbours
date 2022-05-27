@@ -11,16 +11,18 @@ class MedicinesController extends Controller
 {
     public function index()
     {
+
         return view('cow_daily.index');
     }
 
     public function create()
     {
-        //
+
     }
 
     public function store(Request $request)
     {
+
         //Submit Goat Medicine
         if (isset($_POST['submitGoat']))
         {
@@ -43,7 +45,7 @@ class MedicinesController extends Controller
 
     public function show(Cattle $cow_daily)
     {
-        //
+
     }
 
     public function edit(Medicines $medicines)

@@ -49,7 +49,14 @@
                 <tr>
                     <td>{{$loop->iteration}}</td>
                     <td>{{$pregnant->date ?? ''}}</td>
-                    <td>{{$pregnant->is_pregnant ?? ''}}</td>
+                    <td>{{$pregnant->is_pregnant == 1 ? 'Is Pregnant' : 'Delivered'}}</td>
+                    <td>
+                        <form action="{{ route('pregnant.destroy', $pregnant->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this?');" style="display: inline-block;">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-sm btn-danger" data-toggle="tooltip" title="Delete"><i class="fe fe-trash-2"></i></button>
+                        </form>
+                    </td>
                 </tr>
             @endforeach
             </tbody>

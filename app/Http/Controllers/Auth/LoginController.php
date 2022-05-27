@@ -19,10 +19,8 @@ class LoginController extends Controller
     | to conveniently provide its functionality to your applications.
     |
     */
+
     use AuthenticatesUsers;
-//    protected $redirectTo = RouteServiceProvider::HOME;
-
-
     protected function redirectTo(){
         // User role
         $role = Auth::user()->roles->pluck('name')->last();
@@ -43,6 +41,7 @@ class LoginController extends Controller
                 break;
         }
     }
+
     public function __construct()
     {
         $this->middleware('guest')->except('logout');

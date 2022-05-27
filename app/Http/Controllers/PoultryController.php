@@ -38,6 +38,8 @@ class PoultryController extends Controller
         $poultry_types = PoultryType::all();
         $poultry_statuses = PoultryStatus::all();
         $poultries = Poultry::orderBy('id','desc')->get();
+
+
         return view('poultry.index',compact('poultry_types','poultry_statuses', 'poultries', 'eggincdates','eggincquans'));
     }
     public function getDateQuantity($date)
@@ -79,6 +81,9 @@ class PoultryController extends Controller
         $incDateMcollDate = $incubationDatetotalQty - $collectionDatetotalQty;
         return response()->json($incDateMcollDate);
 
+
+
+//        return view('/poultry.test',compact('dateQuantity'));
     }
     public function totalEggs()
     {
@@ -120,6 +125,7 @@ class PoultryController extends Controller
                 Poultry::create($request->all());
                 return redirect(route('poultry.index'))->with('message', ' Entry Created');
             }
+
     }
 
     public function show(Poultry $poultry)
@@ -178,6 +184,24 @@ class PoultryController extends Controller
            Transaction::Create($request->except('submitEgg'));
            return redirect()->back()->with('message', 'Eggs Sold');
        }
+        $accountHeadData = [];
+        if (isset($_POST['submitEgg']))
+        {
+            $accountHeadData = array
+            (
+                'name' => "eggs",
+                'parent_id' => 8
+            );
+            AccountHead::updateOrCreate($accountHeadData);
+            $request['transaction_type_id'] = 1;
+            $request['account_head_id'] = 4;
+            $sub_head_id = AccountHead::where('name', "eggs")->pluck('id')->last();
+            $request['sub_head_id'] = $sub_head_id;
+
+            Transaction::Create($request->except('submitEgg'));
+            return redirect()->back()->with('message', 'Eggs Sold');
+        }
+>>>>>>> 7aa12446f3168cc99f774249729e28d36ff2fc9d
         if (isset($_POST['submitHen']))
         {
 

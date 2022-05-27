@@ -49,7 +49,7 @@ class PrivilegeSeeder extends Seeder
                     'module_id' => $privilege['module_id'],
                     'access_level_id' => $privilege['access_level_id'],
                     'privilegeCode' => $privilege['privilegeCode'],
-                    'privilegeName' => $privilege['privilegeName'],
+                    'privilegeName' => $privilege['privilegeName']
                 ]
             );
         }

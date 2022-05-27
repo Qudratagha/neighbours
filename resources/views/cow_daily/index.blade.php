@@ -77,6 +77,8 @@
                                 <div class="panel-body tabs-menu-body">
                                     <div class="tab-content">
                                         <div class="tab-pane active" id="tab11">
+                                            <h4>Total Milk Stock Available {{\App\Models\Transaction::milkStock()}}</h4>
+
                                             <div class="float-right mb-3">
                                                 <div class="input-group">
                                                     <button type="button" class="btn btn-info" data-toggle="modal" data-target="#addMilk">Add Milk</button>
@@ -164,7 +166,7 @@
                                                                     </button>
                                                                 </div>
                                                                 <div class="modal-body">
-                                                                    <form method="POST" action="{{route('sickCow.store')}}">
+                                                                        <form method="POST" action="{{route('sickCow.store')}}">
                                                                         @csrf
                                                                         <div class="form-group">
                                                                             <label for="recipient-name" class="form-control-label">Date</label>
@@ -278,15 +280,16 @@
                                             <div class="table-responsive">
                                                 <table id="" class="table table-striped table-bordered text-nowrap w-100 display">
                                                     <thead>
-                                                    <tr>
-                                                        <th class="wd-15p">ID</th>
-                                                        <th class="wd-25p">Date</th>
-                                                        <th class="wd-15p">Medicine</th>
-                                                        <th class="wd-15p">Description</th>
-                                                        <th style="width: 5px">Action</th>
-                                                    </tr>
+                                                        <tr>
+                                                            <th class="wd-15p">ID</th>
+                                                            <th class="wd-25p">Date</th>
+                                                            <th class="wd-15p">Medicine</th>
+                                                            <th class="wd-15p">Description</th>
+                                                            <th style="width: 5px">Action</th>
+                                                        </tr>
                                                     </thead>
                                                     <tbody>
+
                                                     @foreach($medicines as $medicine)
                                                         <tr>
                                                             <td>{{$loop->iteration}}</td>
@@ -302,6 +305,7 @@
                                                             </td>
                                                         </tr>
                                                     @endforeach
+
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -324,7 +328,7 @@
                                                                     </button>
                                                                 </div>
                                                                 <div class="modal-body">
-                                                                    <form method="POST" action="{{route('insemination.store')}}">
+                                                                    <form method="POST" action="{{route('inseminationCow.store')}}">
                                                                         @csrf
                                                                         <div class="form-group">
                                                                             <label for="recipient-name" class="form-control-label">Date</label>
@@ -506,14 +510,6 @@
                                                                 @csrf
                                                                 @method('DELETE')
                                                                 <button type="submit" class="btn btn-sm btn-danger" data-toggle="tooltip" title="Delete"><i class="fe fe-trash-2"></i></button>
-                                                            </form>
-                                                            <form action="{{route('deliveryCow.store')}}" method="POST"  style="display: inline-block;">
-                                                                @csrf
-                                                                <input type="hidden" name="is_sick" value="0">
-                                                                <input type="hidden" name="date" value="<?php echo date('Y-m-d')?>">
-                                                                <input type="hidden" name="pregnant_id" value="{{$delivery->id}}">
-                                                                <input type="hidden" name="cattle_id" value="{{$cow_daily->id}}">
-                                                                <button type="submit" name="submitDeliveredCow" class="btn btn-sm btn-success" data-toggle="tooltip" title="Healthy"><i class="fe fe-heart"></i></button>
                                                             </form>
                                                             </td>
                                                         </tr>

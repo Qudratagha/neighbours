@@ -6406,7 +6406,7 @@ var widgetsControlgroup = $.widget( "ui.controlgroup", {
 			classes: {}
 		};
 		result.classes[ key ] = {
-			"middle": "",
+			o"middle": "",
 			"first": "ui-corner-" + ( direction ? "top" : "left" ),
 			"last": "ui-corner-" + ( direction ? "bottom" : "right" ),
 			"only": "ui-corner-all"

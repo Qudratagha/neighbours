@@ -25,6 +25,41 @@
                                 @csrf
                                 @method('PUT')
                                 <div class="row">
+                                    @if($cattle_id->dob == null)
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="form-label">Enter Date</label>
+                                            <input type="text" onfocus= "(this. type='date')" class="form-control" name="date" value="{{$cattle_id->date}}">
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="form-label">Cow Serial</label>
+                                            <input type="number" class="form-control" name="serial_no" placeholder="Enter Serial No" value="{{$cattle_id->serial_no}}">
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="form-label">Entry In Farm</label>
+                                            <input type="text" onfocus= "(this. type='date')" class="form-control" name="entry_in_farm" placeholder="Entry In Farm" value="{{$cattle_id->entry_in_farm}}">
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="form-label">Age</label>
+                                            <input type="number" class="form-control" name="age" placeholder="Enter Age" value="{{$cattle_id->age}}">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="form-label">Breed</label>
+                                            <input type="text" class="form-control" name="breed" placeholder="Enter Breed" value="{{$cattle_id->breed}}">
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="form-label">Weight</label>
+                                            <input type="number" class="form-control" name="weight" placeholder="Enter Weight" value="{{$cattle_id->weight}}">
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="form-label">Height</label>
+                                            <input type="number" class="form-control" name="height" placeholder="Enter Height" value="{{$cattle_id->height}}">
+                                        </div>
+                                    </div>
+                                </div>
+                                @else
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="form-label">Enter Date</label>
@@ -42,23 +77,15 @@
                                             <label class="form-label">Parent</label>
                                             <select name="parent_id" id="parent_id" class="form-control">
                                                 <option value="">{{$cattle_id->parent->serial_no}}</option>
-                                            @foreach($cows as $cow)
-                                                @if($cow->parent_id)
+                                                @foreach($cows as $cow)
+                                                    @if($cow->parent_id)
                                                         <option value="{{$cow->parent_id}}">{{$cow->serial_no}}</option>
                                                     @endif
                                                 @endforeach
                                             </select>
                                         </div>
-                                        <div class="form-group">
-                                            <label class="form-label">Entry In Farm</label>
-                                            <input type="text" onfocus= "(this. type='date')" class="form-control" name="entry_in_farm" placeholder="Entry In Farm" value="{{$cattle_id->entry_in_farm}}">
-                                        </div>
                                     </div>
                                     <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="form-label">Age</label>
-                                            <input type="number" class="form-control" name="age" placeholder="Enter Age" value="{{$cattle_id->age}}">
-                                        </div>
                                         <div class="form-group">
                                             <label class="form-label">Breed</label>
                                             <input type="text" class="form-control" name="breed" placeholder="Enter Breed" value="{{$cattle_id->breed}}">
@@ -72,7 +99,8 @@
                                             <input type="number" class="form-control" name="height" placeholder="Enter Height" value="{{$cattle_id->height}}">
                                         </div>
                                     </div>
-                                </div>
+                        </div>
+                                @endif
                                 <button type="submit" name="updateCow" value="1" class="btn btn-primary">Submit</button>
                                 <a href="{{route('cattle.index', 'cow')}}" type="button" class="btn btn-danger">Back</a>
                             </form>
