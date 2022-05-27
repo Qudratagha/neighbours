@@ -17,36 +17,23 @@
                                 @csrf
                                 <div class="form-group">
                                     <label for="recipient-name" class="form-control-label">Date</label>
-{{--                                    <input type="hidden" name="cow_id" value="{{$cow_daily->id}}">--}}
                                     <input type="text" id="test1" onfocus= "(this. type='date')" class="form-control" name="date" value="<?php echo date('Y-m-d');?>" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="message-text" class="form-control-label">Quantity</label>
-                                    <input type="text"  class="form-control" id="quantity" name="quantity" required>
+                                    <input type="text"  class="form-control" id="EggQuantity" name="quantity" required>
                                     <?php
-                                    $eggscollected = \App\Models\Poultry::where('poultry_type_id',3)->where('poultry_status_id',4)->sum('quantity');
-                                    $totalQty = $eggscollected / 12;
-                                    $qtyindzn = floor($totalQty);
-
-
+                                    $collEggsMIncEggs = \App\Models\Poultry:: collEggsMIncEggs();
                                     ?>
-
-
                                     <div id="testing" class="invalid-feedback" style="display: block !important;">
-                                        {{$qtyindzn}}
+                                        Avaliable Eggs = {{$collEggsMIncEggs}} Dozens
                                     </div>
-
-
-
                                 </div>
                                 <div class="form-group">
                                     <label for="message-text" class="form-control-label">Description</label>
                                     <input type="text" class="form-control" id="description" name="description">
                                 </div>
-                                <div class="form-group">
-                                    <label for="message-text" class="form-control-label">Amount</label>
-                                    <input type="number" class="form-control" id="amount" name="amount">
-                                </div>
+
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                     <button type="submit" name="submitEgg" class="btn btn-primary">Sold Egg</button>
@@ -100,17 +87,19 @@
     @parent
 
     <script>
-        var qtyindzn = {{$qtyindzn}};
-
-        $('#quantity').change(function()
-        {
-            // console.log(this.value);
-            if(this.value > qtyindzn)
+        var qtyindzn = {{$collEggsMIncEggs}};
+        $(function(){
+            $('#EggQuantity').change(function()
             {
-                alert('Please do not exceed the Available Quantity');
-                $('#quantity').val(qtyindzn);
-            }
+
+                if(this.value > qtyindzn)
+                {
+                    alert('Please do not exceed the Available Quantity');
+                    $('#EggQuantity').val(qtyindzn);
+                }
+            });
         });
+
 
     {{--$(document).ready(function() {--}}
 

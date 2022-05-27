@@ -14,6 +14,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Symfony\Component\HttpFoundation\Response;
 use Gate;
+use function Symfony\Component\Mime\Header\get;
 
 class PoultryController extends Controller
 {
@@ -28,21 +29,56 @@ class PoultryController extends Controller
     {
         abort_if(Gate::denies("poultry-read"), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $eggincdates =  Poultry::where('status',3)->distinct('created_at')->pluck('created_at');
-//        dd($eggincdates);
+
+
+        $eggincdates = [];
+        $eggincdates = Poultry::where('status', 3)->distinct('created_at')->pluck('created_at');
         $eggincquans =  Poultry::where('quantity','>',0)->get()->pluck('quantity');
 
         $poultry_types = PoultryType::all();
         $poultry_statuses = PoultryStatus::all();
-        $poultries = Poultry::all();
+        $poultries = Poultry::orderBy('id','desc')->get();
         return view('poultry.index',compact('poultry_types','poultry_statuses', 'poultries', 'eggincdates','eggincquans'));
     }
     public function getDateQuantity($date)
     {
-        $dateQuantity = Poultry::where('created_at',$date)->where('poultry_type_id',3)->where('poultry_status_id',3)->sum('quantity');
-//        $dateQuantity = Poultry::where('created_at',$date)->where('poultry_type_id',3)->where('poultry_status_id',3)->where('quantity','>',0)->pluck('remaining_quantity')->last();
-        return  response()->json($dateQuantity);
-//        return view('/poultry.test',compact('dateQuantity'));
+        $incDateMcollDate = 0;
+        $incubationDate = Poultry::where('created_at',$date)
+            ->where('poultry_type_id', 3)
+            ->where('poultry_status_id', 3)
+            ->pluck('created_at')->last();
+        $incubationDatetotalQty = Poultry::where('created_at',$incubationDate)
+            ->where('poultry_type_id', 3)
+            ->where('poultry_status_id', 3)
+            ->sum('quantity');
+        $collectionDatetotalQty = Poultry::where('collection_date',$incubationDate)
+            ->where('poultry_type_id', 2)
+            ->where('poultry_status_id', 4)
+            ->sum('quantity');
+        $incDateMcollDate = $incubationDatetotalQty - $collectionDatetotalQty;
+        return response()->json($incDateMcollDate);
+//      return view('/poultry.test',compact('dateQuantity'));
+    }
+    public function getIncubationDates($date)
+    {
+        $incDateMcollDate = 0;
+        $incubationDate = Poultry::where('created_at',$date)
+            ->where('poultry_type_id', 3)
+            ->where('poultry_status_id', 3)
+            ->pluck('created_at')->last();
+        $incubationDatetotalQty = Poultry::where('created_at',$incubationDate)
+            ->where('poultry_type_id', 3)
+            ->where('poultry_status_id', 3)
+            ->sum('quantity');
+
+        $collectionDatetotalQty = Poultry::where('collection_date',$incubationDate)
+            ->where('poultry_type_id', 2)
+            ->where('poultry_status_id', 4)
+            ->sum('quantity');
+
+        $incDateMcollDate = $incubationDatetotalQty - $collectionDatetotalQty;
+        return response()->json($incDateMcollDate);
+
     }
     public function totalEggs()
     {
@@ -70,20 +106,18 @@ class PoultryController extends Controller
     }
     public function store(Request $request)
     {
-
         $request['account_head_id'] = 8;
         $pti =  $request->poultry_type_id;
         $psi =  $request->poultry_status_id;
         $request['remaining_quantity'] = 0;
         $request['status'] = $psi;
-
         if ($request['quantity'] == 0)
-        {
-            return redirect(route('poultry.index'))->with('errorMessage', 'Your quantity must be greater than zero ');
-        }
+            {
+                return redirect(route('poultry.index'))->with('errorMessage', 'Your quantity must be greater than zero ');
+            }
         else
             {
-                Poultry::create($request->except('updatedDate'));
+                Poultry::create($request->all());
                 return redirect(route('poultry.index'))->with('message', ' Entry Created');
             }
     }
@@ -125,32 +159,32 @@ class PoultryController extends Controller
        $accountHeadData = [];
        if (isset($_POST['submitEgg']))
        {
-           $accountHeadData = array
-           (
-               'name' => "eggs",
-               'parent_id' => 8
-           );
-           AccountHead::updateOrCreate($accountHeadData);
+
+           $quantity = $request->quantity;
+
+           $rate = \App\Models\Rate::where('name','egg')->where('status',1)->get('rate')->last();
+           if (!$rate)
+           {
+               return redirect()->back()->with('errorMessage', 'Please Add Egg\'s Rate First');
+           }
+           $rate = ($rate->rate)*($quantity);
+           $request['amount'] = $rate ;
+
            $request['transaction_type_id'] = 1;
            $request['account_head_id'] = 4;
-           $sub_head_id = AccountHead::where('name', "eggs")->pluck('id')->last();
-           $request['sub_head_id'] = $sub_head_id;
+           $request['sub_head_id'] = 20;
 
+           dd($request);
            Transaction::Create($request->except('submitEgg'));
            return redirect()->back()->with('message', 'Eggs Sold');
        }
         if (isset($_POST['submitHen']))
         {
-            $accountHeadData = array
-            (
-                'name' => "hen",
-                'parent_id' => 8
-            );
-            AccountHead::updateOrCreate($accountHeadData);
-            $request['transaction_type_id'] = 1;
-            $request['account_head_id'] = 4;
-            $sub_head_id = AccountHead::where('name', "hen")->pluck('id')->last();
 
+            $request['transaction_type_id'] = 1;
+            $request['account_head_id'] = 21 ;
+
+            $sub_head_id = AccountHead::where('name', "hen")->pluck('id')->last();
             $request['sub_head_id'] = $sub_head_id;
             Transaction::Create($request->except('submitHen'));
             return redirect()->back()->with('message', 'Hen Sold');

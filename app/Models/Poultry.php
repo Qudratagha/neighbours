@@ -9,9 +9,6 @@ class Poultry extends Model
 {
     use HasFactory;
 
-
-
-
     protected $guarded = [];
     public $timestamps = false;
 
@@ -74,15 +71,13 @@ class Poultry extends Model
         }
         return $healthyHen;
     }
-    public static function totalPurchaseSickHealthy(){
+    public static function totalPurchaseSickHealthy()
+    {
         $totalPurchaseHen = Poultry::where('poultry_type_id',1)->where('poultry_status_id',6)->sum('quantity');
         $henDie = Poultry::where('poultry_type_id',1)->where('poultry_status_id',1)->sum('quantity');
         $sickHen = Poultry::where('poultry_type_id',1)->where('poultry_status_id',7)->sum('quantity');
-
         $healthyHen = Poultry::where('poultry_type_id',1)->where('poultry_status_id',8)->sum('quantity');
-
         $totalPurchaseSickHealthy =  $totalPurchaseHen - $henDie - $sickHen + $healthyHen ;
-
         return $totalPurchaseSickHealthy;
     }
     public static function totalHenEggs()
@@ -105,6 +100,56 @@ class Poultry extends Model
         $totalEggsToBeIncubated = $totalCollectedEggs - $totalIncubatedEggs;
         return $totalEggsToBeIncubated;
     }
+    public static function chicksCollected()
+    {
+        $totalChicksCollected = Poultry::where('poultry_type_id',2)->where('poultry_status_id',4)->sum('quantity');
+        $totalDieChicks = Poultry::where('poultry_type_id',2)->where('poultry_status_id',1)->sum('quantity');
+        $collectedMdieChicks  = $totalChicksCollected - $totalDieChicks;
+        return $collectedMdieChicks;
+    }
+    public static function totalSickChicks()
+    {
+        $chicksCollected =  \App\Models\Poultry::chicksCollected();
+        $totalSickChicks = Poultry::where('poultry_type_id',2)->where('poultry_status_id',7)->sum('quantity');
+        $totalHealthyChicks = Poultry::where('poultry_type_id',2)->where('poultry_status_id',8)->sum('quantity');
+        $totalChicksMSick =  $chicksCollected - $totalSickChicks + $totalHealthyChicks;
+        return $totalChicksMSick;
+    }
+    public static function totalSickMHealthy()
+    {
+        $totalSickChicks = Poultry::where('poultry_type_id',2)->where('poultry_status_id',7)->sum('quantity');
+        $totalHealthyChicks = Poultry::where('poultry_type_id',2)->where('poultry_status_id',8)->sum('quantity');
+        $totalSickMHealthy = $totalSickChicks - $totalHealthyChicks;
+        return $totalSickMHealthy;
+    }
+    public static function collEggsMIncEggs()
+    {
+        $eggscollected = \App\Models\Poultry::where('poultry_type_id',3)->where('poultry_status_id',4)->sum('quantity');
+        $eggsIncubated = \App\Models\Poultry::where('poultry_type_id',3)->where('poultry_status_id',3)->sum('quantity');
+
+        $collEggsMIncEggs = $eggscollected - $eggsIncubated;
+        $collEggsMIncEggs = $collEggsMIncEggs / 12;
+        return floor($collEggsMIncEggs);
+    }
+
+    public static function totalSellHen()
+    {
+        $totalSellHen = \App\Models\Transaction::where('transaction_type_id',1)->where('account_head_id',4)->where('sub_head_id',24)->sum('quantity');
+
+        return $totalSellHen;
+
+    }
+    public static function totalAvaliableHens()
+    {
+        $totalPurchaseHen = \App\Models\Poultry::totalPurchaseHen();
+        $totalDieHen = \App\Models\Poultry::totalDieHen();
+        $totalSellHen = \App\Models\Poultry::totalSellHen();
+        $totalAvaliableHens = $totalPurchaseHen - $totalDieHen - $totalSellHen ;
+
+        return $totalAvaliableHens;
+    }
+
+
 
 
 

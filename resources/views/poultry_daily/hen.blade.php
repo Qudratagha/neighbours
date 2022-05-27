@@ -21,7 +21,13 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="message-text" class="form-control-label">Hen Quantity</label>
-                                    <input type="text" class="form-control" id="quantity" name="quantity" required>
+                                    <input type="text" class="form-control" id="HenQuantity" name="quantity" required>
+                                    <?php
+                                    $totalAvaliableHens = \App\Models\Poultry:: totalAvaliableHens();
+                                    ?>
+                                    <div id="testing" class="invalid-feedback" style="display: block !important;">
+                                        Avaliable Hens = {{$totalAvaliableHens}}
+                                    </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="message-text" class="form-control-label">Description</label>
@@ -33,7 +39,7 @@
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <button type="submit" name="submitHen" class="btn btn-primary">Sold Egg</button>
+                                    <button type="submit" name="submitHen" class="btn btn-primary">Sold Hen</button>
                                 </div>
                             </form>
                         </div>
@@ -68,3 +74,24 @@
     </div>
     <!-- table-wrapper -->
 </div>
+
+@section('more-script')
+    @parent
+    <script>
+        var qtyindzn = {{$totalAvaliableHens}};
+
+        $(function()
+        {
+            $('#HenQuantity').change(function()
+            {
+                if(this.value > qtyindzn)
+                {
+                    alert('Please do not exceed the Available Quantity');
+                    $('#HenQuantity').val(qtyindzn);
+                }
+            });
+        });
+
+    </script>
+@endsection
+

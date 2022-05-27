@@ -135,7 +135,12 @@
 
                             $totalEggsToBeIncubated = \App\Models\Poultry:: totalEggsToBeIncubated();
 
+                            $chicksCollected = \App\Models\Poultry:: chicksCollected();
 
+
+                            $totalSickChicks = \App\Models\Poultry:: totalSickChicks();
+
+                            $totalSickMHealthy = \App\Models\Poultry:: totalSickMHealthy();
                             if ($totalPurchaseHen > $totalDieHen){
                                 $purchaseMdie = $totalPurchaseHen - $totalDieHen;
                             }
@@ -189,12 +194,8 @@
                             {
                                 $totalChicks = 0;
                             }
-
                             //      Chicks calculation Ends
-
-
                             ?>
-{{--                            {{dd($totalHealthyHen)}}--}}
                             <div id="totalHen" class="invalid-feedback" style="display: block !important;"></div>
                             <div id="testing" class="invalid-feedback" style="display: block !important;"></div>
                         </div>
@@ -234,6 +235,10 @@
         let totalsickhensRemaining = {{$totalRemainingHen}};
         {{--let totalSickHen = {{$totalSickHen}};--}}
 
+            let chicksCollected = {{$chicksCollected}};
+            let totalSickChicks = {{$totalSickChicks}};
+            let totalSickMHealthy = {{$totalSickMHealthy}};
+
         let totalEggs = {{$totalEggs}};
         let totalChicks = {{$totalChicks}};
         var newQty = 0;
@@ -257,7 +262,7 @@
                 if (this.value == 4 && pti == 2)
                 {
                     $('#incubatedDate').html('<label class="form-label">Incubation Date</label>\n' +
-                        '                            <select id="mySelect" name="updatedDate" class="form-control dates">\n' +
+                        '                            <select id="mySelect" name="collection_date" class="form-control dates">\n' +
                         '                                <option value="">Please Select Incubation Date</option>\n' +
                         '                                    @foreach($eggincdates as $eggincdate)\n' +
                         '                                        <option value={{$eggincdate}} >{{$eggincdate}}</option>\n' +
@@ -267,19 +272,32 @@
                     $('#incubatedDate').html('');
                 }
                 $('#mySelect').change(function(e){
-
                     var date = this.value;
+
+                    $.ajax({
+                        url:"{{  route('poultry.getIncubationDates',"") }}/"+date,
+                        method:'get',
+                        success: function(result){
+                            $('#testing').html('Total Remaining Incubated Eggs = '+result);
+                            newQty = result;
+                        }
+                    });
+
                     // console.log(this.value);
+
+
+
                     $.ajax({
                         url: "{{  route('poultry.getDateQuantity',"") }}/"+date,
                         method: 'get',
                         success: function(result){
-                            $('#testing').html('Your Total Incubated Eggs = '+result);
+                            $('#testing').html('Total Remaining Incubated Eggs = '+result);
                             newQty = result;
                         }
                     });
                 });
-
+                console.log(this.value);
+                console.log(pti);
                 switch (this.value != 0 || pti != 0)
                 {
                     //      Hen calculation Starts
@@ -328,21 +346,34 @@
                     //      Eggs calculation Ends
                     //      Chick calculation Starts
 
+                    case this.value == 1 && pti == 2:
+                    {
+                        newQty = chicksCollected;
+                        validationMsg = 'Total Collected Chicks = ' + chicksCollected;
+                        break;
+                    }
+                    case this.value == 7 && pti == 2:
+                    {
+                        newQty = totalSickChicks;
+                        validationMsg = 'Total Chicks To Be Sick = ' + totalSickChicks;
+                        break;
+                    }
+                    case this.value == 8 && pti == 2:
+                    {
+                        newQty = totalSickMHealthy;
+                        validationMsg = 'Total Chicks To Be Healthy = ' + totalSickMHealthy;
+                        break;
+                    }
+
+
+
                     //      Chick calculation Ends
 
 
                 }
                 //      Chick calculation Starts
-                if (this.value == 1 && pti == 2)
-                {
-                    newQty = totalChicks;
-                    validationMsg = 'Total Hens = ' + totalChicks;
-                }
-                if (this.value == 7 && pti == 2)
-                {
-                    newQty = totalChicks;
-                    validationMsg = 'Total Hens = ' + totalChicks;
-                }
+
+
                 $('#totalHen').html(validationMsg);
             });
                 //      Hens calculation Starts
@@ -351,6 +382,7 @@
 
         $(document).ready(function() {
             $('#mytable').DataTable( {
+                "ordering": false
             });
         });
 

@@ -18,7 +18,6 @@
                     <div class="card">
                         @include('partials.message')
                         <div class="card-header">
-{{--                            <h3 class="mb-0 card-title">{{ __('Cow Serial') }} # {{$cow_daily->serial_no}}</h3>--}}
                         </div>
                         <div class="card-body">
                             <div class="panel panel-primary">

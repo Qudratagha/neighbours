@@ -29,8 +29,10 @@ Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'inde
 
 //poultry
 
-Route::resource('/poultry', PoultryController::class);
+Route::get('/poultry/getIncubationDates/{date}', [\App\Http\Controllers\PoultryController::class, 'getIncubationDates'])->name('poultry.getIncubationDates');
 Route::get('/poultry/getDateQuantity/{date}', [\App\Http\Controllers\PoultryController::class,'getDateQuantity'])->name('poultry.getDateQuantity');
+Route::resource('/poultry', PoultryController::class);
+//Route::get('/poultry/getIncubationDates', [\App\Http\Controllers\PoultryController::class,'getIncubationDates'])->name('poultry.getIncubationDates');
 
 //poultry_daily
 Route::get('poultry_daily',[\App\Http\Controllers\PoultryController::class, 'indexDaily'])->name('poultry_daily.indexDaily');
