@@ -55,6 +55,8 @@
 
     <!-- Date Picker css-->
     <link href="/assets/plugins/date-picker/spectrum.css" rel="stylesheet" />
+
+    @yield('more-style')
     <style>
         #hov:hover {
             background-color: #1753fc;
@@ -162,6 +164,11 @@
 <!---Select 2--->
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
+<!--Charts-->
+<script src="/assets/plugins/chart/chart.bundle.js"></script>
+<script src="/assets/plugins/chart/chart.bundle-dark.js"></script>
+<script src="/assets/plugins/chart/chart.extension.js"></script>
+<script src="/assets/js/vendors/chart.js"></script>
 
 <!-- Custom js-->
 <script src="/assets/js/custom.js"></script>

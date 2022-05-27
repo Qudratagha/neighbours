@@ -137,7 +137,7 @@
     <script>
         @parent
             var  wheatQty = {{$totalWheat}};
-            var  cornQty = {{$totalCorn}};
+            var  cornQty ={{$totalCorn}};
             var  cucumberQty = {{$totalCucumber}};
         $(document).ready(function() {
             $('#mytable').DataTable( {
