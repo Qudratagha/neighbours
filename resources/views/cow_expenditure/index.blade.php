@@ -48,18 +48,23 @@
                                                 <td>{{$cowExpense->amount ?? 'Null'}}</td>
                                                 <td>{{$cowExpense->quantity ?? 'Null'}}</td>
                                                 <td>{{$cowExpense->description ?? 'Null'}}</td>
+                                                <?php
+                                                    $lastID = \App\Models\Transaction::pluck('id')->last();
+                                                ?>
                                                 <td>
+
                                                     <a href="{{route('cow_expenditure.edit',$cowExpense->id)}}"
                                                        class="btn btn-sm btn-success"
                                                        data-toggle="tooltip"
                                                        title="Edit"><i class="fe fe-edit-3"></i></a>
                                                     <form action="{{ route('cow_expenditure.destroy',$cowExpense->id) }}"
                                                           method="POST" onsubmit="return confirm('Are you sure you want to delete this?');" style="display: inline-block;">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-sm btn-danger"
-                                                                data-toggle="tooltip" title="Delete"><i class="fe fe-trash-2"></i></button>
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="btn btn-sm btn-danger"
+                                                                    data-toggle="tooltip" title="Delete"><i class="fe fe-trash-2"></i></button>
                                                     </form>
+
                                                 </td>
                                             </tr>
                                         @endforeach

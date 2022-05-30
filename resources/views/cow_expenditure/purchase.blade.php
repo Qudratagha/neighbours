@@ -45,7 +45,7 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label class="form-label">Cost</label>
-                                                <input type="text" class="form-control" name="amount" placeholder="Enter Cost">
+                                                <input type="number" class="form-control" name="amount" placeholder="Enter Cost">
                                             </div>
                                             <div class="form-group">
                                                 <label class="form-label">Breed</label>

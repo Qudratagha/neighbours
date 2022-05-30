@@ -201,7 +201,6 @@ class PoultryController extends Controller
             Transaction::Create($request->except('submitEgg'));
             return redirect()->back()->with('message', 'Eggs Sold');
         }
->>>>>>> 7aa12446f3168cc99f774249729e28d36ff2fc9d
         if (isset($_POST['submitHen']))
         {
 

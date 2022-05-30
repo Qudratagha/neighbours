@@ -48,7 +48,7 @@
                                                 <td>{{$goatExpense->amount ?? 'Null'}}</td>
                                                 <td>{{$goatExpense->quantity ?? 'Null'}}</td>
                                                 <td>{{$goatExpense->description ?? 'Null'}}</td>
-                                                <td>
+                                                <td>'
                                                     <a href="{{route('goat_expenditure.edit',$goatExpense->id)}}"
                                                        class="btn btn-sm btn-success"
                                                        data-toggle="tooltip"

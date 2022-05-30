@@ -67,6 +67,10 @@ class CattleController extends Controller
         return view('cow_expenditure.purchase');
     }
 
+    public function createGoatExpenditurePurchase()
+    {
+        return view('goat_expenditure.purchase');
+    }
     public function store(StoreCattleRequest $request)
     {
         //dry Goat
@@ -101,7 +105,6 @@ class CattleController extends Controller
         //store cow
         if (isset($_POST['submitCow']))
         {
-
             $cow_daily = $request->serial_no;
             $accountHeadData = array
             (
@@ -112,7 +115,6 @@ class CattleController extends Controller
 
             $accountHeadId = AccountHead::where('name',"cow#$cow_daily")->pluck('id')->last();
 
-
             if ($request->age){
                Transaction::create([
                    'date' => $request->date,
@@ -120,7 +122,8 @@ class CattleController extends Controller
                    'account_head_id' => 6,
                    'sub_head_id' => $accountHeadId,
                    'quantity' => 1,
-                   'amount' => $request->amount
+                   'amount' => $request->amount,
+                   'description' => 'Purchased Cow'
                ]);
             }
             $request['cattle_type_id'] = $request->submitCow;
@@ -141,6 +144,7 @@ class CattleController extends Controller
 //
 //            $accountHeadId = AccountHead::where('name',"goat#$goat_daily")->pluck('id')->last();
 //            $request['cattle_type_id'] = 2;
+
         //store goat
         if (isset($_POST['submitGoat']))
         {
@@ -154,15 +158,17 @@ class CattleController extends Controller
             );
             AccountHead::updateOrCreate($accountHeadData);
             $accountHeadId = AccountHead::where('name',"goat#$goat_serial")->pluck('id')->last();
+
             if ($request->age){
 
                 Transaction::create([
                     'date' => $request->entry_in_farm,
                     'transaction_type_id' => 2,
-                    'account_head_id' => 18,
+                    'account_head_id' => 7,
                     'sub_head_id' => $accountHeadId,
-                    'quantity' => $request->serial_no,
-                    'amount' => $request->amount
+                    'quantity' => 1,
+                    'amount' => $request->amount,
+                    'description' => "Purchased Goat/Sheep"
                 ]);
             }
 
@@ -302,7 +308,8 @@ class CattleController extends Controller
         $cattle->pregnants()->delete();
         $cattle->sicks()->delete();
         $cattle->delete();
-        return CattleController::index($cattle_type);
+        $cattle->account_head->transactionSubHead()->delete();
+        $cattle->account_head()->delete();
+        return to_route('cattle.index',$cattle_type)->with('errorMessage',"$cattle_type Deleted Successful");
     }
-
 }

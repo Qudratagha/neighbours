@@ -38,9 +38,8 @@ class TransactionController extends Controller
 
     public function indexCowExpenditure()
     {
-        $cowExpenses = Transaction::where('transaction_type_id',2)
-            ->where('account_head_id',6)
-            ->get();
+        $cowExpenses = Transaction::where('transaction_type_id',2)->where('account_head_id',6)->get();
+
         return view('cow_expenditure.index',compact('cowExpenses'));
     }
 
@@ -53,8 +52,7 @@ class TransactionController extends Controller
 
     public function indexGoatExpenditure()
     {
-        $goatExpenses = Transaction::where('transaction_type_id',2)
-            ->where('account_head_id',7)->get();
+        $goatExpenses = Transaction::where('transaction_type_id',2)->where('account_head_id',7)->get();
         return view('goat_expenditure.index',compact('goatExpenses'));
     }
 
@@ -349,10 +347,16 @@ class TransactionController extends Controller
         return redirect()->back()->with('errorMessage','FARM Expenditure Entry Deleted');
     }
 
-    public function destroyCowExpenditure(Transaction $transaction, Cattle $cattle)
+    public function destroyCowExpenditure(Transaction $transaction)
     {
+        $cowPurchased = $transaction->description;
+
+        if (($cowPurchased == 'Purchased Cow'))
+        {
+            return to_route('cattle.index','cow')->with('errorMessage','Expenditure For Cows can not be deleted You have to delete Cow First From Cows Page');
+        }
+        else
         $transaction->delete();
-        $transaction->accountSubHead()->delete();
         return redirect()->back()->with('errorMessage','Cow Expenditure Entry Deleted');
     }
 
@@ -364,7 +368,14 @@ class TransactionController extends Controller
 
     public function destroyGoatExpenditure(Transaction $transaction)
     {
-        $transaction->delete();
+        $goatPurchased = $transaction->description;
+
+        if ($goatPurchased == 'Purchased Goat/Sheep')
+        {
+            return to_route('cattle.index','goat')->with('errorMessage','Goat/Sheep Purchase can not be deleted You have to delete Cow First From Goat/Sheep Page');
+        }
+        else
+            $transaction->delete();
         return redirect()->back()->with('errorMessage','Goat Expenditure Entry Deleted');
     }
 

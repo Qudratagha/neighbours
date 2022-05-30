@@ -128,6 +128,10 @@ Route::delete('/poultry_expenditure/{transaction}',[\App\Http\Controllers\Transa
 
 //goat_expenditure
 Route::get('/goat_expenditure',[\App\Http\Controllers\TransactionController::class, 'indexGoatExpenditure'])->name('goat_expenditure.index');
+//  {  Cow Purchase
+Route::get('/goat_expenditure_purchase_create',[\App\Http\Controllers\CattleController::class, 'createGoatExpenditurePurchase'])->name('goat_expenditure_purchase.create');
+Route::post('/goat_expenditure_purchase',[\App\Http\Controllers\CattleController::class, 'store'])->name('goat_expenditure_purchase.store');
+//     Cow Purchase end }
 Route::get('/goat_expenditure_create',[\App\Http\Controllers\TransactionController::class, 'createGoatExpenditure'])->name('goat_expenditure.create');
 Route::post('/goat_expenditure',[\App\Http\Controllers\TransactionController::class, 'storeGoatExpenditure'])->name('goat_expenditure.store');
 Route::get('/goat_expenditure/{transaction}/edit',[\App\Http\Controllers\TransactionController::class, 'editGoatExpenditure'])->name('goat_expenditure.edit');

@@ -112,7 +112,7 @@
                                 </li>
                                 <li aria-haspopup="true" class="sub-menu-sub"><a href="{{route('goat_expenditure.index')}}">Goat/Sheep</a>
                                     <ul class="sub-menu">
-                                        <li aria-haspopup="true"><a href="{{route('goat_expenditure.index')}}">Purchase Goat/Sheep</a></li>
+                                        <li aria-haspopup="true"><a href="{{route('goat_expenditure_purchase.create')}}">Purchase Goat/Sheep</a></li>
                                     </ul>
                                 </li>
                                 <li aria-haspopup="true" class="sub-icon"><a href="{{route('poultry_expenditure.index')}}">Poultry</a></li>

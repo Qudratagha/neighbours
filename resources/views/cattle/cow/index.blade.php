@@ -21,6 +21,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="card">
+                        @include('partials.message')
                         <div class="card-header">
                             <h3 class="mb-0 card-title">{{ __('Cows') }}</h3>
                         </div>
@@ -46,6 +47,8 @@
                                         <td>{{$cow->breed ?? 'Null'}}</td>
                                         <td>{{$cow->parent->serial_no ?? ''}}</td>
 
+                                            {{-- To Show to Delete on last entry --}}
+                                        <?php $lastRow = \App\Models\Cattle::cows()->pluck('id')->last()?>
 
                                         @if( !($cow->dead_date || $cow->dry_date || $cow->saleStatus==1))
                                         <td>
@@ -70,11 +73,13 @@
                                             <a href="{{route('cattle.edit',['cow',$cow->id])}}" class="btn btn-sm btn-success" data-toggle="tooltip" title="Edit"><i class="fe fe-edit-3"></i></a>
                                             @endcan
                                             @can('cow-delete')
-                                            <form action="{{ route('cattle.destroy',['cow',$cow->id] ) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this?');" style="display: inline-block;">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-sm btn-danger" data-toggle="tooltip" title="Delete"><i class="fe fe-trash-2"></i></button>
-                                            </form>
+                                              @if($lastRow == $cow->id)
+                                                <form action="{{ route('cattle.destroy',['cow',$cow->id] ) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this?');" style="display: inline-block;">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-sm btn-danger" data-toggle="tooltip" title="Delete"><i class="fe fe-trash-2"></i></button>
+                                                </form>
+                                              @endif
                                             @endcan
                                         </td>
                                             @else
