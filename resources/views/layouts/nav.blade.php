@@ -108,15 +108,26 @@
                                 <li aria-haspopup="true" class="sub-menu-sub"><a href="{{route('cow_expenditure.index')}}">Cow</a>
                                     <ul class="sub-menu">
                                         <li aria-haspopup="true"><a href="{{route('cow_expenditure_purchase.create')}}">Purchase Cow</a></li>
+                                        <li aria-haspopup="true"><a href="{{route('cow_salary.create')}}">Cow Worker Salary</a></li>
                                     </ul>
                                 </li>
                                 <li aria-haspopup="true" class="sub-menu-sub"><a href="{{route('goat_expenditure.index')}}">Goat/Sheep</a>
                                     <ul class="sub-menu">
                                         <li aria-haspopup="true"><a href="{{route('goat_expenditure_purchase.create')}}">Purchase Goat/Sheep</a></li>
+                                        <li aria-haspopup="true"><a href="{{route('goat_salary.create')}}">Goat Worker Salary</a></li>
                                     </ul>
                                 </li>
-                                <li aria-haspopup="true" class="sub-icon"><a href="{{route('poultry_expenditure.index')}}">Poultry</a></li>
-                                <li aria-haspopup="true" class="sub-icon"><a href="{{route('cultivation_expenditure.index')}}">Cultivation </a></li>
+                                <li aria-haspopup="true" class="sub-menu-sub"><a href="{{route('poultry_expenditure.index')}}">Poultry</a>
+                                    <ul class="sub-menu">
+                                        <li aria-haspopup="true"><a href="{{route('poultry_salary.create')}}">Poultry Worker Salary</a></li>
+                                    </ul>
+                                </li>
+
+                                <li aria-haspopup="true" class="sub-menu-sub"><a href="{{route('cultivation_expenditure.index')}}">Cultivation</a>
+                                    <ul class="sub-menu">
+                                        <li aria-haspopup="true"><a href="{{route('cultivation_salary.create')}}">Cultivation Worker Salary</a></li>
+                                    </ul>
+                                </li>
                             </ul>
                         </li>
                         @endcanany

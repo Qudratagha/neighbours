@@ -83,7 +83,7 @@
                                                     <a href="{{route('cattle.edit',['goat',$goat->id])}}" class="btn btn-sm btn-success" data-toggle="tooltip" title="Edit"><i class="fe fe-edit-3"></i></a>
                                                 @endcan
                                                 @can('goat-delete')
-                                                    @if($lastRow == $goat->id)
+                                                    @if( $lastRow == $goat->id )
                                                         <form action="{{ route('cattle.destroy',['goat',$goat->id] ) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this?');" style="display: inline-block;">
                                                             @csrf
                                                             @method('DELETE')
@@ -95,11 +95,11 @@
                                             @else
                                                 <td>
                                                     <a href="{{route('cattle.show',['goat',$goat->id])}}" class="btn btn-sm btn-primary" data-toggle="tooltip" title="View"><i class="fe fe-eye"></i></a>
-                                                    @if($goat->dead_date)
+                                                    @if( $goat->dead_date )
                                                         Dead
-                                                    @elseif ($goat->dry_date)
+                                                    @elseif ( $goat->dry_date )
                                                         Dry
-                                                    @elseif ($goat->saleStatus==1)
+                                                    @elseif ( $goat->saleStatus==1 )
                                                         Sold
                                                     @endif
                                                 </td>
