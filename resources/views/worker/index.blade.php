@@ -47,13 +47,17 @@
                                             <td>{{$worker->name}}</td>
                                             <td>{{$worker->phone}}</td>
                                             <td>{{$worker->address}}</td>
+                                            {{-- To Show to Delete on last entry --}}
+                                            <?php  $lastRow = \App\Models\Worker::pluck('id')->max(); ?>
                                             <td>
                                                 <a href="{{route('worker.edit',$worker->id)}}" class="btn btn-sm btn-success" data-toggle="tooltip" title="Edit"><i class="fe fe-edit-3"></i></a>
+                                                @if($lastRow == $worker->id )
                                                 <form action="{{ route('worker.destroy',$worker->id ) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this?');" style="display: inline-block;">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-sm btn-danger" data-toggle="tooltip" title="Delete"><i class="fe fe-trash-2"></i></button>
                                                 </form>
+                                                @endif
                                             </td>
                                         </tr>
                                     @endforeach

@@ -105,31 +105,39 @@ class CattleController extends Controller
         //store cow
         if (isset($_POST['submitCow']))
         {
-            $cow_daily = $request->serial_no;
-            $accountHeadData = array
-            (
-                'name' => "cow#$cow_daily",
-                'parent_id' => 6
-            );
-            AccountHead::updateOrCreate($accountHeadData);
-
-            $accountHeadId = AccountHead::where('name',"cow#$cow_daily")->pluck('id')->last();
-
-            if ($request->age){
-               Transaction::create([
-                   'date' => $request->date,
-                   'transaction_type_id' => 2,
-                   'account_head_id' => 6,
-                   'sub_head_id' => $accountHeadId,
-                   'quantity' => 1,
-                   'amount' => $request->amount,
-                   'description' => 'Purchased Cow'
-               ]);
+            $uniqueSerial = Cattle::cows()->where('serial_no',$request->serial_no)->first();
+           if (isset($uniqueSerial->serial_no) and isset($request->serial_no))
+            {
+                return to_route('cattle.index','cow')->with('errorMessage', 'Cow With this SerialNo Already exists. Please Try another');
             }
-            $request['cattle_type_id'] = $request->submitCow;
-            $request['account_head_id'] = $accountHeadId;
-            Cattle::create($request->except('submitCow','amount'));
-            return redirect()->back()->with('message', 'Cow Added Successfully');
+           else
+           {
+               $cow_daily = $request->serial_no;
+               $accountHeadData = array
+               (
+                   'name' => "cow#$cow_daily",
+                   'parent_id' => 6
+               );
+               AccountHead::updateOrCreate($accountHeadData);
+
+               $accountHeadId = AccountHead::where('name', "cow#$cow_daily")->pluck('id')->last();
+
+               if ($request->age) {
+                   Transaction::create([
+                       'date' => $request->date,
+                       'transaction_type_id' => 2,
+                       'account_head_id' => 6,
+                       'sub_head_id' => $accountHeadId,
+                       'quantity' => 1,
+                       'amount' => $request->amount,
+                       'description' => 'Purchased Cow'
+                   ]);
+               }
+               $request['cattle_type_id'] = $request->submitCow;
+               $request['account_head_id'] = $accountHeadId;
+               Cattle::create($request->except('submitCow', 'amount'));
+               return redirect()->back()->with('message', 'Cow Added Successfully');
+           }
         }
 //        if (isset($_POST['submitGoat']))
 //        {

@@ -48,11 +48,10 @@
                                         <td>{{$cow->parent->serial_no ?? ''}}</td>
 
                                             {{-- To Show to Delete on last entry --}}
-                                        <?php $lastRow = \App\Models\Cattle::cows()->pluck('id')->last()?>
+                                        <?php $lastRow = \App\Models\Cattle::cows()->pluck('id')->max()?>
 
                                         @if( !($cow->dead_date || $cow->dry_date || $cow->saleStatus==1))
                                         <td>
-
                                             <form action="{{route('cattle.store',$cow->id)}}" method="POST" onsubmit="return confirm('Are you sure you want to DRY cow with serial no: {{$cow->id}} ?');" style="display: inline-block;">
                                                 @csrf
                                                 <input type="hidden" onfocus= "(this. type='date')" class="form-control" name="dry_date" value="<?php echo date('Y-m-d');?>">
