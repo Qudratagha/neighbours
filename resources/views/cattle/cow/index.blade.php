@@ -58,8 +58,6 @@
                                                 <input type="hidden" name="cattle_id" value="{{$cow->id}}">
                                                 <button type="submit" name="submitDry" class="btn btn-sm btn-outline-danger" data-toggle="tooltip" title="Dry"><span>Dry</span></button>
                                             </form>
-
-
                                             <form action="{{ route('cattle.store',$cow->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to DEAD cow with serial no: {{$cow->id}} ?');" style="display: inline-block;">
                                                 @csrf
                                                 <input type="hidden" onfocus= "(this. type='date')" class="form-control" name="dead_date" value="<?php echo date('Y-m-d');?>">
