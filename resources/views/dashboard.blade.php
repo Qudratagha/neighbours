@@ -28,9 +28,7 @@
                                     </ul>
                                 </div>
                             </div>
-
-                            <! -- Cow Tabs Content -->
-
+                            
                             <div class="panel-body tabs-menu-body">
                                 <div class="tab-content">
                                     <div class="tab-pane active " id="tab11">
@@ -764,10 +762,13 @@
 {{--   end container area--}}
 @endsection
 @section('more-script')
-    @parent
     <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+<<<<<<< HEAD
     <script>
         $('input[name="dates"]').daterangepicker();
     </script>
+=======
+
+>>>>>>> ba839eca1dcc0c3e6f831244c2ac756ac25f45dd
 @endsection

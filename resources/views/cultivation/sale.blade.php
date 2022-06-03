@@ -54,11 +54,16 @@
                                             <td>{{$transaction->description}}</td>
                                             <td>{{$transaction->date}}</td>
                                             <td>
-                                                <form action="{{ route('cultivation.destroy',$transaction->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this?');" style="display: inline-block;">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-sm btn-danger" data-toggle="tooltip" title="Delete"><i class="fe fe-trash-2"></i></button>
-                                                </form>
+                                                <?php
+                                                    $saleCultivation =  App\Models\Transaction::where('transaction_type_id', 1)->pluck('id')->last();
+                                                ?>
+                                                @if($transaction->id == $saleCultivation)
+                                                    <form action="{{ route('cultivation.destroy',$transaction->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this?');" style="display: inline-block;">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="btn btn-sm btn-danger" data-toggle="tooltip" title="Delete"><i class="fe fe-trash-2"></i></button>
+                                                    </form>
+                                                @endif
                                             </td>
                                         </tr>
                                     @endforeach
