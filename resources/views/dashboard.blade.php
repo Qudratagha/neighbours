@@ -37,6 +37,195 @@
 
                             <! -- Cow Tabs Content -->
 
+                            <div class="row row-cards">
+                                <div class="col-xl-3 col-lg-6 col-md-12 col-sm-12">
+                                    <div class="card card-counter bg-gradient-purple">
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-8">
+                                                    <div class="mt-4 mb-0 text-white">
+                                                        <h3 class="mb-0">80,956</h3>
+                                                        <p class="text-white mt-1">Total Graph </p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-4">
+                                                    <i class="fa fa-line-chart mt-3 mb-0 text-white-transparent"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div><!-- col end -->
+                                <div class="col-xl-3 col-lg-6 col-md-12 col-sm-12">
+                                    <div class="card card-counter bg-gradient-secondary">
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-8">
+                                                    <div class="mt-4 mb-0 text-white">
+                                                        <h3 class="mb-0">54,234</h3>
+                                                        <p class="text-white mt-1">Requesting Projects </p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-4">
+                                                    <i class="fa fa-sign-out mt-3 mb-0 text-white-transparent"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div><!-- col end -->
+                                <div class="col-xl-3 col-lg-6 col-md-12 col-sm-12">
+                                    <div class="card card-counter bg-gradient-warning">
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-8">
+                                                    <div class="mt-4 mb-0 text-white">
+                                                        <h3 class="mb-0">25,789</h3>
+                                                        <p class="text-white mt-1 ">Requests Receiving</p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-4">
+                                                    <i class="fa fa-reply-all mt-3 mb-0 text-white-transparent"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div><!-- col end -->
+                                <div class="col-xl-3 col-lg-6 col-md-12 col-sm-12">
+                                    <div class="card card-counter bg-gradient-success">
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-8">
+                                                    <div class="mt-4 mb-0 text-white">
+                                                        <h3 class="mb-0">34,762</h3>
+                                                        <p class="text-white mt-1">Supported projects </p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-4">
+                                                    <i class="fa fa-suitcase mt-3 mb-0 text-white-transparent"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div><!-- col end -->
+                            </div>
+
+                            <div class="row">
+                                <div class="col-xl-3 col-lg-6 col-md-12 col-sm-12">
+                                    <div class="card card-counter bg-gradient-danger">
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-4">
+                                                    <i class="si si-eye mt-3 mb-0 text-white-transparent"></i>
+                                                </div>
+                                                <div class="col-8 text-center">
+                                                    <div class="mt-4 mb-0 text-white">
+                                                        <h2 class="mb-0">54,234</h2>
+                                                        <p class="text-white mt-1">Daily Visitors </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-3 col-lg-6 col-md-12 col-sm-12">
+                                    <div class="card card-counter bg-gradient-secondary ">
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-4">
+                                                    <i class="si si-basket mt-3 mb-0 text-white-transparent"></i>
+                                                </div>
+                                                <div class="col-8 text-center">
+                                                    <div class="mt-4 mb-0 text-white">
+                                                        <h2 class="mb-0">80,956</h2>
+                                                        <p class="text-white mt-1">Daily Orders </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-3 col-lg-6 col-md-12 col-sm-12">
+                                    <div class="card card-counter bg-gradient-success">
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-4">
+                                                    <i class="si si-people mt-3 mb-0 text-white-transparent"></i>
+                                                </div>
+                                                <div class="col-8 text-center">
+                                                    <div class="mt-4 mb-0 text-white">
+                                                        <h2 class="mb-0">34,762</h2>
+                                                        <p class="text-white mt-1">Daily  Customers</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-3 col-lg-6 col-md-12 col-sm-12">
+                                    <div class="card card-counter bg-gradient-pink">
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-4">
+                                                    <i class="si si-paper-plane mt-3 mb-0 text-white-transparent"></i>
+                                                </div>
+                                                <div class="col-8 text-center">
+                                                    <div class="mt-4 mb-0 text-white">
+                                                        <h2 class="mb-0">25,789</h2>
+                                                        <p class="text-white mt-1 ">Daily Revenue</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row row-cards">
+                                <div class="col-lg-1"></div>
+                                <div class="col-sm-12 col-md-6 col-lg-2">
+                                    <div class="card" style="background: mediumseagreen; ">
+                                        <div class="card-body text-center list-icons">
+                                            <i class="si si-briefcase text-primary"></i>
+                                            <p class="card-text mt-3 mb-3">Total Projects</p>
+                                            <p class="h1 text-center  text-primary">459</p>
+                                        </div>
+                                    </div>
+                                </div><!-- col end -->
+                                <div class="col-sm-12 col-md-6 col-lg-2">
+                                    <div class="card">
+                                        <div class="card-body text-center list-icons">
+                                            <i class="si si-basket-loaded text-secondary"></i>
+                                            <p class="card-text mt-3 mb-3">New Sales</p>
+                                            <p class="h1 text-center  text-secondary">262</p>
+                                        </div>
+                                    </div>
+                                </div><!-- col end -->
+                                <div class="col-sm-12 col-md-6 col-lg-2">
+                                    <div class="card">
+                                        <div class="card-body text-center list-icons">
+                                            <i class="si si-people text-warning"></i>
+                                            <p class="card-text mt-3 mb-3">Employees</p>
+                                            <p class="h1 text-center  text-warning">789</p>
+                                        </div>
+                                    </div>
+                                </div><!-- col end -->
+                                <div class="col-sm-12 col-md-6 col-lg-2">
+                                    <div class="card">
+                                        <div class="card-body text-center list-icons">
+                                            <i class="si si-eye text-success"></i>
+                                            <p class="card-text mt-3 mb-3">Customer Visitis</p>
+                                            <p class="h1 text-center text-success">2635</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-6 col-lg-2 ">
+                                    <div class="card">
+                                        <div class="card-body text-center list-icons">
+                                            <i class="si si-eye text-success"></i>
+                                            <p class="card-text mt-3 mb-3">Customer Visitis</p>
+                                            <p class="h1 text-center text-success">2635</p>
+                                        </div>
+                                    </div>
+                                </div><!-- col end -->
+                            </div>
                             <div class="panel-body tabs-menu-body">
                                 <div class="tab-content">
                                     <div class="tab-pane active " id="tab11">
@@ -272,15 +461,7 @@
 {{--   end container area--}}
 @endsection
 @section('more-script')
-    @parent
     <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
-    <script src="/assets/plugins/chart/chart.bundle.js"></script>
-{{--    <script src="/assets/plugins/chart/chart.bundle-dark.js"></script>--}}
-    <script src="/assets/plugins/chart/chart.extension.js"></script>
-    <script src="/assets/js/vendors/chart.js"></script>
 
-    <script>
-        $('input[name="dates"]').daterangepicker();
-    </script>
 @endsection

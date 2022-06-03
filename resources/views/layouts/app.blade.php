@@ -164,11 +164,12 @@
 <!---Select 2--->
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
-<!--Charts-->
+<!-- Charts js-->
 <script src="/assets/plugins/chart/chart.bundle.js"></script>
-<script src="/assets/plugins/chart/chart.bundle-dark.js"></script>
 <script src="/assets/plugins/chart/chart.extension.js"></script>
-<script src="/assets/js/vendors/chart.js"></script>
+
+<!-- Custom-charts js-->
+<script src="/assets/js/chartjs.js"></script>
 
 <!-- Custom js-->
 <script src="/assets/js/custom.js"></script>
