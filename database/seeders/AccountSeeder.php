@@ -73,18 +73,6 @@ class AccountSeeder extends Seeder
                 'parent_id' => '13'
             ],
             [
-                'name'      => 'wheat sale',
-                'parent_id' => '13'
-            ],
-            [
-                'name'      => 'cucumber sale',
-                'parent_id' => '13'
-            ],
-            [
-                'name'      => 'corn sale',
-                'parent_id' => '13'
-            ],
-            [
                 'name'      => 'cow sale',
                 'parent_id' => '13'
             ],
@@ -335,6 +323,19 @@ class AccountSeeder extends Seeder
             [
                 'name'      => 'cucumber collection',
                 'parent_id' => '9'
+            ],
+
+            [
+                'name'      => 'wheat sale',
+                'parent_id' => '13'
+            ],
+            [
+                'name'      => 'cucumber sale',
+                'parent_id' => '13'
+            ],
+            [
+                'name'      => 'corn sale',
+                'parent_id' => '13'
             ],
 
         ]);

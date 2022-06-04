@@ -49,12 +49,12 @@ class CultivationController extends Controller
         if (isset($_POST['collectCultivation'])){
             $cultivation_type_id = $request['cultivation_type_id'];
             if ($cultivation_type_id == 1){
-                $request['sub_head_id'] = 27;
+                $request['sub_head_id'] = 73;
             }elseif ($cultivation_type_id == 2){
-                $request['sub_head_id'] = 28;
+                $request['sub_head_id'] = 74;
 
             }elseif ($cultivation_type_id == 3){
-                $request['sub_head_id'] = 29;
+                $request['sub_head_id'] = 75;
 
             }
             $request['transaction_type_id'] = 3;
@@ -65,19 +65,18 @@ class CultivationController extends Controller
 
         //Sale Cultivation
         if (isset($_POST['saleCultivation'])){
-
             $request['transaction_type_id'] = 1;
             $cultivation_type_id = $request['cultivation_type_id'];
             if ($cultivation_type_id == 1){
                 $request['account_head_id'] = 13;
-                $request['sub_head_id'] = 16;
+                $request['sub_head_id'] = 76;
             }elseif ($cultivation_type_id == 2){
                 $request['account_head_id'] = 13;
-                $request['sub_head_id'] = 18;
+                $request['sub_head_id'] = 77;
 
             }elseif ($cultivation_type_id == 3){
                 $request['account_head_id'] = 13;
-                $request['sub_head_id'] = 17;
+                $request['sub_head_id'] = 78;
 
             }
 
