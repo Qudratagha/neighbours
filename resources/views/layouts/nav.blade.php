@@ -14,28 +14,26 @@
                     <a id="horizontal-navtoggle" class="animated-arrow hor-toggle"><span></span></a>
 
                     <div class="d-flex order-lg-2 ml-auto header-rightmenu">
-
                         <div class="dropdown">
-                            <ul class="nav header-nav">
-                                <li class="nav-item dropdown header-option m-2">
-                                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                                        <i class="fe fe-user mr-2"></i>
-                                            {{ Auth::user()->name }}
-                                        <i class="mr-2"></i>
-                                    </a>
+                            <div class="dropdown header-notify">
+                                <a class="nav-link icon" data-toggle="dropdown" aria-expanded="false">
+                                    <i class="fe fe-log-out "></i>
+                                    <span class="pulse bg-success"></span>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow ">
+                                    <a href="#" class="dropdown-item">
+                                        <div>
+                                            <a class="dropdown-item" href="{{ route('logout') }}"
+                                               onclick="event.preventDefault();document.getElementById('logout-form').submit();"> <i class="fe fe-user"></i> <strong>{{ __('Logout') }} {{ Auth::user()->name }}</strong> </a>
+                                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                                @csrf
+                                            </form>
+                                        </div>
 
-                                    <div class="dropdown-menu dropdown-menu-left">
-                                        <a class="dropdown-item" href="{{ route('logout') }}"
-                                           onclick="event.preventDefault();document.getElementById('logout-form').submit();">
-                                            <i class="fe fe-log-out mr-2"></i> {{ __('Logout') }}
-                                        </a>
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                            @csrf
-                                        </form>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div><!-- logout -->
+                                    </a>
+                                </div>
+                            </div><!-- logout -->
+                        </div>
                         <div class="dropdown">
                             <a  class="nav-link icon full-screen-link" id="fullscreen-button" data-toggle="fullscreen-button" data-placement="bottom" title="FullScreen">
                                 <i class="fe fe-maximize-2"></i>

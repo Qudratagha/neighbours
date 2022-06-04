@@ -168,7 +168,10 @@
 
 <script>
     $(document).ready( function () {
-        $('table.display').DataTable();
+        $('table.display').DataTable({
+
+        });
+
     } );
 </script>
 <script>

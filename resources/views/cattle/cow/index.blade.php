@@ -27,14 +27,14 @@
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table id="example" class="table table-striped table-bordered text-nowrap w-100">
+                                <table id="example" class="table table-striped table-bordered text-nowrap w-100" data-order="[ 0, 'desc' ]">
                                     <thead>
                                     <tr>
                                         <th class="wd-15p">ID</th>
                                         <th class="wd-25p">Date</th>
                                         <th class="wd-15p">Cow-Serial</th>
                                         <th class="wd-15p">Breed</th>
-                                        <th class="wd-15p">Parent</th>
+                                        <th class="wd-15p">Parent-Serial</th>
                                         <th class="wd-25p" style="width: 200px; !important;">Actions</th>
                                     </tr>
                                     </thead>
