@@ -54,7 +54,7 @@ class CattleController extends Controller
     public function create(string $cattle_type)
     {
         $goats = Cattle::goats()->where('saleStatus', 0)->where('dry_date', null)->where('dead_date', null)->get();
-        $cows = Cattle::where('cattle_type_id',1)->where('dry_date', null)->where('dead_date', null)->get();
+        $cows = Cattle::cows()->where('saleStatus',0)->where('dry_date', null)->where('dead_date', null)->get();
         if ($cattle_type == 'cow' || $cattle_type == 'goat')
         {
             abort_if(Gate::denies("$cattle_type-create"), Response::HTTP_FORBIDDEN, '403 Forbidden');
