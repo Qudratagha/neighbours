@@ -191,6 +191,9 @@ class PoultryController extends Controller
        }
         $accountHeadData = [];
 
+
+
+
         if (isset($_POST['submitHen']))
         {
             $request['transaction_type_id'] = 1;

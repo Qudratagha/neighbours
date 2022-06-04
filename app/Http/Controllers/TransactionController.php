@@ -12,6 +12,7 @@ use App\Models\Rate;
 use App\Models\Sick;
 use App\Models\Transaction;
 use App\Models\Vaccination;
+use App\Models\Worker;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Gate;
@@ -38,9 +39,8 @@ class TransactionController extends Controller
 
     public function indexCowExpenditure()
     {
-        $cowExpenses = Transaction::where('transaction_type_id',2)
-            ->where('account_head_id',6)
-            ->get();
+        $cowExpenses = Transaction::where('transaction_type_id',2)->where('account_head_id',6)->get();
+
         return view('cow_expenditure.index',compact('cowExpenses'));
     }
 
@@ -53,8 +53,7 @@ class TransactionController extends Controller
 
     public function indexGoatExpenditure()
     {
-        $goatExpenses = Transaction::where('transaction_type_id',2)
-            ->where('account_head_id',7)->get();
+        $goatExpenses = Transaction::where('transaction_type_id',2)->where('account_head_id',7)->get();
         return view('goat_expenditure.index',compact('goatExpenses'));
     }
 
@@ -156,9 +155,32 @@ class TransactionController extends Controller
         return view('cultivation_expenditure/create',compact('expenseHeads'));
     }
 
+    public function createCowSalary()
+    {
+        $workers = Worker::where('module_id',1)->with('accountHeads')->get();
+        return view('cow_expenditure/cow_salary',compact('workers'));
+    }
+
+    public function createGoatSalary()
+    {
+        $workers = Worker::where('module_id',2)->with('accountHeads')->get();
+        return view('goat_expenditure/goat_salary',compact('workers'));
+    }
+
+    public function createPoultrySalary()
+    {
+        $workers = Worker::where('module_id',3)->with('accountHeads')->get();
+        return view('poultry_expenditure/poultry_salary',compact('workers'));
+    }
+
+    public function createCultivationSalary()
+    {
+        $workers = Worker::where('module_id',4)->with('accountHeads')->get();
+        return view('cultivation_expenditure/cultivation_salary',compact('workers'));
+    }
+
     public function store(Request $request)
     {
-
         //        sale cow
         if (isset($_POST['submitCowSale']))
         {
@@ -256,6 +278,38 @@ class TransactionController extends Controller
         $request['account_head_id'] = 9;
         Transaction::create($request->all());
         return redirect()->back()->with('message','Cultivation Added Successfully');
+    }
+
+    public function storeCowSalary(Request $request)
+    {
+        $request['transaction_type_id'] = 2;
+        $request['account_head_id'] = 6;
+        Transaction::create($request->all());
+        return redirect()->back()->with('message','Cow Worker Salary Added Successfully');
+    }
+
+    public function storeGoatSalary(Request $request)
+    {
+        $request['transaction_type_id'] = 2;
+        $request['account_head_id'] = 7;
+        Transaction::create($request->all());
+        return redirect()->back()->with('message','Goat/sheep Worker Salary Added Successfully');
+    }
+
+    public function storePoultrySalary(Request $request)
+    {
+        $request['transaction_type_id'] = 2;
+        $request['account_head_id'] = 8;
+        Transaction::create($request->all());
+        return redirect()->back()->with('message','Poultry/sheep Worker Salary Added Successfully');
+    }
+
+    public function storeCultivationSalary(Request $request)
+    {
+        $request['transaction_type_id'] = 2;
+        $request['account_head_id'] = 9;
+        Transaction::create($request->all());
+        return redirect()->back()->with('message','Cultivation/sheep Worker Salary Added Successfully');
     }
 
 
@@ -361,10 +415,16 @@ class TransactionController extends Controller
         return redirect()->back()->with('errorMessage','FARM Expenditure Entry Deleted');
     }
 
-    public function destroyCowExpenditure(Transaction $transaction, Cattle $cattle)
+    public function destroyCowExpenditure(Transaction $transaction)
     {
+        $cowPurchased = $transaction->description;
+
+        if (($cowPurchased == 'Purchased Cow'))
+        {
+            return to_route('cattle.index','cow')->with('errorMessage','Expenditure For Cows can not be deleted You have to delete Cow First From Cows Page');
+        }
+        else
         $transaction->delete();
-        $transaction->accountSubHead()->delete();
         return redirect()->back()->with('errorMessage','Cow Expenditure Entry Deleted');
     }
 
@@ -376,7 +436,14 @@ class TransactionController extends Controller
 
     public function destroyGoatExpenditure(Transaction $transaction)
     {
-        $transaction->delete();
+        $goatPurchased = $transaction->description;
+
+        if ($goatPurchased == 'Purchased Goat/Sheep')
+        {
+            return to_route('cattle.index','goat')->with('errorMessage','Goat/Sheep Purchase can not be deleted You have to delete Cow First From Goat/Sheep Page');
+        }
+        else
+            $transaction->delete();
         return redirect()->back()->with('errorMessage','Goat Expenditure Entry Deleted');
     }
 

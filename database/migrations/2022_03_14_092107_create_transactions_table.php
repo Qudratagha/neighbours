@@ -19,7 +19,7 @@ return new class extends Migration
             $table->unsignedBigInteger('transaction_type_id');
             $table->unsignedBigInteger('account_head_id');
             $table->unsignedBigInteger('sub_head_id');
-            $table->integer('quantity')->default(0);
+            $table->integer('quantity')->default(0)->nullable();
             $table->string('description')->nullable();
             $table->integer('amount')->nullable();
 

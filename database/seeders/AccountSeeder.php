@@ -134,7 +134,7 @@ class AccountSeeder extends Seeder
                 'name'      => 'FARM Others',
                 'parent_id' => '5'
             ],
-
+             //cow expenditure
             [
                 'name'      => 'Cow Salaries',
                 'parent_id' => '5'
@@ -184,6 +184,7 @@ class AccountSeeder extends Seeder
                 'parent_id' => '5'
             ],
 
+            //goat/sheep expenditure
             [
                 'name'      => 'Goat/Sheep Salaries',
                 'parent_id' => '5'
@@ -220,6 +221,7 @@ class AccountSeeder extends Seeder
                 'name'      => 'Goat/Sheep Others',
                 'parent_id' => '5'
             ],
+            //poultry expenditure
             [
                 'name'      => 'Poultry Salaries',
                 'parent_id' => '5'
@@ -264,7 +266,7 @@ class AccountSeeder extends Seeder
                 'name'      => 'Poultry Others',
                 'parent_id' => '5'
             ],
-
+            //cultivation expenditure
             [
                 'name'      => 'Cultivation Salaries',
                 'parent_id' => '5'
@@ -298,7 +300,7 @@ class AccountSeeder extends Seeder
                 'parent_id' => '5'
             ],
             [
-                'name'      => 'Poultry Transportation',
+                'name'      => 'Cultivation Transportation',
                 'parent_id' => '5'
             ],
             [
@@ -309,6 +311,7 @@ class AccountSeeder extends Seeder
                 'name'      => 'Cultivation Others',
                 'parent_id' => '5'
             ]
+
             //Expenditure End
         ]);
 

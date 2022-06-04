@@ -6405,8 +6405,9 @@ var widgetsControlgroup = $.widget( "ui.controlgroup", {
 		var result = {
 			classes: {}
 		};
-		result.classes[ key ] = {
-			o"middle": "",
+		// noinspection CommaExpressionJS
+        result.classes[ key ] = {
+			"middle": "",
 			"first": "ui-corner-" + ( direction ? "top" : "left" ),
 			"last": "ui-corner-" + ( direction ? "bottom" : "right" ),
 			"only": "ui-corner-all"

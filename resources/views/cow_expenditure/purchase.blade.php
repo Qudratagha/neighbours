@@ -31,7 +31,7 @@
                                             </div>
                                             <div class="form-group">
                                                 <label class="form-label">Cow Serial</label>
-                                                <input type="number" class="form-control" name="serial_no" placeholder="Enter Serial No">
+                                                <input type="number" class="form-control" name="serial_no" id="serialNO" placeholder="Enter Serial No">
                                             </div>
                                             <div class="form-group">
                                                 <label class="form-label">Entry In Farm</label>
@@ -45,7 +45,7 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label class="form-label">Cost</label>
-                                                <input type="text" class="form-control" name="amount" placeholder="Enter Cost">
+                                                <input type="number" class="form-control" name="amount" placeholder="Enter Cost">
                                             </div>
                                             <div class="form-group">
                                                 <label class="form-label">Breed</label>
@@ -72,4 +72,22 @@
     {{--      end side app --}}
     </div>
     {{--   end container area--}}
+@endsection
+@section('more-script')
+    <script>
+        <?php $allSerialNO = \App\Models\Cattle::cows()->get('serial_no');
+                $allSerialNO = json_encode($allSerialNO);
+        ?>
+        $(function () {
+            let allSerialNOs = {!! $allSerialNO !!};
+            console.log(allSerialNO);
+            $('#serialNO').change(function () {
+                forEach(allSerialNOs as allSerialNO)
+                if (allSerialNO === this.value)
+                {
+                    console.log(this.value);
+                }
+            });
+        });
+    </script>
 @endsection

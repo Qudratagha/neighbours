@@ -11,6 +11,7 @@ class Worker extends Model
     protected $table = 'workers';
     protected $primaryKey = 'id';
     protected $guarded = [];
+
     public function modules(){
         return $this->belongsTo(Module::class, 'module_id', 'id');
     }
@@ -18,5 +19,4 @@ class Worker extends Model
     public function accountHeads(){
         return $this->belongsTo(AccountHead::class, 'account_head_id', 'id');
     }
-
 }
