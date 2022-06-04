@@ -30,16 +30,12 @@ class PoultryController extends Controller
         abort_if(Gate::denies("poultry-read"), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
 
-
         $eggincdates = [];
         $eggincdates = Poultry::where('status', 3)->distinct('created_at')->pluck('created_at');
         $eggincquans =  Poultry::where('quantity','>',0)->get()->pluck('quantity');
-
         $poultry_types = PoultryType::all();
         $poultry_statuses = PoultryStatus::all();
         $poultries = Poultry::orderBy('id','desc')->get();
-
-
         return view('poultry.index',compact('poultry_types','poultry_statuses', 'poultries', 'eggincdates','eggincquans'));
     }
     public function getDateQuantity($date)
@@ -80,9 +76,6 @@ class PoultryController extends Controller
 
         $incDateMcollDate = $incubationDatetotalQty - $collectionDatetotalQty;
         return response()->json($incDateMcollDate);
-
-
-
 //        return view('/poultry.test',compact('dateQuantity'));
     }
     public function totalEggs()
@@ -92,18 +85,25 @@ class PoultryController extends Controller
         $qtyindzn = floor($totalQty);
         return response()->json($qtyindzn);
     }
-    public function indexDaily(Poultry $poultry)
+    public function indexDaily(Poultry $poultry, Request $request)
     {
+        $tab = 'egg';
+        if ($request->has('tab')) {
+            $tab = $request->get('tab');
+        }
         $eggscollected = Poultry::where('poultry_type_id',3)->sum('quantity');
         $totalQty = $eggscollected / 12;
         $qtyindzn = floor($totalQty);
 
-        $eggs = Transaction::where('sub_head_id', 16 )->get();
-        $hens = Transaction::where('sub_head_id', 17 )->get();
-        $chicks = Transaction::where('sub_head_id', 17 )->get();
-        $vaccines = Vaccination::where('sub_head_id', 20 )->get();
-        $medicines = Medicines::where('sub_head_id', 21 )->get();
-        return view ('poultry_daily.indexDaily',compact('eggs','hens', 'chicks','vaccines','medicines'));
+
+        $eggSale = Transaction::where('transaction_type_id', 1 )->where('account_head_id', 19 )->where('sub_head_id', 19 )->get();
+        $henSale = Transaction::where('transaction_type_id', 1 )->where('account_head_id', 20 )->where('sub_head_id', 20 )->get();
+        $chickSale = Transaction::where('transaction_type_id', 1 )->where('account_head_id', 21 )->where('sub_head_id', 21 )->get();
+        $poultryFeedPurchase = Transaction::where('transaction_type_id', 2 )->where('account_head_id', 8 )->where('sub_head_id', 54 )->get();
+        $poultryFeed = Feed::where('status', 1 )->where('cattle_type', 1 )->get();
+        $poultryVaccine = Vaccination::where('sub_head_id', 57 )->get();
+        $poultryMedicine = Medicines::where('sub_head_id', 55 )->get();
+        return view ('poultry_daily.indexDaily',compact('eggSale','henSale', 'chickSale','poultryFeedPurchase','poultryFeed','poultryVaccine','poultryMedicine', 'tab'));
     }
     public function create()
     {
@@ -159,6 +159,12 @@ class PoultryController extends Controller
         $eggt->delete();
         return redirect()->back()->with('message', 'Entry Deleted');
     }
+    public function feeddel($poultry_daily)
+    {
+        $eggt = Feed::where('id',$poultry_daily);
+        $eggt->delete();
+        return redirect()->back()->with('message', 'Entry Deleted');
+    }
     public function storeDaily(Request $request)
     {
 
@@ -173,92 +179,64 @@ class PoultryController extends Controller
            {
                return redirect()->back()->with('errorMessage', 'Please Add Egg\'s Rate First');
            }
+           $request['quantity'] = $quantity*12;
            $rate = ($rate->rate)*($quantity);
            $request['amount'] = $rate ;
-
            $request['transaction_type_id'] = 1;
-           $request['account_head_id'] = 4;
-           $request['sub_head_id'] = 20;
-
-           dd($request);
+           $request['account_head_id'] = 19;
+           $request['sub_head_id'] = 19;
+//            dd($request);
            Transaction::Create($request->except('submitEgg'));
            return redirect()->back()->with('message', 'Eggs Sold');
        }
         $accountHeadData = [];
-        if (isset($_POST['submitEgg']))
-        {
-            $accountHeadData = array
-            (
-                'name' => "eggs",
-                'parent_id' => 8
-            );
-            AccountHead::updateOrCreate($accountHeadData);
-            $request['transaction_type_id'] = 1;
-            $request['account_head_id'] = 4;
-            $sub_head_id = AccountHead::where('name', "eggs")->pluck('id')->last();
-            $request['sub_head_id'] = $sub_head_id;
 
-            Transaction::Create($request->except('submitEgg'));
-            return redirect()->back()->with('message', 'Eggs Sold');
-        }
+
+
+
         if (isset($_POST['submitHen']))
         {
-
             $request['transaction_type_id'] = 1;
-            $request['account_head_id'] = 21 ;
-
-            $sub_head_id = AccountHead::where('name', "hen")->pluck('id')->last();
-            $request['sub_head_id'] = $sub_head_id;
+            $request['account_head_id'] = 20 ;
+            $request['sub_head_id'] = 20;
             Transaction::Create($request->except('submitHen'));
-            return redirect()->back()->with('message', 'Hen Sold');
+//            return redirect()->back()->with('message', 'Hen Sold');
+            return redirect()->route('poultry_daily.indexDaily','tab=hen')->with('message', 'Hen Sold');
         }
         if (isset($_POST['submitChick']))
         {
-            $accountHeadData = array
-            (
-                'name' => "chick",
-                'parent_id' => 8
-            );
-            AccountHead::updateOrCreate($accountHeadData);
             $request['transaction_type_id'] = 1;
-            $request['account_head_id'] = 4;
-            $sub_head_id = AccountHead::where('name', "chick")->pluck('id')->last();
-            $request['sub_head_id'] = $sub_head_id;
+            $request['account_head_id'] = 21;
+            $request['sub_head_id'] = 21;
             Transaction::Create($request->except('submitChick'));
-            return redirect()->back()->with('message', 'Chick Sold');
+//            return redirect()->back()->with('message', 'Chick Sold');
+            return redirect()->route('poultry_daily.indexDaily','tab=chicks')->with('message', 'Chicks Sold');
         }
         if (isset($_POST['submitFeed']))
         {
-//            dd($request);
-//            dd($request['poultry'] = 8);
-            dd(Feed::Create($request));
-            return redirect()->back()->with('message', 'Feed Added');
+//           status 1 is for poultry
+            $request['status'] = 1;
+//            cattle type 1 is for poultry
+            $request['cattle_type'] = 1;
+//            dd($request->all());
+            Feed::Create($request->except('submitFeed','name'));
+//            return redirect()->back()->with('message', 'Feed Added');
+            return redirect()->route('poultry_daily.indexDaily','tab=feed')->with('message', 'Feed Added');
         }
+
         if (isset($_POST['submitVaccine']))
         {
-            $accountHeadData = array
-            (
-                'name' => "vaccine",
-                'parent_id' => 8
-            );
-            AccountHead::updateOrCreate($accountHeadData);
-            $sub_head_id = AccountHead::where('name', "vaccine")->pluck('id')->last();
-            $request['sub_head_id'] = $sub_head_id;
-            Vaccination::Create($request->except('submitVaccine'));
-            return redirect()->back()->with('message', 'Vaccine Added');
+            $request['sub_head_id'] = 57;
+            Vaccination::Create($request->except('submitVaccine', 'name'));
+//            return redirect()->back()->with('message', 'Vaccine Added');
+            return redirect()->route('poultry_daily.indexDaily','tab=vaccine')->with('message', 'Vaccine Added');
         }
         if (isset($_POST['submitMedicine']))
         {
-            $accountHeadData = array
-            (
-                'name' => "medicine",
-                'parent_id' => 8
-            );
-            AccountHead::updateOrCreate($accountHeadData);
-            $sub_head_id = AccountHead::where('name', "medicine")->pluck('id')->last();
-            $request['sub_head_id'] = $sub_head_id;
-            Medicines::Create($request->except('submitMedicine'));
-            return redirect()->back()->with('message', 'Medicine Added');
+            $request['sub_head_id'] = 55;
+            Medicines::Create($request->except('submitMedicine','name'));
+//            return redirect()->back()->with('message', 'Medicine Added');
+            return redirect()->route('poultry_daily.indexDaily','tab=medicine')->with('message', 'Medicine Added');
         }
     }
 }

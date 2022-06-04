@@ -1,4 +1,4 @@
-<div class="tab-pane" id="tab31">
+<div class="tab-pane @if ($tab == 'feed') active @endif" id="tab31">
     <div class="float-right mb-3">
         <div class="input-group">
             <button type="button" class="btn btn-info" data-toggle="modal" data-target="#addfeed">Add Feed</button>
@@ -21,12 +21,14 @@
                                     <input type="text" onfocus= "(this. type='date')" class="form-control" name="created_at" value="<?php echo date('Y-m-d');?>" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="message-text" class="form-control-label">Feed Name</label>
-                                    <input type="text" class="form-control" id="name" name="name">
-                                </div>
-                                <div class="form-group">
                                     <label for="message-text" class="form-control-label">Feed Quantity</label>
-                                    <input type="number" class="form-control" id="quantity" name="quantity" required>
+                                    <input type="number" class="form-control" id="feedQuantity" name="quantity" required>
+                                    <?php
+                                    $purchaseFeedMUsedFeed = \App\Models\Poultry::purchaseFeedMUsedFeed();
+                                    ?>
+                                    <div id="testing" class="invalid-feedback" style="display: block !important;">
+                                        Avaliable Feeds = {{$purchaseFeedMUsedFeed}}
+                                    </div>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -45,20 +47,43 @@
             <tr>
                 <th class="wd-15p">ID</th>
                 <th class="wd-25p">Date</th>
-                <th class="wd-15p">Feed Name</th>
                 <th class="wd-15p">Quantity</th>
+                <th class="wd-15p">Delete</th>
             </tr>
             </thead>
             <tbody>
-            {{--            @foreach($transactions as $t)--}}
-            {{--                <tr>--}}
-            {{--                    <td>{{$loop->iteration}}</td>--}}
-            {{--                    <td>{{$t->date ?? ''}}</td>--}}
-            {{--                    <td>{{$t->quantity ?? ''}} Liters</td>--}}
-            {{--                </tr>--}}
-            {{--            @endforeach--}}
+                @foreach($poultryFeed as $t)
+                    <tr>
+                        <td>{{$loop->iteration}}</td>
+                        <td>{{date('d-m-Y', strtotime($t->created_at))}}</td>
+                        <td>{{$t->quantity ?? ''}} </td>
+                        <td>
+                            <form method="POST" action="{{ route('poultry_daily.feeddel',$t->id ) }}">
+                                @method('DELETE')
+                                @csrf
+                                <button type="submit" name="deleteEgg" class="btn btn-sm btn-danger" data-toggle="tooltip" title="Delete"><i class="fe fe-trash"></i> {{$t->id}}</button>
+                            </form>
+                        </td>
+                    </tr>
+                @endforeach
             </tbody>
         </table>
     </div>
     <!-- table-wrapper -->
 </div>
+
+@section('more-script')
+    <script>
+        var feedQty = {{$purchaseFeedMUsedFeed}};
+        $(function(){
+            $('#feedQuantity').change(function()
+            {
+                if(this.value > feedQty)
+                {
+                    alert('Please do not exceed the Available Quantity');
+                    $('#feedQuantity').val(feedQty);
+                }
+            });
+        });
+    </script>
+@endsection

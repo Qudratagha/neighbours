@@ -109,13 +109,6 @@
                             <label class="form-label">Poultry Status</label>
                             <select name="poultry_status_id" id="poultry_status_id" class="form-control select2 custom-select" required></select>
                         </div>
-
-
-
-
-
-
-
                         <div class="form-group" id="incubatedDate"></div>
 
                         <div class="form-group">
@@ -124,77 +117,26 @@
                             <?php
 
                             //      Hens calculation Starts
-
-                            $totalPurchaseHen = \App\Models\Poultry:: totalPurchaseHen();
-                            $totalDieHen = \App\Models\Poultry:: totalDieHen();
-                            $totalSickHen = \App\Models\Poultry:: totalSickHen();
-                            $totalHealthyHen = \App\Models\Poultry:: totalHealthyHen();
-                            $totalPurchaseSickHealthy = \App\Models\Poultry:: totalPurchaseSickHealthy();
-//                            dd($totalPurchaseSickHealthy);
-                            $totalEggsCollected = \App\Models\Poultry:: totalHenEggs();
-
-                            $totalEggsToBeIncubated = \App\Models\Poultry:: totalEggsToBeIncubated();
-
-                            $chicksCollected = \App\Models\Poultry:: chicksCollected();
-
-
-                            $totalSickChicks = \App\Models\Poultry:: totalSickChicks();
-
-                            $totalSickMHealthy = \App\Models\Poultry:: totalSickMHealthy();
-                            if ($totalPurchaseHen > $totalDieHen){
-                                $purchaseMdie = $totalPurchaseHen - $totalDieHen;
-                            }
-                            else{
-                                $purchaseMdie = 0;
-                            }
-                            $purchasePhealthy =   $totalPurchaseHen + $totalHealthyHen;
-
-                            if ($totalPurchaseHen > $totalSickHen && $totalPurchaseHen > $totalDieHen  ){
-                                $purchaseMsick = $totalPurchaseHen - $totalDieHen;
-                            }
-                            else{
-                                $purchaseMsick = 0;
-                            }
-                            if ($totalSickHen > $totalHealthyHen && $totalPurchaseHen > $totalDieHen ){
-                                $sickMhealthy = $totalSickHen - $totalHealthyHen;
-                            }
-                            else{
-                                $sickMhealthy = 0;
-                            }
-
-
-
-//                            $totalSickHen = \App\Models\Poultry::where('poultry_type_id',1)->where('poultry_status_id',7)->pluck('remaining_quantity')->last();
-                            $totalHen = \App\Models\Poultry::where('poultry_type_id',1)->where('poultry_status_id',6)->pluck('remaining_quantity')->last();
-                            $totalRemainingHen = $totalHen - $totalSickHen;
-//                            if ($totalSickHen == NULL)
-//                            {
-//                                $totalSickHen = 0;
-//                            }
-                            $totalHen = \App\Models\Poultry::where('poultry_type_id',1)->where('poultry_status_id',6)->pluck('remaining_quantity')->last();
-                            if ($totalHen == NULL)
-                            {
-                                $totalHen = 0;
-                            }
-                            if ($totalRemainingHen == NULL)
-                            {
-                                $totalRemainingHen = 0;
-                            }
+                            $purchaseMsaleMdie = \App\Models\Poultry::purchaseMsaleMdie();
+                            $purchaseMsaleMdieMsickHen = \App\Models\Poultry:: purchaseMsaleMdieMsickHen();
+                            $totalSickHen = \App\Models\Poultry:: sickMHealthy();
                             //      Hens calculation Ends
                             //      Eggs calculation Starts
-                            $totalEggs = \App\Models\Poultry::where('poultry_type_id',3)->where('poultry_status_id',4)->pluck('remaining_quantity')->last();
-                            if ($totalEggs == NULL)
-                            {
-                                $totalEggs = 0;
-                            }
-                            //      Hens calculation Ends
+                            $totalEggsCollected = \App\Models\Poultry::totalEggsCollected();
+                            //      Egg calculation Ends
                             //      Chicks calculation Starts
-                            $totalChicks = \App\Models\Poultry::where('poultry_type_id',2)->where('poultry_status_id',4)->pluck('remaining_quantity')->last();
-                            if ($totalChicks == NULL)
-                            {
-                                $totalChicks = 0;
-                            }
+                            $totalRemainingChicks = \App\Models\Poultry::totalRemainingChicks();
+                            $totalRemainingMsick = \App\Models\Poultry::totalRemainingMsick();
+                            $totalSickPHealthy = \App\Models\Poultry::totalSickPHealthy();
                             //      Chicks calculation Ends
+                            //      Feed calculation Starts
+                            $totalFeedPurchase = \App\Models\Poultry::totalFeedPurchase();
+
+
+                            //      Feed calculation Ends
+
+
+
                             ?>
                             <div id="totalHen" class="invalid-feedback" style="display: block !important;"></div>
                             <div id="testing" class="invalid-feedback" style="display: block !important;"></div>
@@ -213,34 +155,25 @@
 @endsection
 @section('more-script')
     <script>
-        let totalPurchaseHen = {{$totalPurchaseHen}};
-        let purchaseMdie = {{$purchaseMdie}};
+        // Hen Calculation Starts
+        let purchaseMsaleMdie = {{$purchaseMsaleMdie}};
+        let purchaseMsaleMdieMsickHen = {{$purchaseMsaleMdieMsickHen}};
         let totalSickHen = {{$totalSickHen}};
-
-        let sickMhealthy = {{$sickMhealthy}};
-
-
-        let totalPurchaseSickHealthy = {{$totalPurchaseSickHealthy}};
-
-        let purchaseMsick = {{$purchaseMsick}};
-
-        let purchasePhealthy = {{$purchasePhealthy}};
-
-
-        // Eggs calculation
+        // Hen Calculation Ends
+        // Egg Calculation Starts
         let totalEggsCollected = {{$totalEggsCollected}};
-        let totalEggsToBeIncubated = {{$totalEggsToBeIncubated}};
+        let totalRemainingChicks = {{$totalRemainingChicks}};
+        // Egg Calculation Ends
+        // Chicks Calculation Starts
+        let totalRemainingMsick = {{$totalRemainingMsick}};
+        let totalSickPHealthy = {{$totalSickPHealthy}};
+        // Hen Calculation Ends
+        // Feed Calculation Starts
+        let totalFeedPurchase = {{$totalFeedPurchase}};
 
-        let totalhens = {{$totalHen}};
-        let totalsickhensRemaining = {{$totalRemainingHen}};
-        {{--let totalSickHen = {{$totalSickHen}};--}}
 
-            let chicksCollected = {{$chicksCollected}};
-            let totalSickChicks = {{$totalSickChicks}};
-            let totalSickMHealthy = {{$totalSickMHealthy}};
+        // Feed Calculation Ends
 
-        let totalEggs = {{$totalEggs}};
-        let totalChicks = {{$totalChicks}};
         var newQty = 0;
         var current_poultry_status = 0;
         var alertMsg = "";
@@ -283,10 +216,6 @@
                         }
                     });
 
-                    // console.log(this.value);
-
-
-
                     $.ajax({
                         url: "{{  route('poultry.getDateQuantity',"") }}/"+date,
                         method: 'get',
@@ -296,84 +225,64 @@
                         }
                     });
                 });
-                console.log(this.value);
-                console.log(pti);
                 switch (this.value != 0 || pti != 0)
                 {
                     //      Hen calculation Starts
-
                     case this.value == 1 && pti == 1:
                         {
-                            newQty = purchaseMdie;
-                            validationMsg = 'Total Purchase Minus Die Hens = ' + purchaseMdie;
+                            newQty = purchaseMsaleMdie;
+                            validationMsg = 'Remaining Hens = ' + purchaseMsaleMdie;
                             break;
                         }
                     case this.value == 7 && pti == 1:
                         {
-                            newQty = totalPurchaseSickHealthy;
-                            validationMsg = 'Total Purchase Sick Healthy Hens = ' + totalPurchaseSickHealthy;
+                            newQty = purchaseMsaleMdieMsickHen;
+                            validationMsg = 'Remaining Hens = ' + purchaseMsaleMdieMsickHen;
                             break;
                         }
                     case this.value == 8 && pti == 1:
                         {
-                            newQty = sickMhealthy;
-                            validationMsg = 'Total Sick Hens = ' + sickMhealthy;
+                            newQty = totalSickHen;
+                            validationMsg = 'Total Sick Hens = ' + totalSickHen;
                             break;
                         }
                     //      Hen calculation Ends
                     //      Egg calculation Starts
-                    case this.value == 3 && pti == 4:
+                    case this.value == 4 && pti == 3:
                     {
-                        newQty = totalEggs;
-                        validationMsg = 'Total Hens = ' + totalEggs;
+                        newQty = purchaseMsaleMdie;
+                        validationMsg = 'Total Eggs to be Collected = ' + purchaseMsaleMdie;
                         break;
                     }
-
-                    //      Egg calculation Ends
-
-                    case this.value == 4 && pti == 3:
-                        {
-                            newQty = totalEggsCollected;
-                            validationMsg = 'Total Eggs To Be Collected = ' + totalEggsCollected;
-                            break;
-                        }
                     case this.value == 3 && pti == 3:
                     {
-                        newQty = totalEggsToBeIncubated;
-                        validationMsg = 'Total Eggs To Be Incubated = ' + totalEggsToBeIncubated;
+                        newQty = totalEggsCollected;
+                        validationMsg = 'Total Eggs To Be Incubated = ' + totalEggsCollected;
                         break;
                     }
                     //      Eggs calculation Ends
                     //      Chick calculation Starts
-
                     case this.value == 1 && pti == 2:
                     {
-                        newQty = chicksCollected;
-                        validationMsg = 'Total Collected Chicks = ' + chicksCollected;
+                        newQty = totalRemainingChicks;
+                        validationMsg = 'Total Collected Chicks = ' + totalRemainingChicks;
                         break;
                     }
                     case this.value == 7 && pti == 2:
                     {
-                        newQty = totalSickChicks;
-                        validationMsg = 'Total Chicks To Be Sick = ' + totalSickChicks;
+                        newQty = totalRemainingMsick;
+                        validationMsg = 'Total Chicks To Be Sick = ' + totalRemainingMsick;
                         break;
                     }
                     case this.value == 8 && pti == 2:
                     {
-                        newQty = totalSickMHealthy;
-                        validationMsg = 'Total Chicks To Be Healthy = ' + totalSickMHealthy;
+                        newQty = totalSickPHealthy;
+                        validationMsg = 'Total Chicks To Be Healthy = ' + totalSickPHealthy;
                         break;
                     }
-
-
-
                     //      Chick calculation Ends
-
-
                 }
                 //      Chick calculation Starts
-
-
                 $('#totalHen').html(validationMsg);
             });
                 //      Hens calculation Starts
@@ -391,7 +300,7 @@
                 'name' : 'Hen',
                 'status' : [
                     { id: 1, value: 'Die'},
-                    { id: 6,value: 'Purchase'},
+                    // { id: 6,value: 'Purchase'},
                     { id: 7, value: 'Sick'},
                     { id: 8, value: 'Healthy'},
                 ]
@@ -401,7 +310,7 @@
                 'status' : [
                     { id : 1, value: 'Die' },
                     { id : 4, value: 'Collected' },
-                    { id : 5, value: 'Converted To Hen' },
+                    // { id : 5, value: 'Converted To Hen' },
                     { id : 7, value: 'Sick'},
                     { id: 8, value: 'Healthy'},
                 ]
@@ -415,7 +324,8 @@
             }
         };
 
-        function change_status(statusID) {
+        function change_status(statusID)
+        {
             var strOptions = '<option value="">Please Select Poultry Status</option>';
             poultry_status['poultry_'+statusID].status.forEach(function(val,idx)
             {

@@ -25,13 +25,12 @@
                                     <div class="tabs-menu">
                                         <!-- Tabs -->
                                         <ul class="nav panel-tabs">
-                                            <li><a class="active" href="#tab11" id="hov" data-toggle="tab">Egg</a></li>
-                                            <li class="act"><a href="#tab21" id="hov" data-toggle="tab">Hen</a></li>
-                                            <li class="act"><a href="#tab61" id="hov" data-toggle="tab">Chicks</a></li>
-
-                                            <li class="act"><a href="#tab31" id="hov" data-toggle="tab">Feed</a></li>
-                                            <li class="act"><a href="#tab41" id="hov" data-toggle="tab">Vaccination</a></li>
-                                            <li class="act"><a href="#tab51" id="hov" data-toggle="tab">Medicine</a></li>
+                                            <li class="@if ($tab == 'egg') active  @endif"><a  href="#tab11" id="hov" data-toggle="tab">Egg</a></li>
+                                            <li class="@if ($tab == 'hen') active  @endif"><a  href="#tab21" id="hov" data-toggle="tab">Hen</a></li>
+                                            <li class="@if ($tab == 'chicks') active  @endif"><a  href="#tab61" id="hov" data-toggle="tab">Chicks</a></li>
+                                            <li class="@if ($tab == 'feed') active  @endif"><a  href="#tab31" id="hov" data-toggle="tab">Feed</a></li>
+                                            <li class="@if ($tab == 'vaccine') active  @endif"><a  href="#tab41" id="hov" data-toggle="tab">Vaccination</a></li>
+                                            <li class="@if ($tab == 'medicine') active  @endif"><a  href="#tab51" id="hov" data-toggle="tab">Medicine</a></li>
                                         </ul>
                                     </div>
                                 </div>

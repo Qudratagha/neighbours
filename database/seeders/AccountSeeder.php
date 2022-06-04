@@ -231,11 +231,19 @@ class AccountSeeder extends Seeder
                 'parent_id' => '5'
             ],
             [
+                'name'      => 'Poultry Hen Purchase',
+                'parent_id' => '5'
+            ],
+            [
+                'name'      => 'Poultry Feed',
+                'parent_id' => '5'
+            ],
+            [
                 'name'      => 'Poultry Medicines',
                 'parent_id' => '5'
             ],
             [
-                'name'      => 'Poultry FeedingTray',
+                'name'      => 'Poultry Feeding Tray',
                 'parent_id' => '5'
             ],
             [
@@ -251,11 +259,7 @@ class AccountSeeder extends Seeder
                 'parent_id' => '5'
             ],
             [
-                'name'      => 'Poultry Transportation',
-                'parent_id' => '5'
-            ],
-            [
-                'name'      => 'Poultry utilities',
+                'name'      => 'Poultry Utilities',
                 'parent_id' => '5'
             ],
             [

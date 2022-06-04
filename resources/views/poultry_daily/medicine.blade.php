@@ -1,4 +1,4 @@
-<div class="tab-pane" id="tab51">
+<div class="tab-pane @if ($tab == 'medicine') active @endif" id="tab51">
     <div class="float-right mb-3">
         <div class="input-group">
             <button type="button" class="btn btn-info" data-toggle="modal" data-target="#addmedicine">Add Medicine</button>
@@ -17,13 +17,20 @@
                                 @csrf
                                 <div class="form-group">
                                     <label for="recipient-name" class="form-control-label">Date</label>
-                                    {{--                                    <input type="hidden" name="cow_id" value="{{$cow_daily->id}}">--}}
-                                    <input type="text" onfocus= "(this. type='date')" class="form-control" name="date" value="<?php echo date('Y-m-d');?>" required>
+                                    <input type="text" onfocus= "(this. type='date')" class="form-control" name="created_at" value="<?php echo date('Y-m-d');?>" required>
                                 </div>
+
                                 <div class="form-group">
-                                    <label for="message-text" class="form-control-label">Medicine Name</label>
-                                    <input type="text" class="form-control" id="name" name="name">
+                                    <label for="message-text" class="form-control-label">Medicine Quantity</label>
+                                    <input type="text" class="form-control" id="medicineQty" name="quantity">
+                                    <?php
+                                    $totalMedicinePurchase = \App\Models\Poultry:: totalMedicinePurchase();
+                                    ?>
+                                    <div id="testing" class="invalid-feedback" style="display: block !important;">
+                                        Avaliable Medicine = {{$totalMedicinePurchase}}
+                                    </div>
                                 </div>
+
                                 <div class="form-group">
                                     <label for="message-text" class="form-control-label">Medicine Desc</label>
                                     <input type="text" class="form-control" id="description" name="description" required>
@@ -47,14 +54,16 @@
                 <th class="wd-25p">Date</th>
                 <th class="wd-15p">Medicine Name</th>
                 <th class="wd-15p">Medicine Quantity</th>
+                <th class="wd-15p">Description</th>
             </tr>
             </thead>
             <tbody>
-                @foreach($medicines as $medicine)
+                @foreach($poultryMedicine as $medicine)
                     <tr>
                         <td>{{$medicine->id}}</td>
-                        <td>{{$medicine->date ?? ''}}</td>
+                        <td>{{date('d-m-Y', strtotime($medicine->created_at))}}</td>
                         <td>{{$medicine->name ?? ''}} </td>
+                        <td>{{$medicine->quantity ?? ''}} </td>
                         <td>{{$medicine->description ?? ''}} </td>
                     </tr>
                 @endforeach
@@ -63,3 +72,18 @@
     </div>
     <!-- table-wrapper -->
 </div>
+@section('more-script')
+    <script>
+        var medicineQty = {{$totalMedicinePurchase}};
+        $(function(){
+            $('#medicineQty').change(function()
+            {
+                if(this.value > medicineQty)
+                {
+                    alert('Please do not exceed the Available Quantity');
+                    $('#medicineQty').val(medicineQty);
+                }
+            });
+        });
+    </script>
+@endsection

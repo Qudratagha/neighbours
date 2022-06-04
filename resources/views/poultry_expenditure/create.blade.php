@@ -36,13 +36,15 @@
                                         </div>
                                         <div class="form-group">
                                             <label class="form-label required">Select Expenditure Type</label>
-                                            <select name="sub_head_id" id="expenseHeads" class="form-control">
+                                            <select name="sub_head_id" id="asd" class="form-control">
                                                 <option style="font-weight: bold">Select Expenditure Type</option>
                                                 @foreach($expenseHeads as $expenseHead)
                                                         <option value="{{$expenseHead->id}}">{{trim(strstr("$expenseHead->name"," "))}}</option>
                                                 @endforeach
                                             </select>
                                         </div>
+                                        <div class="form-group" id="incubatedDate"></div>
+
                                         <div class="form-group">
                                             <label class="form-label required">Amount</label>
                                             <input type="number" class="form-control" name="amount" placeholder="Amount">
@@ -69,4 +71,51 @@
         {{--      end side app --}}
     </div>
     {{--   end container area--}}
+@endsection
+@section('more-script')
+    <script>
+        var newQty = 0;
+        var alertMsg = "";
+        var validationMsg = "";
+        var eggincdates = '';
+
+
+            {{--$("#asd").change(function () {--}}
+            {{--    console.log(this.value);--}}
+            {{--    switch(this.value > 0) {--}}
+            {{--        case this.value == 52:--}}
+            {{--            $('#incubatedDate').html(--}}
+            {{--                '<label class="form-label required">Select Expenditure Type Type</label>\n' +--}}
+            {{--                '                            <select name="sub_head_id" id="asd" class="form-control">\n' +--}}
+            {{--                '                                <option style="font-weight: bold">Select Expenditure Type</option>\n' +--}}
+            {{--                '                                    @foreach($acRealtedToPurchases as $acRealtedToPurchase)\n' +--}}
+            {{--                '                                        <option value={{$acRealtedToPurchase->id}} >{{trim(strstr("$acRealtedToPurchase->name"," "))}}</option>\n' +--}}
+            {{--                '                                    @endforeach\n' +--}}
+            {{--                '                            </select>');--}}
+            {{--            break;--}}
+            {{--        case this.value == 51:--}}
+
+            {{--            $('#incubatedDate').html(--}}
+            {{--                '<label class="form-label required">Select Expenditure Type Type</label>\n' +--}}
+            {{--                '                            <select name="sub_head_id" id="asd" class="form-control">\n' +--}}
+            {{--                '                                <option style="font-weight: bold">Select Expenditure Type</option>\n' +--}}
+            {{--                '                                    @foreach($poultryWorkers as $poultryWorker)\n' +--}}
+            {{--                '                                        <option value={{$poultryWorker->id}} >{{$poultryWorker->name}}</option>\n' +--}}
+            {{--                '                                    @endforeach\n' +--}}
+            {{--                '                            </select>');--}}
+            {{--            break;--}}
+
+            {{--    }--}}
+            {{--    });--}}
+                //      Hens calculation Starts
+                //      Chick calculation Ends
+
+
+
+
+
+
+
+
+    </script>
 @endsection

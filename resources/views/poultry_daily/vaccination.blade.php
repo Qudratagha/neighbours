@@ -1,4 +1,4 @@
-<div class="tab-pane" id="tab41">
+<div class="tab-pane @if ($tab == 'vaccine') active @endif" id="tab41">
     <div class="float-right mb-3">
         <div class="input-group">
             <button type="button" class="btn btn-info" data-toggle="modal" data-target="#addvaccine">Add Vaccine</button>
@@ -17,11 +17,17 @@
                                 @csrf
                                 <div class="form-group">
                                     <label for="recipient-name" class="form-control-label">Date</label>
-                                    <input type="text" onfocus= "(this. type='date')" class="form-control" name="date" value="<?php echo date('Y-m-d');?>" required>
+                                    <input type="text" onfocus= "(this. type='date')" class="form-control" name="created_at" value="<?php echo date('Y-m-d');?>" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="message-text" class="form-control-label">Vaccine Name</label>
-                                    <input type="text" class="form-control" id="name" name="name">
+                                    <label for="message-text" class="form-control-label">Vaccine Quantity</label>
+                                    <input type="text" class="form-control vaccinationQty" id="vaccinationQty" name="quantity">
+                                    <?php
+                                    $purchaseVaccineMUsedVaccine = \App\Models\Poultry:: purchaseVaccineMUsedVaccine();
+                                    ?>
+                                    <div id="testing" class="invalid-feedback" style="display: block !important;">
+                                        Avaliable Vaccine = {{$purchaseVaccineMUsedVaccine}}
+                                    </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="message-text" class="form-control-label">Vaccine Desc</label>
@@ -44,16 +50,16 @@
             <tr>
                 <th class="wd-15p">ID</th>
                 <th class="wd-25p">Date</th>
-                <th class="wd-15p">Vaccine Name</th>
                 <th class="wd-15p">Vaccine Quantity</th>
+                <th class="wd-15p">DESC</th>
             </tr>
             </thead>
             <tbody>
-                @foreach($vaccines as $vaccine)
+                @foreach($poultryVaccine as $vaccine)
                     <tr>
                         <td>{{$vaccine->id}}</td>
-                        <td>{{$vaccine->date ?? ''}}</td>
-                        <td>{{$vaccine->name ?? ''}} </td>
+                        <td>{{date('d-m-Y', strtotime($vaccine->created_at))}}</td>
+                        <td>{{$vaccine->quantity ?? ''}} </td>
                         <td>{{$vaccine->description ?? ''}} </td>
                     </tr>
                 @endforeach
@@ -62,3 +68,18 @@
     </div>
     <!-- table-wrapper -->
 </div>
+@section('more-script')
+    <script>
+        var feedQty = {{$purchaseVaccineMUsedVaccine}};
+        $(function(){
+            $('.vaccinationQty').change(function()
+            {
+                if(this.value > feedQty)
+                {
+                    alert('Please do not exceed the Available Quantity');
+                    $('.vaccinationQty').val(feedQty);
+                }
+            });
+        });
+    </script>
+@endsection
