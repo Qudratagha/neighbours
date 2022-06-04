@@ -59,7 +59,7 @@
                                                             </div>
                                                             <div class="modal-footer">
                                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                                <button type="submit" name="submitMilkSale" class="btn btn-primary">Sale Milk</button>
+                                                                <button type="submit" id="exceed" name="submitMilkSale" class="btn btn-primary">Sale Milk</button>
                                                             </div>
                                                         </form>
                                                     </div>
@@ -117,7 +117,18 @@
                 if(this.value > milkQty)
                 {
                     alert('Please do not exceed the Available Stock');
+                    $('#exceed').prop('disabled',true);
                     $(this).val(milkQty);
+                }
+                else if(this.value == 0)
+                {
+                    alert('You can no sell 0 quantity');
+                    $('#exceed').prop('disabled',true);
+                    $(this).val(milkQty);
+                }
+                else
+                {
+                    $('#exceed').prop('disabled',false);
                 }
             })
         });

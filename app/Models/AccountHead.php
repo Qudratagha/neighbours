@@ -37,15 +37,18 @@ class AccountHead extends Model
     return $this->hasMany(Vaccination::class,'sub_head_id','id');
     }
 
-    public function transactionHeads()
+    public function transactionHead()
     {
         return $this->hasMany(Transaction::class,'account_head_id','id');
     }
 
-    public function transactionSubHeads()
+    public function transactionSubHead()
     {
         return $this->hasMany(Transaction::class,'sub_head_id','id');
     }
 
+    public function worker(){
+        return $this->hasMany(AccountHead::class, 'account_head_id', 'id');
+    }
 
 }

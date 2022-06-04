@@ -11,28 +11,25 @@ class UserSeeder extends Seeder
     {
         $aryUserRoles = [
             [
-                'name' => 'umair',
-                'email' => 'umair@gmail.com',
-                'password' => \Illuminate\Support\Facades\Hash::make('umair123')
+                'name' => 'admin',
+                'email' => 'admin@gmail.com',
+                'password' => \Illuminate\Support\Facades\Hash::make('admin123')
             ],
             [
                 'name' => 'cow',
                 'email' => 'cow@gmail.com',
                 'password' => \Illuminate\Support\Facades\Hash::make('cow123')
             ],
-     [
+            [
                 'name' => 'goat',
                 'email' => 'goat@gmail.com',
                 'password' => \Illuminate\Support\Facades\Hash::make('goat123')
-                ],
-
+            ],
             [
                 'name' => 'poultry',
                 'email' => 'poultry@gmail.com',
                 'password' => \Illuminate\Support\Facades\Hash::make('poultry123')
-
             ],
-
             [
                 'name' => 'cultivation',
                 'email' => 'cultivation@gmail.com',

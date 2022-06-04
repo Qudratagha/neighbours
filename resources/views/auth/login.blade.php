@@ -17,7 +17,7 @@
                                 </div>
                                 <h3>Login</h3>
                                 <p class="text-muted">Sign In to your account</p>
-                                <form method="POST" action="{{ route('login') }}">
+                                <form action="{{ route('login') }}" method="post" autocomplete="off">
                                     @csrf
                                     <div class="input-group mb-3">
                                         <span class="input-group-addon "><i class="fa fa-user"></i></span>

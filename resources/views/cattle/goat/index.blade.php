@@ -23,6 +23,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="card">
+                        @include('partials.message')
                         <div class="card-header">
                             <h3 class="mb-0 card-title">{{ __('Dashboard') }}</h3>
                         </div>
@@ -52,15 +53,20 @@
                                             <td>{{$goat->breed ?? 'Null'}}</td>
                                             <td>{{($goat->gender == 1) ? 'Male' : 'female' }}</td>
                                             <td>{{$goat->parent->serial_no ?? ''}}</td>
-                                        @if(!($goat->dead_date||$goat->dry_date||$goat->saleStatus==1))
+                                            {{-- To Show to Delete on last entry --}}
+                                            <?php $lastRow = \App\Models\Cattle::goats()->pluck('id')->last()?>
+
+                                        @if( !($goat->dead_date || $goat->dry_date || $goat->saleStatus==1) )
                                             <td>
                                                 @can('goat-create')
+                                                    @if($goat->gender == 0)
                                                     <form action="{{route('cattle.store',$goat->id)}}" method="POST" onsubmit="return confirm('Are you sure you want to DRY cow with serial no: {{$goat->id}} ?');" style="display: inline-block;">
                                                         @csrf
                                                         <input type="hidden" onfocus= "(this. type='date')" class="form-control" name="dry_date" value="<?php echo date('Y-m-d');?>">
                                                         <input type="hidden" name="cattle_id" value="{{$goat->id}}">
                                                         <button type="submit" name="submitDryGoat" class="btn btn-sm btn-outline-danger" data-toggle="tooltip" title="Dry"><span>Dry</span></button>
                                                     </form>
+                                                    @endif
                                                 @endcan
                                                 @can('goat-create')
                                                     <form action="{{ route('cattle.store',$goat->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to DEAD cow with serial no: {{$goat->id}} ?');" style="display: inline-block;">
@@ -77,21 +83,23 @@
                                                     <a href="{{route('cattle.edit',['goat',$goat->id])}}" class="btn btn-sm btn-success" data-toggle="tooltip" title="Edit"><i class="fe fe-edit-3"></i></a>
                                                 @endcan
                                                 @can('goat-delete')
-                                                    <form action="{{ route('cattle.destroy',['goat',$goat->id] ) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this?');" style="display: inline-block;">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button type="submit" class="btn btn-sm btn-danger" data-toggle="tooltip" title="Delete"><i class="fe fe-trash-2"></i></button>
-                                                    </form>
+                                                    @if( $lastRow == $goat->id )
+                                                        <form action="{{ route('cattle.destroy',['goat',$goat->id] ) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this?');" style="display: inline-block;">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit" class="btn btn-sm btn-danger" data-toggle="tooltip" title="Delete"><i class="fe fe-trash-2"></i></button>
+                                                        </form>
+                                                    @endif
                                                 @endcan
                                             </td>
                                             @else
                                                 <td>
                                                     <a href="{{route('cattle.show',['goat',$goat->id])}}" class="btn btn-sm btn-primary" data-toggle="tooltip" title="View"><i class="fe fe-eye"></i></a>
-                                                    @if($goat->dead_date)
+                                                    @if( $goat->dead_date )
                                                         Dead
-                                                        @elseif ($goat->dry_date)
+                                                    @elseif ( $goat->dry_date )
                                                         Dry
-                                                    @elseif ($goat->saleStatus==1)
+                                                    @elseif ( $goat->saleStatus==1 )
                                                         Sold
                                                     @endif
                                                 </td>
