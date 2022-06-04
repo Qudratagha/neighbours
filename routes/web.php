@@ -39,6 +39,9 @@ Route::post('/poultry_daily',[\App\Http\Controllers\PoultryController::class, 's
 
 
 Route::delete('/poultry_daily/{poultry_daily}',[\App\Http\Controllers\Poultrycontroller::class,'eggdel'])->name('poultry_daily.eggdel');
+Route::delete('/poultry_daily_feed/{poultry_daily}',[\App\Http\Controllers\Poultrycontroller::class,'feeddel'])->name('poultry_daily.feeddel');
+Route::delete('/poultry_daily_vaccine/{poultry_daily}',[\App\Http\Controllers\Poultrycontroller::class,'vaccinedel'])->name('poultry_daily.vaccinedel');
+Route::delete('/poultry_daily_medicine/{poultry_daily}',[\App\Http\Controllers\Poultrycontroller::class,'medicinedel'])->name('poultry_daily.medicinedel');
 
 //cultivation
 Route::resource('/cultivation', CultivationController::class);

@@ -1,4 +1,4 @@
-<div class="tab-pane active" id="tab11">
+<div class="tab-pane @if ($tab == 'egg') active @endif" id="tab11">
     <div class="float-right mb-3">
         <div class="input-group">
             <button type="button" class="btn btn-info" data-toggle="modal" data-target="#soldEgg">Sold Egg</button>
@@ -23,17 +23,18 @@
                                     <label for="message-text" class="form-control-label">Quantity</label>
                                     <input type="text"  class="form-control" id="EggQuantity" name="quantity" required>
                                     <?php
-                                    $collEggsMIncEggs = \App\Models\Poultry:: collEggsMIncEggs();
+                                    $totalEggsCollected = \App\Models\Poultry::totalEggsCollected();
+                                    $qtyInDozens = floor($totalEggsCollected / 12);
+
                                     ?>
                                     <div id="testing" class="invalid-feedback" style="display: block !important;">
-                                        Avaliable Eggs = {{$collEggsMIncEggs}} Dozens
+                                        Avaliable Eggs = {{$qtyInDozens}} Dozens
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="message-text" class="form-control-label">Description</label>
                                     <input type="text" class="form-control" id="description" name="description">
                                 </div>
-
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                     <button type="submit" name="submitEgg" class="btn btn-primary">Sold Egg</button>
@@ -53,16 +54,17 @@
                 <th class="wd-25p">Date</th>
                 <th class="wd-15p">Egg Quantity</th>
                 <th class="wd-15p">Amount</th>
-                <th class="wd-15p">Detail</th>
+                <th class="wd-15p">Description</th>
                 <th class="wd-15p">Delete</th>
             </tr>
             </thead>
             <tbody>
-            @foreach($eggs as $egg)
+            @foreach($eggSale as $egg)
+                {{$eggQty = $egg->quantity/12}}
                 <tr>
-                    <td>{{$egg->id}}</td>
+                    <td>{{$loop->iteration}}</td>
                     <td>{{$egg->date ?? ''}}</td>
-                    <td>{{$egg->quantity ?? ''}} Dozen</td>
+                    <td>{{$eggQty ?? ''}} Dozen</td>
                     <td>{{$egg->amount ?? ''}} </td>
                     <td>{{$egg->description ?? ''}}</td>
                     <td>
@@ -79,15 +81,10 @@
     </div>
     <!-- table-wrapper -->
 </div>
-
-
-
-
 @section('more-script')
-    @parent
 
     <script>
-        var qtyindzn = {{$collEggsMIncEggs}};
+        var qtyindzn = {{$qtyInDozens}};
         $(function(){
             $('#EggQuantity').change(function()
             {
@@ -99,12 +96,8 @@
                 }
             });
         });
-
-
     {{--$(document).ready(function() {--}}
-
     {{--    $('#test1').change(function (e) {--}}
-
     {{--        $.ajax({--}}
     {{--            url: "{{route('poultry_daily.totalEggs')}}",--}}
     {{--            method: 'get',--}}
@@ -120,8 +113,6 @@
     {{--                });--}}
     {{--            }--}}
     {{--        });--}}
-
-
     {{--    });--}}
     {{--});--}}
 </script>

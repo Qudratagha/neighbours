@@ -128,8 +128,20 @@ class TransactionController extends Controller
 
     public function createPoultryExpenditure()
     {
-        $expenseHeads = AccountHead::where('parent_id',5)->where('name','LIKE','%Poultry %')->get();
-        return view('poultry_expenditure/create',compact('expenseHeads'));
+        $expenseHeads = AccountHead::where('parent_id',5)
+            ->where('name','LIKE','%Poultry %')
+            ->orderBy('id','desc')
+            ->take(10)
+            ->get();
+        $acRealtedToPurchases = AccountHead::where('parent_id',5)
+            ->where('name','LIKE','%Poultry %')
+            ->orderBy('id','desc')
+            ->take(10)
+            ->get();
+        $poultryWorkers = \App\Models\Worker::where('module_id',3)->get();
+
+
+        return view('poultry_expenditure/create',compact('expenseHeads', 'acRealtedToPurchases' , 'poultryWorkers'));
     }
 
     public function createGoatExpenditure()

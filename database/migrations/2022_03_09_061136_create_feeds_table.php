@@ -17,8 +17,8 @@ return new class extends Migration
             $table->id();
             $table->string('name',45);
             $table->integer('quantity');
-            $table->boolean('cattle')->nullable();
-            $table->boolean('poultry')->nullable();
+            $table->integer('status');
+            $table->integer('cattle_type');
             $table->timestamps();
         });
     }
