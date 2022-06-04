@@ -72,7 +72,7 @@ class TransactionController extends Controller
 //            return $query->where('account_head_id',17);
 //        }])->where('cattle_type_id',1)->get();
         abort_if(Gate::denies('cow-read'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-        $cows = Cattle::where('cattle_type_id',1)->where('saleStatus',0)->get();
+        $cows = Cattle::cows()->where('dead_date',null)->where('saleStatus',0)->get();
         $soldCow = Transaction::where('account_head_id',16)->where('transaction_type_id',1)->get();
 //        dd($cows);
 //        $soldcowarr = [];
