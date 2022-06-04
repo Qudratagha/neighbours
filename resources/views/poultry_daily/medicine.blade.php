@@ -74,8 +74,8 @@
 </div>
 @section('more-script')
     <script>
-        var medicineQty = {{$totalMedicinePurchase}};
         $(function(){
+            var medicineQty = {{$totalMedicinePurchase}};
             $('#medicineQty').change(function()
             {
                 if(this.value > medicineQty)

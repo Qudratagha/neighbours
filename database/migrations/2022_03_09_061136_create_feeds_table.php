@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('feeds', function (Blueprint $table) {
             $table->id();
-            $table->string('name',45);
+            $table->string('name',45)->nullable();
             $table->integer('quantity');
             $table->integer('status');
             $table->integer('cattle_type');

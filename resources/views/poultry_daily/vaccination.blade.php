@@ -70,8 +70,8 @@
 </div>
 @section('more-script')
     <script>
-        var feedQty = {{$purchaseVaccineMUsedVaccine}};
         $(function(){
+            var feedQty = {{$purchaseVaccineMUsedVaccine}};
             $('.vaccinationQty').change(function()
             {
                 if(this.value > feedQty)

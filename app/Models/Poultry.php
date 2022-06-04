@@ -186,8 +186,16 @@ class Poultry extends Model
     }
     public static function totalMedicineUsed()
     {
-        $totalMedicineUsed = \App\Models\Medicines::where('sub_head_id', 57)->sum('quantity');
+        $totalMedicineUsed = \App\Models\Medicines::where('sub_head_id', 55)->sum('quantity');
         return $totalMedicineUsed;
+    }
+
+    public static function purchaseMedicineMUsedMedicine()
+    {
+        $totalMedicinePurchase = \App\Models\Poultry::totalMedicinePurchase();
+        $totalMedicineUsed = \App\Models\Poultry::totalMedicineUsed();
+        $variable = $totalMedicinePurchase - $totalMedicineUsed;
+        return $variable;
     }
 
 

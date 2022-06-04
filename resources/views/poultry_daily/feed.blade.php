@@ -74,8 +74,8 @@
 
 @section('more-script')
     <script>
-        var feedQty = {{$purchaseFeedMUsedFeed}};
         $(function(){
+            var feedQty = {{$purchaseFeedMUsedFeed}};
             $('#feedQuantity').change(function()
             {
                 if(this.value > feedQty)

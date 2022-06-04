@@ -30,6 +30,7 @@ class PoultryController extends Controller
         abort_if(Gate::denies("poultry-read"), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
 
+
         $eggincdates = [];
         $eggincdates = Poultry::where('status', 3)->distinct('created_at')->pluck('created_at');
         $eggincquans =  Poultry::where('quantity','>',0)->get()->pluck('quantity');
