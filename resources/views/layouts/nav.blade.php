@@ -22,7 +22,7 @@
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow ">
                                     <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();document.getElementById('logout-form').submit();"><strong><i class="fe fe-user"></i> {{ __(' Logout') }}{{ Auth::user()->name }}</strong></a>
+                                       onclick="event.preventDefault();document.getElementById('logout-form').submit();"><strong><i class="fe fe-user"></i> {{ __(' Logout') }}-{{ ucfirst(Auth::user()->name) }}</strong></a>
                                         <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                             @csrf
                                         </form>

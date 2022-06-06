@@ -28,17 +28,47 @@
                                     </ul>
                                 </div>
                             </div>
-                            
+
                             <div class="panel-body tabs-menu-body">
                                 <div class="tab-content">
                                     <div class="tab-pane active " id="tab11">
-                                        <h3>Total Expenditures:</h3>
-                                        <h3>Total Income:</h3>
                                         <hr>
                                         <h3 class="text-center" style="font-weight: bold; font-size: 35px;">Overall Cow Details</h3>
                                         <div class="row">
-                                            <div class="col-xl-3 col-lg-6 col-md-12 col-sm-12">
+                                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
                                                 <div class="card card-counter bg-gradient-danger">
+                                                    <div class="card-body">
+                                                        <div class="row">
+                                                            <div class="col-8">
+                                                                <h2 class="text-white mt-1 mb-0">Total Expenditure</h2>
+                                                            </div>
+                                                            <div class="mr-1 text-center">
+                                                                <div class="mt-1 mb-0 text-white">
+                                                                    <h2 class="mb-0">{{$totalExpenditure}}</h2>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div><!-- col end -->
+                                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
+                                                <div class="card card-counter bg-gradient-teal">
+                                                    <div class="card-body">
+                                                        <div class="row">
+                                                            <div class="col-5">
+                                                                <h2 class="text-white mt-1 mb-0">Total Income</h2>
+                                                            </div>
+                                                            <div class="col-5 text-center">
+                                                                <div class="mt-1 mb-0 text-white">
+                                                                    <h2 class="mb-0">{{$totalIncome}}</h2>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div><!-- col end -->
+                                            <div class="col-xl-3 col-lg-6 col-md-12 col-sm-12">
+                                                <div class="card card-counter bg-gradient-blue">
                                                     <div class="card-body">
                                                         <div class="row">
                                                             <div class="col-4">
@@ -46,7 +76,7 @@
                                                             </div>
                                                             <div class="col-8 text-center">
                                                                 <div class="mt-4 mb-0 text-white">
-                                                                    <h2 class="mb-0">54,234</h2>
+                                                                    <h2 class="mb-0">{{$cows}}</h2>
                                                                     <p class="text-white mt-1">Total Cows</p>
                                                                 </div>
                                                             </div>
@@ -55,7 +85,7 @@
                                                 </div>
                                             </div><!-- col end -->
                                             <div class="col-xl-3 col-lg-6 col-md-12 col-sm-12">
-                                                <div class="card card-counter bg-azure-dark ">
+                                                <div class="card card-counter bg-gradient-success ">
                                                     <div class="card-body">
                                                         <div class="row">
                                                             <div class="col-4">
@@ -63,7 +93,7 @@
                                                             </div>
                                                             <div class="col-8 text-center">
                                                                 <div class="mt-4 mb-0 text-white">
-                                                                    <h2 class="mb-0">80,956</h2>
+                                                                    <h2 class="mb-0">{{$milkingCows}}</h2>
                                                                     <p class="text-white mt-1">Milking Cows</p>
                                                                 </div>
                                                             </div>
@@ -72,7 +102,7 @@
                                                 </div>
                                             </div><!-- col end -->
                                             <div class="col-xl-3 col-lg-6 col-md-12 col-sm-12">
-                                                <div class="card card-counter bg-gradient-success">
+                                                <div class="card card-counter bg-azure-dark">
                                                     <div class="card-body">
                                                         <div class="row">
                                                             <div class="col-4">
@@ -80,7 +110,7 @@
                                                             </div>
                                                             <div class="col-8 text-center">
                                                                 <div class="mt-4 mb-0 text-white">
-                                                                    <h2 class="mb-0">34,762</h2>
+                                                                    <h2 class="mb-0">{{$pregnantCows}}</h2>
                                                                     <p class="text-white mt-1">Pregnant Cows</p>
                                                                 </div>
                                                             </div>
@@ -97,7 +127,7 @@
                                                             </div>
                                                             <div class="col-8 text-center">
                                                                 <div class="mt-4 mb-0 text-white">
-                                                                    <h2 class="mb-0">25,789</h2>
+                                                                    <h2 class="mb-0">{{$dryCows}}</h2>
                                                                     <p class="text-white mt-1 ">Dry Cows</p>
                                                                 </div>
                                                             </div>
@@ -116,7 +146,7 @@
                                                             </div>
                                                             <div class="col-8 text-center">
                                                                 <div class="mt-4 mb-0 text-white">
-                                                                    <h3 class="mb-0">80,956</h3>
+                                                                    <h3 class="mb-0">{{$deadCows}}</h3>
                                                                     <p class="text-white mt-1">Dead Cows </p>
                                                                 </div>
                                                             </div>
@@ -133,7 +163,7 @@
                                                             </div>
                                                             <div class="col-8 text-center">
                                                                 <div class="mt-4 mb-0 text-white">
-                                                                    <h3 class="mb-0">54,234</h3>
+                                                                    <h3 class="mb-0">{{$sickCows}}</h3>
                                                                     <p class="text-white mt-1">Sick Cows </p>
                                                                 </div>
                                                             </div>
@@ -151,7 +181,7 @@
                                                             </div>
                                                             <div class="col-8 text-center">
                                                                 <div class="mt-4 mb-0 text-white">
-                                                                    <h3 class="mb-0">25,789</h3>
+                                                                    <h3 class="mb-0">{{$soldCows}}</h3>
                                                                     <p class="text-white mt-1 ">Sold Cows</p>
                                                                 </div>
                                                             </div>
