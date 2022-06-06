@@ -41,8 +41,8 @@
                                             <input type="text" class="form-control" name="quantity" value="{{$cultivation->quantity}}" >
                                         </div>
                                         <div class="form-group">
-                                            <button type="submit" class="btn btn-outline-success">Submit</button>
-                                            <a href="{{ url()->previous() }}" class="btn btn-outline-danger">Back</a>
+                                            <button type="submit" class="btn btn-success">Submit</button>
+                                            <a href="{{ url()->previous() }}" class="btn btn-danger">Back</a>
                                         </div>
                                     </div>
                                     <div class="col-md-6">

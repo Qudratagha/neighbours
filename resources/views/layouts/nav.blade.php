@@ -52,8 +52,9 @@
 
                         {{-- Cow     --}}
                         @canany('cow-read')
-                        <li aria-haspopup="true"><a href="{{route('cattle.index','cow')}}" class="sub-icon @if(request()->route()->action['as'] == "cattle.index" && request()->route()->parameters['cattle_type'] == 'cow' || request()->route()->action['as'] == 'cattle_daily.show' || request()->route()->action['as'] == 'cow_sale.index' || request()->route()->action['as'] == 'milk_sale.index') active @endif"><i class="typcn typcn-th-large-outline hor-icon"></i> Cows <i class="fa fa-angle-down horizontal-icon"></i></a>
+                        <li aria-haspopup="true"><a class="sub-icon @if(request()->route()->action['as'] == "cattle.index" && request()->route()->parameters['cattle_type'] == 'cow' || request()->route()->action['as'] == 'cattle_daily.show' || request()->route()->action['as'] == 'cow_sale.index' || request()->route()->action['as'] == 'milk_sale.index') active @endif"><i class="typcn typcn-th-large-outline hor-icon"></i> Cows <i class="fa fa-angle-down horizontal-icon"></i></a>
                             <ul class="sub-menu">
+                                <li aria-haspopup="true"><a href="{{route('cattle.index','cow')}}"  class="sub-icon ">Cow List</a></li>
                                 <li aria-haspopup="true"><a href="{{route('milk_sale.index')}}"  class="sub-icon ">Milk Sale</a></li>
                                 <li aria-haspopup="true"><a href="{{route('cow_sale.index')}}"  class="sub-icon ">Cow Sale</a></li>
                             </ul>
@@ -62,8 +63,9 @@
 
                         {{-- Goat/Sheep  --}}
                         @canany('goat-read')
-                        <li aria-haspopup="true"><a href="{{route('cattle.index','goat')}}" class="sub-icon @if(request()->route()->action['as'] == 'cattle.index' && request()->route()->parameters['cattle_type'] == 'goat' || request()->route()->action['as'] == 'goat_daily.show' || request()->route()->action['as'] == 'goat_sale.index') active @endif"><i class="typcn typcn-th-large-outline hor-icon"></i> Goats/Sheeps <i class="fa fa-angle-down horizontal-icon"></i>                                                                  </a>
+                        <li aria-haspopup="true"><a class="sub-icon @if(request()->route()->action['as'] == 'cattle.index' && request()->route()->parameters['cattle_type'] == 'goat' || request()->route()->action['as'] == 'goat_daily.show' || request()->route()->action['as'] == 'goat_sale.index') active @endif"><i class="typcn typcn-th-large-outline hor-icon"></i> Goats/Sheeps <i class="fa fa-angle-down horizontal-icon"></i>                                                                  </a>
                             <ul class="sub-menu">
+                                <li aria-haspopup="true"><a href="{{route('cattle.index','goat')}}"  class="sub-icon ">Goat List</a></li>
                                 <li aria-haspopup="true"><a href="{{route('goat_sale.index')}}"  class="sub-icon ">Goat Sale</a></li>
                             </ul>
                         </li>
@@ -71,19 +73,21 @@
 
                         {{-- Poultry  --}}
                         @canany('poultry-read')
-                        <li aria-haspopup="true"><a href="{{route('poultry.index')}}" class="sub-icon @if(request()->route()->action['as'] == 'poultry.index') active @endif ||@if(request()->route()->action['as'] == 'poultry_daily.indexDaily') active @endif  "><i class="typcn typcn-arrow-move-outline"></i> Poultry <i class="fa fa-angle-down horizontal-icon"></i></a>
+                        <li aria-haspopup="true"><a  class="sub-icon @if(request()->route()->action['as'] == 'poultry.index') active @endif ||@if(request()->route()->action['as'] == 'poultry_daily.indexDaily') active @endif  "><i class="typcn typcn-arrow-move-outline"></i> Poultry <i class="fa fa-angle-down horizontal-icon"></i></a>
                             <ul class="sub-menu">
-                                <li aria-haspopup="true"><a href="{{route('poultry_daily.indexDaily')}}"  class="sub-icon @if(request()->route()->action['as'] == 'poultry_daily.indexDaily') active @endif">Poultry Daily</a></li>
+                                <li aria-haspopup="true"><a href="{{route('poultry.index')}}"  class="sub-icon">Poultry List</a></li>
+                                <li aria-haspopup="true"><a href="{{route('poultry_daily.indexDaily')}}"  class="sub-icon">Poultry Daily</a></li>
                             </ul>
                         </li>
                         @endcanany
 
                         {{-- Cultivation  --}}
                         @canany('cultivation-read')
-                            <li aria-haspopup="true"><a href="{{route('cultivation.index')}}" class="sub-icon @if(request()->route()->action['as'] == 'cultivation.index') active @endif"><i class="typcn typcn-th-large-outline hor-icon"></i> Cultivation <i class="fa fa-angle-down horizontal-icon"></i>                                                                  </a>
+                            <li aria-haspopup="true"><a  class="sub-icon @if(request()->route()->action['as'] == 'cultivation.index') active @endif"><i class="typcn typcn-th-large-outline hor-icon"></i> Cultivation <i class="fa fa-angle-down horizontal-icon"></i>                                                                  </a>
                                 <ul class="sub-menu">
-                                    <li aria-haspopup="true"><a href="{{route('cultivation.collectCultivation')}}"  class="sub-icon @if(request()->route()->action['as'] == 'cultivation.collectCultivation') active @endif">Cultivation Collect</a></li>
-                                    <li aria-haspopup="true"><a href="{{route('cultivation.saleCultivation')}}"  class="sub-icon @if(request()->route()->action['as'] == 'cultivation.saleCultivation') active @endif">Cultivation Sale</a></li>
+                                    <li aria-haspopup="true"><a href="{{route('cultivation.index')}}" class="sub-icon">Cultivation List</a></li>
+                                    <li aria-haspopup="true"><a href="{{route('cultivation.collectCultivation')}}"  class="sub-icon">Cultivation Collect</a></li>
+                                    <li aria-haspopup="true"><a href="{{route('cultivation.saleCultivation')}}"  class="sub-icon">Cultivation Sale</a></li>
                                 </ul>
                             </li>
                         @endcanany
@@ -95,46 +99,50 @@
 
                         {{-- Expenditure  --}}
                         @canany('dashboard-read')
-                        <li aria-haspopup="true"><a href="{{route('expenditure.index')}}" class="sub-icon @if(request()->route()->action['as'] == 'expenditure.index'||
-                                                                                                                                                                        request()->route()->action['as'] == 'cow_expenditure.index'||
-                                                                                                                                                                        request()->route()->action['as'] == 'goat_expenditure.index'||
-                                                                                                                                                                        request()->route()->action['as'] == 'poultry_expenditure.index'||
-                                                                                                                                                                        request()->route()->action['as'] == 'cultivation_expenditure.index'||
-                                                                                                                                                                        request()->route()->action['as'] == 'cow_expenditure_purchase.create') active @endif ">
-                                                                                                                                                                        <i class="typcn typcn-cog-outline"></i> Expenditure <i class="fa fa-angle-down horizontal-icon"></i></a>
+                        <li aria-haspopup="true"><a class="sub-icon @if(
+                                                    request()->route()->action['as'] == 'expenditure.index'||
+                                                    request()->route()->action['as'] == 'cow_expenditure.index'||
+                                                    request()->route()->action['as'] == 'goat_expenditure.index'||
+                                                    request()->route()->action['as'] == 'poultry_expenditure.index'||
+                                                    request()->route()->action['as'] == 'cultivation_expenditure.index'||
+                                                    request()->route()->action['as'] == 'cow_expenditure_purchase.create') active @endif ">
+                                                    <i class="typcn typcn-cog-outline"></i> Expenditure <i class="fa fa-angle-down horizontal-icon"></i></a>
                             <ul class="sub-menu">
-                                <li aria-haspopup="true" class="sub-menu-sub"><a href="{{route('cow_expenditure.index')}}">Cow</a>
+                                <li aria-haspopup="true" class="sub-icon"><a href="{{route('expenditure.index')}}">Farm Expenditure</a></li>
+
+                                <li aria-haspopup="true" class="sub-menu-sub"><a>Cow</a>
                                     <ul class="sub-menu">
+                                        <li aria-haspopup="true"><a href="{{route('cow_expenditure.index')}}">Cow Expenditure List</a></li>
                                         <li aria-haspopup="true"><a href="{{route('cow_expenditure_purchase.create')}}">Purchase Cow</a></li>
                                         <li aria-haspopup="true"><a href="{{route('cow_salary.create')}}">Cow Worker Salary</a></li>
                                     </ul>
                                 </li>
                                 <li aria-haspopup="true" class="sub-menu-sub"><a href="{{route('goat_expenditure.index')}}">Goat/Sheep</a>
                                     <ul class="sub-menu">
+                                        <li aria-haspopup="true"><a href="{{route('goat_expenditure.index')}}">Goat/Sheep Expenditure List</a></li>
                                         <li aria-haspopup="true"><a href="{{route('goat_expenditure_purchase.create')}}">Purchase Goat/Sheep</a></li>
                                         <li aria-haspopup="true"><a href="{{route('goat_salary.create')}}">Goat Worker Salary</a></li>
                                     </ul>
                                 </li>
-                                <li aria-haspopup="true" class="sub-menu-sub"><a href="{{route('poultry_expenditure.index')}}">Poultry</a>
+                                <li aria-haspopup="true" class="sub-menu-sub"><a>Poultry</a>
                                     <ul class="sub-menu">
+                                        <li aria-haspopup="true"><a href="{{route('poultry_expenditure.index')}}">Poultry Expenditure List</a></li>
                                         <li aria-haspopup="true"><a href="{{route('poultry_salary.create')}}">Poultry Worker Salary</a></li>
                                     </ul>
                                 </li>
-
                                 <li aria-haspopup="true" class="sub-menu-sub"><a href="{{route('cultivation_expenditure.index')}}">Cultivation</a>
                                     <ul class="sub-menu">
+                                        <li aria-haspopup="true"><a href="{{route('cultivation_expenditure.index')}}">Cultivation Expenditure List</a></li>
                                         <li aria-haspopup="true"><a href="{{route('cultivation_salary.create')}}">Cultivation Worker Salary</a></li>
                                     </ul>
                                 </li>
                             </ul>
                         </li>
                         @endcanany
-
                         {{-- Worker  --}}
                         @canany('dashboard-read')
                             <li aria-haspopup="true"><a href="{{route('worker.index')}}" class="sub-icon @if(request()->route()->action['as'] == 'worker.index') active @endif"><i class="typcn typcn-arrow-move-outline"></i> Worker </a></li>
                         @endcanany
-
                     </ul>
                 </nav>
                 <!--Nav end -->

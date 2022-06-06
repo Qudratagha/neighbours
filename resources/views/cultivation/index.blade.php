@@ -16,7 +16,7 @@
                 <div class="ml-auto">
 
                     <div class="input-group">
-                        <button type="button" class="btn btn-outline-info " data-toggle="modal" data-target="#add-cultivation">Add Cultivation</button>
+                        <button type="button" class="btn btn-info " data-toggle="modal" data-target="#add-cultivation">Add Cultivation</button>
                     </div>
                 </div>
             </div>
@@ -109,8 +109,8 @@
                             <input type="date" name="created_at" class="form-control">
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Close</button>
-                            <button type="submit" name="addCultivation" class="btn btn-outline-success">Submit </button>
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                            <button type="submit" name="addCultivation" class="btn btn-success">Submit </button>
                         </div>
                     </form>
                 </div>
