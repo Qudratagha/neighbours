@@ -61,7 +61,7 @@ class AccountSeeder extends Seeder
                 'parent_id' => '1'
             ],
             [
-                'name'      => 'Purchases',
+                'name'      => 'Purchase',
                 'parent_id' => '5'
             ],
             [
@@ -69,23 +69,7 @@ class AccountSeeder extends Seeder
                 'parent_id' => '4'
             ],
             [
-                'name'      => 'utilities',
-                'parent_id' => '5'
-            ],
-            [
                 'name'      => 'milk sale',
-                'parent_id' => '13'
-            ],
-            [
-                'name'      => 'wheat sale',
-                'parent_id' => '13'
-            ],
-            [
-                'name'      => 'cucumber sale',
-                'parent_id' => '13'
-            ],
-            [
-                'name'      => 'corn sale',
                 'parent_id' => '13'
             ],
             [
@@ -120,10 +104,217 @@ class AccountSeeder extends Seeder
                 'name'      => 'milk collection',
                 'parent_id' => '6'
             ],
+            //Expenditure
+            [
+            'name'      => 'FARM Salaries',
+            'parent_id' => '5'
+            ],
+            [
+                'name'      => 'FARM Purchases',
+                'parent_id' => '5'
+            ],
+            [
+                'name'      => 'FARM Medicines',
+                'parent_id' => '5'
+            ],
+            [
+                'name'      => 'FARM Vaccines',
+                'parent_id' => '5'
+            ],
+            [
+                'name'      => 'FARM Sheds',
+                'parent_id' => '5'
+            ],
+            [
+                'name'      => 'FARM utilities',
+                'parent_id' => '5'
+            ],
+            [
+                'name'      => 'FARM Others',
+                'parent_id' => '5'
+            ],
+             //cow expenditure
+            [
+                'name'      => 'Cow Salaries',
+                'parent_id' => '5'
+            ],
+            [
+                'name'      => 'Cow Purchases',
+                'parent_id' => '5'
+            ],
+            [
+                'name'      => 'Cow Medicines',
+                'parent_id' => '5'
+            ],
+            [
+                'name'      => 'Cow AI-kit',
+                'parent_id' => '5'
+            ],
+            [
+                'name'      => 'Cow Feeders',
+                'parent_id' => '5'
+            ],
+            [
+                'name'      => 'Cow Vaccines',
+                'parent_id' => '5'
+            ],
+            [
+                'name'      => 'Cow Medicine',
+                'parent_id' => '5'
+            ],
+            [
+                'name'      => 'Cow Sheds',
+                'parent_id' => '5'
+            ],
+            [
+                'name'      => 'Cow PackingMaterial',
+                'parent_id' => '5'
+            ],
+            [
+                'name'      => 'Cow utilities',
+                'parent_id' => '5'
+            ],
+            [
+                'name'      => 'Cow Transportation',
+                'parent_id' => '5'
+            ],
+            [
+                'name'      => 'Cow Others',
+                'parent_id' => '5'
+            ],
+
+            //goat/sheep expenditure
+            [
+                'name'      => 'Goat/Sheep Salaries',
+                'parent_id' => '5'
+            ],
+            [
+                'name'      => 'Goat/Sheep Purchases',
+                'parent_id' => '5'
+            ],
+            [
+                'name'      => 'Goat/Sheep Medicines',
+                'parent_id' => '5'
+            ],
+            [
+                'name'      => 'Goat/Sheep Feeders',
+                'parent_id' => '5'
+            ],
+            [
+                'name'      => 'Goat/Sheep Vaccines',
+                'parent_id' => '5'
+            ],
+            [
+                'name'      => 'Goat/Sheep Sheds',
+                'parent_id' => '5'
+            ],
+            [
+                'name'      => 'Goat/Sheep FeedingTray',
+                'parent_id' => '5'
+            ],
+            [
+                'name'      => 'Goat/Sheep utilities',
+                'parent_id' => '5'
+            ],
+            [
+                'name'      => 'Goat/Sheep Others',
+                'parent_id' => '5'
+            ],
+            //poultry expenditure
+            [
+                'name'      => 'Poultry Salaries',
+                'parent_id' => '5'
+            ],
+            [
+                'name'      => 'Poultry Purchases',
+                'parent_id' => '5'
+            ],
+            [
+                'name'      => 'Poultry Hen Purchase',
+                'parent_id' => '5'
+            ],
+            [
+                'name'      => 'Poultry Feed',
+                'parent_id' => '5'
+            ],
+            [
+                'name'      => 'Poultry Medicines',
+                'parent_id' => '5'
+            ],
+            [
+                'name'      => 'Poultry Feeding Tray',
+                'parent_id' => '5'
+            ],
+            [
+                'name'      => 'Poultry Vaccines',
+                'parent_id' => '5'
+            ],
+            [
+                'name'      => 'Poultry Sheds',
+                'parent_id' => '5'
+            ],
+            [
+                'name'      => 'Poultry Material',
+                'parent_id' => '5'
+            ],
+            [
+                'name'      => 'Poultry Utilities',
+                'parent_id' => '5'
+            ],
+            [
+                'name'      => 'Poultry Others',
+                'parent_id' => '5'
+            ],
+            //cultivation expenditure
+            [
+                'name'      => 'Cultivation Salaries',
+                'parent_id' => '5'
+            ],
+            [
+                'name'      => 'Cultivation Purchase',
+                'parent_id' => '5'
+            ],
+            [
+                'name'      => 'Cultivation Machine',
+                'parent_id' => '5'
+            ],
+            [
+                'name'      => 'Cultivation TubeWell',
+                'parent_id' => '5'
+            ],
+            [
+                'name'      => 'Cultivation Spray',
+                'parent_id' => '5'
+            ],
+            [
+                'name'      => 'Cultivation Plastic',
+                'parent_id' => '5'
+            ],
+            [
+                'name'      => 'Cultivation TunnelRepair',
+                'parent_id' => '5'
+            ],
+            [
+                'name'      => 'Cultivation PackingMaterial',
+                'parent_id' => '5'
+            ],
+            [
+                'name'      => 'Cultivation Transportation',
+                'parent_id' => '5'
+            ],
+            [
+                'name'      => 'Cultivation utilities',
+                'parent_id' => '5'
+            ],
+            [
+                'name'      => 'Cultivation Others',
+                'parent_id' => '5'
+            ],
+            //Expenditure End
 
             [
-                'name'      => 'wheat collection',
-                'parent_id' => '9'
+            'name'      => 'wheat collection',
+            'parent_id' => '9'
             ],
             [
                 'name'      => 'corn collection',
@@ -132,7 +323,21 @@ class AccountSeeder extends Seeder
             [
                 'name'      => 'cucumber collection',
                 'parent_id' => '9'
-            ]
+            ],
+
+            [
+                'name'      => 'wheat sale',
+                'parent_id' => '13'
+            ],
+            [
+                'name'      => 'cucumber sale',
+                'parent_id' => '13'
+            ],
+            [
+                'name'      => 'corn sale',
+                'parent_id' => '13'
+            ],
+
         ]);
 
 //        $account =

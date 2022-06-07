@@ -16,10 +16,11 @@ return new class extends Migration
         Schema::create('vaccinations', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('sub_head_id');
-            $table->string('name',45);
+            $table->string('name',45)->nullable();
+            $table->integer('quantity');
+
             $table->string('description');
             $table->timestamps();
-            $table->date('date');
 
             $table->foreign('sub_head_id')->references('id')->on('account_heads');
         });

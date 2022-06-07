@@ -15,10 +15,10 @@ return new class extends Migration
     {
         Schema::create('feeds', function (Blueprint $table) {
             $table->id();
-            $table->string('name',45);
+            $table->string('name',45)->nullable();
             $table->integer('quantity');
-            $table->boolean('cattle')->nullable();
-            $table->boolean('poultry')->nullable();
+            $table->integer('status');
+            $table->integer('cattle_type');
             $table->timestamps();
         });
     }

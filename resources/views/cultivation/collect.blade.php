@@ -16,7 +16,7 @@
                 <div class="ml-auto">
 
                     <div class="input-group">
-                        <button type="button" class="btn btn-outline-success " data-toggle="modal" data-target="#collect-cultivation">Collect Cultivation</button>
+                        <button type="button" class="btn btn-success " data-toggle="modal" data-target="#collect-cultivation">Collect Cultivation</button>
                     </div>
                 </div>
             </div>

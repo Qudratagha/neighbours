@@ -16,7 +16,7 @@
                 <div class="ml-auto">
 
                     <div class="input-group">
-                        <button type="button" class="btn btn-outline-info mr-2" data-toggle="modal" data-target="#add-cultivation">Cultivation Sale</button>
+                        <button type="button" class="btn btn-info mr-2" data-toggle="modal" data-target="#add-cultivation">Cultivation Sale</button>
 
                     </div>
                 </div>
@@ -128,8 +128,8 @@
                             <input type="text" name="description" class="form-control">
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Close</button>
-                            <button type="submit" id="btn" name="saleCultivation" class="btn btn-outline-success">Submit </button>
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                            <button type="submit" id="btn" name="saleCultivation" class="btn btn-success">Submit </button>
                         </div>
                     </form>
                 </div>
