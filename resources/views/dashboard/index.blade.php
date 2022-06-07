@@ -271,7 +271,7 @@
                                         <h3>Total Expenditures:</h3>
                                         <h3>Total Income:</h3>
                                         <hr>
-                                        <h3 class="text-center" style="font-weight: bold; font-size: 35px;">Overall Goat/Sheep Details</h3>
+                                        <h3 class="text-center" style="font-weight: bold; font-size: 35px;">Overall Goat Details</h3>
 
                                         <div class="row">
                                             <div class="col-xl-3 col-lg-6 col-md-12 col-sm-12">
@@ -283,8 +283,8 @@
                                                             </div>
                                                             <div class="col-8 text-center">
                                                                 <div class="mt-4 mb-0 text-white">
-                                                                    <h2 class="mb-0">54,234</h2>
-                                                                    <p class="text-white mt-1">Total Goat/Sheep</p>
+                                                                    <h2 class="mb-0">{{$allGoats}}</h2>
+                                                                    <p class="text-white mt-1">Total Goat</p>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -300,8 +300,8 @@
                                                             </div>
                                                             <div class="col-8 text-center">
                                                                 <div class="mt-4 mb-0 text-white">
-                                                                    <h2 class="mb-0">80,956</h2>
-                                                                    <p class="text-white mt-1">Sick</p>
+                                                                    <h2 class="mb-0">{{$maleGoats}}</h2>
+                                                                    <p class="text-white mt-1">Male</p>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -317,31 +317,32 @@
                                                             </div>
                                                             <div class="col-8 text-center">
                                                                 <div class="mt-4 mb-0 text-white">
-                                                                    <h2 class="mb-0">34,762</h2>
-                                                                    <p class="text-white mt-1">Dry</p>
+                                                                    <h2 class="mb-0">{{$femaleGoats}}</h2>
+                                                                    <p class="text-white mt-1">Female</p>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div><!-- col end -->
+                                            </div>
                                             <div class="col-xl-3 col-lg-6 col-md-12 col-sm-12">
-                                                <div class="card card-counter bg-gradient-pink">
+                                                <div class="card card-counter bg-gradient-teal">
                                                     <div class="card-body">
                                                         <div class="row">
                                                             <div class="col-4">
-                                                                <i class="si si-paper-plane mt-3 mb-0 text-white-transparent"></i>
+                                                                <i class="fa fa-suitcase mt-3 mb-0 text-white-transparent"></i>
                                                             </div>
                                                             <div class="col-8 text-center">
                                                                 <div class="mt-4 mb-0 text-white">
-                                                                    <h2 class="mb-0">25,789</h2>
-                                                                    <p class="text-white mt-1 ">Dead</p>
+                                                                    <h3 class="mb-0">{{$pregnantGoats}}</h3>
+                                                                    <p class="text-white mt-1">Pregnant</p>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div><!-- col end -->
+                                            <!-- col end -->
                                         </div>
                                         <div class="row row-cards">
                                             <div class="col-xl-3 col-lg-6 col-md-12 col-sm-12">
@@ -353,8 +354,8 @@
                                                             </div>
                                                             <div class="col-8 text-center">
                                                                 <div class="mt-4 mb-0 text-white">
-                                                                    <h3 class="mb-0">80,956</h3>
-                                                                    <p class="text-white mt-1">Healthy</p>
+                                                                    <h3 class="mb-0">{{$sickGoats}}</h3>
+                                                                    <p class="text-white mt-1">Sick</p>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -370,7 +371,7 @@
                                                             </div>
                                                             <div class="col-8 text-center">
                                                                 <div class="mt-4 mb-0 text-white">
-                                                                    <h3 class="mb-0">54,234</h3>
+                                                                    <h3 class="mb-0">{{$soldGoats}}</h3>
                                                                     <p class="text-white mt-1">Sold</p>
                                                                 </div>
                                                             </div>
@@ -388,8 +389,8 @@
                                                             </div>
                                                             <div class="col-8 text-center">
                                                                 <div class="mt-4 mb-0 text-white">
-                                                                    <h3 class="mb-0">25,789</h3>
-                                                                    <p class="text-white mt-1 ">Vaccinated</p>
+                                                                    <h3 class="mb-0">{{$dryGoats}}</h3>
+                                                                    <p class="text-white mt-1 ">Dry</p>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -397,16 +398,16 @@
                                                 </div>
                                             </div><!-- col end -->
                                             <div class="col-xl-3 col-lg-6 col-md-12 col-sm-12">
-                                                <div class="card card-counter bg-gradient-teal">
+                                                <div class="card card-counter bg-gradient-pink">
                                                     <div class="card-body">
                                                         <div class="row">
                                                             <div class="col-4">
-                                                                <i class="fa fa-suitcase mt-3 mb-0 text-white-transparent"></i>
+                                                                <i class="si si-paper-plane mt-3 mb-0 text-white-transparent"></i>
                                                             </div>
                                                             <div class="col-8 text-center">
                                                                 <div class="mt-4 mb-0 text-white">
-                                                                    <h3 class="mb-0">34,762</h3>
-                                                                    <p class="text-white mt-1">Pregnant</p>
+                                                                    <h2 class="mb-0">{{$deadGoats}}</h2>
+                                                                    <p class="text-white mt-1 ">Dead</p>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -416,6 +417,152 @@
                                         </div>
                                         <hr>
 
+                                        <!-- Sheep -->
+                                        <h3 class="text-center" style="font-weight: bold; font-size: 35px;">Overall Sheep Details</h3>
+                                        <div class="row">
+                                            <div class="col-xl-3 col-lg-6 col-md-12 col-sm-12">
+                                                <div class="card card-counter bg-gradient-danger">
+                                                    <div class="card-body">
+                                                        <div class="row">
+                                                            <div class="col-4">
+                                                                <i class="si si-eye mt-3 mb-0 text-white-transparent"></i>
+                                                            </div>
+                                                            <div class="col-8 text-center">
+                                                                <div class="mt-4 mb-0 text-white">
+                                                                    <h2 class="mb-0">{{$allSheeps}}</h2>
+                                                                    <p class="text-white mt-1">Total Sheep</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div><!-- col end -->
+                                            <div class="col-xl-3 col-lg-6 col-md-12 col-sm-12">
+                                                <div class="card card-counter bg-azure-dark ">
+                                                    <div class="card-body">
+                                                        <div class="row">
+                                                            <div class="col-4">
+                                                                <i class="si si-basket mt-3 mb-0 text-white-transparent"></i>
+                                                            </div>
+                                                            <div class="col-8 text-center">
+                                                                <div class="mt-4 mb-0 text-white">
+                                                                    <h2 class="mb-0">{{$maleSheeps}}</h2>
+                                                                    <p class="text-white mt-1">Male</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div><!-- col end -->
+                                            <div class="col-xl-3 col-lg-6 col-md-12 col-sm-12">
+                                                <div class="card card-counter bg-gradient-success">
+                                                    <div class="card-body">
+                                                        <div class="row">
+                                                            <div class="col-4">
+                                                                <i class="si si-people mt-3 mb-0 text-white-transparent"></i>
+                                                            </div>
+                                                            <div class="col-8 text-center">
+                                                                <div class="mt-4 mb-0 text-white">
+                                                                    <h2 class="mb-0">{{$femaleSheeps}}</h2>
+                                                                    <p class="text-white mt-1">Female</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-3 col-lg-6 col-md-12 col-sm-12">
+                                                <div class="card card-counter bg-gradient-teal">
+                                                    <div class="card-body">
+                                                        <div class="row">
+                                                            <div class="col-4">
+                                                                <i class="fa fa-suitcase mt-3 mb-0 text-white-transparent"></i>
+                                                            </div>
+                                                            <div class="col-8 text-center">
+                                                                <div class="mt-4 mb-0 text-white">
+                                                                    <h3 class="mb-0">{{$pregnantSheeps}}</h3>
+                                                                    <p class="text-white mt-1">Pregnant</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div><!-- col end -->
+                                            <!-- col end -->
+                                        </div>
+                                        <div class="row row-cards">
+                                            <div class="col-xl-3 col-lg-6 col-md-12 col-sm-12">
+                                                <div class="card card-counter bg-gray-dark-dark">
+                                                    <div class="card-body">
+                                                        <div class="row">
+                                                            <div class="col-4">
+                                                                <i class="fa fa-line-chart mt-3 mb-0 text-white-transparent"></i>
+                                                            </div>
+                                                            <div class="col-8 text-center">
+                                                                <div class="mt-4 mb-0 text-white">
+                                                                    <h3 class="mb-0">{{$sickSheeps}}</h3>
+                                                                    <p class="text-white mt-1">Sick</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div><!-- col end -->
+                                            <div class="col-xl-3 col-lg-6 col-md-12 col-sm-12">
+                                                <div class="card card-counter badge-gradient-warning">
+                                                    <div class="card-body">
+                                                        <div class="row">
+                                                            <div class="col-4">
+                                                                <i class="fa fa-sign-out mt-3 mb-0 text-white-transparent"></i>
+                                                            </div>
+                                                            <div class="col-8 text-center">
+                                                                <div class="mt-4 mb-0 text-white">
+                                                                    <h3 class="mb-0">{{$soldSheeps}}</h3>
+                                                                    <p class="text-white mt-1">Sold</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- col end -->
+                                            <div class="col-xl-3 col-lg-6 col-md-12 col-sm-12">
+                                                <div class="card card-counter bg-gradient-info">
+                                                    <div class="card-body">
+                                                        <div class="row">
+                                                            <div class="col-4">
+                                                                <i class="fa fa-reply-all mt-3 mb-0 text-white-transparent"></i>
+                                                            </div>
+                                                            <div class="col-8 text-center">
+                                                                <div class="mt-4 mb-0 text-white">
+                                                                    <h3 class="mb-0">{{$drySheeps}}</h3>
+                                                                    <p class="text-white mt-1 ">Dry</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-3 col-lg-6 col-md-12 col-sm-12">
+                                                <div class="card card-counter bg-gradient-pink">
+                                                    <div class="card-body">
+                                                        <div class="row">
+                                                            <div class="col-4">
+                                                                <i class="si si-paper-plane mt-3 mb-0 text-white-transparent"></i>
+                                                            </div>
+                                                            <div class="col-8 text-center">
+                                                                <div class="mt-4 mb-0 text-white">
+                                                                    <h2 class="mb-0">{{$deadSheeps}}</h2>
+                                                                    <p class="text-white mt-1 ">Dead</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- col end -->
+                                        </div>
+                                        <hr>
                                         <h3 class="text-center" style="font-weight: bold;">Total Goat/Sheep Purchased</h3>
                                         <div class="row">
                                             <div class="col-lg-12 col-md-12">
