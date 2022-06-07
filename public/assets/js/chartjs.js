@@ -8,7 +8,7 @@ $(function() {
 			datasets: [{
 				label: 'Profits',
 				data: [20, 420, 210, 354, 580, 320, 480],
-				borderWidth: 2,
+				// borderWidth: 2,
 				backgroundColor: 'transparent',
 				borderColor: '#1753fc',
 				borderWidth: 4,
@@ -60,7 +60,7 @@ $(function() {
 			datasets: [{
 				label: 'Sales',
 				data: [200, 450, 290, 367, 256, 543, 345],
-				borderWidth: 2,
+				// borderWidth: 2,
 				backgroundColor: '#1753fc',
 				borderColor: '#1753fc',
 				borderWidth: 2.0,
@@ -71,9 +71,9 @@ $(function() {
 		options: {
 			responsive: true,
 			maintainAspectRatio: false,
-			legend: {
-				display: true
-			},
+			// legend: {
+			// 	display: true
+			// },
 			scales: {
 				yAxes: [{
 					ticks: {

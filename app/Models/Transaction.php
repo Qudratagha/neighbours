@@ -45,11 +45,11 @@ class Transaction extends Model
 
         $totalWheat = Transaction::where('transaction_type_id', 3)
             ->where('account_head_id', 9)
-            ->where('sub_head_id', 27)
+            ->where('sub_head_id', 73)
             ->sum('quantity');
 
         $soldWheat = Transaction::where('transaction_type_id', 1)
-            ->where('account_head_id', 13)
+            ->where('account_head_id', 74)
             ->where('sub_head_id', 16)
             ->sum('quantity');
 
@@ -61,7 +61,7 @@ class Transaction extends Model
 
         $totalWheat = Transaction::where('transaction_type_id', 3)
             ->where('account_head_id', 9)
-            ->where('sub_head_id', 28)
+            ->where('sub_head_id', 75)
             ->sum('quantity');
 
         $soldWheat = Transaction::where('transaction_type_id', 1)

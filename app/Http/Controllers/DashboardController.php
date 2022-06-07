@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cattle;
+use App\Models\Cultivation;
 use App\Models\Pregnant;
 use App\Models\Sick;
+use App\Models\Transaction;
 use Carbon\Traits\Localization;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -42,6 +44,23 @@ class DashboardController extends Controller
         $drySheeps = Cattle::where('cattle_type_id', 3)->where('gender', 0)->whereNotNull('dry_date')->count();
         $deadSheeps = Cattle::where('cattle_type_id', 3)->whereNotNull('dead_date')->count();
 
-        return view('/dashboard.index', compact('allGoats', 'maleGoats', 'femaleGoats', 'pregnantGoats', 'sickGoats', 'soldGoats', 'dryGoats', 'deadGoats', 'allSheeps', 'maleSheeps', 'femaleSheeps', 'pregnantSheeps', 'sickSheeps', 'soldSheeps', 'drySheeps', 'deadSheeps'));
+        //Graph
+
+        $transactions = Transaction::where('account_head_id', 7)->get('date');
+
+
+        //Cultivation Wheat
+        $wheatAreaCultivated = Cultivation::where('cultivation_type_id', 1)->sum('total_area_cultivated');
+        $wheatCollected = Transaction::where('transaction_type_id', 3)->where('sub_head_id', 73)->sum('quantity');
+
+        //Cultivation Corn
+        $cornAreaCultivated = Cultivation::where('cultivation_type_id', 2)->sum('total_area_cultivated');
+        $cornCollected = Transaction::where('transaction_type_id', 3)->where('sub_head_id', 74)->sum('quantity');
+
+        //Cultivation Cucumber
+        $cucumberAreaCultivated = Cultivation::where('cultivation_type_id', 3)->sum('total_area_cultivated');
+        $cucumberCollected = Transaction::where('transaction_type_id', 3)->where('sub_head_id', 75)->sum('quantity');
+
+        return view('/dashboard.index', compact('transactions','allGoats', 'maleGoats', 'femaleGoats', 'pregnantGoats', 'sickGoats', 'soldGoats', 'dryGoats', 'deadGoats', 'allSheeps', 'maleSheeps', 'femaleSheeps', 'pregnantSheeps', 'sickSheeps', 'soldSheeps', 'drySheeps', 'deadSheeps', 'wheatAreaCultivated', 'wheatCollected', 'cornAreaCultivated', 'cornCollected', 'cucumberAreaCultivated', 'cucumberCollected'));
     }
 }

@@ -13,11 +13,8 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="mb-0 card-title">{{ __('Dashboard') }}</h3>
-                        </div>
-                        <div class="card-body">
-                            <div class="tab-menu-heading">
-                                <div class="tabs-menu ">
+{{--                            <div class="tab-menu-heading">--}}
+                                <div class="tabs-menu">
                                     <!-- Tabs -->
                                     <ul class="nav panel-tabs">
                                         <li class=""><a href="#tab11" class="active" data-toggle="tab">Cow</a></li>
@@ -27,8 +24,9 @@
                                         <li><a href="#tab15" data-toggle="tab">Overall farm</a></li>
                                     </ul>
                                 </div>
-                            </div>
-
+{{--                            </div>--}}
+                        </div>
+                        <div class="card-body">
                             <div class="panel-body tabs-menu-body">
                                 <div class="tab-content">
                                     <div class="tab-pane active " id="tab11">
@@ -563,29 +561,29 @@
                                             <!-- col end -->
                                         </div>
                                         <hr>
-                                        <h3 class="text-center" style="font-weight: bold;">Total Goat/Sheep Purchased</h3>
+                                        <h3 class="text-center" style="font-weight: bold;">Total Goats Purchased/Sold</h3>
                                         <div class="row">
                                             <div class="col-lg-12 col-md-12">
                                                 <div class="card">
                                                     <div class="card-header">
-                                                        <h3 class="card-title">Single Barchart</h3>
+                                                        <h3 class="card-title">Goat</h3>
                                                     </div>
                                                     <div class="card-body"><div class="chartjs-size-monitor" style="position: absolute; inset: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
-                                                        <canvas id="Chart2" class="h-200 chartjs-render-monitor" width="528" height="200" style="display: block; width: 528px; height: 200px;"></canvas>
+                                                        <canvas id="goatsPurchasedSold" class="h-200 chartjs-render-monitor" width="528" height="200" style="display: block; width: 528px; height: 200px;"></canvas>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
 
-                                        <h3 class="text-center" style="font-weight: bold">Total Goat/Sheep Sold</h3>
+                                        <h3 class="text-center" style="font-weight: bold">Total Sheeps Purchased/Sold</h3>
                                         <div class="row">
                                             <div class="col-lg-12 col-md-12">
                                                 <div class="card">
                                                     <div class="card-header">
-                                                        <h3 class="card-title">Single Barchart</h3>
+                                                        <h3 class="card-title">Sheep</h3>
                                                     </div>
                                                     <div class="card-body"><div class="chartjs-size-monitor" style="position: absolute; inset: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
-                                                        <canvas id="Chart2" class="h-200 chartjs-render-monitor" width="528" height="200" style="display: block; width: 528px; height: 200px;"></canvas>
+                                                        <canvas id="sheepPurchasedSold" class="h-200 chartjs-render-monitor" width="528" height="200" style="display: block; width: 528px; height: 200px;"></canvas>
                                                     </div>
                                                 </div>
                                             </div>
@@ -745,9 +743,9 @@
                                         <h3>Total Expenditures:</h3>
                                         <h3>Total Income:</h3>
                                         <hr>
-                                        <h3 class="text-center" style="font-weight: bold; font-size: 35px;">Overall Cultivation Details</h3>
+                                        <h3 class="text-center" style="font-weight: bold; font-size: 35px;">Wheat Details</h3>
                                         <div class="row">
-                                            <div class="col-xl-3 col-lg-6 col-md-12 col-sm-12">
+                                            <div class="col-xl-4 col-lg-6 col-md-12 col-sm-12">
                                                 <div class="card card-counter bg-gradient-danger">
                                                     <div class="card-body">
                                                         <div class="row">
@@ -756,15 +754,15 @@
                                                             </div>
                                                             <div class="col-8 text-center">
                                                                 <div class="mt-4 mb-0 text-white">
-                                                                    <h2 class="mb-0">54,234</h2>
+                                                                    <h2 class="mb-0">{{$wheatAreaCultivated}}</h2>
                                                                     <p class="text-white mt-1">Area Cultivated</p>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div><!-- col end -->
-                                            <div class="col-xl-3 col-lg-6 col-md-12 col-sm-12">
+                                            </div>
+                                            <div class="col-xl-4 col-lg-6 col-md-12 col-sm-12">
                                                 <div class="card card-counter bg-azure-dark ">
                                                     <div class="card-body">
                                                         <div class="row">
@@ -773,15 +771,15 @@
                                                             </div>
                                                             <div class="col-8 text-center">
                                                                 <div class="mt-4 mb-0 text-white">
-                                                                    <h2 class="mb-0">80,956</h2>
-                                                                    <p class="text-white mt-1">Wheat</p>
+                                                                    <h2 class="mb-0">{{$wheatCollected}} Kg</h2>
+                                                                    <p class="text-white mt-1">Collected Wheat</p>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div><!-- col end -->
-                                            <div class="col-xl-3 col-lg-6 col-md-12 col-sm-12">
+                                            </div>
+                                            <div class="col-xl-4 col-lg-6 col-md-12 col-sm-12">
                                                 <div class="card card-counter bg-gradient-success">
                                                     <div class="card-body">
                                                         <div class="row">
@@ -791,31 +789,125 @@
                                                             <div class="col-8 text-center">
                                                                 <div class="mt-4 mb-0 text-white">
                                                                     <h2 class="mb-0">34,762</h2>
-                                                                    <p class="text-white mt-1">Corn</p>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div><!-- col end -->
-                                            <div class="col-xl-3 col-lg-6 col-md-12 col-sm-12">
-                                                <div class="card card-counter bg-gradient-pink">
-                                                    <div class="card-body">
-                                                        <div class="row">
-                                                            <div class="col-4">
-                                                                <i class="si si-paper-plane mt-3 mb-0 text-white-transparent"></i>
-                                                            </div>
-                                                            <div class="col-8 text-center">
-                                                                <div class="mt-4 mb-0 text-white">
-                                                                    <h2 class="mb-0">25,789</h2>
-                                                                    <p class="text-white mt-1 ">Cucumber</p>
+                                                                    <p class="text-white mt-1">Sold Wheat</p>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <!-- col end -->
+                                        </div>
+                                        <hr>
+
+                                        <h3 class="text-center" style="font-weight: bold; font-size: 35px;">Corn Details</h3>
+                                        <div class="row">
+                                            <div class="col-xl-4 col-lg-6 col-md-12 col-sm-12">
+                                                <div class="card card-counter bg-gradient-danger">
+                                                    <div class="card-body">
+                                                        <div class="row">
+                                                            <div class="col-4">
+                                                                <i class="si si-eye mt-3 mb-0 text-white-transparent"></i>
+                                                            </div>
+                                                            <div class="col-8 text-center">
+                                                                <div class="mt-4 mb-0 text-white">
+                                                                    <h2 class="mb-0">{{$cornAreaCultivated}}</h2>
+                                                                    <p class="text-white mt-1">Area Cultivated</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-4 col-lg-6 col-md-12 col-sm-12">
+                                                <div class="card card-counter bg-azure-dark ">
+                                                    <div class="card-body">
+                                                        <div class="row">
+                                                            <div class="col-4">
+                                                                <i class="si si-basket mt-3 mb-0 text-white-transparent"></i>
+                                                            </div>
+                                                            <div class="col-8 text-center">
+                                                                <div class="mt-4 mb-0 text-white">
+                                                                    <h2 class="mb-0">{{$cornCollected}} Kg</h2>
+                                                                    <p class="text-white mt-1">Collected Corn</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-4 col-lg-6 col-md-12 col-sm-12">
+                                                <div class="card card-counter bg-gradient-success">
+                                                    <div class="card-body">
+                                                        <div class="row">
+                                                            <div class="col-4">
+                                                                <i class="si si-people mt-3 mb-0 text-white-transparent"></i>
+                                                            </div>
+                                                            <div class="col-8 text-center">
+                                                                <div class="mt-4 mb-0 text-white">
+                                                                    <h2 class="mb-0">34,762</h2>
+                                                                    <p class="text-white mt-1">Sold Corn</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <hr>
+
+                                        <h3 class="text-center" style="font-weight: bold; font-size: 35px;">Cucumber Details</h3>
+                                        <div class="row">
+                                            <div class="col-xl-4 col-lg-6 col-md-12 col-sm-12">
+                                                <div class="card card-counter bg-gradient-danger">
+                                                    <div class="card-body">
+                                                        <div class="row">
+                                                            <div class="col-4">
+                                                                <i class="si si-eye mt-3 mb-0 text-white-transparent"></i>
+                                                            </div>
+                                                            <div class="col-8 text-center">
+                                                                <div class="mt-4 mb-0 text-white">
+                                                                    <h2 class="mb-0">{{$cucumberAreaCultivated}}</h2>
+                                                                    <p class="text-white mt-1">Area Cultivated</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-4 col-lg-6 col-md-12 col-sm-12">
+                                                <div class="card card-counter bg-azure-dark ">
+                                                    <div class="card-body">
+                                                        <div class="row">
+                                                            <div class="col-4">
+                                                                <i class="si si-basket mt-3 mb-0 text-white-transparent"></i>
+                                                            </div>
+                                                            <div class="col-8 text-center">
+                                                                <div class="mt-4 mb-0 text-white">
+                                                                    <h2 class="mb-0">{{$cucumberCollected}} Kg</h2>
+                                                                    <p class="text-white mt-1">Collected Cucumber</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-4 col-lg-6 col-md-12 col-sm-12">
+                                                <div class="card card-counter bg-gradient-success">
+                                                    <div class="card-body">
+                                                        <div class="row">
+                                                            <div class="col-4">
+                                                                <i class="si si-people mt-3 mb-0 text-white-transparent"></i>
+                                                            </div>
+                                                            <div class="col-8 text-center">
+                                                                <div class="mt-4 mb-0 text-white">
+                                                                    <h2 class="mb-0">34,762</h2>
+                                                                    <p class="text-white mt-1">Sold Cucumber</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                         <hr>
 
@@ -832,10 +924,10 @@
                                             <div class="col-lg-12 col-md-12">
                                                 <div class="card">
                                                     <div class="card-header">
-                                                        <h3 class="card-title">Single Barchart</h3>
+                                                        <h3 class="card-title">Wheat</h3>
                                                     </div>
                                                     <div class="card-body"><div class="chartjs-size-monitor" style="position: absolute; inset: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
-                                                        <canvas id="Chart2" class="h-200 chartjs-render-monitor" width="528" height="200" style="display: block; width: 528px; height: 200px;"></canvas>
+                                                        <canvas id="wheat" class="h-200 chartjs-render-monitor" width="528" height="200" style="display: block; width: 528px; height: 200px;"></canvas>
                                                     </div>
                                                 </div>
                                             </div>
@@ -854,10 +946,10 @@
                                             <div class="col-lg-12 col-md-12">
                                                 <div class="card">
                                                     <div class="card-header">
-                                                        <h3 class="card-title">Single Barchart</h3>
+                                                        <h3 class="card-title">Corn</h3>
                                                     </div>
                                                     <div class="card-body"><div class="chartjs-size-monitor" style="position: absolute; inset: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
-                                                        <canvas id="Chart2" class="h-200 chartjs-render-monitor" width="528" height="200" style="display: block; width: 528px; height: 200px;"></canvas>
+                                                        <canvas id="corn" class="h-200 chartjs-render-monitor" width="528" height="200" style="display: block; width: 528px; height: 200px;"></canvas>
                                                     </div>
                                                 </div>
                                             </div>
@@ -877,10 +969,10 @@
                                             <div class="col-lg-12 col-md-12">
                                                 <div class="card">
                                                     <div class="card-header">
-                                                        <h3 class="card-title">Single Barchart</h3>
+                                                        <h3 class="card-title">Cucumber</h3>
                                                     </div>
                                                     <div class="card-body"><div class="chartjs-size-monitor" style="position: absolute; inset: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
-                                                        <canvas id="Chart2" class="h-200 chartjs-render-monitor" width="528" height="200" style="display: block; width: 528px; height: 200px;"></canvas>
+                                                        <canvas id="cucumber" class="h-200 chartjs-render-monitor" width="528" height="200" style="display: block; width: 528px; height: 200px;"></canvas>
                                                     </div>
                                                 </div>
                                             </div>
@@ -911,11 +1003,239 @@
 @section('more-script')
     <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
-<<<<<<< HEAD
+
     <script>
         $('input[name="dates"]').daterangepicker();
-    </script>
-=======
 
->>>>>>> ba839eca1dcc0c3e6f831244c2ac756ac25f45dd
+        var ctx = document.getElementById("goatsPurchasedSold");
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"],
+                labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"],
+                datasets: [{
+                    label: "Purchase",
+                    data: [65, 59, 80, 81, 56, 55, 40],
+                    borderColor: "#1753fc",
+                    borderWidth: "0",
+                    backgroundColor: "#1753fc"
+                }, {
+                    label: "Sold",
+                    data: [28, 48, 40, 19, 86, 27, 90],
+                    borderColor: "#9258f1",
+                    borderWidth: "0",
+                    backgroundColor: "#9258f1"
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    xAxes: [{
+                        ticks: {
+                            fontColor: "#bbc1ca",
+                        },
+                        gridLines: {
+                            color: 'rgba(0,0,0,0.03)'
+                        }
+                    }],
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true,
+                            fontColor: "#bbc1ca",
+                        },
+                        gridLines: {
+                            color: 'rgba(0,0,0,0.03)'
+                        },
+                    }]
+                },
+                legend: {
+                    labels: {
+                        fontColor: "#bbc1ca"
+                    },
+                },
+            }
+        });
+        var ctx = document.getElementById("sheepPurchasedSold");
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"],
+                // labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"],
+                datasets: [{
+                    label: "Purchase",
+                    data: [65, 59, 80, 81, 56, 55, 40],
+                    borderColor: "#1753fc",
+                    borderWidth: "0",
+                    backgroundColor: "#1753fc"
+                }, {
+                    label: "Sold",
+                    data: [28, 48, 40, 19, 86, 27, 90],
+                    borderColor: "#9258f1",
+                    borderWidth: "0",
+                    backgroundColor: "#9258f1"
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    xAxes: [{
+                        ticks: {
+                            fontColor: "#bbc1ca",
+                        },
+                        gridLines: {
+                            color: 'rgba(0,0,0,0.03)'
+                        }
+                    }],
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true,
+                            fontColor: "#bbc1ca",
+                        },
+                        gridLines: {
+                            color: 'rgba(0,0,0,0.03)'
+                        },
+                    }]
+                },
+                legend: {
+                    labels: {
+                        fontColor: "#bbc1ca"
+                    },
+                },
+            }
+        });
+
+        var ctx = document.getElementById("wheat");
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"],
+                // labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"],
+                datasets: [{
+                    label: "Purchase",
+                    data: [65, 59, 80, 81, 56, 55, 40],
+                    borderColor: "#1753fc",
+                    borderWidth: "0",
+                    backgroundColor: "#1753fc"
+                }],
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    xAxes: [{
+                        ticks: {
+                            fontColor: "#bbc1ca",
+                        },
+                        gridLines: {
+                            color: 'rgba(0,0,0,0.03)'
+                        }
+                    }],
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true,
+                            fontColor: "#bbc1ca",
+                        },
+                        gridLines: {
+                            color: 'rgba(0,0,0,0.03)'
+                        },
+                    }]
+                },
+                legend: {
+                    labels: {
+                        fontColor: "#bbc1ca"
+                    },
+                },
+            }
+        });
+        var ctx = document.getElementById("corn");
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"],
+                // labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"],
+                datasets: [{
+                    label: "Purchase",
+                    data: [65, 59, 80, 81, 56, 55, 40],
+                    borderColor: "#1753fc",
+                    borderWidth: "0",
+                    backgroundColor: "#1753fc"
+                }],
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    xAxes: [{
+                        ticks: {
+                            fontColor: "#bbc1ca",
+                        },
+                        gridLines: {
+                            color: 'rgba(0,0,0,0.03)'
+                        }
+                    }],
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true,
+                            fontColor: "#bbc1ca",
+                        },
+                        gridLines: {
+                            color: 'rgba(0,0,0,0.03)'
+                        },
+                    }]
+                },
+                legend: {
+                    labels: {
+                        fontColor: "#bbc1ca"
+                    },
+                },
+            }
+        });
+
+        var ctx = document.getElementById("cucumber");
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"],
+                // labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"],
+                datasets: [{
+                    label: "Purchase",
+                    data: [65, 59, 80, 81, 56, 55, 40],
+                    borderColor: "#1753fc",
+                    borderWidth: "0",
+                    backgroundColor: "#1753fc"
+                }],
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    xAxes: [{
+                        ticks: {
+                            fontColor: "#bbc1ca",
+                        },
+                        gridLines: {
+                            color: 'rgba(0,0,0,0.03)'
+                        }
+                    }],
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true,
+                            fontColor: "#bbc1ca",
+                        },
+                        gridLines: {
+                            color: 'rgba(0,0,0,0.03)'
+                        },
+                    }]
+                },
+                legend: {
+                    labels: {
+                        fontColor: "#bbc1ca"
+                    },
+                },
+            }
+        });
+    </script>
+
 @endsection

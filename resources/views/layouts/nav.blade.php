@@ -67,6 +67,7 @@
                             <ul class="sub-menu">
                                 <li aria-haspopup="true"><a href="{{route('cattle.index','goat')}}"  class="sub-icon ">Goat List</a></li>
                                 <li aria-haspopup="true"><a href="{{route('goat_sale.index')}}"  class="sub-icon ">Goat Sale</a></li>
+                                <li aria-haspopup="true"><a href="{{route('goat_sale.index')}}"  class="sub-icon ">Goat Feed</a></li>
                             </ul>
                         </li>
                         @endcanany
