@@ -13,10 +13,7 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="mb-0 card-title">{{ __('Dashboard') }}</h3>
-                        </div>
-                        <div class="card-body">
-                            <div class="tab-menu-heading">
+
                                 <div class="tabs-menu ">
                                     <!-- Tabs -->
                                     <ul class="nav panel-tabs">
@@ -27,7 +24,9 @@
                                         <li><a href="#tab15" data-toggle="tab">Overall farm</a></li>
                                     </ul>
                                 </div>
-                            </div>
+
+                        </div>
+                        <div class="card-body">
 
                             <div class="panel-body tabs-menu-body">
                                 <div class="tab-content">
@@ -211,15 +210,19 @@
 
                                         <!-- Tabs end -->
 
-                                        <h3 class="text-center" style="font-weight: bold;">One Cow Total Collection</h3>
                                         <div class="row">
                                             <div class="col-lg-12 col-md-12">
                                                 <div class="card">
                                                     <div class="card-header">
-                                                        <h3 class="card-title">Single Barchart</h3>
+                                                        <h3 class="card-title">Single Cow Milk Collection</h3>
+                                                        <select name="" id="getCowID" style="position: absolute; right: 0px">
+                                                                @foreach( $cowSerials as $cowSerial)
+                                                                <option value="{{$cowSerial->account_head_id}}">{{$cowSerial->serial_no}}</option>
+                                                                @endforeach
+                                                        </select>
                                                     </div>
-                                                    <div class="card-body"><div class="chartjs-size-monitor" style="position: absolute; inset: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
-                                                        <canvas id="Chart2" class="h-200 chartjs-render-monitor" width="528" height="200" style="display: block; width: 528px; height: 200px;"></canvas>
+                                                    <div class="card-body">
+                                                          <canvas id="singleCowMilkCollection" class="h-200 chartjs-render-monitor" width="528" height="200" style="display: block; width: 528px; height: 200px;"></canvas>
                                                     </div>
                                                 </div>
                                             </div>
@@ -796,5 +799,63 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
     <script>
         $('input[name="dates"]').daterangepicker();
+        $('#getCowID').change(function()
+        {
+            let text = "";
+            let singleCowMilkCollection = [];
+            let account_head_id = this.value;
+            $.ajax({
+                url:"{{  route('dashboard.getSingleCowMilkCollection',"") }}/"+account_head_id,
+                method:'get',
+                success: function(result){
+                    var ctx = document.getElementById("singleCowMilkCollection").getContext('2d');
+                    var myChart = new Chart(ctx, {
+                        type: 'bar',
+                        data: {
+                            labels: [
+                                result.forEach((item) => {text += item;})
+                            ],
+                            datasets: [{
+                                label: 'Milk Collection',
+                                data: [
+
+                                ],
+                                borderWidth: 2,
+                                backgroundColor: '#1753fc',
+                                borderColor: '#1753fc',
+                                borderWidth: 2.0,
+                                pointBackgroundColor: '#ffffff',
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            scales: {
+                                yAxes: [{
+                                    ticks: {
+                                        beginAtZero: true,
+                                        stepSize: 150,
+                                        fontColor: "#bbc1ca",
+                                    },
+                                    gridLines: {
+                                        color: 'rgba(0,0,0,0.03)'
+                                    }
+                                }],
+                                xAxes: [{
+                                    ticks: {
+                                        display: true,
+                                        fontColor: "#bbc1ca",
+                                    },
+                                    gridLines: {
+                                        display: false,
+                                        color: 'rgba(0,0,0,0.03)'
+                                    }
+                                }]
+                            },
+                        }
+                    });
+                }
+            });
+        });
     </script>
 @endsection
