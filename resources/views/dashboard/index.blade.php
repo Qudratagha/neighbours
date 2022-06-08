@@ -13,10 +13,7 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="mb-0 card-title">{{ __('Dashboard') }}</h3>
-                        </div>
-                        <div class="card-body">
-                            <div class="tab-menu-heading">
+
                                 <div class="tabs-menu ">
                                     <!-- Tabs -->
                                     <ul class="nav panel-tabs">
@@ -27,7 +24,9 @@
                                         <li><a href="#tab15" data-toggle="tab">Overall farm</a></li>
                                     </ul>
                                 </div>
-                            </div>
+
+                        </div>
+                        <div class="card-body">
 
                             <div class="panel-body tabs-menu-body">
                                 <div class="tab-content">
@@ -216,6 +215,11 @@
                                                 <div class="card">
                                                     <div class="card-header">
                                                         <h3 class="card-title">Single Cow Milk Collection</h3>
+                                                        <select name="" id="getCowID" style="position: absolute; right: 0px">
+                                                                @foreach( $cowSerials as $cowSerial)
+                                                                <option value="{{$cowSerial->account_head_id}}">{{$cowSerial->serial_no}}</option>
+                                                                @endforeach
+                                                        </select>
                                                     </div>
                                                     <div class="card-body">
                                                           <canvas id="singleCowMilkCollection" class="h-200 chartjs-render-monitor" width="528" height="200" style="display: block; width: 528px; height: 200px;"></canvas>
@@ -796,56 +800,63 @@
     <script>
         $('input[name="dates"]').daterangepicker();
 
-        var ctx = document.getElementById("singleCowMilkCollection").getContext('2d');
-        var myChart = new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"],
-                datasets: [{
-                    label: 'Sales',
-                    data: [200, 450, 290, 367, 256, 543, 345],
-                    borderWidth: 2,
-                    backgroundColor: '#1753fc',
-                    borderColor: '#1753fc',
-                    borderWidth: 2.0,
-                    pointBackgroundColor: '#ffffff',
+        $('#getCowID').change(function()
+        {
+            let text = "";
+            let singleCowMilkCollection = [];
+            let account_head_id = this.value;
+            $.ajax({
+                url:"{{  route('dashboard.getSingleCowMilkCollection',"") }}/"+account_head_id,
+                method:'get',
+                success: function(result){
+                    var ctx = document.getElementById("singleCowMilkCollection").getContext('2d');
+                    var myChart = new Chart(ctx, {
+                        type: 'bar',
+                        data: {
+                            labels: [
+                                result.forEach((item) => {text += item;})
+                            ],
+                            datasets: [{
+                                label: 'Milk Collection',
+                                data: [
 
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                legend: {
-                    display: true
-                },
-                scales: {
-                    yAxes: [{
-                        ticks: {
-                            beginAtZero: true,
-                            stepSize: 150,
-                            fontColor: "#bbc1ca",
+                                ],
+                                borderWidth: 2,
+                                backgroundColor: '#1753fc',
+                                borderColor: '#1753fc',
+                                borderWidth: 2.0,
+                                pointBackgroundColor: '#ffffff',
+                            }]
                         },
-                        gridLines: {
-                            color: 'rgba(0,0,0,0.03)'
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            scales: {
+                                yAxes: [{
+                                    ticks: {
+                                        beginAtZero: true,
+                                        stepSize: 150,
+                                        fontColor: "#bbc1ca",
+                                    },
+                                    gridLines: {
+                                        color: 'rgba(0,0,0,0.03)'
+                                    }
+                                }],
+                                xAxes: [{
+                                    ticks: {
+                                        display: true,
+                                        fontColor: "#bbc1ca",
+                                    },
+                                    gridLines: {
+                                        display: false,
+                                        color: 'rgba(0,0,0,0.03)'
+                                    }
+                                }]
+                            },
                         }
-                    }],
-                    xAxes: [{
-                        ticks: {
-                            display: true,
-                            fontColor: "#bbc1ca",
-                        },
-                        gridLines: {
-                            display: false,
-                            color: 'rgba(0,0,0,0.03)'
-                        }
-                    }]
-                },
-                legend: {
-                    labels: {
-                        fontColor: "#bbc1ca"
-                    },
-                },
-            }
+                    });
+                }
+            });
         });
     </script>
 @endsection

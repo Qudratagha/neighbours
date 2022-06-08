@@ -22,6 +22,7 @@ class DashboardController extends Controller
     {
         abort_if(Gate::denies('dashboard-read'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         $cows = Cattle::cows()->count();
+        $cowSerials = Cattle::cows()->get();
         $milkingCows = Transaction::milkingCows()->count();
         $pregnantCows = Pregnant::pregnantCows();
         $dryCows = Cattle::cows()->whereNotNull('dry_date')->count();
@@ -31,9 +32,12 @@ class DashboardController extends Controller
         $totalExpenditure = Transaction::totalExpenditure();
         $totalIncome = Transaction::totalIncome();
 
-        $cowMilkCollection = Cattle::with('account_head.transactionSubHead')->get();
+        return view('/dashboard.index',compact('cowSerials','cows','milkingCows','pregnantCows','dryCows','deadCows','sickCows','soldCows','totalExpenditure','totalIncome'));
+    }
 
-
-        return view('/dashboard.index',compact('cows','milkingCows','pregnantCows','dryCows','deadCows','sickCows','soldCows','totalExpenditure','totalIncome','cowMilkCollection'));
+    public function getSingleCowMilkCollection($account_head_id)
+    {
+        $cowMilkCollection = Transaction::where('transaction_type_id',3)->where('account_head_id',22)->where('sub_head_id',$account_head_id)->get('quantity');
+        return response()->json($cowMilkCollection);
     }
 }
