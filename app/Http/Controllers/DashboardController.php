@@ -21,7 +21,7 @@ class DashboardController extends Controller
     public function index()
     {
         abort_if(Gate::denies('dashboard-read'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-        $cows = Cattle::cows()->count();
+        $cows = Cattle::cows()->where('dead_date',null)->where('saleStatus',0)->count();
         $milkingCows = Transaction::milkingCows();
         $pregnantCows = Pregnant::pregnantCows();
         $dryCows = Cattle::cows()->whereNotNull('dry_date')->count();

@@ -44,7 +44,7 @@
                                                             </div>
                                                             <div class="mr-1 text-center">
                                                                 <div class="mt-1 mb-0 text-white">
-                                                                    <h2 class="mb-0">{{$totalExpenditure}}</h2>
+                                                                    <h2 class="mb-0">PKR-{{$totalExpenditure}}</h2>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -60,7 +60,7 @@
                                                             </div>
                                                             <div class="col-5 text-center">
                                                                 <div class="mt-1 mb-0 text-white">
-                                                                    <h2 class="mb-0">{{$totalIncome}}</h2>
+                                                                    <h2 class="mb-0">PKR-{{$totalIncome}}</h2>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -794,11 +794,7 @@
 @section('more-script')
     <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
-<<<<<<< HEAD
     <script>
         $('input[name="dates"]').daterangepicker();
     </script>
-=======
-
->>>>>>> ba839eca1dcc0c3e6f831244c2ac756ac25f45dd
 @endsection
