@@ -90,7 +90,7 @@ class Transaction extends Model
     }
 
     public function scopeMilkingCows($q) {
-        return $q->where('transaction_type_id',3)->where('account_head_id',22)->groupBy('sub_head_id')->get()->count();
+        return $q->where('transaction_type_id',3)->where('account_head_id',22)->groupBy('sub_head_id')->get();
     }
 
     public function scopeSoldCows($q) {
@@ -104,5 +104,4 @@ class Transaction extends Model
     public function scopeTotalIncome($q) {
         return $q->where('transaction_type_id',1)->whereIn('account_head_id',[15,14])->sum('amount');
     }
-
 }

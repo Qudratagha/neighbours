@@ -211,15 +211,14 @@
 
                                         <!-- Tabs end -->
 
-                                        <h3 class="text-center" style="font-weight: bold;">One Cow Total Collection</h3>
                                         <div class="row">
                                             <div class="col-lg-12 col-md-12">
                                                 <div class="card">
                                                     <div class="card-header">
-                                                        <h3 class="card-title">Single Barchart</h3>
+                                                        <h3 class="card-title">Single Cow Milk Collection</h3>
                                                     </div>
-                                                    <div class="card-body"><div class="chartjs-size-monitor" style="position: absolute; inset: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
-                                                        <canvas id="Chart2" class="h-200 chartjs-render-monitor" width="528" height="200" style="display: block; width: 528px; height: 200px;"></canvas>
+                                                    <div class="card-body">
+                                                          <canvas id="singleCowMilkCollection" class="h-200 chartjs-render-monitor" width="528" height="200" style="display: block; width: 528px; height: 200px;"></canvas>
                                                     </div>
                                                 </div>
                                             </div>
@@ -794,11 +793,59 @@
 @section('more-script')
     <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
-<<<<<<< HEAD
     <script>
         $('input[name="dates"]').daterangepicker();
-    </script>
-=======
 
->>>>>>> ba839eca1dcc0c3e6f831244c2ac756ac25f45dd
+        var ctx = document.getElementById("singleCowMilkCollection").getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"],
+                datasets: [{
+                    label: 'Sales',
+                    data: [200, 450, 290, 367, 256, 543, 345],
+                    borderWidth: 2,
+                    backgroundColor: '#1753fc',
+                    borderColor: '#1753fc',
+                    borderWidth: 2.0,
+                    pointBackgroundColor: '#ffffff',
+
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                legend: {
+                    display: true
+                },
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true,
+                            stepSize: 150,
+                            fontColor: "#bbc1ca",
+                        },
+                        gridLines: {
+                            color: 'rgba(0,0,0,0.03)'
+                        }
+                    }],
+                    xAxes: [{
+                        ticks: {
+                            display: true,
+                            fontColor: "#bbc1ca",
+                        },
+                        gridLines: {
+                            display: false,
+                            color: 'rgba(0,0,0,0.03)'
+                        }
+                    }]
+                },
+                legend: {
+                    labels: {
+                        fontColor: "#bbc1ca"
+                    },
+                },
+            }
+        });
+    </script>
 @endsection
