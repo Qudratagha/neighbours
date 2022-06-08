@@ -34,32 +34,32 @@
                                         <hr>
                                         <h3 class="text-center" style="font-weight: bold; font-size: 35px;">Overall Cow Details</h3>
                                         <div class="row">
-                                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
+                                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
                                                 <div class="card card-counter bg-gradient-danger">
                                                     <div class="card-body">
                                                         <div class="row">
-                                                            <div class="col-8">
+                                                            <div class="col-lg-8 col-sm-12">
                                                                 <h2 class="text-white mt-1 mb-0">Total Expenditure</h2>
                                                             </div>
                                                             <div class="mr-1 text-center">
                                                                 <div class="mt-1 mb-0 text-white">
-                                                                    <h2 class="mb-0">PKR-{{$totalExpenditure}}</h2>
+                                                                    <h2 class="mb-0">PKR: {{$totalExpenditure}}</h2>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div><!-- col end -->
-                                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
+                                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
                                                 <div class="card card-counter bg-gradient-teal">
                                                     <div class="card-body">
                                                         <div class="row">
-                                                            <div class="col-5">
+                                                            <div class="col-lg-8 col-sm-12">
                                                                 <h2 class="text-white mt-1 mb-0">Total Income</h2>
                                                             </div>
-                                                            <div class="col-5 text-center">
+                                                            <div class="mr-1 text-center">
                                                                 <div class="mt-1 mb-0 text-white">
-                                                                    <h2 class="mb-0">PKR-{{$totalIncome}}</h2>
+                                                                    <h2 class="mb-0">PKR: {{$totalIncome}}</h2>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -207,98 +207,43 @@
                                             </div><!-- col end -->
                                         </div>
                                         <hr>
-
                                         <!-- Tabs end -->
-
                                         <div class="row">
                                             <div class="col-lg-12 col-md-12">
                                                 <div class="card">
                                                     <div class="card-header">
-                                                        <h3 class="card-title">Single Cow Milk Collection</h3>
-                                                        <select name="" id="getCowID" style="position: absolute; right: 0px">
-                                                                @foreach( $cowSerials as $cowSerial)
-                                                                <option value="{{$cowSerial->account_head_id}}">{{$cowSerial->serial_no}}</option>
-                                                                @endforeach
-                                                        </select>
+                                                        <h3 class="card-title">Single Cow Milk Collection in Last 30 Days</h3>
+                                                        <div  style="position: absolute !important; right: 0px">
+                                                            <select class="form-control custom-control" id="getCowID">
+                                                                <option selected disabled>Choose Cow to Show Milk Collection Data</option>
+                                                                    @foreach( $cowSerials as $cowSerial)
+                                                                    <option value="{{$cowSerial->account_head_id}}">{{$cowSerial->serial_no}}</option>
+                                                                    @endforeach
+                                                            </select>
+                                                        </div>
                                                     </div>
                                                     <div class="card-body">
-                                                          <canvas id="singleCowMilkCollection" class="h-200 chartjs-render-monitor" width="528" height="200" style="display: block; width: 528px; height: 200px;"></canvas>
+                                                          <canvas id="singleCowMilkCollection" class="h-300 chartjs-render-monitor" width="528" height="300" style="display: block; width: 528px; height: 300px;"></canvas>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
 
-                                        <h3 class="text-center" style="font-weight: bold">Today Total Collection</h3>
-                                        <div class="row">
-                                            <div class="col-lg-12 col-md-12">
-                                                <div class="card">
-                                                    <div class="card-header">
-                                                        <h3 class="card-title">Single lineChart</h3>
+                                        <div class="col-xl-12 col-lg-12 col-md-12">
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    <h3 class="card-title">Total Milk Collected and Sold</h3>
+                                                    <div class=" col-md-3" style="position: absolute !important; right: 0px">
+                                                        <label class="form-label">Filter Data According to date</label>
+                                                        <input type="text" value="getDatesCowMilkCollection[]" id="getDatesCowMilkCollection" class="form-control" name="getDatesCowMilkCollection" placeholder="Select Range">
                                                     </div>
-                                                    <div class="card-body"><div class="chartjs-size-monitor" style="position: absolute; inset: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
-                                                        <canvas id="Chart" class="h-200 chartjs-render-monitor" width="528" height="200" style="display: block; width: 528px; height: 200px;"></canvas>
-                                                    </div>
+                                                </div>
+                                                <div class="card-body">
+                                                    <canvas id="milkCollectionSold" class="h-200"></canvas>
                                                 </div>
                                             </div>
                                         </div>
 
-                                        <h3 class="text-center" style="font-weight: bold">Overall Total Collection</h3>
-                                        <form action="">
-                                            <div class="row">
-                                                <div class="mb-3 col-md-3">
-                                                    <label for="" class="form-label">Select Date Range :</label>
-                                                    <input type="text" class="form-control" name="dates" placeholder="Select Range">
-                                                </div>
-                                            </div>
-                                        </form>
-                                        <div class="row">
-                                            <div class="col-lg-12 col-md-12">
-                                                <div class="card">
-                                                    <div class="card-header">
-                                                        <h3 class="card-title">Single Barchart</h3>
-                                                    </div>
-                                                    <div class="card-body"><div class="chartjs-size-monitor" style="position: absolute; inset: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
-                                                        <canvas id="Chart2" class="h-200 chartjs-render-monitor" width="528" height="200" style="display: block; width: 528px; height: 200px;"></canvas>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <h3 class="text-center" style="font-weight: bold">Today Total Sale</h3>
-                                        <div class="row">
-                                            <div class="col-lg-12 col-md-12">
-                                                <div class="card">
-                                                    <div class="card-header">
-                                                        <h3 class="card-title">Single Barchart</h3>
-                                                    </div>
-                                                    <div class="card-body"><div class="chartjs-size-monitor" style="position: absolute; inset: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
-                                                        <canvas id="Chart2" class="h-200 chartjs-render-monitor" width="528" height="200" style="display: block; width: 528px; height: 200px;"></canvas>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <h3 class="text-center" style="font-weight: bold">Overall Total Sale</h3>
-                                        <form action="">
-                                            <div class="row">
-                                                <div class="mb-3 col-md-3">
-                                                    <label for="" class="form-label">Select Date Range :</label>
-                                                    <input type="text" class="form-control" name="dates" placeholder="Select Range">
-                                                </div>
-                                            </div>
-                                        </form>
-                                        <div class="row">
-                                            <div class="col-lg-12 col-md-12">
-                                                <div class="card">
-                                                    <div class="card-header">
-                                                        <h3 class="card-title">Single Barchart</h3>
-                                                    </div>
-                                                    <div class="card-body"><div class="chartjs-size-monitor" style="position: absolute; inset: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
-                                                        <canvas id="Chart2" class="h-200 chartjs-render-monitor" width="528" height="200" style="display: block; width: 528px; height: 200px;"></canvas>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
                                     </div>
                                     <div class="tab-pane" id="tab12">
                                         <h3>Total Expenditures:</h3>
@@ -798,64 +743,164 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
     <script>
-        $('input[name="dates"]').daterangepicker();
-        $('#getCowID').change(function()
-        {
-            let text = "";
-            let singleCowMilkCollection = [];
-            let account_head_id = this.value;
+        var ctx = myChart = null;
+        var chart_label = [];
+        var chart_data = [];
+        $(function(){
+            ctx = document.getElementById("singleCowMilkCollection").getContext('2d');
+            initializeChart();
+            getSingleCowMilkCollectionData($('#getCowID').val());
+            $('#getCowID').change(function() {
+                getSingleCowMilkCollectionData(this.value);
+            });
+        });
+
+        function initializeChart() {
+            myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: chart_label,
+                    datasets: [{
+                        label: 'Milk Collection',
+                        data: chart_data,
+                        borderWidth: 2,
+                        backgroundColor: '#1753fc',
+                        borderColor: '#1753fc',
+                        borderWidth: 2.0,
+                        pointBackgroundColor: '#ffffff',
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true,
+                                stepSize: 100,
+                                fontColor: "#bbc1ca",
+                            },
+                            gridLines: {
+                                color: 'rgba(0,0,0,0.03)'
+                            }
+                        }],
+                        xAxes: [{
+                            ticks: {
+                                display: true,
+                                fontColor: "#bbc1ca",
+                            },
+                            gridLines: {
+                                display: false,
+                                color: 'rgba(0,0,0,0.03)'
+                            }
+                        }]
+                    },
+                }
+            });
+        }
+        function getSingleCowMilkCollectionData(account_head_id) {
+            chart_label = [];
+            chart_data = [];
             $.ajax({
                 url:"{{  route('dashboard.getSingleCowMilkCollection',"") }}/"+account_head_id,
                 method:'get',
                 success: function(result){
-                    var ctx = document.getElementById("singleCowMilkCollection").getContext('2d');
-                    var myChart = new Chart(ctx, {
-                        type: 'bar',
-                        data: {
-                            labels: [
-                                result.forEach((item) => {text += item;})
-                            ],
-                            datasets: [{
-                                label: 'Milk Collection',
-                                data: [
-
-                                ],
-                                borderWidth: 2,
-                                backgroundColor: '#1753fc',
-                                borderColor: '#1753fc',
-                                borderWidth: 2.0,
-                                pointBackgroundColor: '#ffffff',
-                            }]
-                        },
-                        options: {
-                            responsive: true,
-                            maintainAspectRatio: false,
-                            scales: {
-                                yAxes: [{
-                                    ticks: {
-                                        beginAtZero: true,
-                                        stepSize: 150,
-                                        fontColor: "#bbc1ca",
-                                    },
-                                    gridLines: {
-                                        color: 'rgba(0,0,0,0.03)'
-                                    }
-                                }],
-                                xAxes: [{
-                                    ticks: {
-                                        display: true,
-                                        fontColor: "#bbc1ca",
-                                    },
-                                    gridLines: {
-                                        display: false,
-                                        color: 'rgba(0,0,0,0.03)'
-                                    }
-                                }]
-                            },
-                        }
+                    result.forEach((item) => {
+                        chart_label.push(item.date);
+                        chart_data.push(item.quantity);
                     });
+                    myChart.destroy();
+                    initializeChart();
                 }
             });
+        }
+
+        //milkCollectionSold
+        var milkCollectionSoldCtx = milkCollectionSoldMyChart = null;
+        var milkCollectionSoldChartLabel = [];
+        var milkCollectionSoldChartData = [];
+        $(function(){
+            milkCollectionSoldCtx = document.getElementById("milkCollectionSold").getContext('2d');
+            initializeChart();
+            getMilkCollectionSaleData($('#getDatesCowMilkCollection').val());
+            $('#getDatesCowMilkCollection').change(function() {
+                getMilkCollectionSaleData(this.value);
+            });
         });
+
+        function initializeMilkCollectionSold() {
+            var milkCollectionSoldCtx = document.getElementById("milkCollectionSold");
+            var milkCollectionSoldMyChart = new Chart(milkCollectionSoldCtx, {
+                type: 'bar',
+                data: {
+                    labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"],
+                    datasets: [{
+                        label: "data1",
+                        data: [65, 59, 80, 81, 56, 55, 40],
+                        borderColor: "#1753fc",
+                        borderWidth: "0",
+                        backgroundColor: "#1753fc"
+                    }, {
+                        label: "data2",
+                        data: [28, 48, 40, 19, 86, 27, 90],
+                        borderColor: "#9258f1",
+                        borderWidth: "0",
+                        backgroundColor: "#9258f1"
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        xAxes: [{
+                            ticks: {
+                                fontColor: "#bbc1ca",
+                            },
+                            gridLines: {
+                                color: 'rgba(0,0,0,0.03)'
+                            }
+                        }],
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true,
+                                fontColor: "#bbc1ca",
+                            },
+                            gridLines: {
+                                color: 'rgba(0,0,0,0.03)'
+                            },
+                        }]
+                    },
+                    legend: {
+                        labels: {
+                            fontColor: "#bbc1ca"
+                        },
+                    },
+                }
+            });
+        }
+        function getMilkCollectionSaleData(getDatesCowMilkCollection) {
+
+            $('input[name="getDatesCowMilkCollection"]').daterangepicker({
+                opens: 'center'
+            },function(start, end) {
+                var startDate = start.format('YYYY-MM-DD');
+                var endDate = end.format('YYYY-MM-DD');
+            });
+            milkCollectionSoldChartLabel = [];
+            milkCollectionSoldChartData = [];
+            $.ajax({
+                url:"{{  route('dashboard.getMilkCollectionSaleData',"") }}/"+start+end,
+                method:'get',
+                success: function(result){
+                    console.log(result);
+                    result.forEach((item) => {
+                        milkCollectionSoldChartLabel.push(item.date);
+                        milkCollectionSoldChartData.push(item.quantity);
+                    });
+                    milkCollectionSoldMyChart.destroy();
+                    initializeMilkCollectionSold();
+                }
+            });
+        }
     </script>
 @endsection
