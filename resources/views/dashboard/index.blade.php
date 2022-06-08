@@ -17,8 +17,8 @@
                                 <div class="tabs-menu">
                                     <!-- Tabs -->
                                     <ul class="nav panel-tabs">
-                                        <li class=""><a href="#tab11" class="active" data-toggle="tab">Cow</a></li>
-                                        <li><a href="#tab12" data-toggle="tab">Goat/Sheep</a></li>
+                                        <li class=""><a href="#tab11"  data-toggle="tab">Cow</a></li>
+                                        <li><a href="#tab12" class="active" data-toggle="tab">Goat/Sheep</a></li>
                                         <li><a href="#tab13" data-toggle="tab">Poultry</a></li>
                                         <li><a href="#tab14" data-toggle="tab">Cultivation</a></li>
                                         <li><a href="#tab15" data-toggle="tab">Overall farm</a></li>
@@ -29,7 +29,7 @@
                         <div class="card-body">
                             <div class="panel-body tabs-menu-body">
                                 <div class="tab-content">
-                                    <div class="tab-pane active " id="tab11">
+                                    <div class="tab-pane  " id="tab11">
                                         <h3>Total Expenditures:</h3>
                                         <h3>Total Income:</h3>
                                         <hr>
@@ -265,7 +265,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="tab-pane" id="tab12">
+                                    <div class="tab-pane active" id="tab12">
                                         <h3>Total Expenditures:</h3>
                                         <h3>Total Income:</h3>
                                         <hr>
@@ -568,8 +568,8 @@
                                                     <div class="card-header">
                                                         <h3 class="card-title">Goat</h3>
                                                     </div>
-                                                    <div class="card-body"><div class="chartjs-size-monitor" style="position: absolute; inset: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
-                                                        <canvas id="goatsPurchasedSold" class="h-200 chartjs-render-monitor" width="528" height="200" style="display: block; width: 528px; height: 200px;"></canvas>
+                                                    <div class="card-body">
+                                                        <canvas id="goatPurchasedSold" class="h-200"></canvas>
                                                     </div>
                                                 </div>
                                             </div>
@@ -788,7 +788,7 @@
                                                             </div>
                                                             <div class="col-8 text-center">
                                                                 <div class="mt-4 mb-0 text-white">
-                                                                    <h2 class="mb-0">34,762</h2>
+                                                                    <h2 class="mb-0">{{$wheatSold}} Kg</h2>
                                                                     <p class="text-white mt-1">Sold Wheat</p>
                                                                 </div>
                                                             </div>
@@ -844,7 +844,7 @@
                                                             </div>
                                                             <div class="col-8 text-center">
                                                                 <div class="mt-4 mb-0 text-white">
-                                                                    <h2 class="mb-0">34,762</h2>
+                                                                    <h2 class="mb-0">{{$cornSold}} Kg</h2>
                                                                     <p class="text-white mt-1">Sold Corn</p>
                                                                 </div>
                                                             </div>
@@ -900,7 +900,7 @@
                                                             </div>
                                                             <div class="col-8 text-center">
                                                                 <div class="mt-4 mb-0 text-white">
-                                                                    <h2 class="mb-0">34,762</h2>
+                                                                    <h2 class="mb-0">{{$cucumberSold}} Kg</h2>
                                                                     <p class="text-white mt-1">Sold Cucumber</p>
                                                                 </div>
                                                             </div>
@@ -1007,95 +1007,65 @@
     <script>
         $('input[name="dates"]').daterangepicker();
 
-        var ctx = document.getElementById("goatsPurchasedSold");
+        var ctx = document.getElementById("goatPurchasedSold").getContext('2d');
         var myChart = new Chart(ctx, {
             type: 'bar',
             data: {
-                labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"],
-                labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"],
-                datasets: [{
-                    label: "Purchase",
-                    data: [65, 59, 80, 81, 56, 55, 40],
-                    borderColor: "#1753fc",
-                    borderWidth: "0",
-                    backgroundColor: "#1753fc"
-                }, {
-                    label: "Sold",
-                    data: [28, 48, 40, 19, 86, 27, 90],
-                    borderColor: "#9258f1",
-                    borderWidth: "0",
-                    backgroundColor: "#9258f1"
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                scales: {
-                    xAxes: [{
-                        ticks: {
-                            fontColor: "#bbc1ca",
-                        },
-                        gridLines: {
-                            color: 'rgba(0,0,0,0.03)'
-                        }
-                    }],
-                    yAxes: [{
-                        ticks: {
-                            beginAtZero: true,
-                            fontColor: "#bbc1ca",
-                        },
-                        gridLines: {
-                            color: 'rgba(0,0,0,0.03)'
-                        },
+                labels: [
+                    @foreach ($transactions as $collected)
+                        "{{ $collected->date }}",
+                    @endforeach
+                ],
+                datasets:
+                    [{
+                        label: "Purchase",
+                        data: [
+                            @foreach ($graphPurchaseGoats as $collected)
+                                "{{ $collected->quantity }}",
+                            @endforeach
+                        ],
+                        borderColor: "#1753fc",
+                        borderWidth: "0",
+                        backgroundColor: "#1753fc"
+                    }, {
+                        label: "Sale",
+                        data: [
+                            @foreach ($graphSoldGoats as $sale)
+                                "{{ $sale->quantity }}",
+                            @endforeach
+                        ],
+                        borderColor: "#9258f1",
+                        borderWidth: "0",
+                        backgroundColor: "#9258f1"
                     }]
-                },
-                legend: {
-                    labels: {
-                        fontColor: "#bbc1ca"
-                    },
-                },
-            }
-        });
-        var ctx = document.getElementById("sheepPurchasedSold");
-        var myChart = new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"],
-                // labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"],
-                datasets: [{
-                    label: "Purchase",
-                    data: [65, 59, 80, 81, 56, 55, 40],
-                    borderColor: "#1753fc",
-                    borderWidth: "0",
-                    backgroundColor: "#1753fc"
-                }, {
-                    label: "Sold",
-                    data: [28, 48, 40, 19, 86, 27, 90],
-                    borderColor: "#9258f1",
-                    borderWidth: "0",
-                    backgroundColor: "#9258f1"
-                }]
+
             },
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
+                legend: {
+                    display: true
+                },
                 scales: {
-                    xAxes: [{
+                    yAxes: [{
                         ticks: {
+                            beginAtZero: true,
+                            stepSize: 7,
                             fontColor: "#bbc1ca",
                         },
                         gridLines: {
                             color: 'rgba(0,0,0,0.03)'
                         }
                     }],
-                    yAxes: [{
+                    xAxes: [{
                         ticks: {
-                            beginAtZero: true,
+                            display: true,
                             fontColor: "#bbc1ca",
                         },
                         gridLines: {
+                            display: false,
                             color: 'rgba(0,0,0,0.03)'
-                        },
+                        }
                     }]
                 },
                 legend: {
@@ -1106,136 +1076,6 @@
             }
         });
 
-        var ctx = document.getElementById("wheat");
-        var myChart = new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"],
-                // labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"],
-                datasets: [{
-                    label: "Purchase",
-                    data: [65, 59, 80, 81, 56, 55, 40],
-                    borderColor: "#1753fc",
-                    borderWidth: "0",
-                    backgroundColor: "#1753fc"
-                }],
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                scales: {
-                    xAxes: [{
-                        ticks: {
-                            fontColor: "#bbc1ca",
-                        },
-                        gridLines: {
-                            color: 'rgba(0,0,0,0.03)'
-                        }
-                    }],
-                    yAxes: [{
-                        ticks: {
-                            beginAtZero: true,
-                            fontColor: "#bbc1ca",
-                        },
-                        gridLines: {
-                            color: 'rgba(0,0,0,0.03)'
-                        },
-                    }]
-                },
-                legend: {
-                    labels: {
-                        fontColor: "#bbc1ca"
-                    },
-                },
-            }
-        });
-        var ctx = document.getElementById("corn");
-        var myChart = new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"],
-                // labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"],
-                datasets: [{
-                    label: "Purchase",
-                    data: [65, 59, 80, 81, 56, 55, 40],
-                    borderColor: "#1753fc",
-                    borderWidth: "0",
-                    backgroundColor: "#1753fc"
-                }],
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                scales: {
-                    xAxes: [{
-                        ticks: {
-                            fontColor: "#bbc1ca",
-                        },
-                        gridLines: {
-                            color: 'rgba(0,0,0,0.03)'
-                        }
-                    }],
-                    yAxes: [{
-                        ticks: {
-                            beginAtZero: true,
-                            fontColor: "#bbc1ca",
-                        },
-                        gridLines: {
-                            color: 'rgba(0,0,0,0.03)'
-                        },
-                    }]
-                },
-                legend: {
-                    labels: {
-                        fontColor: "#bbc1ca"
-                    },
-                },
-            }
-        });
-
-        var ctx = document.getElementById("cucumber");
-        var myChart = new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"],
-                // labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"],
-                datasets: [{
-                    label: "Purchase",
-                    data: [65, 59, 80, 81, 56, 55, 40],
-                    borderColor: "#1753fc",
-                    borderWidth: "0",
-                    backgroundColor: "#1753fc"
-                }],
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                scales: {
-                    xAxes: [{
-                        ticks: {
-                            fontColor: "#bbc1ca",
-                        },
-                        gridLines: {
-                            color: 'rgba(0,0,0,0.03)'
-                        }
-                    }],
-                    yAxes: [{
-                        ticks: {
-                            beginAtZero: true,
-                            fontColor: "#bbc1ca",
-                        },
-                        gridLines: {
-                            color: 'rgba(0,0,0,0.03)'
-                        },
-                    }]
-                },
-                legend: {
-                    labels: {
-                        fontColor: "#bbc1ca"
-                    },
-                },
-            }
-        });
     </script>
 
 @endsection
