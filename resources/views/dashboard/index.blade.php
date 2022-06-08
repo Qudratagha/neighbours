@@ -28,7 +28,7 @@
                                     </ul>
                                 </div>
                             </div>
-                            
+
                             <div class="panel-body tabs-menu-body">
                                 <div class="tab-content">
                                     <div class="tab-pane active " id="tab11">
@@ -450,6 +450,45 @@
                                         <hr>
                                         <h3 class="text-center" style="font-weight: bold; font-size: 35px;">Overall Poultry Details</h3>
                                         <div class="row">
+                                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
+                                                <div class="card card-counter bg-gradient-danger">
+                                                    <div class="card-body">
+                                                        <div class="row">
+                                                            <div class="col-8">
+                                                                <h2 class="text-white mt-1 mb-0">Total Expenditure</h2>
+                                                            </div>
+                                                            <div class="mr-1 text-center">
+                                                                <div class="mt-1 mb-0 text-white">
+                                                                    <?php
+                                                                    $poultryExpenditure = \App\Models\Poultry:: poultryExpenditure();
+                                                                    ?>
+                                                                    <h2 class="mb-0">{{$poultryExpenditure}}</h2>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div><!-- col end -->
+                                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
+                                                <div class="card card-counter bg-gradient-teal">
+                                                    <div class="card-body">
+                                                        <div class="row">
+                                                            <div class="col-5">
+                                                                <h2 class="text-white mt-1 mb-0">Total Income</h2>
+                                                            </div>
+                                                            <div class="col-5 text-center">
+                                                                <div class="mt-1 mb-0 text-white">
+                                                                    <?php
+                                                                    $poultryIncome = \App\Models\Poultry:: poultryIncome();
+                                                                    ?>
+                                                                    <h2 class="mb-0">{{$poultryIncome}}</h2>
+                                                                    <h2 class="mb-0"></h2>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div><!-- col end -->
                                             <div class="col-xl-3 col-lg-6 col-md-12 col-sm-12">
                                                 <div class="card card-counter bg-gradient-danger">
                                                     <div class="card-body">
@@ -459,8 +498,11 @@
                                                             </div>
                                                             <div class="col-8 text-center">
                                                                 <div class="mt-4 mb-0 text-white">
-                                                                    <h2 class="mb-0">54,234</h2>
-                                                                    <p class="text-white mt-1">Hens</p>
+                                                                    <?php
+                                                                    $purchaseMsaleMdie = \App\Models\Poultry:: purchaseMsaleMdie();
+                                                                    ?>
+                                                                    <h2 class="mb-0">{{$purchaseMsaleMdie}}</h2>
+                                                                    <p class="text-white mt-1">Total Hens</p>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -476,7 +518,10 @@
                                                             </div>
                                                             <div class="col-8 text-center">
                                                                 <div class="mt-4 mb-0 text-white">
-                                                                    <h2 class="mb-0">80,956</h2>
+                                                                    <?php
+                                                                    $totalRemainingChicks = \App\Models\Poultry:: totalRemainingChicks();
+                                                                    ?>
+                                                                    <h2 class="mb-0">{{$totalRemainingChicks}}</h2>
                                                                     <p class="text-white mt-1">Chicks</p>
                                                                 </div>
                                                             </div>
@@ -493,7 +538,10 @@
                                                             </div>
                                                             <div class="col-8 text-center">
                                                                 <div class="mt-4 mb-0 text-white">
-                                                                    <h2 class="mb-0">34,762</h2>
+                                                                    <?php
+                                                                    $totalEggsCollected = \App\Models\Poultry::totalEggsCollected();
+                                                                    ?>
+                                                                    <h2 class="mb-0">{{$totalEggsCollected}}</h2>
                                                                     <p class="text-white mt-1">Eggs</p>
                                                                 </div>
                                                             </div>
@@ -510,7 +558,10 @@
                                                             </div>
                                                             <div class="col-8 text-center">
                                                                 <div class="mt-4 mb-0 text-white">
-                                                                    <h2 class="mb-0">25,789</h2>
+                                                                    <?php
+                                                                    $incubatedEggs = \App\Models\Poultry::eggincMchickCollected();
+                                                                    ?>
+                                                                    <h2 class="mb-0">{{$incubatedEggs}}</h2>
                                                                     <p class="text-white mt-1 ">Eggs Incubated</p>
                                                                 </div>
                                                             </div>
@@ -523,6 +574,22 @@
 
                                         <h3 class="text-center" style="font-weight: bold">Total Eggs Collected</h3>
                                         <div class="row">
+                                            <div class="col-lg-12 col-md-12">
+                                                <div class="card">
+                                                    <div class="card-header">
+                                                        <?php
+                                                        $totalEggsCollected = \App\Models\Poultry::totalEggsCollected();
+                                                        ?>
+
+                                                        <h3 class="card-title">Single Barchart</h3>
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <h3>{{$totalEggsCollected}}</h3>
+
+                                                        <canvas id="totalEggsChart" class="h-300"></canvas>
+                                                    </div>
+                                                </div>
+                                            </div>
                                             <div class="col-lg-12 col-md-12">
                                                 <div class="card">
                                                     <div class="card-header">
@@ -764,11 +831,75 @@
 @section('more-script')
     <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
-<<<<<<< HEAD
     <script>
         $('input[name="dates"]').daterangepicker();
-    </script>
-=======
+        var ctx = document.getElementById("totalEggsChart").getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: [
+                    @foreach ($eggCollected as $collected)
+                        "{{ $collected->created_at }}",
+                    @endforeach
+                ],
+                datasets:
+                    [{
+                        label: "Egg Collected",
+                        data: [
+                            "{{ $eggCollected->sum('quantity') }}",
+                        ],
+                        borderColor: "#1753fc",
+                        borderWidth: "0",
+                        backgroundColor: "#1753fc"
+                    }, {
+                        label: "Egg Sale",
+                        data: [
+                            @foreach ($eggSale as $collected)
+                                "{{ $collected->sum('quantity') }}",
+                            @endforeach
+                        ],
+                        borderColor: "#9258f1",
+                        borderWidth: "0",
+                        backgroundColor: "#9258f1"
+                    }]
 
->>>>>>> ba839eca1dcc0c3e6f831244c2ac756ac25f45dd
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                legend: {
+                    display: true
+                },
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true,
+                            stepSize: 150,
+                            fontColor: "#bbc1ca",
+                        },
+                        gridLines: {
+                            color: 'rgba(0,0,0,0.03)'
+                        }
+                    }],
+                    xAxes: [{
+                        ticks: {
+                            display: true,
+                            fontColor: "#bbc1ca",
+                        },
+                        gridLines: {
+                            display: false,
+                            color: 'rgba(0,0,0,0.03)'
+                        }
+                    }]
+                },
+                legend: {
+                    labels: {
+                        fontColor: "#bbc1ca"
+                    },
+                },
+            }
+        });
+    </script>
+
+
 @endsection

@@ -97,9 +97,9 @@ class PoultryController extends Controller
         $qtyindzn = floor($totalQty);
 
 
-        $eggSale = Transaction::where('transaction_type_id', 1 )->where('account_head_id', 19 )->where('sub_head_id', 19 )->get();
-        $henSale = Transaction::where('transaction_type_id', 1 )->where('account_head_id', 20 )->where('sub_head_id', 20 )->get();
-        $chickSale = Transaction::where('transaction_type_id', 1 )->where('account_head_id', 21 )->where('sub_head_id', 21 )->get();
+        $eggSale = Transaction::where('transaction_type_id', 1 )->where('account_head_id', 8 )->where('sub_head_id', 19 )->get();
+        $henSale = Transaction::where('transaction_type_id', 1 )->where('account_head_id', 8 )->where('sub_head_id', 20 )->get();
+        $chickSale = Transaction::where('transaction_type_id', 1 )->where('account_head_id', 8 )->where('sub_head_id', 21 )->get();
         $poultryFeedPurchase = Transaction::where('transaction_type_id', 2 )->where('account_head_id', 8 )->where('sub_head_id', 54 )->get();
         $poultryFeed = Feed::where('status', 1 )->where('cattle_type', 1 )->get();
         $poultryVaccine = Vaccination::where('sub_head_id', 57 )->get();
@@ -126,9 +126,7 @@ class PoultryController extends Controller
                 Poultry::create($request->all());
                 return redirect(route('poultry.index'))->with('message', ' Entry Created');
             }
-
     }
-
     public function show(Poultry $poultry)
     {
         return view('poultry.view');
@@ -184,7 +182,7 @@ class PoultryController extends Controller
            $rate = ($rate->rate)*($quantity);
            $request['amount'] = $rate ;
            $request['transaction_type_id'] = 1;
-           $request['account_head_id'] = 19;
+           $request['account_head_id'] = 8;
            $request['sub_head_id'] = 19;
 //            dd($request);
            Transaction::Create($request->except('submitEgg'));
@@ -198,7 +196,7 @@ class PoultryController extends Controller
         if (isset($_POST['submitHen']))
         {
             $request['transaction_type_id'] = 1;
-            $request['account_head_id'] = 20 ;
+            $request['account_head_id'] = 8 ;
             $request['sub_head_id'] = 20;
             Transaction::Create($request->except('submitHen'));
 //            return redirect()->back()->with('message', 'Hen Sold');
@@ -207,7 +205,7 @@ class PoultryController extends Controller
         if (isset($_POST['submitChick']))
         {
             $request['transaction_type_id'] = 1;
-            $request['account_head_id'] = 21;
+            $request['account_head_id'] = 8;
             $request['sub_head_id'] = 21;
             Transaction::Create($request->except('submitChick'));
 //            return redirect()->back()->with('message', 'Chick Sold');

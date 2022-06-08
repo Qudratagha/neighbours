@@ -100,11 +100,10 @@
                                                     </thead>
                                                     <tbody>
                                                     @foreach($eggSale as $egg)
-                                                        {{$eggQty = $egg->quantity/12}}
                                                         <tr>
                                                             <td>{{$loop->iteration}}</td>
                                                             <td>{{$egg->date ?? ''}}</td>
-                                                            <td>{{$eggQty ?? ''}} Dozen</td>
+                                                            <td>{{$egg->quantity/12 ?? ''}} Dozen</td>
                                                             <td>{{$egg->amount ?? ''}} </td>
                                                             <td>{{$egg->description ?? ''}}</td>
                                                             <td>
@@ -242,7 +241,7 @@
                                                                             $totalRemainingChicks = \App\Models\Poultry:: totalRemainingChicks();
                                                                             ?>
                                                                             <div id="testing" class="invalid-feedback" style="display: block !important;">
-                                                                                Avaliable Chickss = {{$totalRemainingChicks}}
+                                                                                Avaliable Chicks = {{$totalRemainingChicks}}
                                                                             </div>
                                                                         </div>
                                                                         <div class="form-group">
