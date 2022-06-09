@@ -61,6 +61,7 @@ class Poultry extends Model
     }
     public static function sickMHealthy()
     {
+
         $totalSickHen = \App\Models\Poultry:: totalSickHen();
         $totalHealthyHen = \App\Models\Poultry:: totalHealthyHen();
         $sickMHealthy =$totalSickHen - $totalHealthyHen;
@@ -233,8 +234,8 @@ class Poultry extends Model
 
         $poultryRevenue = $poultryExpenditure - $poultryIncome;
         return $poultryRevenue;
-    }    
-    
+    }
+
 
 
 

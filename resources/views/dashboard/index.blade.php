@@ -20,9 +20,9 @@
                                 <div class="tabs-menu ">
                                     <!-- Tabs -->
                                     <ul class="nav panel-tabs">
-                                        <li class=""><a href="#tab11" class="active" data-toggle="tab">Cow</a></li>
+                                        <li class=""><a href="#tab11"  data-toggle="tab">Cow</a></li>
                                         <li><a href="#tab12" data-toggle="tab">Goat/Sheep</a></li>
-                                        <li><a href="#tab13" data-toggle="tab">Poultry</a></li>
+                                        <li><a href="#tab13" class="active" data-toggle="tab">Poultry</a></li>
                                         <li><a href="#tab14" data-toggle="tab">Cultivation</a></li>
                                         <li><a href="#tab15" data-toggle="tab">Overall farm</a></li>
                                     </ul>
@@ -31,7 +31,7 @@
 
                             <div class="panel-body tabs-menu-body">
                                 <div class="tab-content">
-                                    <div class="tab-pane active " id="tab11">
+                                    <div class="tab-pane " id="tab11">
                                         <h3>Total Expenditures:</h3>
                                         <h3>Total Income:</h3>
                                         <hr>
@@ -444,51 +444,89 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="tab-pane " id="tab13">
-                                        <h3>Total Expenditures:</h3>
-                                        <h3>Total Income:</h3>
+                                    <div class="tab-pane active" id="tab13">
+
                                         <hr>
-                                        <h3 class="text-center" style="font-weight: bold; font-size: 35px;">Overall Poultry Details</h3>
+                                        <h3 class="text-center" style="font-weight: bold; font-size: 35px;">Overall ultry Details</h3>
                                         <div class="row">
-                                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
+                                            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
                                                 <div class="card card-counter bg-gradient-danger">
                                                     <div class="card-body">
                                                         <div class="row">
-                                                            <div class="col-8">
-                                                                <h2 class="text-white mt-1 mb-0">Total Expenditure</h2>
+                                                            <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12 text-center">
+                                                                <h2 class="text-white mt-1 mb-0">Total Expeniture</h2>
                                                             </div>
-                                                            <div class="mr-1 text-center">
-                                                                <div class="mt-1 mb-0 text-white">
+                                                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 text-center">
+                                                                <div class="mt-2 mb-0 text-white">
                                                                     <?php
-                                                                    $poultryExpenditure = \App\Models\Poultry:: poultryExpenditure();
+                                                                    $poultryExpenditure = \App\Models\Poultry:: poultryExpenditure();;
                                                                     ?>
-                                                                    <h2 class="mb-0">{{$poultryExpenditure}}</h2>
+                                                                        <h2 class="mb-0">{{$poultryExpenditure}}</h2>
+{{--                                                                    <p class="text-white mt-1">Total Hens</p>--}}
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div><!-- col end -->
-                                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
-                                                <div class="card card-counter bg-gradient-teal">
+                                            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+                                                <div class="card card-counter bg-gradient-danger">
                                                     <div class="card-body">
                                                         <div class="row">
-                                                            <div class="col-5">
+                                                            <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12 text-center">
                                                                 <h2 class="text-white mt-1 mb-0">Total Income</h2>
                                                             </div>
-                                                            <div class="col-5 text-center">
-                                                                <div class="mt-1 mb-0 text-white">
+                                                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 text-center">
+                                                                <div class="mt-2 mb-0 text-white">
                                                                     <?php
-                                                                    $poultryIncome = \App\Models\Poultry:: poultryIncome();
+                                                                    $poultryExpenditure = \App\Models\Poultry:: poultryIncome();;
                                                                     ?>
-                                                                    <h2 class="mb-0">{{$poultryIncome}}</h2>
-                                                                    <h2 class="mb-0"></h2>
+                                                                    <h2 class="mb-0">{{$poultryExpenditure}}</h2>
+                                                                    {{--                                                                    <p class="text-white mt-1">Total Hens</p>--}}
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div><!-- col end -->
+{{--                                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">--}}
+{{--                                                <div class="card card-counter bg-gradient-danger">--}}
+{{--                                                    <div class="card-body">--}}
+{{--                                                        <div class="row">--}}
+{{--                                                            <div class="d-none d-sm-none d-md-block">--}}
+{{--                                                                <h2 class="text-white mt-1 mb-0">Total Expeniture</h2>--}}
+{{--                                                            </div>--}}
+{{--                                                            <div class="text-center col-xl-4 col-lg-6 col-md-5 col-sm-12">--}}
+{{--                                                                <div class="mt-1 mb-0 text-white">--}}
+{{--                                                                    <?php--}}
+{{--                                                                    $poultryExpenditure = \App\Models\Poultry:: poultryExpenditure();--}}
+{{--                                                                    ?>--}}
+{{--                                                                    <h2 class="mb-0">{{$poultryExpenditure}}</h2>--}}
+{{--                                                                </div>--}}
+{{--                                                            </div>--}}
+{{--                                                        </div>--}}
+{{--                                                    </div>--}}
+{{--                                                </div>--}}
+{{--                                            </div><!-- col end -->--}}
+{{--                                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">--}}
+{{--                                                <div class="card card-counter bg-gradient-teal">--}}
+{{--                                                    <div class="card-body">--}}
+{{--                                                        <div class="row">--}}
+{{--                                                            <div class="col-lg-8 col-md-8 col-sm-12">--}}
+{{--                                                                <h2 class="text-white mb-0">Total Income</h2>--}}
+{{--                                                            </div>--}}
+{{--                                                            <div class="text-center col-lg-4 col-md-4 col-sm-12">--}}
+{{--                                                                <div class="mt-1 mb-0 text-white">--}}
+{{--                                                                    <?php--}}
+{{--                                                                    $poultryIncome = \App\Models\Poultry:: poultryIncome();--}}
+{{--                                                                    ?>--}}
+{{--                                                                    <h2 class="mb-0">{{$poultryIncome}}</h2>--}}
+{{--                                                                </div>--}}
+{{--                                                            </div>--}}
+{{--                                                        </div>--}}
+{{--                                                    </div>--}}
+{{--                                                </div>--}}
+{{--                                            </div><!-- col end -->--}}
                                             <div class="col-xl-3 col-lg-6 col-md-12 col-sm-12">
                                                 <div class="card card-counter bg-gradient-danger">
                                                     <div class="card-body">
@@ -569,37 +607,52 @@
                                                     </div>
                                                 </div>
                                             </div><!-- col end -->
-                                        </div>
                                         <hr>
 
-                                        <h3 class="text-center" style="font-weight: bold">Total Eggs Collected</h3>
+                                        <h3 class="text-center" style="font-weight: bold"></h3>
                                         <div class="row">
-                                            <div class="col-lg-12 col-md-12">
+                                            <div class="col-lg-10 col-md-12">
                                                 <div class="card">
                                                     <div class="card-header">
                                                         <?php
                                                         $totalEggsCollected = \App\Models\Poultry::totalEggsCollected();
                                                         ?>
 
-                                                        <h3 class="card-title">Single Barchart</h3>
+                                                        <h3 class="card-title">Eggs Collected And Egg Sale</h3>
                                                     </div>
                                                     <div class="card-body">
-                                                        <h3>{{$totalEggsCollected}}</h3>
-
-                                                        <canvas id="totalEggsChart" class="h-300"></canvas>
+                                                        <canvas id="totalEggsChart" class="h-400"></canvas>
                                                     </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-2 col-md-12">
+                                                <div class="card">
+                                                    <div class="card-header">
+                                                        <?php
+                                                        $totalEggsCollected = \App\Models\Poultry::where('poultry_type_id', 3)->where('poultry_status_id', 4)->where('account_head_id', 8)->sum('quantity');
+                                                        ?>
+                                                        <h3 class="card-title">{{$totalEggsCollected}}</h3>
+                                                    </div>
+
                                                 </div>
                                             </div>
                                             <div class="col-lg-12 col-md-12">
                                                 <div class="card">
                                                     <div class="card-header">
-                                                        <h3 class="card-title">Single Barchart</h3>
+                                                        <h3 class="card-title">Hen Calculation </h3>
                                                     </div>
-                                                    <div class="card-body"><div class="chartjs-size-monitor" style="position: absolute; inset: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
-                                                        <canvas id="Chart2" class="h-200 chartjs-render-monitor" width="528" height="200" style="display: block; width: 528px; height: 200px;"></canvas>
-                                                    </div>
+                                                    <canvas id="henPurchaseSaleDie" class="h-400"></canvas>
                                                 </div>
                                             </div>
+                                            <div class="col-lg-12 col-md-12">
+                                                <div class="card">
+                                                    <div class="card-header">
+                                                        <h3 class="card-title">Chick Calculation </h3>
+                                                    </div>
+                                                    <canvas id="chickCollected" class="h-400"></canvas>
+                                                </div>
+                                            </div>
+
                                         </div>
 
                                         <h3 class="text-center" style="font-weight: bold">Total Eggs Collected</h3>
@@ -783,7 +836,6 @@
                                             </div>
                                         </div>
 
-
                                         <h3 class="text-center" style="font-weight: bold">Total Cucumber Sold</h3>
                                         <form action="">
                                             <div class="row">
@@ -846,7 +898,9 @@
                     [{
                         label: "Egg Collected",
                         data: [
-                            "{{ $eggCollected->sum('quantity') }}",
+                            @foreach ($eggCollected as $collected)
+                            "{{ $collected->quantity }}",
+                            @endforeach
                         ],
                         borderColor: "#1753fc",
                         borderWidth: "0",
@@ -854,8 +908,8 @@
                     }, {
                         label: "Egg Sale",
                         data: [
-                            @foreach ($eggSale as $collected)
-                                "{{ $collected->sum('quantity') }}",
+                            @foreach ($eggSale as $sale)
+                                "{{ $sale->totalQuantity }}",
                             @endforeach
                         ],
                         borderColor: "#9258f1",
@@ -892,6 +946,65 @@
                         }
                     }]
                 },
+                legend: {
+                    labels: {
+                        fontColor: "#bbc1ca"
+                    },
+                },
+            }
+        });
+
+
+        var ctx = document.getElementById("henPurchaseSaleDie");
+        var myChart = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                datasets: [{
+                    data: [
+                        {{$totalPurchaseHens}},
+
+                        {{$totalSaleHens}},
+                        {{ $totalDieHens }},
+                        {{$totalRemainingHens}}
+                            ],
+                    backgroundColor: ['#1753fc', ' #00b3ff', '#9258f1', '#4333f2'],
+                    hoverBackgroundColor: ['#1753fc', ' #00b3ff', '#9258f1','#0099ee'],
+                    borderColor:'transparent',
+                }],
+                labels: ["Hen Purchase", "Hen Sale", "Hen Die","Remaining Hens"]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                legend: {
+                    labels: {
+                        fontColor: "#bbc1ca"
+                    },
+                },
+            }
+        });
+        var ctx = document.getElementById("chickCollected");
+        var myChart = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                datasets: [{
+                    data: [
+                        {{$totalChicksCollected}},
+
+                        {{$totalchickSale}},
+                        {{ $totalDieChicks }},
+                        {{$totalRemainingChicks}}
+
+                    ],
+                    backgroundColor: ['#1753fc', ' #00b3ff', '#9258f1','#89ee43'],
+                    hoverBackgroundColor: ['#1753fc', ' #00b3ff', '#9258f1','#89ee43'],
+                    borderColor:'transparent',
+                }],
+                labels: ["collected chicks", "chick Sale", "chick Die","Remaining chicks"]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
                 legend: {
                     labels: {
                         fontColor: "#bbc1ca"
