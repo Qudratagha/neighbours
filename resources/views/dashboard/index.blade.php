@@ -447,10 +447,10 @@
                                     <div class="tab-pane active" id="tab13">
 
                                         <hr>
-                                        <h3 class="text-center" style="font-weight: bold; font-size: 35px;">Overall ultry Details</h3>
+                                        <h3 class="text-center" style="font-weight: bold; font-size: 35px;">Overall Poultry Details</h3>
                                         <div class="row">
                                             <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
-                                                <div class="card card-counter bg-gradient-danger">
+                                                <div class="card card-counter bg-gradient-info">
                                                     <div class="card-body">
                                                         <div class="row">
                                                             <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12 text-center">
@@ -470,7 +470,7 @@
                                                 </div>
                                             </div><!-- col end -->
                                             <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
-                                                <div class="card card-counter bg-gradient-danger">
+                                                <div class="card card-counter bg-gradient-primary">
                                                     <div class="card-body">
                                                         <div class="row">
                                                             <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12 text-center">
@@ -652,67 +652,8 @@
                                                     <canvas id="chickCollected" class="h-400"></canvas>
                                                 </div>
                                             </div>
-
                                         </div>
-
-                                        <h3 class="text-center" style="font-weight: bold">Total Eggs Collected</h3>
-                                        <form action="">
-                                            <div class="row">
-                                                <div class="mb-3 col-md-3">
-                                                    <label for="" class="form-label">Select Date Range :</label>
-                                                    <input type="text" class="form-control" name="dates" placeholder="Select Range">
-                                                </div>
-                                            </div>
-                                        </form>
-                                        <div class="row">
-                                            <div class="col-lg-12 col-md-12">
-                                                <div class="card">
-                                                    <div class="card-header">
-                                                        <h3 class="card-title">Single Barchart</h3>
-                                                    </div>
-                                                    <div class="card-body"><div class="chartjs-size-monitor" style="position: absolute; inset: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
-                                                        <canvas id="Chart2" class="h-200 chartjs-render-monitor" width="528" height="200" style="display: block; width: 528px; height: 200px;"></canvas>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <h3 class="text-center" style="font-weight: bold">Total Sold Eggs</h3>
-                                        <div class="row">
-                                            <div class="col-lg-12 col-md-12">
-                                                <div class="card">
-                                                    <div class="card-header">
-                                                        <h3 class="card-title">Single Barchart</h3>
-                                                    </div>
-                                                    <div class="card-body"><div class="chartjs-size-monitor" style="position: absolute; inset: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
-                                                        <canvas id="Chart2" class="h-200 chartjs-render-monitor" width="528" height="200" style="display: block; width: 528px; height: 200px;"></canvas>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <h3 class="text-center" style="font-weight: bold">Total Sold Eggs</h3>
-                                        <form action="">
-                                            <div class="row">
-                                                <div class="mb-3 col-md-3">
-                                                    <label for="" class="form-label">Select Date Range :</label>
-                                                    <input type="text" class="form-control" name="dates" placeholder="Select Range">
-                                                </div>
-                                            </div>
-                                        </form>
-                                        <div class="row">
-                                            <div class="col-lg-12 col-md-12">
-                                                <div class="card">
-                                                    <div class="card-header">
-                                                        <h3 class="card-title">Single Barchart</h3>
-                                                    </div>
-                                                    <div class="card-body"><div class="chartjs-size-monitor" style="position: absolute; inset: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
-                                                        <canvas id="Chart2" class="h-200 chartjs-render-monitor" width="528" height="200" style="display: block; width: 528px; height: 200px;"></canvas>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
+                                    </div>
                                     </div>
                                     <div class="tab-pane  " id="tab14">
                                         <h3>Total Expenditures:</h3>
@@ -967,8 +908,8 @@
                         {{ $totalDieHens }},
                         {{$totalRemainingHens}}
                             ],
-                    backgroundColor: ['#1753fc', ' #00b3ff', '#9258f1', '#4333f2'],
-                    hoverBackgroundColor: ['#1753fc', ' #00b3ff', '#9258f1','#0099ee'],
+                    backgroundColor: ['#1753fc', ' #00b3ff', '#9258f1', '#68b2bb'],
+                    hoverBackgroundColor: ['#1753fc', ' #00b3ff', '#9258f1','#68b2bb'],
                     borderColor:'transparent',
                 }],
                 labels: ["Hen Purchase", "Hen Sale", "Hen Die","Remaining Hens"]
@@ -996,8 +937,8 @@
                         {{$totalRemainingChicks}}
 
                     ],
-                    backgroundColor: ['#1753fc', ' #00b3ff', '#9258f1','#89ee43'],
-                    hoverBackgroundColor: ['#1753fc', ' #00b3ff', '#9258f1','#89ee43'],
+                    backgroundColor: ['#1753fc', ' #00b3ff', '#9258f1','#68b2bb'],
+                    hoverBackgroundColor: ['#1753fc', ' #00b3ff', '#9258f1','#68b2bb'],
                     borderColor:'transparent',
                 }],
                 labels: ["collected chicks", "chick Sale", "chick Die","Remaining chicks"]
