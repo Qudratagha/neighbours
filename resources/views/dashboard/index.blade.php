@@ -233,12 +233,12 @@
                                                     <h3 class="card-title">Total Milk Collected and Sold</h3>
                                                     <div class="row" style="position: absolute; right: 0px">
                                                         <div class="col">
-                                                            <label for="from" class="form-control">From</label>
-                                                            <input type="date" class="form-control">
+                                                            <label for="from" class="form-control">Start</label>
+                                                            <input type="date" id="startDateMilkCollectionSold" class="form-control">
                                                         </div>
                                                         <div class="col">
-                                                            <label for="to" class="form-control">To</label>
-                                                            <input type="date" class="form-control">
+                                                            <label for="to" class="form-control">End</label>
+                                                            <input type="date" id="endDateMilkCollectionSold" class="form-control">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -807,7 +807,6 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
     <script>
-        $('input[name="dates"]').daterangepicker();
         var ctx = document.getElementById("totalEggsChart").getContext('2d');
         var myChart = new Chart(ctx, {
             type: 'bar',
@@ -1007,95 +1006,85 @@
             });
         }
 
+
+
         //milkCollectionSold
-        var milkCollectionSoldCtx = milkCollectionSoldMyChart = null;
-        var milkCollectionSoldChartLabel = [];
-        var milkCollectionSoldChartData = [];
-        $(function(){
-            milkCollectionSoldCtx = document.getElementById("milkCollectionSold").getContext('2d');
-            initializeChart();
-            getMilkCollectionSaleData($('#getDatesCowMilkCollection').val());
-            $('#getDatesCowMilkCollection').change(function() {
-                getMilkCollectionSaleData(this.value);
-                console.log(this.value);
+        chart_data_sale = [];
+        var startDateMilkCollectionSold = endDateMilkCollectionSold = null;
+        $('#startDateMilkCollectionSold').change(function() {
+             startDateMilkCollectionSold = this.value;
+
+            $('#endDateMilkCollectionSold').change(function() {
+                endDateMilkCollectionSold = this.value;
+                $.ajax({
+                    url:"{{route('dashboard.getMilkCollectionSaleData',["",""])}}/"+startDateMilkCollectionSold+"/"+endDateMilkCollectionSold,
+                    method:'get',
+                    success: function(result){
+                        console.log(result);
+                        result.milkCollection.forEach((item) => {
+                            console.log('printing milkCollection',item);
+                            chart_label.push(item.date);
+                            chart_data.push(item.quantity);
+                        });
+                        result.milkSale.forEach((item) => {
+                            console.log('printing Milk sale',item);
+                            chart_data_sale.push(item.quantity);
+                        });
+                        // console.log('chart_label: ',chart_label);
+                        // console.log('chart_data: ',chart_data);
+                        // console.log('chart_data_sale: ',chart_data_sale);
+                        var ctx = document.getElementById("milkCollectionSold");
+                        var myChart = new Chart(ctx, {
+                            type: 'bar',
+                            data: {
+                                labels: chart_label,
+                                datasets: [{
+                                    label: "collection",
+                                    data: chart_data,
+                                    borderColor: "#1753fc",
+                                    borderWidth: "0",
+                                    backgroundColor: "#1753fc"
+                                }, {
+                                    label: "sale",
+                                    data: chart_data_sale,
+                                    borderColor: "#9258f1",
+                                    borderWidth: "0",
+                                    backgroundColor: "#9258f1"
+                                }]
+                            },
+                            options: {
+                                responsive: true,
+                                maintainAspectRatio: false,
+                                scales: {
+                                    xAxes: [{
+                                        ticks: {
+                                            fontColor: "#bbc1ca",
+                                        },
+                                        gridLines: {
+                                            color: 'rgba(0,0,0,0.03)'
+                                        }
+                                    }],
+                                    yAxes: [{
+                                        ticks: {
+                                            beginAtZero: true,
+                                            fontColor: "#bbc1ca",
+                                        },
+                                        gridLines: {
+                                            color: 'rgba(0,0,0,0.03)'
+                                        },
+                                    }]
+                                },
+                                legend: {
+                                    labels: {
+                                        fontColor: "#bbc1ca"
+                                    },
+                                },
+                            }
+                        });
+                    }
+                });
             });
         });
 
-        function initializeMilkCollectionSold() {
-            var milkCollectionSoldCtx = document.getElementById("milkCollectionSold");
-            var milkCollectionSoldMyChart = new Chart(milkCollectionSoldCtx, {
-                type: 'bar',
-                data: {
-                    labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"],
-                    datasets: [{
-                        label: "data1",
-                        data: [65, 59, 80, 81, 56, 55, 40],
-                        borderColor: "#1753fc",
-                        borderWidth: "0",
-                        backgroundColor: "#1753fc"
-                    }, {
-                        label: "data2",
-                        data: [28, 48, 40, 19, 86, 27, 90],
-                        borderColor: "#9258f1",
-                        borderWidth: "0",
-                        backgroundColor: "#9258f1"
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    scales: {
-                        xAxes: [{
-                            ticks: {
-                                fontColor: "#bbc1ca",
-                            },
-                            gridLines: {
-                                color: 'rgba(0,0,0,0.03)'
-                            }
-                        }],
-                        yAxes: [{
-                            ticks: {
-                                beginAtZero: true,
-                                fontColor: "#bbc1ca",
-                            },
-                            gridLines: {
-                                color: 'rgba(0,0,0,0.03)'
-                            },
-                        }]
-                    },
-                    legend: {
-                        labels: {
-                            fontColor: "#bbc1ca"
-                        },
-                    },
-                }
-            });
-        }
-        function getMilkCollectionSaleData(getDatesCowMilkCollection) {
-            var startDate = endDate = null;
-            $('input[name="getDatesCowMilkCollection"]').daterangepicker({
-                opens: 'center'
-            },function(start, end) {
-                startDate = start.format('YYYY-MM-DD');
-                endDate = end.format('YYYY-MM-DD');
-                // console.log('startDate '+startDate);
-            });
-            milkCollectionSoldChartLabel = [];
-            milkCollectionSoldChartData = [];
-            // console.log('endDate '+endDate);
-            $.ajax({
-                url:"{{ route("dashboard.getMilkCollectionSaleData","") }}/"+getDatesCowMilkCollection,
-                method:'get',
-                success: function(result){
-                    console.log(result);
-                    result.forEach((item) => {
-                        milkCollectionSoldChartLabel.push(item.date);
-                        milkCollectionSoldChartData.push(item.quantity);
-                    });
-                    milkCollectionSoldMyChart.destroy();
-                    initializeMilkCollectionSold();
-                }
-            });
-        }
     </script>
 @endsection

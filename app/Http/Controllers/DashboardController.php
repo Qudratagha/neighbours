@@ -75,10 +75,20 @@ class DashboardController extends Controller
         return response()->json($cowMilkCollection);
     }
 
-    public function getMilkCollectionSaleData($getDatesCowMilkCollection)
+    public function getMilkCollectionSaleData($startDateMilkCollectionSold,$endDateMilkCollectionSold)
     {
-        dd($getDatesCowMilkCollection);
-        return response()->json($getDatesCowMilkCollection);
+        $getMilkCollectionData = Transaction::where('transaction_type_id',3)->where('account_head_id',22)->whereBetween('date',[$startDateMilkCollectionSold,$endDateMilkCollectionSold])->get(['quantity','date']);
+
+        $getMilkSaleData = Transaction::where('transaction_type_id',1)->where('account_head_id',14)->whereBetween('date',[$startDateMilkCollectionSold,$endDateMilkCollectionSold])->get(['quantity','date']);
+
+         $milkDates = ['2022-06-06','2022-06-12'];
+        $milkCollection = [343,4344];
+        $milkSale = [null,4434];
+        if ( ($getMilkCollectionData != null) && $getMilkCollectionData != null )
+        {
+            return response()->json(['milkCollection' => $getMilkCollectionData, 'milkSale' => $getMilkSaleData]);
+        }
+        else return response()->json('no records found');
     }
 
 }
