@@ -96,7 +96,7 @@ class TransactionController extends Controller
     {
         abort_if(Gate::denies("cow-read"), Response::HTTP_FORBIDDEN, '403 Forbidden');
         $milkStock = Transaction::milkStock();
-        $soldMilk  = Transaction::whereRaw("account_head_id = 15 AND sub_head_id = 15")->get();
+        $soldMilk  = Transaction::whereRaw("account_head_id = 14 AND sub_head_id = 14")->get();
         return view('milk_sale.index',compact('soldMilk'));
     }
 
@@ -186,7 +186,7 @@ class TransactionController extends Controller
         {
             $cow = $request->cow_serial;
             $request['transaction_type_id'] = 1;
-            $request['account_head_id'] = 16;
+            $request['account_head_id'] = 15;
             $request['quantity'] = 1;
             $sub_head_id = AccountHead::where('name', "cow#$cow")->pluck('id')->last();
             $request['sub_head_id'] = $sub_head_id;
@@ -209,8 +209,8 @@ class TransactionController extends Controller
 
             $request['amount'] = $rate;
             $request['transaction_type_id'] = 1;
-            $request['account_head_id'] = 15;
-            $request['sub_head_id'] = 15;
+            $request['account_head_id'] = 14;
+            $request['sub_head_id'] = 14;
 
             Transaction::create($request->except('submitMilkSale'));
             return redirect()->back()->with('message', 'Milk Sold Successful');

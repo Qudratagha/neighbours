@@ -6,13 +6,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
 
-    <meta content="Hogo– Creative Admin Multipurpose Responsive Bootstrap4 Dashboard HTML Template" name="description">
-    <meta content="Spruko Technologies Private Limited" name="author">
-    <meta name="keywords" content="html admin template, bootstrap admin template premium, premium responsive admin template, admin dashboard template bootstrap, bootstrap simple admin template premium, web admin template, bootstrap admin template, premium admin template html5, best bootstrap admin template, premium admin panel template, admin template"/>
+    <meta content="The Neighbours Farm Managment System" name="description">
+    <meta content="Impact Enterprises" name="author">
+    <meta name="keywords" content="The Neighbours Farm Managment System"/>
 
     <!-- Favicon -->
-    <link rel="icon" href="/assets/images/brand/favicon.ico" type="image/x-icon"/>
-    <link rel="shortcut icon" type="image/x-icon" href="/assets/images/brand/favicon.ico" />
+    <link rel="icon" href="/assets/images/brand/NFMS.png" type="image/x-icon"/>
+    <link rel="shortcut icon" type="image/x-icon" href="/assets/images/brand/NFMS.png" />
 
     <!-- Title -->
     <title>@yield('title')</title>
@@ -87,7 +87,7 @@
         <div class="container">
             <div class="row align-items-center flex-row-reverse">
                 <div class="col-lg-12 col-sm-12   text-center">
-                    Copyright © 2022 <a href="https://www.dailywebsolutions.com/" target="_blank">Daily Web Solutions</a>. Designed by <a href="#">Asfand Afridi</a> All rights reserved.
+                    Copyright © 2022 <a href="https://www.impact-enterprises.co/" target="_blank">Impact Enterprises</a>. Designed by <a href="#">Asfand Afridi</a> All rights reserved.
                 </div>
             </div>
         </div>

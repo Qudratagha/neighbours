@@ -41,7 +41,7 @@ class Poultry extends Model
     }
     public static function totalSaleHen()
     {
-        $totalSaleHen = Transaction::where('transaction_type_id', 1)->where('account_head_id', 20)->where('sub_head_id', 20)->sum('quantity');
+        $totalSaleHen = Transaction::where('transaction_type_id', 1)->where('account_head_id', 8)->where('sub_head_id', 20)->sum('quantity');
         return $totalSaleHen;
     }
     public static function totalDieHen()
@@ -61,6 +61,7 @@ class Poultry extends Model
     }
     public static function sickMHealthy()
     {
+
         $totalSickHen = \App\Models\Poultry:: totalSickHen();
         $totalHealthyHen = \App\Models\Poultry:: totalHealthyHen();
         $sickMHealthy =$totalSickHen - $totalHealthyHen;
@@ -88,7 +89,7 @@ class Poultry extends Model
     {
         $totalEggsCollected = \App\Models\Poultry::where('poultry_type_id', 3)->where('poultry_status_id', 4)->where('account_head_id', 8)->sum('quantity');
         $totalIncubatedCollected = \App\Models\Poultry::where('poultry_type_id', 3)->where('poultry_status_id', 3)->where('account_head_id', 8)->sum('quantity');
-        $totalSaleEggs = \App\Models\Transaction::where('transaction_type_id', 1)->where('account_head_id', 19)->where('sub_head_id', 19)->sum('quantity');
+        $totalSaleEggs = \App\Models\Transaction::where('transaction_type_id', 1)->where('account_head_id', 8)->where('sub_head_id', 19)->sum('quantity');
         $collEggsMincuEggs =  $totalEggsCollected - $totalIncubatedCollected - $totalSaleEggs ;
         return $collEggsMincuEggs;
     }
@@ -116,7 +117,7 @@ class Poultry extends Model
     }
     public static function totalchickSale()
     {
-        $totalHealthyChicks = \App\Models\Transaction::where('transaction_type_id', 1)->where('account_head_id', 21)->where('sub_head_id', 21)->sum('quantity');
+        $totalHealthyChicks = \App\Models\Transaction::where('transaction_type_id', 1)->where('account_head_id', 8)->where('sub_head_id', 21)->sum('quantity');
         return $totalHealthyChicks;
     }
     public static function totalRemainingChicks()
@@ -189,7 +190,6 @@ class Poultry extends Model
         $totalMedicineUsed = \App\Models\Medicines::where('sub_head_id', 55)->sum('quantity');
         return $totalMedicineUsed;
     }
-
     public static function purchaseMedicineMUsedMedicine()
     {
         $totalMedicinePurchase = \App\Models\Poultry::totalMedicinePurchase();
@@ -197,6 +197,46 @@ class Poultry extends Model
         $variable = $totalMedicinePurchase - $totalMedicineUsed;
         return $variable;
     }
+    public static function incubatedEggs()
+    {
+        $q =  \App\Models\Poultry::where('poultry_type_id', 3)->where('poultry_status_id', 3)->where('account_head_id', 8)->sum('quantity');
+        return $q;
+    }
+    public static function chicksCollectedFromIncubation()
+    {
+        $q =  \App\Models\Poultry::where('poultry_type_id', 2)->where('poultry_status_id', 4)->where('account_head_id', 8)->sum('quantity');
+        return $q;
+    }
+    public static function eggincMchickCollected()
+    {
+        $incubatedEggs = \App\Models\Poultry::incubatedEggs();
+        $chicksCollectedFromIncubation = \App\Models\Poultry::chicksCollectedFromIncubation();
+        $q = $incubatedEggs - $chicksCollectedFromIncubation;
+        return $q;
+    }
+//    poultry expenditure
+    public static function poultryExpenditure()
+    {
+        $poultryExpenditure = \App\Models\Transaction::where('transaction_type_id', 2)->where('account_head_id', 8)->sum('amount');
+        return $poultryExpenditure;
+    }
+//    poultry income
+    public static function poultryIncome()
+    {
+        $poultryIncome = \App\Models\Transaction::where('transaction_type_id', 1)->where('account_head_id', 8)->sum('amount');
+        return $poultryIncome;
+    }
+//    poultry revenue
+    public static function poultryRevenue()
+    {
+        $poultryExpenditure = \App\Models\Poultry::poultryExpenditure();
+        $poultryIncome = \App\Models\Poultry::poultryIncome();
+
+        $poultryRevenue = $poultryExpenditure - $poultryIncome;
+        return $poultryRevenue;
+    }
+
+
 
 
 
