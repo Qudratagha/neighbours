@@ -25,7 +25,7 @@ Auth::routes();
 
 Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard');
 Route::get('/getSingleCowMilkCollection/{account_head_id}', [App\Http\Controllers\DashboardController::class, 'getSingleCowMilkCollection'])->name('dashboard.getSingleCowMilkCollection');
-Route::get('/getMilkCollectionSaleData/{startDate}', [App\Http\Controllers\DashboardController::class, 'getMilkCollectionSaleData'])->name('dashboard.getMilkCollectionSaleData');
+Route::get('/getMilkCollectionSaleData/{getDatesCowMilkCollection}', [App\Http\Controllers\DashboardController::class, 'getMilkCollectionSaleData'])->name('dashboard.getMilkCollectionSaleData');
 
 //poultry
 

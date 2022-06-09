@@ -51,7 +51,7 @@ class DashboardController extends Controller
 
     public function getMilkCollectionSaleData($getDatesCowMilkCollection)
     {
-        dd('hello');
+        dd($getDatesCowMilkCollection);
         return response()->json($getDatesCowMilkCollection);
     }
 }
