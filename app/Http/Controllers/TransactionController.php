@@ -130,7 +130,7 @@ class TransactionController extends Controller
         $expenseHeads = AccountHead::where('parent_id',5)
             ->where('name','LIKE','%Poultry %')
             ->orderBy('id','desc')
-            ->take(10)
+            ->take(9)
             ->get();
         $acRealtedToPurchases = AccountHead::where('parent_id',5)
             ->where('name','LIKE','%Poultry %')
