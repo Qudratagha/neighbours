@@ -32,9 +32,9 @@ class Transaction extends Model
 
     public static function milkStock()
     {
-        $totalMilk = Transaction::where('account_head_id',21)->sum('quantity');
+        $totalMilk = Transaction::where('account_head_id',22)->sum('quantity');
 
-        $soldMilk = Transaction::where('account_head_id',15)->sum('quantity');
+        $soldMilk = Transaction::where('account_head_id',14)->sum('quantity');
 
         $stockMilk = $totalMilk - $soldMilk;
 
@@ -87,5 +87,21 @@ class Transaction extends Model
 
         $stockCorn = $totalCorn - $soldCorn;
         return $stockCorn;
+    }
+
+    public function scopeMilkingCows($q) {
+        return $q->where('transaction_type_id',3)->where('account_head_id',22)->groupBy('sub_head_id')->get();
+    }
+
+    public function scopeSoldCows($q) {
+        return $q->where('transaction_type_id',1)->where('account_head_id',15)->groupBy('sub_head_id')->get()->count();
+    }
+
+    public function scopeTotalExpenditure($q) {
+        return $q->where('transaction_type_id',2)->where('account_head_id',6)->sum('amount');
+    }
+
+    public function scopeTotalIncome($q) {
+        return $q->where('transaction_type_id',1)->whereIn('account_head_id',[15,14])->sum('amount');
     }
 }

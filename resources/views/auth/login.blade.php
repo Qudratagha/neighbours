@@ -13,7 +13,7 @@
                             <div class="card-header">{{ __('Login') }}</div>
                             <div class="card-body">
                                 <div class="text-center mb-6">
-                                    <img src="{{asset('assets/images/brand/logo.png')}}" class="" alt="">
+                                    <img src="{{asset('/assets/images/brand/NFMS.png')}}" class="" alt="NFMS Logo">
                                 </div>
                                 <h3>Login</h3>
                                 <p class="text-muted">Sign In to your account</p>

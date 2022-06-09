@@ -16,4 +16,10 @@ class Sick extends Model
     public function cattle(){
         return $this->belongsTo(Cattle::class,'cattle_id','id');
     }
+
+    public function scopeSickCows($q) {
+        return $q->with(['cattle'=> function($query) {
+            return $query->cows();
+        }])->where('is_sick',1)->get()->groupBy('cattle_id')->count();
+    }
 }

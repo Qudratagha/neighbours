@@ -190,7 +190,7 @@ class CattleController extends Controller
             $cowSerial = $request->serial_no;
 
             $request['transaction_type_id'] = 3;
-            $request['account_head_id'] = 21;
+            $request['account_head_id'] = 22;
             $sub_head_id = AccountHead::where('name', "cow#$cowSerial")->pluck('id')->last();
             $request['sub_head_id'] = $sub_head_id;
 
@@ -243,7 +243,7 @@ class CattleController extends Controller
 
         if ($sub_head_id != '')
         {
-            $transactions = Transaction::whereRaw("account_head_id = 21 AND sub_head_id = $sub_head_id")->get();
+            $transactions = Transaction::whereRaw("account_head_id = 22 AND sub_head_id = $sub_head_id")->get();
         }
         else $transactions = [null];
 

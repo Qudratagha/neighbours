@@ -8,7 +8,7 @@
             <div class="container">
                 <div class="d-flex">
                     <a class="header-brand" href="{{route('dashboard')}}">
-                        <img src="{{asset('assets/images/brand/NFMS.png')}}" class="header-brand-img main-logo" alt="Hogo logo">
+                        <img src="{{asset('assets/images/brand/NFMS.png')}}" class="header-brand-img main-logo" alt="NFMS logo">
                      </a><!-- logo-->
                     {{--<a aria-label="Hide Sidebar" class="app-sidebar__toggle" data-toggle="sidebar" href=""></a>--}}
                     <a id="horizontal-navtoggle" class="animated-arrow hor-toggle"><span></span></a>
@@ -22,7 +22,7 @@
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow ">
                                     <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();document.getElementById('logout-form').submit();"><strong><i class="fe fe-user"></i> {{ __(' Logout') }}{{ Auth::user()->name }}</strong></a>
+                                       onclick="event.preventDefault();document.getElementById('logout-form').submit();"><strong><i class="fe fe-user"></i> {{ __(' Logout') }}-{{ ucfirst(Auth::user()->name) }}</strong></a>
                                         <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                             @csrf
                                         </form>
