@@ -13,17 +13,16 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
-
-                                <div class="tabs-menu ">
-                                    <!-- Tabs -->
-                                    <ul class="nav panel-tabs">
-                                        <li class=""><a href="#tab11"   data-toggle="tab">Cow</a></li>
-                                        <li><a href="#tab12" data-toggle="tab">Goat/Sheep</a></li>
-                                        <li><a href="#tab13" class="active" data-toggle="tab">Poultry</a></li>
-                                        <li><a href="#tab14" data-toggle="tab">Cultivation</a></li>
-                                        <li><a href="#tab15" data-toggle="tab">Overall farm</a></li>
-                                    </ul>
-                                </div>
+                            <div class="tabs-menu ">
+                                <!-- Tabs -->
+                                <ul class="nav panel-tabs">
+                                    <li class=""><a href="#tab11" class="active" data-toggle="tab">Cow</a></li>
+                                    <li><a href="#tab12" data-toggle="tab">Goat/Sheep</a></li>
+                                    <li><a href="#tab13" data-toggle="tab">Poultry</a></li>
+                                    <li><a href="#tab14" data-toggle="tab">Cultivation</a></li>
+                                    <li><a href="#tab15" data-toggle="tab">Overall farm</a></li>
+                                </ul>
+                            </div>
                         </div>
                         <div class="card-body">
                             <div class="panel-body tabs-menu-body">
@@ -217,14 +216,14 @@
                                                         <div  style="position: absolute !important; right: 0px">
                                                             <select class="form-control custom-control" id="getCowID">
                                                                 <option selected disabled>Choose Cow to Show Milk Collection Data</option>
-                                                                    @foreach( $cowSerials as $cowSerial)
+                                                                @foreach( $cowSerials as $cowSerial)
                                                                     <option value="{{$cowSerial->account_head_id}}">{{$cowSerial->serial_no}}</option>
-                                                                    @endforeach
+                                                                @endforeach
                                                             </select>
                                                         </div>
                                                     </div>
                                                     <div class="card-body">
-                                                          <canvas id="singleCowMilkCollection" class="h-300 chartjs-render-monitor" width="528" height="300" style="display: block; width: 528px; height: 300px;"></canvas>
+                                                        <canvas id="singleCowMilkCollection" class="h-300 chartjs-render-monitor" width="528" height="300" style="display: block; width: 528px; height: 300px;"></canvas>
                                                     </div>
                                                 </div>
                                             </div>
@@ -425,8 +424,8 @@
                                                                     <?php
                                                                     $poultryExpenditure = \App\Models\Poultry:: poultryExpenditure();;
                                                                     ?>
-                                                                        <h2 class="mb-0">{{$poultryExpenditure}}</h2>
-{{--                                                                    <p class="text-white mt-1">Total Hens</p>--}}
+                                                                    <h2 class="mb-0">{{$poultryExpenditure}}</h2>
+                                                                    {{--                                                                    <p class="text-white mt-1">Total Hens</p>--}}
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -552,6 +551,18 @@
                                             <div class="col-12">
                                                 <div class="card">
                                                     <div class="card-header">
+                                                        <h3 class="card-title">Eggs Collected </h3>
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <canvas id="totalEggsCollectionChart" class="h-400"></canvas>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div class="card">
+                                                    <div class="card-header">
                                                         <h3 class="card-title">Eggs Sale </h3>
                                                     </div>
                                                     <div class="card-body">
@@ -560,28 +571,28 @@
                                                 </div>
                                             </div>
                                         </div>
-                                            <div class="row">
-                                                <div class="col-12">
-                                                    <div class="card">
-                                                        <div class="card-header">
-                                                            <h3 class="card-title">Hen Calculation </h3>
-                                                        </div>
-                                                        <canvas id="henPurchaseSaleDie" class="h-400"></canvas>
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div class="card">
+                                                    <div class="card-header">
+                                                        <h3 class="card-title">Hen Calculation </h3>
                                                     </div>
+                                                    <canvas id="henPurchaseSaleDie" class="h-400"></canvas>
                                                 </div>
                                             </div>
-                                            <div class="row">
-                                                <div class="col-12">
-                                                    <div class="card">
-                                                        <div class="card-header">
-                                                            <h3 class="card-title">Chick Calculation </h3>
-                                                        </div>
-                                                        <canvas id="chickCollected" class="h-400"></canvas>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div class="card">
+                                                    <div class="card-header">
+                                                        <h3 class="card-title">Chick Calculation </h3>
                                                     </div>
+                                                    <canvas id="chickCollected" class="h-400"></canvas>
                                                 </div>
                                             </div>
+                                        </div>
                                     </div>
-                                    <div class="tab-pane  " id="tab14">
+                                    <div class="tab-pane" id="tab14">
                                         <h3>Total Expenditures:</h3>
                                         <h3>Total Income:</h3>
                                         <hr>
@@ -743,9 +754,9 @@
                 </div>
             </div>
         </div>
-{{--      end side app --}}
+        {{--      end side app --}}
     </div>
-{{--   end container area--}}
+    {{--   end container area--}}
 @endsection
 @section('more-script')
     <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
@@ -768,6 +779,7 @@
                             "{{ $collected->quantity }}",
                         @endforeach
                         ],
+
                     borderWidth: 2,
                     backgroundColor: 'rgba(59,175,238,0.73)',
                     borderColor: 'rgba(59,175,238,0.73)',
@@ -880,7 +892,7 @@
                         {{$totalSaleHens}},
                         {{ $totalDieHens }},
                         {{$totalRemainingHens}}
-                            ],
+                    ],
                     backgroundColor: ['#1753fc', ' #00b3ff', '#9258f1', '#68b2bb'],
                     hoverBackgroundColor: ['#1753fc', ' #00b3ff', '#9258f1','#68b2bb'],
                     borderColor:'transparent',

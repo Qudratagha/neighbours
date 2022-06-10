@@ -45,12 +45,12 @@ class Transaction extends Model
 
         $totalWheat = Transaction::where('transaction_type_id', 3)
             ->where('account_head_id', 9)
-            ->where('sub_head_id', 27)
+            ->where('sub_head_id', 73)
             ->sum('quantity');
 
         $soldWheat = Transaction::where('transaction_type_id', 1)
-            ->where('account_head_id', 13)
-            ->where('sub_head_id', 16)
+            ->where('account_head_id', 74)
+            ->where('sub_head_id', 76)
             ->sum('quantity');
 
         $stockWheat = $totalWheat - $soldWheat;
@@ -61,12 +61,12 @@ class Transaction extends Model
 
         $totalWheat = Transaction::where('transaction_type_id', 3)
             ->where('account_head_id', 9)
-            ->where('sub_head_id', 28)
+            ->where('sub_head_id', 74)
             ->sum('quantity');
 
         $soldWheat = Transaction::where('transaction_type_id', 1)
             ->where('account_head_id', 13)
-            ->where('sub_head_id', 18)
+            ->where('sub_head_id', 77)
             ->sum('quantity');
 
         $stockWheat = $totalWheat - $soldWheat;
@@ -77,12 +77,12 @@ class Transaction extends Model
 
         $totalCorn = Transaction::where('transaction_type_id', 3)
             ->where('account_head_id', 9)
-            ->where('sub_head_id', 29)
+            ->where('sub_head_id', 75)
             ->sum('quantity');
 
         $soldCorn = Transaction::where('transaction_type_id', 1)
             ->where('account_head_id', 13)
-            ->where('sub_head_id', 17)
+            ->where('sub_head_id', 78)
             ->sum('quantity');
 
         $stockCorn = $totalCorn - $soldCorn;

@@ -188,6 +188,7 @@
                 if(this.value == 3){
                     $('#available').html("Total Stock Available Of Cucumber " + cucumberQty + " kg" );
                     $('#quantity').change(function () {
+                        // console.log(this.value);
                         if(this.value > cucumberQty)
                         {
                             alert('Please do not exceed the Available Stock');

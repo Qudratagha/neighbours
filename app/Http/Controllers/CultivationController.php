@@ -95,7 +95,7 @@ class CultivationController extends Controller
 
     //Sale Cultivation
     public function saleCultivation(){
-        $transactions = Transaction::where('transaction_type_id', 1)->get();
+        $transactions = Transaction::where('transaction_type_id', 1)->where('account_head_id', 13)->get();
         $cultivation_types = CultivationType::all();
         return view('cultivation.sale', compact('cultivation_types', 'transactions'));
     }
