@@ -135,11 +135,7 @@ class AccountSeeder extends Seeder
             ],
              //cow expenditure
             [
-                'name'      => 'Cow Salaries',
-                'parent_id' => '5'
-            ],
-            [
-                'name'      => 'Cow Purchases',
+                'name'      => 'Cow Feed',
                 'parent_id' => '5'
             ],
             [
@@ -185,11 +181,7 @@ class AccountSeeder extends Seeder
 
             //goat/sheep expenditure
             [
-                'name'      => 'Goat/Sheep Salaries',
-                'parent_id' => '5'
-            ],
-            [
-                'name'      => 'Goat/Sheep Purchases',
+                'name'      => 'Goat/Sheep Feed',
                 'parent_id' => '5'
             ],
             [

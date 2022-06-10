@@ -65,7 +65,7 @@
                         <td>{{$medicine->name }}</td>
                         <td>{{$medicine->description}}</td>
                         <td>
-                            <form action="{{ route('medicine.destroy', $medicine->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this?');" style="display: inline-block;">
+                            <form action="{{ route('medicineGoat.destroy', $medicine->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this?');" style="display: inline-block;">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-sm btn-danger" data-toggle="tooltip" title="Delete"><i class="fe fe-trash-2"></i></button>

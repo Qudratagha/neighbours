@@ -60,7 +60,7 @@
                     <td>{{$sick->treatment ?? ''}}</td>
                     @if($sick->cattle_id || $sick->is_sick == 1)
                         <td>
-                            <form action="{{ route('sickCow.destroy', $sick->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this?');" style="display: inline-block;">
+                            <form action="{{ route('sickGoat.destroy', $sick->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this?');" style="display: inline-block;">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-sm btn-danger" data-toggle="tooltip" title="Delete"><i class="fe fe-trash-2"></i></button>
