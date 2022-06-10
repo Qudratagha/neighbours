@@ -164,6 +164,19 @@ class PoultryController extends Controller
         $eggt->delete();
         return redirect()->back()->with('message', 'Entry Deleted');
     }
+    public function vaccineDelete($poultry_daily)
+    {
+        $eggt = Vaccination::where('id',$poultry_daily);
+        $eggt->delete();
+        return redirect()->back()->with('message', 'Entry Deleted');
+    }
+    public function medicineDelete($poultry_daily)
+    {
+        $eggt = Medicines::where('id',$poultry_daily);
+        $eggt->delete();
+        return redirect()->back()->with('message', 'Entry Deleted');
+    }
+
     public function storeDaily(Request $request)
     {
 

@@ -32,6 +32,10 @@ class DashboardController extends Controller
     public function index()
     {
         abort_if(Gate::denies('dashboard-read'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
+        $date = \Carbon\Carbon::now()->subDays(30);
+        $year = \Carbon\Carbon::now()->year;
+
         //Goats Details
         $allGoats = Cattle::where('cattle_type_id', 2)->where('saleStatus', 0)->where('dead_date', Null)->count();
         $maleGoats= Cattle::where('cattle_type_id', 2)->where('saleStatus', 0)->where('dead_date', Null)->where('gender', 1)->count();
@@ -77,18 +81,42 @@ class DashboardController extends Controller
         $cucumberSold = Transaction::where('transaction_type_id', 1)->where('account_head_id', 13)->where('sub_head_id', 78)->whereNotNull('amount')->sum('quantity');
 
 
+
         $eggCollected =  \App\Models\Poultry::where('poultry_type_id',3)
             ->where('poultry_status_id',4)
             ->where('account_head_id', 8)
+            ->where('created_at','>=',$date)
+            ->where('created_at','>=',$year)
             ->groupBy('created_at')
             ->selectRaw('SUM(quantity) AS quantity,created_at')
+            ->orderBy('created_at','asc')
             ->get();
+
+
         $eggSale =  \App\Models\Transaction::where('transaction_type_id',1)
             ->where('account_head_id',8)
             ->where('sub_head_id', 19)
+            ->where('date','>=',$date)
+            ->where('date','>=',$year)
             ->groupBy('date')
             ->selectRaw('SUM(quantity) AS totalQuantity,date')
-            ->get();
+            ->orderBy('date','asc')
+            ->get(['quantity','date']);
+
+//        dd($eggSale);
+
+//        $date = \Carbon\Carbon::now()->subDays(30);
+//        $year = \Carbon\Carbon::now()->year;
+//        $eggSale = Transaction::where('transaction_type_id',1)
+//            ->where('account_head_id',8)
+//            ->where('sub_head_id',19)
+//
+//            ->orderBy('date','desc')
+//            ->groupBy('date')
+//            ->get(['quantity','date']);
+
+
+
 
         $totalPurchaseHens = \App\Models\Poultry:: totalPurchaseHen();
         $totalSaleHens = \App\Models\Poultry:: totalSaleHen();

@@ -363,7 +363,7 @@
                                                                 <form method="POST" action="{{ route('poultry_daily.feeddel',$t->id ) }}">
                                                                     @method('DELETE')
                                                                     @csrf
-                                                                    <button type="submit" name="deleteEgg" class="btn btn-sm btn-danger" data-toggle="tooltip" title="Delete"><i class="fe fe-trash"></i> {{$t->id}}</button>
+                                                                    <button type="submit" name="deleteEgg" class="btn btn-sm btn-danger" data-toggle="tooltip" title="Delete"><i class="fe fe-trash"></i></button>
                                                                 </form>
                                                             </td>
                                                         </tr>
@@ -430,6 +430,7 @@
                                                         <th class="wd-25p">Date</th>
                                                         <th class="wd-15p">Vaccine Quantity</th>
                                                         <th class="wd-15p">DESC</th>
+                                                        <th class="wd-15p">Delete</th>
                                                     </tr>
                                                     </thead>
                                                     <tbody>
@@ -439,6 +440,13 @@
                                                             <td>{{date('d-m-Y', strtotime($vaccine->created_at))}}</td>
                                                             <td>{{$vaccine->quantity ?? ''}} </td>
                                                             <td>{{$vaccine->description ?? ''}} </td>
+                                                            <td>
+                                                                <form method="POST" action="{{ route('poultry_daily.vaccineDelete',$vaccine->id ) }}">
+                                                                    @method('DELETE')
+                                                                    @csrf
+                                                                    <button type="submit" name="vaccineDelete" class="btn btn-sm btn-danger" data-toggle="tooltip" title="Delete"><i class="fe fe-trash"></i></button>
+                                                                </form>
+                                                            </td>
                                                         </tr>
                                                     @endforeach
                                                     </tbody>
@@ -503,9 +511,9 @@
                                                     <tr>
                                                         <th class="wd-15p">ID</th>
                                                         <th class="wd-25p">Date</th>
-                                                        <th class="wd-15p">Medicine Name</th>
                                                         <th class="wd-15p">Medicine Quantity</th>
                                                         <th class="wd-15p">Description</th>
+                                                        <th class="wd-15p">Delete</th>
                                                     </tr>
                                                     </thead>
                                                     <tbody>
@@ -513,9 +521,15 @@
                                                         <tr>
                                                             <td>{{$medicine->id}}</td>
                                                             <td>{{date('d-m-Y', strtotime($medicine->created_at))}}</td>
-                                                            <td>{{$medicine->name ?? ''}} </td>
                                                             <td>{{$medicine->quantity ?? ''}} </td>
                                                             <td>{{$medicine->description ?? ''}} </td>
+                                                            <td>
+                                                                <form method="POST" action="{{ route('poultry_daily.medicineDelete',$medicine->id ) }}">
+                                                                    @method('DELETE')
+                                                                    @csrf
+                                                                    <button type="submit" name="medicineDelete" class="btn btn-sm btn-danger" data-toggle="tooltip" title="Delete"><i class="fe fe-trash"></i></button>
+                                                                </form>
+                                                            </td>
                                                         </tr>
                                                     @endforeach
                                                     </tbody>

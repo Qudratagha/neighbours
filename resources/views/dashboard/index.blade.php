@@ -13,7 +13,6 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
-
                             <div class="tabs-menu ">
                                 <!-- Tabs -->
                                 <ul class="nav panel-tabs">
@@ -28,7 +27,7 @@
                         <div class="card-body">
                             <div class="panel-body tabs-menu-body">
                                 <div class="tab-content">
-                                    <div class="tab-pane active " id="tab11">
+                                    <div class="tab-pane  " id="tab11">
                                         <hr>
                                         <h3 class="text-center" style="font-weight: bold; font-size: 35px;">Overall Cow Details</h3>
                                         <div class="row">
@@ -408,7 +407,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="tab-pane" id="tab13">
+                                    <div class="tab-pane active" id="tab13">
 
                                         <hr>
                                         <h3 class="text-center" style="font-weight: bold; font-size: 35px;">Overall Poultry Details</h3>
@@ -536,6 +535,18 @@
                                         </div>
                                         <hr>
                                         <h3 class="text-center" style="font-weight: bold"></h3>
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <div class="card">
+                                                        <div class="card-header">
+                                                            <h3 class="card-title">Eggs Collected </h3>
+                                                        </div>
+                                                        <div class="card-body">
+                                                            <canvas id="totalEggsCollectionChart" class="h-400"></canvas>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         <div class="row">
                                             <div class="col-12">
                                                 <div class="card">
@@ -581,7 +592,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="tab-pane  " id="tab14">
+                                    <div class="tab-pane" id="tab14">
                                         <h3>Total Expenditures:</h3>
                                         <h3>Total Income:</h3>
                                         <hr>
@@ -758,7 +769,7 @@
             data: {
                 labels: [
                     @foreach ($eggCollected as $collected)
-                        "{{ $collected->created_at }}",
+                    "{{ $collected->created_at }}",
                     @endforeach
                 ],
                 datasets: [{
@@ -767,7 +778,8 @@
                         @foreach ($eggCollected as $collected)
                             "{{ $collected->quantity }}",
                         @endforeach
-                    ],
+                        ],
+
                     borderWidth: 2,
                     backgroundColor: 'rgba(59,175,238,0.73)',
                     borderColor: 'rgba(59,175,238,0.73)',
