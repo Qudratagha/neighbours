@@ -100,7 +100,6 @@ class DashboardController extends Controller
         $totalchickSale = \App\Models\Poultry:: totalchickSale();
         $totalRemainingChicks = \App\Models\Poultry:: totalRemainingChicks();
 
-
         $cows = Cattle::cows()->count();
         $cowSerials = Cattle::cows()->where('dry_date',null)->where('dead_date',null)->where('saleStatus',0)->get();
         $milkingCows = Transaction::milkingCows()->count();
@@ -129,6 +128,4 @@ class DashboardController extends Controller
                                         ->get(['quantity','date']);
         return response()->json($cowMilkCollection);
     }
-
-
 }
