@@ -16,16 +16,17 @@ class Medicines extends Model
     public function accountHead(){
         return $this->belongsTo(AccountHead::class,'sub_head_id', 'id');
     }
-    public static function cowDailyMedicineStock()
+    public static function cowDailyMedicineStock($sub_head_id)
     {
         $totalMedicinePurchase = \App\Models\Transaction::where('transaction_type_id', 2)->where('account_head_id', 6)->where('sub_head_id', 36)->sum('quantity');
-        $totalMedicineUsed = \App\Models\Medicines::where('sub_head_id', 36)->sum('quantity');
+        $totalMedicineUsed = \App\Models\Medicines::where('sub_head_id', $sub_head_id)->sum('quantity');
         return $cowDailyMedicineStock = $totalMedicinePurchase - $totalMedicineUsed;
     }
-    public static function goatDailyMedicineStock()
+    public static function goatDailyMedicineStock($sub_head_id)
     {
         $totalMedicinePurchase = \App\Models\Transaction::where('transaction_type_id', 2)->where('account_head_id', 7)->where('sub_head_id', 44)->sum('quantity');
-        $totalMedicineUsed = \App\Models\Medicines::where('sub_head_id', 44)->sum('quantity');
-        return $goatDailyMedicineStock = $totalMedicinePurchase - $totalMedicineUsed;
+        $totalMedicineUsed = \App\Models\Medicines::where('sub_head_id', $sub_head_id)->sum('quantity');
+        $goatDailyMedicineStock = $totalMedicinePurchase - $totalMedicineUsed;
+        return $goatDailyMedicineStock;
     }
 }

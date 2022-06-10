@@ -32,11 +32,11 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label class="form-label required">Enter Date</label>
-                                            <input type="text" onfocus= "(this. type='date')" class="form-control" name="date" value="<?php echo date('Y-m-d')?>">
+                                            <input type="text" onfocus= "(this. type='date')" class="form-control" name="date" value="<?php echo date('Y-m-d')?>" required>
                                         </div>
                                         <div class="form-group">
                                             <label class="form-label required">Select Expenditure Type</label>
-                                            <select name="sub_head_id" id="expenseHeads" class="form-control">
+                                            <select name="sub_head_id" id="expenseHeads" class="form-control" required>
                                                 <option style="font-weight: bold">Select Expenditure Type</option>
                                                 @foreach($expenseHeads as $expenseHead)
                                                         <option value="{{$expenseHead->id}}">{{trim(strstr("$expenseHead->name"," "))}}</option>

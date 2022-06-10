@@ -18,13 +18,15 @@
                                 <div class="form-group">
                                     <label for="recipient-name" class="form-control-label">Date</label>
                                     <input type="hidden" name="cattle_id" value="{{$goat_daily->serial_no}}">
-                                    <input type="text" onfocus= "(this. type='date')" class="form-control" name="created_at" value="<?php echo date('Y-m-d');?>" required>
+                                    <input type="text" onfocus= "(this. type='date')" class="form-control" name="created_at" value="<?php use App\Models\AccountHead;use App\Models\Medicines;echo date('Y-m-d');?>" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="message-text" class="form-control-label">Medicine Quantity</label>
                                     <input type="text" class="form-control" id="medicineQuantity" name="quantity">
                                     <?php
-                                        $goatDailyMedicineStock = \App\Models\Medicines:: goatDailyMedicineStock();
+                                    $goatSerial =  $goat_daily->serial_no;
+                                    $sub_head_id = AccountHead::where('name',"goat#$goatSerial")->pluck('id')->last();
+                                        $goatDailyMedicineStock = Medicines::goatDailyMedicineStock($sub_head_id);
                                     ?>
                                     <div id="testing" class="invalid-feedback" style="display: block !important;">
                                         Avaliable Medicine = {{$goatDailyMedicineStock}}
@@ -61,8 +63,8 @@
                 @foreach($medicines as $medicine)
                     <tr>
                         <td>{{$loop->iteration}}</td>
-                        <td>{{$medicine->date}}</td>
-                        <td>{{$medicine->name }}</td>
+                        <td>{{$medicine->created_at}}</td>
+                        <td>{{$medicine->quantity }}</td>
                         <td>{{$medicine->description}}</td>
                         <td>
                             <form action="{{ route('medicineGoat.destroy', $medicine->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this?');" style="display: inline-block;">

@@ -36,7 +36,8 @@ class DeliveryController extends Controller
             }
                 elseif(Pregnant::where('cattle_id', $request->cattle_id )->where('is_pregnant',1)->exists())
                     {
-                        Delivery::create($request->except('submitCowDelivery'));
+                        Delivery::create($request->except('submitCowDelivery','is_pregnant'));
+                        Pregnant::create($request->except('submitCowDelivery','is_delivered'));
                         return redirect()->back()->with('message', 'Delivery Cow Data Added.');
                     }
                     else

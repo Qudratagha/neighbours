@@ -18,11 +18,19 @@
                                 <div class="form-group">
                                     <label for="recipient-name" class="form-control-label">Date</label>
                                     <input type="hidden" name="serial_no" value="{{$goat_daily->serial_no}}">
-                                    <input type="text" onfocus= "(this. type='date')" class="form-control" name="date" value="<?php echo date('Y-m-d');?>" required>
+                                    <input type="text" onfocus= "(this. type='date')" class="form-control" name="created_at" value="<?php use App\Models\AccountHead;use App\Models\Medicines;echo date('Y-m-d');?>" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="message-text" class="form-control-label">Name</label>
-                                    <input type="text" class="form-control" id="name" name="name">
+                                    <label for="message-text" class="form-control-label">Medicine Quantity</label>
+                                    <input type="text" class="form-control" id="medicineQuantity" name="quantity">
+                                    <?php
+                                    $goatSerial = $goat_daily->serial_no;
+                                    $sub_head_id = AccountHead::where('name',"goat#$goatSerial")->pluck('id')->last();
+                                    $goatDailyVaccineStock = \App\Models\Vaccination::goatDailyVaccineStock($sub_head_id);
+                                    ?>
+                                    <div id="testing" class="invalid-feedback" style="display: block !important;">
+                                        Avaliable Vaccine = {{$goatDailyVaccineStock}}
+                                    </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="message-text" class="form-control-label">Description</label>
@@ -45,7 +53,7 @@
             <tr>
                 <th class="wd-15p">ID</th>
                 <th class="wd-25p">Date</th>
-                <th class="wd-15p">Vaccination</th>
+                <th class="wd-15p">Vaccination Quantity</th>
                 <th class="wd-15p">Description</th>
             </tr>
             </thead>
@@ -53,8 +61,8 @@
             @foreach($vaccinations as $vaccination)
                 <tr>
                     <td>{{$loop->iteration}}</td>
-                    <td>{{$vaccination->date ?? ''}}</td>
-                    <td>{{$vaccination->name ?? ''}}</td>
+                    <td>{{$vaccination->created_at ?? ''}}</td>
+                    <td>{{$vaccination->quantity ?? ''}}</td>
                     <td>{{$vaccination->description ?? ''}}</td>
                     <td>
                         <form action="{{ route('vaccinationGoat.destroy', $vaccination->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this?');" style="display: inline-block;">
