@@ -211,44 +211,46 @@
                                                 <div class="card">
                                                     <div class="card-header">
                                                         <h3 class="card-title">Single Cow Milk Collection in Last 30 Days</h3>
-                                                        <div  style="position: absolute !important; right: 0px">
-                                                            <select class="form-control custom-control" id="getCowID">
-                                                                <option selected disabled>Choose Cow to Show Milk Collection Data</option>
-                                                                    @foreach( $cowSerials as $cowSerial)
-                                                                    <option value="{{$cowSerial->account_head_id}}">{{$cowSerial->serial_no}}</option>
-                                                                    @endforeach
-                                                            </select>
-                                                        </div>
                                                     </div>
                                                     <div class="card-body">
                                                           <canvas id="singleCowMilkCollection" class="h-300 chartjs-render-monitor" width="528" height="300" style="display: block; width: 528px; height: 300px;"></canvas>
+                                                        <div  style="position: absolute !important; right: 0px">
+                                                            <select class="form-control custom-control" id="getCowID">
+                                                                <option selected disabled>Choose Cow to Show Milk Collection Data</option>
+                                                                @foreach( $cowSerials as $cowSerial)
+                                                                    <option value="{{$cowSerial->account_head_id}}">{{$cowSerial->serial_no}}</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
 
+                                    <div class="row">
                                         <div class="col-xl-12 col-lg-12 col-md-12">
                                             <div class="card">
                                                 <div class="card-header">
                                                     <h3 class="card-title">Total Milk Collected and Sold</h3>
-                                                    <div class="row" style="position: absolute; right: 0px">
-                                                        <div class="col">
-                                                            <label for="from" class="form-control">Start</label>
-                                                            <input type="date" id="startDateMilkCollectionSold" class="form-control">
-                                                        </div>
-                                                        <div class="col">
-                                                            <label for="to" class="form-control">End</label>
-                                                            <input type="date" id="endDateMilkCollectionSold" class="form-control">
-                                                        </div>
-                                                    </div>
                                                 </div>
                                                 <div class="card-body">
                                                     <canvas id="milkCollectionSold" class="h-200"></canvas>
+                                                    <div class="form-floating row" style="position: absolute; right: 0%; padding-right: 8px">
+                                                        <div class="form-floating">
+                                                            <input type="date" id="startDateMilkCollectionSold" class="form-control">
+                                                            <label for="startDateMilkCollectionSold">Start</label>
+                                                        </div>
+                                                        <div class="form-floating">
+                                                            <input type="date" id="endDateMilkCollectionSold" class="form-control">
+                                                            <label for="endDateMilkCollectionSold">End</label>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-
+                                        </div>
                                     </div>
+
                                     <div class="tab-pane" id="tab12">
                                         <h3>Total Expenditures:</h3>
                                         <h3>Total Income:</h3>
@@ -1010,6 +1012,7 @@
 
         //milkCollectionSold
         chart_data_sale = [];
+        chart_label_sale = [];
         var startDateMilkCollectionSold = endDateMilkCollectionSold = null;
         $('#startDateMilkCollectionSold').change(function() {
              startDateMilkCollectionSold = this.value;
@@ -1021,18 +1024,18 @@
                     method:'get',
                     success: function(result){
                         console.log(result);
-                        result.milkCollection.forEach((item) => {
-                            console.log('printing milkCollection',item);
+                        result.milkCollectionDates.forEach((item) => {
                             chart_label.push(item.date);
+                        });
+                        result.milkSaleDates.forEach((item) => {
+                            chart_label_sale.push(item.date);
+                        });
+                        result.milkCollectionData.forEach((item) => {
                             chart_data.push(item.quantity);
                         });
-                        result.milkSale.forEach((item) => {
-                            console.log('printing Milk sale',item);
+                        result.milkSaleData.forEach((item) => {
                             chart_data_sale.push(item.quantity);
                         });
-                        // console.log('chart_label: ',chart_label);
-                        // console.log('chart_data: ',chart_data);
-                        // console.log('chart_data_sale: ',chart_data_sale);
                         var ctx = document.getElementById("milkCollectionSold");
                         var myChart = new Chart(ctx, {
                             type: 'bar',
