@@ -42,8 +42,8 @@ Route::post('/poultry_daily',[\App\Http\Controllers\PoultryController::class, 's
 
 Route::delete('/poultry_daily/{poultry_daily}',[\App\Http\Controllers\Poultrycontroller::class,'eggdel'])->name('poultry_daily.eggdel');
 Route::delete('/poultry_daily_feed/{poultry_daily}',[\App\Http\Controllers\Poultrycontroller::class,'feeddel'])->name('poultry_daily.feeddel');
-Route::delete('/poultry_daily_vaccine/{poultry_daily}',[\App\Http\Controllers\Poultrycontroller::class,'vaccinedel'])->name('poultry_daily.vaccinedel');
-Route::delete('/poultry_daily_medicine/{poultry_daily}',[\App\Http\Controllers\Poultrycontroller::class,'medicinedel'])->name('poultry_daily.medicinedel');
+Route::delete('/poultry_daily_vaccine/{poultry_daily}',[\App\Http\Controllers\Poultrycontroller::class,'vaccineDelete'])->name('poultry_daily.vaccineDelete');
+Route::delete('/poultry_daily_medicine/{poultry_daily}',[\App\Http\Controllers\Poultrycontroller::class,'medicineDelete'])->name('poultry_daily.medicineDelete');
 
 //cattle
 Route::get('/cattle/{cattle_type}',[\App\Http\Controllers\CattleController::class,'index'])->name('cattle.index');
