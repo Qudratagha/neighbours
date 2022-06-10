@@ -72,54 +72,10 @@ class DashboardController extends Controller
                                         ->where('sub_head_id',$account_head_id)
                                         ->where('date','>=',$date)
                                         ->where('date','>=',$year)
-                                        ->orderBy('date','ASC')
+                                        ->orderBy('date','DESC')
                                         ->get(['quantity','date']);
         return response()->json($cowMilkCollection);
     }
 
-    public function getMilkCollectionSaleData($startDateMilkCollectionSold,$endDateMilkCollectionSold)
-    {
-        $milkDates = Transaction::whereIn('transaction_type_id',[1,3])->whereIn('account_head_id',[14,22])->whereBetween('date',[$startDateMilkCollectionSold,$endDateMilkCollectionSold])->orderBy('date','ASC')->distinct('date')->pluck('date')->toArray();
-
-        $getMilkCollectionDates = Transaction::where('transaction_type_id',3)->where('account_head_id',22)->whereBetween('date',[$startDateMilkCollectionSold,$endDateMilkCollectionSold])->orderBy('date','ASC')->distinct('date')->pluck('date')->toArray();
-
-        $getMilkSaleDates = Transaction::where('transaction_type_id',1)->where('account_head_id',14)->whereBetween('date',[$startDateMilkCollectionSold,$endDateMilkCollectionSold])->orderBy('date','ASC')->distinct('date')->pluck('date')->toArray();
-
-
-        $getMilkCollectionData = Transaction::where('transaction_type_id',3)->where('account_head_id',22)->whereBetween('date',[$startDateMilkCollectionSold,$endDateMilkCollectionSold])->orderBy('date','ASC')->distinct('date')->get('quantity')->toArray();
-
-        $getMilkSaleData = Transaction::where('transaction_type_id',1)->where('account_head_id',14)->whereBetween('date',[$startDateMilkCollectionSold,$endDateMilkCollectionSold])->orderBy('date','ASC')->distinct('date')->get('quantity')->toArray();
-
-        $milkCollectionDates = [];
-
-        foreach($milkDates as $val){
-            if(in_array($val, $getMilkCollectionDates)){
-                $milkCollectionDates[] = $val;
-            } else {
-                array_push($milkCollectionDates, null);
-            }
-        }
-        $milkSaleDates = [];
-        foreach($milkDates as $sal){
-            if(in_array($sal, $getMilkSaleDates)){
-                $milkSaleDates[] = $sal;
-            } else {
-                array_push($milkSaleDates, null);
-            }
-        }
-
-        if ( ($getMilkCollectionData != null) && $getMilkSaleData != null )
-        {
-            return response()->json(
-                [
-                    'milkCollectionDates' => $milkCollectionDates,
-                    'milkSaleDates' => $milkSaleDates,
-                    'milkDates' => $milkDates,
-                    'milkCollectionData' => $getMilkCollectionData,
-                    'milkSaleData' => $getMilkSaleData
-                ]);
-        }
-        else return response()->json('no records found');
-    }
 
 }

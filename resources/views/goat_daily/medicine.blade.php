@@ -18,11 +18,17 @@
                                 <div class="form-group">
                                     <label for="recipient-name" class="form-control-label">Date</label>
                                     <input type="hidden" name="cattle_id" value="{{$goat_daily->serial_no}}">
-                                    <input type="text" onfocus= "(this. type='date')" class="form-control" name="date" value="<?php echo date('Y-m-d');?>" required>
+                                    <input type="text" onfocus= "(this. type='date')" class="form-control" name="created_at" value="<?php echo date('Y-m-d');?>" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="message-text" class="form-control-label">Name</label>
-                                    <input type="text" class="form-control" id="name" name="name" required>
+                                    <label for="message-text" class="form-control-label">Medicine Quantity</label>
+                                    <input type="text" class="form-control" id="medicineQuantity" name="quantity">
+                                    <?php
+                                        $goatDailyMedicineStock = \App\Models\Medicines:: goatDailyMedicineStock();
+                                    ?>
+                                    <div id="testing" class="invalid-feedback" style="display: block !important;">
+                                        Avaliable Medicine = {{$goatDailyMedicineStock}}
+                                    </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="message-text" class="form-control-label">Description</label>

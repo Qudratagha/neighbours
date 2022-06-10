@@ -169,9 +169,8 @@
                                                                         <form method="POST" action="{{route('sickCow.store')}}">
                                                                         @csrf
                                                                         <div class="form-group">
-                                                                            <label for="recipient-name" class="form-control-label">Date</label>
                                                                             <input type="hidden" name="cattle_id" value="{{$cow_daily->id}}">
-                                                                            <input type="text" onfocus= "(this. type='date')" class="form-control" name="date" value="<?php echo date('Y-m-d');?>" required>
+                                                                            <input type="hidden" name="date" value="<?php echo date('Y-m-d');?>">
                                                                         </div>
                                                                         <div class="form-group">
                                                                             <label for="message-text" class="form-control-label">Sick</label>
@@ -256,11 +255,17 @@
                                                                         <div class="form-group">
                                                                             <label for="recipient-name" class="form-control-label">Date</label>
                                                                             <input type="hidden" name="cow_id" value="{{$cow_daily->serial_no}}">
-                                                                            <input type="text" onfocus= "(this. type='date')" class="form-control" name="date" value="<?php echo date('Y-m-d');?>" required>
+                                                                            <input type="text" onfocus= "(this. type='date')" class="form-control" name="created_at" value="<?php echo date('Y-m-d');?>" required>
                                                                         </div>
                                                                         <div class="form-group">
-                                                                            <label for="message-text" class="form-control-label">Name</label>
-                                                                            <input type="text" class="form-control" id="name" name="name" required>
+                                                                            <label for="message-text" class="form-control-label">Medicine Quantity</label>
+                                                                            <input type="text" class="form-control" id="medicineQuantity" name="quantity">
+                                                                            <?php
+                                                                            $cowDailyMedicineStock = \App\Models\Medicines:: cowDailyMedicineStock();
+                                                                            ?>
+                                                                            <div id="testing" class="invalid-feedback" style="display: block !important;">
+                                                                                Avaliable Medicine = {{$cowDailyMedicineStock}}
+                                                                            </div>
                                                                         </div>
                                                                         <div class="form-group">
                                                                             <label for="message-text" class="form-control-label">Description</label>
@@ -283,7 +288,7 @@
                                                         <tr>
                                                             <th class="wd-15p">ID</th>
                                                             <th class="wd-25p">Date</th>
-                                                            <th class="wd-15p">Medicine</th>
+                                                            <th class="wd-15p">Medicine Quantity</th>
                                                             <th class="wd-15p">Description</th>
                                                             <th style="width: 5px">Action</th>
                                                         </tr>
@@ -293,8 +298,8 @@
                                                     @foreach($medicines as $medicine)
                                                         <tr>
                                                             <td>{{$loop->iteration}}</td>
-                                                            <td>{{$medicine->date ?? ''}}</td>
-                                                            <td>{{$medicine->name ?? ''}}</td>
+                                                            <td>{{$medicine->created_at ?? ''}}</td>
+                                                            <td>{{$medicine->quantity ?? ''}}</td>
                                                             <td>{{$medicine->description ?? ''}}</td>
                                                             <td>
                                                                 <form action="{{ route('medicineCow.destroy', $medicine->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this?');" style="display: inline-block;">

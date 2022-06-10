@@ -226,29 +226,6 @@
                                                 </div>
                                             </div>
                                         </div>
-
-                                    <div class="row">
-                                        <div class="col-xl-12 col-lg-12 col-md-12">
-                                            <div class="card">
-                                                <div class="card-header">
-                                                    <h3 class="card-title">Total Milk Collected and Sold</h3>
-                                                </div>
-                                                <div class="card-body">
-                                                    <canvas id="milkCollectionSold" class="h-200"></canvas>
-                                                    <div class="form-floating row" style="position: absolute; right: 0%; padding-right: 8px">
-                                                        <div class="form-floating">
-                                                            <input type="date" id="startDateMilkCollectionSold" class="form-control">
-                                                            <label for="startDateMilkCollectionSold">Start</label>
-                                                        </div>
-                                                        <div class="form-floating">
-                                                            <input type="date" id="endDateMilkCollectionSold" class="form-control">
-                                                            <label for="endDateMilkCollectionSold">End</label>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        </div>
                                     </div>
 
                                     <div class="tab-pane" id="tab12">
@@ -1007,87 +984,5 @@
                 }
             });
         }
-
-
-
-        //milkCollectionSold
-        chart_data_sale = [];
-        chart_label_sale = [];
-        var startDateMilkCollectionSold = endDateMilkCollectionSold = null;
-        $('#startDateMilkCollectionSold').change(function() {
-             startDateMilkCollectionSold = this.value;
-
-            $('#endDateMilkCollectionSold').change(function() {
-                endDateMilkCollectionSold = this.value;
-                $.ajax({
-                    url:"{{route('dashboard.getMilkCollectionSaleData',["",""])}}/"+startDateMilkCollectionSold+"/"+endDateMilkCollectionSold,
-                    method:'get',
-                    success: function(result){
-                        console.log(result);
-                        result.milkCollectionDates.forEach((item) => {
-                            chart_label.push(item.date);
-                        });
-                        result.milkSaleDates.forEach((item) => {
-                            chart_label_sale.push(item.date);
-                        });
-                        result.milkCollectionData.forEach((item) => {
-                            chart_data.push(item.quantity);
-                        });
-                        result.milkSaleData.forEach((item) => {
-                            chart_data_sale.push(item.quantity);
-                        });
-                        var ctx = document.getElementById("milkCollectionSold");
-                        var myChart = new Chart(ctx, {
-                            type: 'bar',
-                            data: {
-                                labels: chart_label,
-                                datasets: [{
-                                    label: "collection",
-                                    data: chart_data,
-                                    borderColor: "#1753fc",
-                                    borderWidth: "0",
-                                    backgroundColor: "#1753fc"
-                                }, {
-                                    label: "sale",
-                                    data: chart_data_sale,
-                                    borderColor: "#9258f1",
-                                    borderWidth: "0",
-                                    backgroundColor: "#9258f1"
-                                }]
-                            },
-                            options: {
-                                responsive: true,
-                                maintainAspectRatio: false,
-                                scales: {
-                                    xAxes: [{
-                                        ticks: {
-                                            fontColor: "#bbc1ca",
-                                        },
-                                        gridLines: {
-                                            color: 'rgba(0,0,0,0.03)'
-                                        }
-                                    }],
-                                    yAxes: [{
-                                        ticks: {
-                                            beginAtZero: true,
-                                            fontColor: "#bbc1ca",
-                                        },
-                                        gridLines: {
-                                            color: 'rgba(0,0,0,0.03)'
-                                        },
-                                    }]
-                                },
-                                legend: {
-                                    labels: {
-                                        fontColor: "#bbc1ca"
-                                    },
-                                },
-                            }
-                        });
-                    }
-                });
-            });
-        });
-
     </script>
 @endsection
