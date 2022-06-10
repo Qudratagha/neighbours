@@ -450,44 +450,7 @@
                                                     </div>
                                                 </div>
                                             </div><!-- col end -->
-{{--                                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">--}}
-{{--                                                <div class="card card-counter bg-gradient-danger">--}}
-{{--                                                    <div class="card-body">--}}
-{{--                                                        <div class="row">--}}
-{{--                                                            <div class="d-none d-sm-none d-md-block">--}}
-{{--                                                                <h2 class="text-white mt-1 mb-0">Total Expeniture</h2>--}}
-{{--                                                            </div>--}}
-{{--                                                            <div class="text-center col-xl-4 col-lg-6 col-md-5 col-sm-12">--}}
-{{--                                                                <div class="mt-1 mb-0 text-white">--}}
-{{--                                                                    <?php--}}
-{{--                                                                    $poultryExpenditure = \App\Models\Poultry:: poultryExpenditure();--}}
-{{--                                                                    ?>--}}
-{{--                                                                    <h2 class="mb-0">{{$poultryExpenditure}}</h2>--}}
-{{--                                                                </div>--}}
-{{--                                                            </div>--}}
-{{--                                                        </div>--}}
-{{--                                                    </div>--}}
-{{--                                                </div>--}}
-{{--                                            </div><!-- col end -->--}}
-{{--                                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">--}}
-{{--                                                <div class="card card-counter bg-gradient-teal">--}}
-{{--                                                    <div class="card-body">--}}
-{{--                                                        <div class="row">--}}
-{{--                                                            <div class="col-lg-8 col-md-8 col-sm-12">--}}
-{{--                                                                <h2 class="text-white mb-0">Total Income</h2>--}}
-{{--                                                            </div>--}}
-{{--                                                            <div class="text-center col-lg-4 col-md-4 col-sm-12">--}}
-{{--                                                                <div class="mt-1 mb-0 text-white">--}}
-{{--                                                                    <?php--}}
-{{--                                                                    $poultryIncome = \App\Models\Poultry:: poultryIncome();--}}
-{{--                                                                    ?>--}}
-{{--                                                                    <h2 class="mb-0">{{$poultryIncome}}</h2>--}}
-{{--                                                                </div>--}}
-{{--                                                            </div>--}}
-{{--                                                        </div>--}}
-{{--                                                    </div>--}}
-{{--                                                </div>--}}
-{{--                                            </div><!-- col end -->--}}
+
                                             <div class="col-xl-3 col-lg-6 col-md-12 col-sm-12">
                                                 <div class="card card-counter bg-gradient-danger">
                                                     <div class="card-body">
@@ -569,16 +532,14 @@
                                                 </div>
                                             </div><!-- col end -->
                                         <hr>
-
                                         <h3 class="text-center" style="font-weight: bold"></h3>
                                         <div class="row">
-                                            <div class="col-lg-10 col-md-12">
+                                            <div class="col-xl-10 col-lg-9 col-md-12 col-sm-12">
                                                 <div class="card">
                                                     <div class="card-header">
                                                         <?php
                                                         $totalEggsCollected = \App\Models\Poultry::totalEggsCollected();
                                                         ?>
-
                                                         <h3 class="card-title">Eggs Collected And Egg Sale</h3>
                                                     </div>
                                                     <div class="card-body">
@@ -586,17 +547,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-lg-2 col-md-12">
-                                                <div class="card">
-                                                    <div class="card-header">
-                                                        <?php
-                                                        $totalEggsCollected = \App\Models\Poultry::where('poultry_type_id', 3)->where('poultry_status_id', 4)->where('account_head_id', 8)->sum('quantity');
-                                                        ?>
-                                                        <h3 class="card-title">{{$totalEggsCollected}}</h3>
-                                                    </div>
 
-                                                </div>
-                                            </div>
                                             <div class="col-lg-12 col-md-12">
                                                 <div class="card">
                                                     <div class="card-header">
