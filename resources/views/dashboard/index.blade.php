@@ -701,16 +701,14 @@
                                                 </div>
                                             </div><!-- col end -->
                                         <hr>
-
                                         <h3 class="text-center" style="font-weight: bold"></h3>
                                         <div class="row">
-                                            <div class="col-lg-10 col-md-12">
+                                            <div class="col-xl-10 col-lg-9 col-md-12 col-sm-12">
                                                 <div class="card">
                                                     <div class="card-header">
                                                         <?php
                                                         $totalEggsCollected = \App\Models\Poultry::totalEggsCollected();
                                                         ?>
-
                                                         <h3 class="card-title">Eggs Collected And Egg Sale</h3>
                                                     </div>
                                                     <div class="card-body">
@@ -718,17 +716,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-lg-2 col-md-12">
-                                                <div class="card">
-                                                    <div class="card-header">
-                                                        <?php
-                                                        $totalEggsCollected = \App\Models\Poultry::where('poultry_type_id', 3)->where('poultry_status_id', 4)->where('account_head_id', 8)->sum('quantity');
-                                                        ?>
-                                                        <h3 class="card-title">{{$totalEggsCollected}}</h3>
-                                                    </div>
 
-                                                </div>
-                                            </div>
                                             <div class="col-lg-12 col-md-12">
                                                 <div class="card">
                                                     <div class="card-header">

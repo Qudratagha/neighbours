@@ -215,7 +215,7 @@ class PoultryController extends Controller
         {
 //           status 1 is for poultry
             $request['status'] = 1;
-//            cattle type 1 is for poultry
+//            cattle type 1 is f  or poultry
             $request['cattle_type'] = 1;
 //            dd($request->all());
             Feed::Create($request->except('submitFeed','name'));
