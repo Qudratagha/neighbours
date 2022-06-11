@@ -1,4 +1,4 @@
-<div class="tab-pane" id="tab21">
+<div class="tab-pane show" id="tab21">
     <div class="float-right mb-3">
         <div class="input-group">
             <button type="button" class="btn btn-info" data-toggle="modal" data-target="#addMedicine">Add Medicine</button>

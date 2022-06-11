@@ -57,14 +57,14 @@
                                 <div class="tab-menu-heading">
                                     <div class="tabs-menu">
                                         <!-- Tabs -->
-                                        <ul class="nav panel-tabs">
-                                            <li><a class="active" href="#tab11" id="hov" data-toggle="tab">Sick</a></li>
-                                            <li class="act"><a href="#tab21" id="hov" data-toggle="tab">Medicine</a></li>
+                                        <ul class="nav panel-tabs myTab" data-bs-toggle="tab">
+                                            <li><a class="nav-link active" href="#tab11" id="hov" data-bs-toggle="tab">Sick</a></li>
+                                            <li class="act"><a href="#tab21" id="hov" data-bs-toggle="tab">Medicine</a></li>
                                             @if($goat_daily->gender == 0)
-                                                <li class="act"><a href="#tab31" id="hov" data-toggle="tab">Pregnant</a></li>
-                                                <li class="act"><a href="#tab41" id="hov" data-toggle="tab">Delivery</a></li>
+                                                <li class="act"><a href="#tab31" id="hov" data-bs-toggle="tab">Pregnant</a></li>
+                                                <li class="act"><a href="#tab41" id="hov" data-bs-toggle="tab">Delivery</a></li>
                                             @endif
-                                            <li class="act"><a href="#tab51" id="hov" data-toggle="tab">Vaccination</a></li>
+                                            <li class="act"><a href="#tab51" id="hov" data-bs-toggle="tab">Vaccination</a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -103,5 +103,13 @@
                 $(this).toggleClass('active');
             });
         });
+
+        $('a[data-bs-toggle="tab"]').on('show.bs.tab', function(e) {
+            localStorage.setItem('activeTab', $(e.target).attr('href'));
+        });
+        var activeTab = localStorage.getItem('activeTab');
+        if(activeTab){
+            $('.myTab a[href="' + activeTab + '"]').tab('show');
+        }
     </script>
 @endsection

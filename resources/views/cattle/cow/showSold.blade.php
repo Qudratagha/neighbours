@@ -20,10 +20,10 @@
                             <h3 class="mb-0 card-title">Sold Cow</h3>
                         </div>
                         <div class="card-body">
-                            <table cellpadding="2" cellspacing="2" border="1" class="table thead-dark table-bordered table-striped ">
+                            <div class="table-responsive">
+                            <table cellpadding="2" cellspacing="2" border="1" class="responsive table thead-dark table-bordered table-striped ">
                                 <thead>
                                 <tr>
-                                    <center>
                                         <th style="font-weight: 600">Cow-Serial</th>
                                         @if($cattle->dob)
                                             <th style="font-weight: 600">Date-of-Birth</th>
@@ -36,7 +36,6 @@
                                         <th style="font-weight: 600">Weight</th>
                                         <th style="font-weight: 600">Height</th>
                                         <th style="font-weight: 600">Sold Date</th>
-                                    </center>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -60,6 +59,7 @@
                                 </tr>
                                 </tbody>
                             </table>
+                            </div>
                         </div>
                     </div>
                 </div>

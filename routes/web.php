@@ -28,7 +28,6 @@ Route::get('/getSingleCowMilkCollection/{account_head_id}', [App\Http\Controller
 //Route::get('/getMilkCollectionSaleData/{startDateMilkCollectionSold}/{endDateMilkCollectionSold}', [App\Http\Controllers\DashboardController::class, 'getMilkCollectionSaleData'])->name('dashboard.getMilkCollectionSaleData');
 
 //poultry
-
 Route::get('/poultry/getIncubationDates/{date}', [\App\Http\Controllers\PoultryController::class, 'getIncubationDates'])->name('poultry.getIncubationDates');
 Route::get('/poultry/getDateQuantity/{date}', [\App\Http\Controllers\PoultryController::class,'getDateQuantity'])->name('poultry.getDateQuantity');
 Route::resource('/poultry', PoultryController::class);
@@ -197,4 +196,7 @@ Route::delete('/cultivation_expenditure/{transaction}',[\App\Http\Controllers\Tr
 
 //worker
 Route::resource('/worker', \App\Http\Controllers\WorkerController::class);
+
+//User
+Route::resource('/user', \App\Http\Controllers\UserController::class);
 

@@ -8,7 +8,6 @@
             <!-- page-header -->
             <div class="page-header">
                 <ol class="breadcrumb"><!-- breadcrumb -->
-                    <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Dashboard</a></li>
                     <li class="breadcrumb-item active" aria-current="page">{{ __('Cows') }}</li>
                 </ol><!-- End breadcrumb -->
                 <div class="ml-auto">

@@ -24,13 +24,13 @@
                                 <div class="tab-menu-heading">
                                     <div class="tabs-menu">
                                         <!-- Tabs -->
-                                        <ul class="nav panel-tabs">
-                                            <li class="@if ($tab == 'egg') active  @endif"><a  href="#tab11" id="hov" data-toggle="tab">Egg</a></li>
-                                            <li class="@if ($tab == 'hen') active  @endif"><a  href="#tab21" id="hov" data-toggle="tab">Hen</a></li>
-                                            <li class="@if ($tab == 'chicks') active  @endif"><a  href="#tab61" id="hov" data-toggle="tab">Chicks</a></li>
-                                            <li class="@if ($tab == 'feed') active  @endif"><a  href="#tab31" id="hov" data-toggle="tab">Feed</a></li>
-                                            <li class="@if ($tab == 'vaccine') active  @endif"><a  href="#tab41" id="hov" data-toggle="tab">Vaccination</a></li>
-                                            <li class="@if ($tab == 'medicine') active  @endif"><a  href="#tab51" id="hov" data-toggle="tab">Medicine</a></li>
+                                        <ul class="nav panel-tabs myTab">
+                                            <li class="@if ($tab == 'egg') active  @endif"><a  href="#tab11" id="hov" data-bs-toggle="tab">Egg</a></li>
+                                            <li class="@if ($tab == 'hen') active  @endif"><a  href="#tab21" id="hov" data-bs-toggle="tab">Hen</a></li>
+                                            <li class="@if ($tab == 'chicks') active  @endif"><a  href="#tab61" id="hov" data-bs-toggle="tab">Chicks</a></li>
+                                            <li class="@if ($tab == 'feed') active  @endif"><a  href="#tab31" id="hov" data-bs-toggle="tab">Feed</a></li>
+                                            <li class="@if ($tab == 'vaccine') active  @endif"><a  href="#tab41" id="hov" data-bs-toggle="tab">Vaccination</a></li>
+                                            <li class="@if ($tab == 'medicine') active  @endif"><a  href="#tab51" id="hov" data-bs-toggle="tab">Medicine</a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -38,7 +38,7 @@
                                     <div class="tab-content">
 
 {{--                                        this is start of egg--}}
-                                        <div class="tab-pane @if ($tab == 'egg') active @endif" id="tab11">
+                                        <div class="tab-pane show @if ($tab == 'egg') active @endif" id="tab11">
                                             <div class="float-right mb-3">
                                                 <div class="input-group">
                                                     <button type="button" class="btn btn-info" data-toggle="modal" data-target="#soldEgg">Sold Egg</button>
@@ -124,7 +124,7 @@
 
 
                                         {{--this is hen --}}
-                                        <div class="tab-pane @if ($tab == 'hen') active @endif" id="tab21">
+                                        <div class="tab-pane show @if ($tab == 'hen') active @endif" id="tab21">
                                             <div class="float-right mb-3">
                                                 <div class="input-group">
                                                     <button type="button" class="btn btn-info" data-toggle="modal" data-target="#soldhen">Sold Hen</button>
@@ -212,7 +212,7 @@
                                         {{--End div 21 --}}
 
 {{--                                        this is chick--}}
-                                        <div class="tab-pane @if ($tab == 'chicks') active @endif" id="tab61">
+                                        <div class="tab-pane show @if ($tab == 'chicks') active @endif" id="tab61">
                                             <div class="float-right mb-3">
                                                 <div class="input-group">
                                                     <button type="button" class="btn btn-info" data-toggle="modal" data-target="#soldchicks">Sold Chicks</button>
@@ -300,7 +300,7 @@
                                         {{--End div 61 --}}
 
 {{--                                        this is feed--}}
-                                        <div class="tab-pane @if ($tab == 'feed') active @endif" id="tab31">
+                                        <div class="tab-pane show @if ($tab == 'feed') active @endif" id="tab31">
                                             <div class="float-right mb-3">
                                                 <div class="input-group">
                                                     <button type="button" class="btn btn-info" data-toggle="modal" data-target="#addfeed">Add Feed</button>
@@ -376,7 +376,7 @@
                                         {{--End div 31 --}}
 
 {{--                                        this is vaccinaiton --}}
-                                        <div class="tab-pane @if ($tab == 'vaccine') active @endif" id="tab41">
+                                        <div class="tab-pane show @if ($tab == 'vaccine') active @endif" id="tab41">
                                             <div class="float-right mb-3">
                                                 <div class="input-group">
                                                     <button type="button" class="btn btn-info" data-toggle="modal" data-target="#addvaccine">Add Vaccine</button>
@@ -457,7 +457,7 @@
                                         {{--End div 41 --}}
 
 {{--                                        this is medicine--}}
-                                        <div class="tab-pane @if ($tab == 'medicine') active @endif" id="tab51">
+                                        <div class="tab-pane show @if ($tab == 'medicine') active @endif" id="tab51">
                                             <div class="float-right mb-3">
                                                 <div class="input-group">
                                                     <button type="button" class="btn btn-info" data-toggle="modal" data-target="#addmedicine">Add Medicine</button>
@@ -630,5 +630,13 @@
             });
             //this is medicine end
         });
+
+        $('a[data-bs-toggle="tab"]').on('show.bs.tab', function(e) {
+            localStorage.setItem('activeTab', $(e.target).attr('href'));
+        });
+        var activeTab = localStorage.getItem('activeTab');
+        if(activeTab){
+            $('.myTab a[href="' + activeTab + '"]').tab('show');
+        }
     </script>
 @endsection

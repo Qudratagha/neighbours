@@ -11,11 +11,6 @@
                      <li class="breadcrumb-item"><a href="{{route('cow_expenditure.index')}}">Cow Expenditure List</a></li>
                     <li class="breadcrumb-item active" aria-current="page">{{ __('Cow Expenditure') }}</li>
                 </ol><!-- End breadcrumb -->
-                <div class="ml-auto">
-                    <div class="input-group">
-                        <a href="#" type="button" class="btn btn-info" >Add Cow's Expenditure</a>
-                    </div>
-                </div>
             </div>
             <!-- End page-header -->
             <div class="row">

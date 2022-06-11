@@ -63,20 +63,20 @@
                                 <div class="tab-menu-heading">
                                     <div class="tabs-menu">
                                         <!-- Tabs -->
-                                        <ul class="nav panel-tabs">
-                                            <li><a class="active" href="#tab11" id="hov" data-toggle="tab">Milk</a></li>
-                                            <li class="act"><a href="#tab21" id="hov" data-toggle="tab">Sick</a></li>
-                                            <li class="act"><a href="#tab31" id="hov" data-toggle="tab">Medicine</a></li>
-                                            <li class="act"><a href="#tab41" id="hov" data-toggle="tab">Insemination</a></li>
-                                            <li class="act"><a href="#tab51" id="hov" data-toggle="tab">Pregnant</a></li>
-                                            <li class="act"><a href="#tab61" id="hov" data-toggle="tab">Delivery</a></li>
-                                            <li class="act"><a href="#tab71" id="hov" data-toggle="tab">Vaccination</a></li>
+                                        <ul class="nav nav-tabs myTab" data-bs-toggle="tab">
+                                            <li><a class="active" href="#tab11" id="hov" data-bs-toggle="tab">Milk</a></li>
+                                            <li class="act"><a href="#tab21" id="hov" data-bs-toggle="tab">Sick</a></li>
+                                            <li class="act"><a href="#tab31" id="hov" data-bs-toggle="tab">Medicine</a></li>
+                                            <li class="act"><a href="#tab41" id="hov" data-bs-toggle="tab">Insemination</a></li>
+                                            <li class="act"><a href="#tab51" id="hov" data-bs-toggle="tab">Pregnant</a></li>
+                                            <li class="act"><a href="#tab61" id="hov" data-bs-toggle="tab">Delivery</a></li>
+                                            <li class="act"><a href="#tab71" id="hov" data-bs-toggle="tab">Vaccination</a></li>
                                         </ul>
                                     </div>
                                 </div>
                                 <div class="panel-body tabs-menu-body">
                                     <div class="tab-content">
-                                        <div class="tab-pane active" id="tab11">
+                                        <div class="tab-pane show active" id="tab11">
                                             <h4>Total Milk Stock Available {{\App\Models\Transaction::milkStock()}}</h4>
 
                                             <div class="float-right mb-3">
@@ -151,7 +151,7 @@
                                         </div>
 
 
-                                        <div class="tab-pane" id="tab21">
+                                        <div class="tab-pane show" id="tab21">
                                             <div class="float-right mb-3">
                                                 <div class="input-group">
                                                     <button type="button" class="btn btn-info" data-toggle="modal" data-target="#sickData">Add Sick Info</button>
@@ -235,7 +235,7 @@
 
 
 
-                                        <div class="tab-pane" id="tab31">
+                                        <div class="tab-pane show" id="tab31">
                                             <div class="float-right mb-3">
                                                 <div class="input-group">
                                                     <button type="button" class="btn btn-info" data-toggle="modal" data-target="#addMedicine">Add Medicine</button>
@@ -320,7 +320,7 @@
                                         </div>
 
 
-                                        <div class="tab-pane" id="tab41">
+                                        <div class="tab-pane show" id="tab41">
                                             <div class="float-right mb-3">
                                                 <div class="input-group">
                                                     <button type="button" class="btn btn-info" data-toggle="modal" data-target="#inseminationData">Add Insemination Info</button>
@@ -389,7 +389,7 @@
                                         </div>
 
 
-                                        <div class="tab-pane" id="tab51">
+                                        <div class="tab-pane show" id="tab51">
                                             <div class="float-right mb-3">
                                                 <div class="input-group">
                                                     <button type="button" class="btn btn-info" data-toggle="modal" data-target="#pregnantData">Add Pregnant Info</button>
@@ -459,7 +459,7 @@
 
 
 
-                                        <div class="tab-pane" id="tab61">
+                                        <div class="tab-pane show" id="tab61">
                                             <div class="float-right mb-3">
                                                 <div class="input-group">
                                                     <button type="button" class="btn btn-info" data-toggle="modal" data-target="#deliveryData">Add Delivery Info</button>
@@ -529,7 +529,7 @@
                                         </div>
 
 
-                                        <div class="tab-pane" id="tab71">
+                                        <div class="tab-pane show" id="tab71">
                                             <div class="float-right mb-3">
                                                 <div class="input-group">
                                                     <button type="button" class="btn btn-info" data-toggle="modal" data-target="#vaccinationData">Add Vaccination Info</button>
@@ -629,5 +629,13 @@
                 $(this).toggleClass('active');
             });
         });
+
+        $('a[data-bs-toggle="tab"]').on('show.bs.tab', function(e) {
+            localStorage.setItem('activeTab', $(e.target).attr('href'));
+        });
+        var activeTab = localStorage.getItem('activeTab');
+        if(activeTab){
+            $('.myTab a[href="' + activeTab + '"]').tab('show');
+        }
     </script>
 @endsection

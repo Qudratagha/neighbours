@@ -21408,7 +21408,7 @@ textarea[cols] {
 		margin-top: 6px;
 	}
 	.app-content .side-app {
-		padding: 0px 0px 0 0px !important;
+		/*padding: 0px 0px 0 0px !important;*/
 	}
 	.chat .justify-content-start {
 		margin-bottom: 35px !important;
@@ -24073,7 +24073,7 @@ div[data-acc-step]:not(.open) h5 {
 }
 @media (min-width:498px) and (max-width:767px){
 	.app-content .side-app{
-		padding:50px 30px 0 30px !important;
+		/*padding:0px 0px 0 0px !important;*/
 	}
 }
 @media (min-width: 576px) {

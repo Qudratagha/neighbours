@@ -49,7 +49,6 @@
                         @canany('dashboard-read')
                         <li aria-haspopup="true"><a href="{{route('dashboard')}}" class="sub-icon @if(request()->route()->action['as'] == 'dashboard') active @endif"><i class="typcn typcn-device-desktop hor-icon"></i> Dashboard</a></li>
                         @endcanany
-
                         {{-- Cow     --}}
                         @canany('cow-read')
                         <li aria-haspopup="true"><a class="sub-icon @if(request()->route()->action['as'] == "cattle.index" && request()->route()->parameters['cattle_type'] == 'cow' || request()->route()->action['as'] == 'cattle_daily.show' || request()->route()->action['as'] == 'cow_sale.index' || request()->route()->action['as'] == 'milk_sale.index') active @endif"><i class="typcn typcn-th-large-outline hor-icon"></i> Cows <i class="fa fa-angle-down horizontal-icon"></i></a>

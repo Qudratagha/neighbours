@@ -20,6 +20,7 @@
                             <h3 class="mb-0 card-title">Dry Goat</h3>
                         </div>
                         <div class="card-body">
+                            <div class="table-responsive">
                             <table cellpadding="2" cellspacing="2" border="1" class="table thead-dark table-bordered table-striped ">
                                 <thead>
                                 <tr>
@@ -61,6 +62,7 @@
                                 </tr>
                                 </tbody>
                             </table>
+                            </div>
                         </div>
                     </div>
                 </div>

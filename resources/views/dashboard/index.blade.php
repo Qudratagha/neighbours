@@ -7,7 +7,7 @@
 @endsection
 @section('main-content')
     <div class="container content-area">
-        <div class="side-app">
+        <div class="sideapp">
             <!-- End page-header -->
             <div class="row">
                 <div class="col-md-12">
@@ -15,19 +15,19 @@
                         <div class="card-header">
                             <div class="tabs-menu ">
                                 <!-- Tabs -->
-                                <ul class="nav panel-tabs">
-                                    <li class=""><a href="#tab11" class="active" data-toggle="tab">Cow</a></li>
-                                    <li><a href="#tab12" data-toggle="tab">Goat/Sheep</a></li>
-                                    <li><a href="#tab13" data-toggle="tab">Poultry</a></li>
-                                    <li><a href="#tab14" data-toggle="tab">Cultivation</a></li>
-                                    <li><a href="#tab15" data-toggle="tab">Overall farm</a></li>
+                                <ul class="nav nav-tabs myTab" data-bs-toggle="tab">
+                                    <li><a href="#tab11" class="active" data-bs-toggle="tab">Cow</a></li>
+                                    <li><a href="#tab12" data-bs-toggle="tab">Goat/Sheep</a></li>
+                                    <li><a href="#tab13" data-bs-toggle="tab">Poultry</a></li>
+                                    <li><a href="#tab14" data-bs-toggle="tab">Cultivation</a></li>
+                                    <li><a href="#tab15" data-bs-toggle="tab">Overall farm</a></li>
                                 </ul>
                             </div>
                         </div>
                         <div class="card-body">
                             <div class="panel-body tabs-menu-body">
                                 <div class="tab-content">
-                                    <div class="tab-pane  " id="tab11">
+                                    <div class="tab-pane show active" id="tab11">
                                         <hr>
                                         <h3 class="text-center" style="font-weight: bold; font-size: 35px;">Overall Cow Details</h3>
                                         <div class="row">
@@ -36,7 +36,7 @@
                                                     <div class="card-body">
                                                         <div class="row">
                                                             <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12 text-center">
-                                                                <h2 class="text-white mt-1 mb-0">Total Expeniture</h2>
+                                                                <h2 class="text-white mt-1 mb-0">Total Expenditure</h2>
                                                             </div>
                                                             <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 text-center">
                                                                 <div class="mt-2 mb-0 text-white">
@@ -230,7 +230,7 @@
                                         </div>
 
                                     </div>
-                                    <div class="tab-pane" id="tab12">
+                                    <div class="tab-pane show" id="tab12">
                                         <h3>Total Expenditures:</h3>
                                         <h3>Total Income:</h3>
                                         <hr>
@@ -407,8 +407,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="tab-pane active" id="tab13">
-
+                                    <div class="tab-pane show" id="tab13">
                                         <hr>
                                         <h3 class="text-center" style="font-weight: bold; font-size: 35px;">Overall Poultry Details</h3>
                                         <div class="row">
@@ -592,7 +591,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="tab-pane" id="tab14">
+                                    <div class="tab-pane show" id="tab14">
                                         <h3>Total Expenditures:</h3>
                                         <h3>Total Income:</h3>
                                         <hr>
@@ -738,7 +737,7 @@
 
 
                                     </div>
-                                    <div class="tab-pane  " id="tab15">
+                                    <div class="tab-pane show" id="tab15">
                                         <h3>Total Expenditures:</h3>
                                         <h3>Total Income:</h3>
                                         <hr>
@@ -1008,6 +1007,14 @@
                     initializeChart();
                 }
             });
+        }
+
+        $('a[data-bs-toggle="tab"]').on('show.bs.tab', function(e) {
+            localStorage.setItem('activeTab', $(e.target).attr('href'));
+        });
+        var activeTab = localStorage.getItem('activeTab');
+        if(activeTab){
+            $('.myTab a[href="' + activeTab + '"]').tab('show');
         }
     </script>
 @endsection
