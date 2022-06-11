@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +15,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+
+// Route::middleware('auth:api')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
+
+
+
+Route::post('login',  [AuthController::class,'login']);
+
+Route::group(['middleware' => ['jwt.verify']], function () {
+    Route::post ('refresh', 'AuthController@refresh');
+    Route::post('logout', [AuthController::class,'logout']);
+    Route::get('me', [AuthController::class,'me']);
+    Route::get('meAuth', 'AuthController@meAuth');
+    Route::get('/cattle/{cattle_type}',[\App\Http\Controllers\API\CattleController::class,'index'])->name('cattle.index');
 });
