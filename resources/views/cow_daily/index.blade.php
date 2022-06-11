@@ -629,6 +629,26 @@
                 $(this).toggleClass('active');
             });
         });
+        //medicine available quantity
+        var purchaseFeedMUsedFeed = {{$cowDailyMedicineStock}};
+        $('#medicineQuantity').change(function()
+        {
+            if(this.value > purchaseFeedMUsedFeed)
+            {
+                alert('Please do not exceed ddddddthe Available Quantity');
+                $('#medicineQuantity').val(purchaseFeedMUsedFeed);
+            }
+        });
+        //vaccine available quantity
+        var purchaseFeedMUsedFeed = {{$cowDailyVaccineStock}};
+        $('#vaccinationQuantity').change(function()
+        {
+            if(this.value > purchaseFeedMUsedFeed)
+            {
+                alert('Please do not exceed ddddddthe Available Quantity');
+                $('#vaccinationQuantity').val(purchaseFeedMUsedFeed);
+            }
+        });
 
         $('a[data-bs-toggle="tab"]').on('show.bs.tab', function(e) {
             localStorage.setItem('activeTab', $(e.target).attr('href'));

@@ -32,7 +32,7 @@
                                             </div>
                                             <div class="form-group">
                                                 <label for="message-text" class="form-control-label">Vaccine Quantity</label>
-                                                <input type="text" class="form-control" id="quantity" name="quantity">
+                                                <input type="text" class="form-control" id="cowFeedQuantity" name="quantity">
                                                 <?php
                                                 $cowDailyFeedStock = \App\Models\Feed::cowDailyFeedStock();
                                                 ?>
@@ -102,4 +102,20 @@
         {{--      end side app --}}
     </div>
     {{--   end container area--}}
+@endsection
+
+@section('more-script')
+    <script>
+        $(function() {
+            var purchaseFeedMUsedFeed = {{$cowDailyFeedStock}};
+            $('#cowFeedQuantity').change(function()
+            {
+                if(this.value > purchaseFeedMUsedFeed)
+                {
+                    alert('Please do not exceed the Available Quantity');
+                    $('#cowFeedQuantity').val(purchaseFeedMUsedFeed);
+                }
+            });
+        });
+    </script>
 @endsection

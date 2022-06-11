@@ -22,11 +22,11 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="message-text" class="form-control-label">Medicine Quantity</label>
-                                    <input type="text" class="form-control" id="medicineQuantity" name="quantity">
+                                    <input type="text" class="form-control" id="goatMedicineQuantity" name="quantity">
                                     <?php
                                     $goatSerial =  $goat_daily->serial_no;
                                     $sub_head_id = AccountHead::where('name',"goat#$goatSerial")->pluck('id')->last();
-                                        $goatDailyMedicineStock = Medicines::goatDailyMedicineStock($sub_head_id);
+                                    $goatDailyMedicineStock = Medicines::goatDailyMedicineStock($sub_head_id);
                                     ?>
                                     <div id="testing" class="invalid-feedback" style="display: block !important;">
                                         Avaliable Medicine = {{$goatDailyMedicineStock}}
@@ -80,3 +80,18 @@
     </div>
     <!-- table-wrapper -->
 </div>
+@section('more-script')
+    <script>
+        $(function() {
+            var purchaseFeedMUsedFeed = {{$goatDailyMedicineStock}};
+            $('#goatMedicineQuantity').change(function()
+            {
+                if(this.value > purchaseFeedMUsedFeed)
+                {
+                    alert('Please do not exceed the Available Quantity');
+                    $('#goatMedicineQuantity').val(purchaseFeedMUsedFeed);
+                }
+            });
+        });
+    </script>
+@endsection

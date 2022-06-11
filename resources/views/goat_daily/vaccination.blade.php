@@ -22,7 +22,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="message-text" class="form-control-label">Medicine Quantity</label>
-                                    <input type="text" class="form-control" id="medicineQuantity" name="quantity">
+                                    <input type="text" class="form-control" id="goatVaccineQuantity" name="quantity">
                                     <?php
                                     $goatSerial = $goat_daily->serial_no;
                                     $sub_head_id = AccountHead::where('name',"goat#$goatSerial")->pluck('id')->last();
@@ -78,3 +78,19 @@
     </div>
     <!-- table-wrapper -->
 </div>
+@section('more-script')
+    <script>
+        $(function() {
+            var purchaseFeedMUsedFeed = {{$goatDailyVaccineStock}};
+            $('#goatVaccineQuantity').change(function()
+            {
+                console.log(this.value);
+                if(this.value > purchaseFeedMUsedFeed)
+                {
+                    alert('Please do not exceed the Available Quantity');
+                    $('#goatVaccineQuantity').val(purchaseFeedMUsedFeed);
+                }
+            });
+        });
+    </script>
+@endsection
