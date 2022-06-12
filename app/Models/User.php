@@ -2,16 +2,16 @@
 
 namespace App\Models;
 
-use Tymon\JWTAuth\Contracts\JWTSubject;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Tymon\JWTAuth\Contracts\JWTSubject;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-
+use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable implements JWTSubject
 {
-    use HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -44,7 +44,7 @@ class User extends Authenticatable implements JWTSubject
     ];
 
     public function roles() {
-        return $this->belongsToMany('App\Models\Role','userRole','user_id','role_id');
+        return $this->belongsToMany(Role::class,'userrole','user_id','role_id');
     }
 
     public function getJWTIdentifier()
@@ -56,4 +56,5 @@ class User extends Authenticatable implements JWTSubject
     {
         return [];
     }
+
 }

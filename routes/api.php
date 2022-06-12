@@ -29,5 +29,9 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::post('logout', [AuthController::class,'logout']);
     Route::get('me', [AuthController::class,'me']);
     Route::get('meAuth', 'AuthController@meAuth');
-    Route::get('/cattle/{cattle_type}',[\App\Http\Controllers\API\CattleController::class,'index'])->name('cattle.index');
+
+    //cattle
+    Route::get('/cattle/{cattle_type}',[\App\Http\Controllers\API\CattleController::class,'index']);
+    Route::get('/cattle/{cattle_type}/create',[\App\Http\Controllers\API\CattleController::class,'create']);
+    Route::post('/cattle/{cattle_type}',[\App\Http\Controllers\API\CattleController::class,'store']);
 });

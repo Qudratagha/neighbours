@@ -23,7 +23,7 @@
                             <form method="POST" action="{{route('cattle.store', 'goat')}}">
                                 @csrf
                                 @method('POST')
-                                <div class="row" >
+                                <div class="row">
                                     <div class = "col-md-6">
                                         <div class="form-group">
                                             <label class="form-label">Date Of Birth</label>
@@ -38,46 +38,48 @@
                                                 @endforeach
                                             </select>
                                         </div>
-                                        <div class="form-group">
-                                            <label for="cattle_name" class="form-label">Select Cattle Type</label>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="cattle_type_id" id="1" value="2" >
-                                                <label class="form-check-label" for="flexRadioDefault1">
-                                                    Goat
-                                                </label>
+                                        <div class="row">
+                                            <div class="form-group col-4">
+                                                <label for="cattle_name" class="form-label">Select Cattle Type</label>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" name="cattle_type_id" id="1" value="2" >
+                                                    <label class="form-check-label" for="flexRadioDefault1">
+                                                        Goat
+                                                    </label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" name="cattle_type_id" id="0" value="3">
+                                                    <label class="form-check-label" for="flexRadioDefault1">
+                                                        Sheep
+                                                    </label>
+                                                </div>
                                             </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="cattle_type_id" id="0" value="3">
-                                                <label class="form-check-label" for="flexRadioDefault1">
-                                                    Sheep
-                                                </label>
-                                            </div>
-                                        </div>
 
-                                        <div class="form-group">
-                                        <label for="gender" class="form-label">Select Gender</label>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="gender" id="1" value=  "1">
-                                            <label class="form-check-label" for="flexRadioDefault1">
-                                                Male
-                                            </label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="gender" id="0" value="0">
-                                            <label class="form-check-label" for="flexRadioDefault1">
-                                                Female
-                                                </label>
+                                            <div class="form-group col-4">
+                                                <label for="gender" class="form-label">Select Gender</label>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" name="gender" id="1" value=  "1">
+                                                    <label class="form-check-label" for="flexRadioDefault1">
+                                                        Male
+                                                    </label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" name="gender" id="0" value="0">
+                                                    <label class="form-check-label" for="flexRadioDefault1">
+                                                        Female
+                                                    </label>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label class="form-label">Enter Date</label>
-                                            <input type="date"  class="form-control" name="date">
+                                            <label class="form-label">Serial No.</label>
+                                            <input type="number" class="form-control" name="serial_no" placeholder="Serial No.">
                                         </div>
                                     </div>
                                     <div class = "col-md-6">
                                         <div class="form-group">
-                                            <label class="form-label">Serial No.</label>
-                                            <input type="number" class="form-control" name="serial_no" placeholder="Serial No.">
+                                            <label class="form-label">Date</label>
+                                            <input type="date"  class="form-control" name="date">
                                         </div>
                                         <div class="form-group">
                                             <label class="form-label">Breed</label>
