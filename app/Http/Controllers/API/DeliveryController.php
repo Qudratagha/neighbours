@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API;
 
+use App\Http\Controllers\Controller;
 use App\Models\Delivery;
 use App\Models\Pregnant;
 use Illuminate\Http\Request;
@@ -10,7 +11,7 @@ class DeliveryController extends Controller
 {
     public function index()
     {
-        return view('cow_daily.delivery');
+        //
     }
 
     public function create()
@@ -22,42 +23,42 @@ class DeliveryController extends Controller
     {
         if (isset($_POST['submitGoat'])) {
             if (Delivery::where('cattle_id', $request->cattle_id)->where('is_delivered', 1)->exists()) {
-                return redirect()->back()->with('errorMessage', 'This Goat Is Already in Delivery Process');
+                return response()->json('This Goat Is Already in Delivery Process',200);
             }
             Delivery::create($request->except('submitGoat'));
-            return redirect()->back()->with('message', 'Delivery Data Added');
+            return response()->json('Delivery Data Added',200);
         }
 
         if (isset($_POST['submitCowDelivery'])) {
             if (Delivery::where('cattle_id', $request->cattle_id)->where('is_delivered', 1)->where('date', $request->date)->exists()) {
-                return redirect()->back()->with('errorMessage', 'This Cow is already Delivered');
+                return response()->json('This Cow is already Delivered',200);
             } elseif (Pregnant::where('cattle_id', $request->cattle_id)->where('is_pregnant', 1)->exists()) {
                 Delivery::create($request->except('submitCowDelivery', 'is_pregnant'));
                 Pregnant::create($request->except('submitCowDelivery', 'is_delivered'));
-                return redirect()->back()->with('message', 'Delivery Cow Data Added.');
+                return response()->json('Delivery Cow Data Added.',200);
             } else
-                return redirect()->back()->with('message', 'This Cow is not Even Pregnant');
+                return response()->json('This Cow is not Even Pregnant',200);
         }
     }
 
-    public function show(Delivery $delivery)
-    {
-
-    }
-
-    public function edit(Delivery $delivery)
+    public function show($id)
     {
         //
     }
 
-    public function update(Request $request, Delivery $delivery)
+
+    public function edit($id)
     {
         //
     }
 
-    public function destroy(Delivery $delivery)
+    public function update(Request $request, $id)
     {
-        $delivery->delete();
-        return redirect()->back()->with('errorMessage', 'Delivery Data Deleted');
+        //
+    }
+
+    public function destroy($id)
+    {
+        //
     }
 }

@@ -80,8 +80,6 @@ class DashboardController extends Controller
         $cucumberCollected = Transaction::where('transaction_type_id', 3)->where('sub_head_id', 75)->sum('quantity');
         $cucumberSold = Transaction::where('transaction_type_id', 1)->where('account_head_id', 13)->where('sub_head_id', 78)->whereNotNull('amount')->sum('quantity');
 
-
-
         $eggCollected =  \App\Models\Poultry::where('poultry_type_id',3)
             ->where('poultry_status_id',4)
             ->where('account_head_id', 8)
@@ -91,7 +89,6 @@ class DashboardController extends Controller
             ->selectRaw('SUM(quantity) AS quantity,created_at')
             ->orderBy('created_at','asc')
             ->get();
-
 
         $eggSale =  \App\Models\Transaction::where('transaction_type_id',1)
             ->where('account_head_id',8)
@@ -129,7 +126,7 @@ class DashboardController extends Controller
         $totalRemainingChicks = \App\Models\Poultry:: totalRemainingChicks();
 
         $cows = Cattle::cows()->count();
-        $cowSerials = Cattle::cows()->where('dry_date',null)->where('dead_date',null)->where('saleStatus',0)->get();
+        $milkingCowSerials = Transaction::where('transaction_type_id',3)->where('account_head_id',22)->distinct('sub_head_id')->get('sub_head_id');
         $milkingCows = Transaction::milkingCows()->count();
         $pregnantCows = Pregnant::pregnantCows();
         $dryCows = Cattle::cows()->whereNotNull('dry_date')->count();
@@ -139,7 +136,7 @@ class DashboardController extends Controller
         $totalCowExpenditure = Transaction::totalExpenditure();
         $totalCowIncome = Transaction::totalIncome();
 
-        return view('/dashboard.index',compact('cowSerials','cows','milkingCows','pregnantCows','dryCows','deadCows','sickCows','soldCows','totalCowExpenditure','totalCowIncome',
+        return view('/dashboard.index',compact('milkingCowSerials','cows','milkingCows','pregnantCows','dryCows','deadCows','sickCows','soldCows','totalCowExpenditure','totalCowIncome',
             'eggCollected', 'eggSale','totalPurchaseHens','totalSaleHens', 'totalDieHens','totalRemainingHens','totalChicksCollected','totalDieChicks','totalchickSale','totalRemainingChicks','transactions','allGoats', 'maleGoats', 'femaleGoats', 'pregnantGoats', 'sickGoats', 'soldGoats', 'dryGoats', 'deadGoats', 'allSheeps', 'maleSheeps', 'femaleSheeps', 'pregnantSheeps', 'sickSheeps', 'soldSheeps', 'drySheeps', 'deadSheeps', 'wheatAreaCultivated', 'wheatCollected', 'cornAreaCultivated', 'cornCollected', 'cucumberAreaCultivated', 'cucumberCollected', 'graphPurchaseGoats', 'graphSoldGoats', 'wheatSold', 'cornSold', 'cucumberSold'));
     }
 

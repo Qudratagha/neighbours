@@ -95,12 +95,14 @@ Route::get('/cow_sale',[\App\Http\Controllers\TransactionController::class, 'ind
 Route::post('/cow_sale',[\App\Http\Controllers\TransactionController::class, 'store'])->name('cow_sale.store');
 Route::get('/cow_sale/{cow_sale}',[\App\Http\Controllers\TransactionController::class, 'showCowSale'])->name('cow_sale.show');
 
-//Feed
+//Cow Feed
 Route::get('cow_feed', [App\Http\Controllers\FeedController::class, 'cowIndex'])->name('cow_feed.index');
-Route::get('goat_feed', [App\Http\Controllers\FeedController::class, 'goatIndex'])->name('goat_feed.index');
 Route::post('cow_feed_store', [App\Http\Controllers\FeedController::class, 'store'])->name('cow_feed.store');
-Route::post('goat_feed_store', [App\Http\Controllers\FeedController::class, 'store'])->name('goat_feed.store');
 Route::delete('cow_feed_delete/{cow_feed_id}', [App\Http\Controllers\FeedController::class, 'destroy'])->name('cow_feed.destroy');
+
+//Goat Feed
+Route::get('goat_feed', [App\Http\Controllers\FeedController::class, 'goatIndex'])->name('goat_feed.index');
+Route::post('goat_feed_store', [App\Http\Controllers\FeedController::class, 'store'])->name('goat_feed.store');
 Route::delete('goat_feed_delete/{goat_feed_id}', [App\Http\Controllers\FeedController::class, 'destroy'])->name('goat_feed.destroy');
 
 //cow_feed
