@@ -31,7 +31,7 @@
                                                 <input type="text" onfocus= "(this. type='date')" class="form-control" name="created_at" value="<?php use App\Models\AccountHead;echo date('Y-m-d');?>" required>
                                             </div>
                                             <div class="form-group">
-                                                <label for="message-text" class="form-control-label">Vaccine Quantity</label>
+                                                <label for="message-text" class="form-control-label">Feed Quantity</label>
                                                 <input type="text" class="form-control" id="cowFeedQuantity" name="quantity">
                                                 <?php
                                                 $cowDailyFeedStock = \App\Models\Feed::cowDailyFeedStock();

@@ -52,6 +52,14 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::post('/cow_daily/vaccination', [VaccinationController::class, 'store']);
     Route::post('/cow_daily/insemination', [InseminationController::class, 'store']);
 
+    //cow_sale
+    Route::get('/cow_sale', [TransactionController::class, 'indexCowSale']);
+    Route::post('/cow_sale', [TransactionController::class, 'store']);
+
+    //milk_sale
+    Route::get('/milk_sale', [TransactionController::class, 'indexMilkSale']);
+    Route::post('/milk_sale', [TransactionController::class, 'store']);
+
     //goat_daily
     Route::get('/goat_daily', [CattleController::class, 'index']);
     Route::post('/goat_daily', [CattleController::class, 'store']);
@@ -62,13 +70,8 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::post('/goat_daily/delivery', [DeliveryController::class, 'store']);
     Route::post('/goat_daily/vaccination', [VaccinationController::class, 'store']);
 
-    //cow_sale
-    Route::get('/cow_sale', [TransactionController::class, 'indexCowSale']);
-    Route::post('/cow_sale', [TransactionController::class, 'store']);
-    Route::get('/cow_sale/{cow_sale}', [TransactionController::class, 'showCowSale']);
-
-    //milk_sale
-    Route::get('/milk_sale', [TransactionController::class, 'indexMilkSale']);
-    Route::post('/milk_sale', [TransactionController::class, 'store']);
+    //goat_sale
+    Route::get('/goat_sale', [TransactionController::class, 'indexGoatSale']);
+    Route::post('/goat_sale', [TransactionController::class, 'store']);
 
 });

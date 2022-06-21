@@ -31,7 +31,7 @@
                                                 <input type="text" onfocus= "(this. type='date')" class="form-control" name="created_at" value="<?php echo date('Y-m-d');?>" required>
                                             </div>
                                             <div class="form-group">
-                                                <label for="message-text" class="form-control-label">Vaccine Quantity</label>
+                                                <label for="message-text" class="form-control-label">Feed Quantity</label>
                                                 <input type="text" class="form-control" id="goatVaccineQuantity" name="quantity">
                                                 <?php
                                                 $goatDailyFeedStock = \App\Models\Feed::goatDailyFeedStock();
