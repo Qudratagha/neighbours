@@ -15,13 +15,21 @@
                         <div class="card-header">
                             <div class="tabs-menu ">
                                 <!-- Tabs -->
-                                <ul class="nav nav-tabs myTab" data-bs-toggle="tab">
-                                    <li><a href="#tab11" class="active" data-bs-toggle="tab">Cow</a></li>
-                                    <li><a href="#tab12" data-bs-toggle="tab">Goat/Sheep</a></li>
-                                    <li><a href="#tab13" data-bs-toggle="tab">Poultry</a></li>
-                                    <li><a href="#tab14" data-bs-toggle="tab">Cultivation</a></li>
-                                    <li><a href="#tab15" data-bs-toggle="tab">Overall farm</a></li>
-                                </ul>
+                                <nav class="navbar navbar-expand-lg navbar-light">
+                                    <a class="navbar-brand" href="#"></a>
+                                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                                        <span class="navbar-toggler-icon"></span>
+                                    </button>
+                                    <div class="collapse navbar-collapse" id="navbarNav">
+                                        <ul class="nav nav-tabs myTab" data-bs-toggle="tab">
+                                            <li class="nav-item active"><a href="#tab11" data-bs-toggle="tab">Cow</a></li>
+                                            <li><a href="#tab12" data-bs-toggle="tab">Goat/Sheep</a></li>
+                                            <li><a href="#tab13" data-bs-toggle="tab">Poultry</a></li>
+                                            <li><a href="#tab14" data-bs-toggle="tab">Cultivation</a></li>
+                                            <li><a href="#tab15" data-bs-toggle="tab">Overall farm</a></li>
+                                        </ul>
+                                    </div>
+                                </nav>
                             </div>
                         </div>
                         <div class="card-body">

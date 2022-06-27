@@ -131,18 +131,11 @@
                             //      Chicks calculation Ends
                             //      Feed calculation Starts
                             $totalFeedPurchase = \App\Models\Poultry::totalFeedPurchase();
-
-
                             //      Feed calculation Ends
-
-
-
                             ?>
                             <div id="totalHen" class="invalid-feedback" style="display: block !important;"></div>
                             <div id="testing" class="invalid-feedback" style="display: block !important;"></div>
                         </div>
-
-
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                             <button type="submit" class="btn btn-primary">Submit </button>
@@ -300,7 +293,6 @@
                 'name' : 'Hen',
                 'status' : [
                     { id: 1, value: 'Die'},
-                    // { id: 6,value: 'Purchase'},
                     { id: 7, value: 'Sick'},
                     { id: 8, value: 'Healthy'},
                 ]
@@ -310,7 +302,6 @@
                 'status' : [
                     { id : 1, value: 'Die' },
                     { id : 4, value: 'Collected' },
-                    // { id : 5, value: 'Converted To Hen' },
                     { id : 7, value: 'Sick'},
                     { id: 8, value: 'Healthy'},
                 ]

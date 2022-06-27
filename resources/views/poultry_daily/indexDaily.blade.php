@@ -60,7 +60,7 @@
                                                                             <input type="text" id="test1" onfocus= "(this. type='date')" class="form-control" name="date" value="<?php echo date('Y-m-d');?>" required>
                                                                         </div>
                                                                         <div class="form-group">
-                                                                            <label for="message-text" class="form-control-label">Quantity</label>
+                                                                            <label for="message-text" class="form-control-label">Quantity: In Dozens </label>
                                                                             <input type="text"  class="form-control" id="EggQuantity" name="quantity" required>
                                                                             <?php
                                                                             $totalEggsCollected = \App\Models\Poultry::totalEggsCollected();

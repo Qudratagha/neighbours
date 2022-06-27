@@ -34,4 +34,16 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::get('/cattle/{cattle_type}',[\App\Http\Controllers\API\CattleController::class,'index']);
     Route::get('/cattle/{cattle_type}/create',[\App\Http\Controllers\API\CattleController::class,'create']);
     Route::post('/cattle/{cattle_type}',[\App\Http\Controllers\API\CattleController::class,'store']);
+
+    //poultry
+    Route::get('/poultry',[\App\Http\Controllers\API\PoultryController::class,'poultryIndex']);
+    Route::post('/poultry',[\App\Http\Controllers\API\PoultryController::class, 'poultryStore']);
+
+    Route::get('/poultry/getDateQuantity/{date}', [\App\Http\Controllers\PoultryController::class,'getDateQuantity'])->name('poultry.getDateQuantity');
+
+    Route::get('/poultry_daily',[\App\Http\Controllers\API\PoultryController::class, 'poultryDailyIndex']);
+    Route::post('/poultry_daily',[\App\Http\Controllers\API\PoultryController::class, 'poultryDailyStore']);
+    Route::get('/poultry_expenditure',[\App\Http\Controllers\API\PoultryController::class,'poultryExpenditureIndex']);
+    Route::post('/poultry_expenditure_store',[\App\Http\Controllers\API\PoultryController::class,'poultryExpenditureStore']);
+
 });
