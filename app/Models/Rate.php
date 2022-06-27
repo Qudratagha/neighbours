@@ -9,6 +9,8 @@ class Rate extends Model
 {
     use HasFactory;
 
+    protected $primaryKey = "id";
+    protected $table = "rates";
     protected $guarded = [];
 
     public function scopeRecentRate($q)

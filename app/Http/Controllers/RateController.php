@@ -44,6 +44,10 @@ class RateController extends Controller
 
             Rate::where('name', $request->input('name','egg'))->where('status', 1)->update(['status'=>0]);
         }
+        if($request->input('name','cucumber')){
+
+            Rate::where('name', $request->input('name','cucumber'))->where('status', 1)->update(['status'=>0]);
+        }
 
         Rate::create($request->all());
         return redirect()->back()->with('message','Rate Add Successfully');

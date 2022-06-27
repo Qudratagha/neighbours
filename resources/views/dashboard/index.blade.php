@@ -1311,6 +1311,7 @@
                         borderWidth: "0",
                         backgroundColor: "#9258f1"
                     }],
+
             }
         });
 
