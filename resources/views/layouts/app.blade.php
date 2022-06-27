@@ -158,7 +158,6 @@
 <script src="/assets/plugins/datatable/jquery.dataTables.min.js"></script>
 <script src="/assets/plugins/datatable/dataTables.bootstrap4.min.js"></script>
 <script src="/assets/plugins/datatable/datatable.js"></script>
-
 <script src="/assets/plugins/datatable/dataTables.responsive.min.js"></script>
 
 <!---Select 2--->
@@ -178,9 +177,11 @@
 <script>
     $(document).ready( function () {
         $('table.display').DataTable({
-
+            dom: 'Bfrtip',
+            buttons: [
+                'excel'
+            ]
         });
-
     } );
 </script>
 <script>

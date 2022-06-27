@@ -27,7 +27,7 @@
                                     <div class = "col-md-6">
                                         <div class="form-group">
                                             <label class="form-label">Date Of Birth</label>
-                                            <input type="date" class="form-control" name="dob">
+                                            <input type="text" onfocus= "(this. type='date')" class="form-control" name="dob" value="<?php echo date('Y-m-d');?>" required>
                                         </div>
                                         <div class="form-group">
                                             <label class="form-label">Parent</label>
@@ -40,7 +40,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label class="form-label">Date</label>
-                                            <input type="date"  class="form-control" name="date">
+                                            <input type="text" onfocus= "(this. type='date')" class="form-control" name="date" value="<?php echo date('Y-m-d');?>" required>
                                         </div>
                                         <div class="form-group">
                                             <label class="form-label">Serial No.</label>
@@ -61,7 +61,7 @@
                                             <input type="number" class="form-control" name="height" placeholder="Enter Height">
                                         </div>
                                     </div>
-                                    <button type="submit" name="submitGoat" class="btn btn-primary">Submit</button>
+                                    <button type="submit" name="submitCow" value="1" class="btn btn-primary">Submit</button>
                                     <a href="{{route('cattle.create', 'cow')}}" type="button" class="btn btn-danger">Back</a>
                                 </div>
                             </form>

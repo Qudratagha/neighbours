@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API;
 
+use App\Http\Controllers\Controller;
 use App\Models\AccountHead;
 use App\Models\Vaccination;
 use Illuminate\Http\Request;
@@ -10,7 +11,7 @@ class VaccinationController extends Controller
 {
     public function index()
     {
-        return view('cow_daily.index');
+        //
     }
 
     public function create()
@@ -22,46 +23,44 @@ class VaccinationController extends Controller
     {
         if (isset($_POST['submitGoat'])) {
             $goatID = $request->serial_no;
-
             $sub_head_id = AccountHead::where('name', "goat#$goatID")->pluck('id')->last();
             if ($sub_head_id != '') {
                 $request['sub_head_id'] = $sub_head_id;
                 Vaccination::create($request->except(['serial_no', 'submitGoat']));
-                return redirect()->back()->with('message', 'Vaccination Added');
-            } else return redirect()->back()->with('message', 'Please Add Milk Data First');
+                return response()->json('Vaccination Added', 200);
+            } else return response()->json('Please Add Milk Data First', 200);
         }
 
         if (isset($_POST['submitCow'])) {
             $cowID = $request->serial_no;
-
             $sub_head_id = AccountHead::where('name', "cow#$cowID")->pluck('id')->last();
-
             if ($sub_head_id != '') {
                 $request['sub_head_id'] = $sub_head_id;
                 Vaccination::create($request->except(['serial_no', 'submitCow']));
-                return redirect()->back()->with('message', 'Vaccination Added');
-            } else return redirect()->back()->with('message', 'Please Add Milk Data First');
+                return response()->json('Vaccination Added', 200);
+            } else return response()->json('Please Add Milk Data First', 200);
         }
     }
 
-    public function show(Vaccination $vaccination)
+    public function show($id)
     {
         //
     }
 
-    public function edit(Vaccination $vaccination)
+    public function edit($id)
     {
         //
     }
 
-    public function update(Request $request, Vaccination $vaccination)
+
+    public function update(Request $request, $id)
     {
         //
     }
 
-    public function destroy(Vaccination $vaccination)
+
+    public function destroy($id)
     {
-        $vaccination->delete();
-        return redirect()->back()->with('errorMessage', 'Vaccination Entry Deleted');
+        //
     }
 }
