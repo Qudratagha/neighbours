@@ -1,5 +1,4 @@
 <?php
-
 use Illuminate\Support\Facades\Route;
 
 use Illuminate\Support\Facades\Auth;
@@ -27,11 +26,12 @@ Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'inde
 Route::get('/getSingleCowMilkCollection/{account_head_id}', [App\Http\Controllers\DashboardController::class, 'getSingleCowMilkCollection'])->name('dashboard.getSingleCowMilkCollection');
 //Route::get('/getMilkCollectionSaleData/{startDateMilkCollectionSold}/{endDateMilkCollectionSold}', [App\Http\Controllers\DashboardController::class, 'getMilkCollectionSaleData'])->name('dashboard.getMilkCollectionSaleData');
 
-//poultry
+//get Incubation Dates Ajax
 Route::get('/poultry/getIncubationDates/{date}', [\App\Http\Controllers\PoultryController::class, 'getIncubationDates'])->name('poultry.getIncubationDates');
 Route::get('/poultry/getDateQuantity/{date}', [\App\Http\Controllers\PoultryController::class,'getDateQuantity'])->name('poultry.getDateQuantity');
+
+//poultry
 Route::resource('/poultry', PoultryController::class);
-//Route::get('/poultry/getIncubationDates', [\App\Http\Controllers\PoultryController::class,'getIncubationDates'])->name('poultry.getIncubationDates');
 
 //poultry_daily
 Route::get('poultry_daily',[\App\Http\Controllers\PoultryController::class, 'indexDaily'])->name('poultry_daily.indexDaily');
@@ -63,10 +63,8 @@ Route::post('/cow_daily/pregnant',[\App\Http\Controllers\PregnantController::cla
 Route::post('/cow_daily/delivery',[\App\Http\Controllers\DeliveryController::class, 'store'])->name('deliveryCow.store');
 Route::post('/cow_daily/vaccination',[\App\Http\Controllers\VaccinationController::class, 'store'])->name('vaccinationCow.store');
 Route::post('/cow_daily/insemination',[\App\Http\Controllers\InseminationController::class, 'store'])->name('inseminationCow.store');
-
 Route::delete('/cow_daily/{transaction}',[\App\Http\Controllers\TransactionController::class, 'destroy'])->name('cow_daily.destroy');
 Route::delete('/cow_daily_sick/{sick}',[\App\Http\Controllers\SickController::class, 'destroy'])->name('sickCow.destroy');
-
 Route::delete('/cow_daily_medicine/{medicine}',[\App\Http\Controllers\MedicinesController::class, 'destroy'])->name('medicineCow.destroy');
 Route::delete('/cow_daily_insemination/{insemination}',[\App\Http\Controllers\InseminationController::class, 'destroy'])->name('inseminationCow.destroy');
 Route::delete('/cow_daily_pregnant/{pregnant}',[\App\Http\Controllers\PregnantController::class, 'destroy'])->name('pregnantCow.destroy');
@@ -82,7 +80,6 @@ Route::post('/goat_daily/medicine',[\App\Http\Controllers\MedicinesController::c
 Route::post('/goat_daily/pregnant',[\App\Http\Controllers\PregnantController::class, 'store'])->name('pregnant.store');
 Route::post('/goat_daily/delivery',[\App\Http\Controllers\DeliveryController::class, 'store'])->name('delivery.store');
 Route::post('/goat_daily/vaccination',[\App\Http\Controllers\VaccinationController::class, 'store'])->name('vaccination.store');
-
 Route::delete('/goat_daily_sick/{sick}', [\App\Http\Controllers\SickController::class, 'destroy'])->name('sickGoat.destroy');
 Route::delete('/goat_daily_medicine/{medicine}',[\App\Http\Controllers\MedicinesController::class, 'destroy'])->name('medicineGoat.destroy');
 Route::delete('/goat_daily_insemination/{insemination}',[\App\Http\Controllers\InseminationController::class, 'destroy'])->name('inseminationGoat.destroy');
@@ -187,9 +184,11 @@ Route::delete('/goat_expenditure/{transaction}',[\App\Http\Controllers\Transacti
 //cultivation_expenditure
 Route::get('/cultivation_expenditure',[\App\Http\Controllers\TransactionController::class, 'indexCultivationExpenditure'])->name('cultivation_expenditure.index');
 Route::get('/cultivation_expenditure_create',[\App\Http\Controllers\TransactionController::class, 'createCultivationExpenditure'])->name('cultivation_expenditure.create');
+
 //  {  Cultivation Salaries
 Route::get('/cultivation_salary_create',[\App\Http\Controllers\TransactionController::class, 'createCultivationSalary'])->name('cultivation_salary.create');
 Route::post('/cultivation_salary',[\App\Http\Controllers\TransactionController::class, 'storeCultivationSalary'])->name('cultivation_salary.store');
+
 //     Cultivation Salaries end }
 Route::post('/cultivation_expenditure',[\App\Http\Controllers\TransactionController::class, 'storeCultivationExpenditure'])->name('cultivation_expenditure.store');
 Route::get('/cultivation_expenditure/{transaction}/edit',[\App\Http\Controllers\TransactionController::class, 'editCultivationExpenditure'])->name('cultivation_expenditure.edit');

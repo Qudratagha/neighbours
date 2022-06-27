@@ -9,8 +9,9 @@
             <div class="page-header">
                 <ol class="breadcrumb"><!-- breadcrumb -->
                     <li class="breadcrumb-item"><a href="{{route('cattle.index','cow')}}">All Cows</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">{{ __('Milk Cow') }}</li>
+                    <li class="breadcrumb-item active" aria-current="page">{{ __('Sale Milk') }}</li>
                 </ol><!-- End breadcrumb -->
+                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#addMilk">Sale Milk</button>
             </div>
             <!-- End page-header -->
             <div class="row">
@@ -24,7 +25,6 @@
                             <div class="tab-pane active" id="tab11">
                                 <div class="float-right mb-3">
                                     <div class="input-group">
-                                        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#addMilk">Sale Milk</button>
                                         <!-- Message Modal -->
                                         <div class="modal fade" id="addMilk" tabindex="-1" role="dialog"  aria-hidden="true">
                                             <div class="modal-dialog" role="document">
@@ -39,7 +39,7 @@
                                                         <form method="POST" action="{{route('milk_sale.store')}}">
                                                             @csrf
                                                             <div class="form-group">
-                                                                <label for="recipient-name" class="form-control-label">Date</label>
+                                                                <label for="recipient-name" class="form-control-label required">Date</label>
                                                                 {{--                                    <input type="hidden" name="cow_id" value="{{$cow_sale->id}}">--}}
                                                                 <input type="text" onfocus= "(this. type='date')" class="form-control" name="date" value="<?php echo date('Y-m-d');?>" required>
                                                             </div>
@@ -47,7 +47,7 @@
                                                                 <?php
                                                                 $totalMilk = \App\Models\Transaction::milkStock();
                                                                 ?>
-                                                                <label for="message-text" class="form-control-label">Quantity</label>
+                                                                <label for="message-text" class="form-control-label required">Quantity</label>
                                                                 <input type="number" class="form-control" id="quantity" name="quantity" required>
                                                                 <div class="invalid-feedback" style="display: block !important;">
                                                                     Total Quantity Available is {{$totalMilk}} Liters

@@ -18,7 +18,7 @@
                     <div class="card">
                         @include('partials.message')
                         <div class="card-header">
-                            <h3 class="mb-0 card-title">{{ __('') }}</h3>
+                            <h3 class="mb-0 card-title">{{ __('Workers List') }}</h3>
                         </div>
                         <div class="card-body">
                             <form method="POST" action="{{route('worker.update',$worker->id)}}">
@@ -28,11 +28,11 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label class="form-label required">Enter Date</label>
-                                            <input type="text" onfocus= "(this. type='date')" class="form-control" name="created_at" value="{{$worker->created_at}}">
+                                            <input type="text" onfocus= "(this. type='date')" class="form-control" name="created_at" value="{{$worker->created_at}}" required>
                                         </div>
                                         <div class="form-group">
                                             <label class="form-label required">Select Expenditure Type</label>
-                                            <select name="module_id" id="module" class="form-control">
+                                            <select name="module_id" id="module" class="form-control" required>
                                                 @foreach($modules as $module)
                                                     <option value="{{$module->id}}">{{$module->moduleCode}}</option>
                                                 @endforeach
@@ -40,11 +40,11 @@
                                         </div>
                                         <div class="form-group">
                                             <label class="form-label required">Worker Name</label>
-                                            <input type="text" class="form-control" name="name" placeholder="Worker Name" value="{{$worker->name}}">
+                                            <input type="text" class="form-control" name="name" placeholder="Worker Name" value="{{$worker->name}}" required>
                                         </div>
                                         <div class="form-group">
-                                            <label class="form-label">Worker Phone</label>
-                                            <input type="number" class="form-control" name="phone" placeholder="Worker Phone" value="{{$worker->phone}}">
+                                            <label class="form-label required">Worker Phone</label>
+                                            <input type="number" class="form-control" name="phone" placeholder="Worker Phone" value="{{$worker->phone}}" required>
                                         </div>
                                         <div class="form-group">
                                             <label class="form-label">Worker Address</label>
@@ -53,7 +53,7 @@
                                     </div>
                                 </div>
                                 <button type="submit" class="btn btn-primary">Submit</button>
-                                <a href="{{route('worker.index')}}" type="button" class="btn btn-danger">Back</a>
+                                <a href="{{route('worker.index')}}" type="button" class="btn btn-secondary">Back</a>
                             </form>
                         </div>
                     </div>

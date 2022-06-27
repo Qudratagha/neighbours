@@ -27,8 +27,8 @@
                                 <div class="row">
                                     <div class="col-lg-12">
                                         <div class="form-group">
-                                            <label class="form-label">Select Module of Worker</label>
-                                            <select class="form-control" name="module_id" id="module">
+                                            <label class="form-label required">Select Module of Worker</label>
+                                            <select class="form-control" name="module_id" id="module" required>
                                                 <option style="font-weight: bold">Select Module of Worker</option>
                                                 @foreach($modules as $module)
                                                 <option value="{{$module->id}}">{{$module->moduleCode}}</option>
@@ -36,12 +36,12 @@
                                             </select>
                                         </div>
                                         <div class="form-group">
-                                            <label class="form-label">Worker Name</label>
-                                            <input type="text" class="form-control" name="name" placeholder="Enter Worker Name">
+                                            <label class="form-label required">Worker Name</label>
+                                            <input type="text" class="form-control" name="name" placeholder="Enter Worker Name" required>
                                         </div>
                                         <div class="form-group">
-                                            <label class="form-label">Worker Phone</label>
-                                            <input type="number" class="form-control" name="phone" placeholder="Enter Worker Phone">
+                                            <label class="form-label required">Worker Phone</label>
+                                            <input type="number" class="form-control" name="phone" placeholder="Enter Worker Phone" required>
                                         </div>
                                         <div class="form-group">
                                             <label class="form-label">Worker Address</label>
@@ -50,7 +50,7 @@
                                     </div>
                                 </div>
                                 <button type="submit" class="btn btn-primary">Submit</button>
-                                <a href="{{route('worker.index')}}" type="button" class="btn btn-danger">Back</a>
+                                <a href="{{route('worker.index')}}" type="button" class="btn btn-secondary">Back</a>
                             </form>
                         </div>
                     </div>

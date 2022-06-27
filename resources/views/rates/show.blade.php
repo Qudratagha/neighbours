@@ -8,8 +8,8 @@
             <!-- page-header -->
             <div class="page-header">
                 <ol class="breadcrumb"><!-- breadcrumb -->
-                    <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Dashboard</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">{{ __('Rates') }}</li>
+                    <li class="breadcrumb-item"><a href="{{route('rates.index')}}">Rates List</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">{{ __('Showing All time Rates for') }} {{$rate->name}}</li>
                 </ol><!-- End breadcrumb -->
                 <div class="ml-auto">
                     <div class="input-group">

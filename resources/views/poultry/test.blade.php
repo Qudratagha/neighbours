@@ -1,1 +1,0 @@
-Masood {{ $dateQuantity }}

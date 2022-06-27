@@ -8,7 +8,6 @@
             <!-- page-header -->
             <div class="page-header">
                 <ol class="breadcrumb"><!-- breadcrumb -->
-                    <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Dashboard</a></li>
                     <li class="breadcrumb-item active" aria-current="page">{{ __('Rates') }}</li>
                 </ol><!-- End breadcrumb -->
                 <div class="ml-auto">
@@ -23,7 +22,7 @@
                     <div class="card">
                         @include('partials.message')
                         <div class="card-header">
-                            {{--                            <h3 class="mb-0 card-title">{{ __('Cow Serial') }} # {{$cow_daily->serial_no}}</h3>--}}
+                            <h3 class="mb-0 card-title">{{ __('Rate') }}</h3>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -46,7 +45,6 @@
                                             <td>{{$rate->rate}}</td>
                                             <td>
                                                 <a href="{{route('rates.show',$rate->id)}}" class="btn btn-sm btn-primary" data-toggle="tooltip" title="View"><i class="fe fe-eye"></i></a>
-                                                <a href="{{route('rates.edit',$rate->id)}}" class="btn btn-sm btn-success" data-toggle="tooltip" title="Edit"><i class="fe fe-edit-3"></i></a>
                                                 <form action="{{ route('rates.destroy',$rate->id ) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this?');" style="display: inline-block;">
                                                     @csrf
                                                     @method('DELETE')

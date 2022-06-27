@@ -11,6 +11,7 @@
                     <li class="breadcrumb-item"><a href="{{route('cattle.index','goat')}}">All Goats</a></li>
                     <li class="breadcrumb-item active" aria-current="page">{{ __('Sale Goat') }}</li>
                 </ol><!-- End breadcrumb -->
+                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#addGoat">Sale Goat</button>
             </div>
             <!-- End page-header -->
             <div class="row">
@@ -23,7 +24,6 @@
                         <div class="card-body">
                             <div class="float-right mb-3">
                                 <div class="input-group">
-                                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#addGoat">Sale Goat</button>
                                     <!-- Message Modal -->
                                         <div class="modal fade" id="addGoat" tabindex="-1" role="dialog"  aria-hidden="true">
                                             <div class="modal-dialog" role="document">
@@ -38,13 +38,13 @@
                                                         <form method="POST" action="{{route('goat_sale.store')}}">
                                                             @csrf
                                                             <div class="form-group">
-                                                                <label for="recipient-name" class="form-control-label">Date</label>
+                                                                <label for="recipient-name" class="form-control-label required">Date</label>
 {{--                                                            <input type="hidden" name="cow_id" value="{{$cow_sale->id}}">--}}
                                                                 <input type="text" onfocus= "(this. type='date')" class="form-control" name="date" value="<?php echo date('Y-m-d');?>" required>
                                                             </div>
                                                             <div class="form-group">
-                                                                <label for="message-text" class="form-label">Goats Quantity</label>
-                                                                <select class="form-control form-select quantity" name="quantity[]" multiple="multiple" style="width: 100%; outline: 0; border: 2px solid black; border-radius: 4px;">
+                                                                <label for="message-text" class="form-label required">Goats Quantity</label>
+                                                                <select class="form-control form-select quantity" name="quantity[]" multiple="multiple" style="width: 100%; outline: 0; border: 2px solid black; border-radius: 4px;" required>
                                                                     @foreach($goats as $goat)
                                                                         @if( $goat->dead_date == null && $goat->dry_date == null && $goat->saleStatus == 0)
                                                                             <option value="{{$goat->serial_no}}">{{$goat->serial_no}}</option>
@@ -53,7 +53,7 @@
                                                                 </select>
                                                             </div>
                                                             <div class="form-group">
-                                                                <label for="message-text" class="form-control-label">Amount</label>
+                                                                <label for="message-text" class="form-control-label required">Amount</label>
                                                                 <input type="number" class="form-control" id="amount" name="amount" required>
                                                             </div>
                                                             <div class="form-group">
@@ -61,8 +61,8 @@
                                                                 <input type="text" class="form-control" id="description" name="description">
                                                             </div>
                                                             <div class="modal-footer">
-                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                                                 <button type="submit" name="submitGoatSale" class="btn btn-primary">Sale Goat</button>
+                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                                             </div>
                                                         </form>
                                                     </div>

@@ -91,10 +91,9 @@
                 <div class="modal-body">
                     <form method="post" action="{{route('poultry.store')}}" >
                         @csrf
-
                         <div class="form-group">
                             <label class="form-label">Entry In Farm</label>
-                            <input type="text" name="created_at" onfocus= "(this. type='date')" class="form-control" name="entry_in_farm" value="<?php echo date('Y-m-d');?>">
+                            <input type="text" name="created_at" onfocus= "(this. type='date')" class="form-control" value="<?php echo date('Y-m-d');?>">
                         </div>
                         <div class="form-group ">
                             <label class="form-label">Poultry Type</label>
@@ -110,7 +109,6 @@
                             <select name="poultry_status_id" id="poultry_status_id" class="form-control select2 custom-select" required></select>
                         </div>
                         <div class="form-group" id="incubatedDate"></div>
-
                         <div class="form-group">
                             <label for="quantity" class="form-control-label">Quantity:</label>
                             <input type="number" class="form-control" name="quantity" id="quantity" required>
@@ -141,11 +139,9 @@
                             <div id="totalHen" class="invalid-feedback" style="display: block !important;"></div>
                             <div id="testing" class="invalid-feedback" style="display: block !important;"></div>
                         </div>
-
-
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                             <button type="submit" class="btn btn-primary">Submit </button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                         </div>
                     </form>
                 </div>

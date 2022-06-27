@@ -120,32 +120,33 @@ class CultivationController extends Controller
         $cultivation->update($request->all());
         return redirect(route('cultivation.index'));
     }
-
-    // Delete Cultivation
-    public function destroy(Cultivation $cultivation)
-    {
-        $cultivation->delete();
-        return redirect(route('cultivation.index'));
-    }
-
-    // Edit Collect Cultivation
-    public function editCollect(Transaction $cultivation){
+	
+	// Edit Collect Cultivation
+	
+	public function editCollect(Transaction $cultivation){
 
         $cultivation_types = CultivationType::all();
         return view('cultivation.editCollect', compact('cultivation', 'cultivation_types'));
     }
-
-    // Update Collect Cultivation
-    public function updateCollect(Request $request, Transaction $cultivation){
+    
+	// Update Collect Cultivation
+	public function updateCollect(Request $request, Transaction $cultivation){
         $cultivation->update($request->except('cultivation_type_id'));
-        return redirect()->back()->with('Message', 'Collect Cultivation Updated');
+        return to_route('cultivation.collectCultivation')->with('Message', 'Collect Cultivation Updated');
 
     }
-
-    // Delete Collect Cultivation
-    public function destroyCollect(Transaction $cultivation){
+    
+	// Delete Cultivation
+	public function destroy(Cultivation $cultivation)
+	{
+		$cultivation->delete();
+		return redirect(route('cultivation.index'));
+	}
+	
+	// Delete Collect Cultivation
+	public function destroyCollect(Transaction $cultivation){
         $cultivation->delete();
         return redirect()->back()->with('errorMessage', 'Collect Cultivation Deleted');
     }
-
+	
 }

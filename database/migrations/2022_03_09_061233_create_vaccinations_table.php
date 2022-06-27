@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('name',45)->nullable();
             $table->integer('quantity');
 
-            $table->string('description');
+            $table->string('description')->nullable();
             $table->timestamps();
 
             $table->foreign('sub_head_id')->references('id')->on('account_heads');

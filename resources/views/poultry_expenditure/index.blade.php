@@ -23,7 +23,7 @@
                     <div class="card">
                         @include('partials.message')
                         <div class="card-header">
-                            <h3 class="mb-0 card-title">{{ __('') }}</h3>
+                            <h3 class="mb-0 card-title">{{ __('Poultry Expenditure') }}</h3>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">

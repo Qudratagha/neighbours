@@ -8,7 +8,7 @@
             <!-- page-header -->
             <div class="page-header">
                 <ol class="breadcrumb"><!-- breadcrumb -->
-                    {{-- <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Dashboard</a></li>--}}
+                    <li class="breadcrumb-item"><a href="{{route('cow_expenditure.index')}}">Cow Expenditure List</a></li>
                     <li class="breadcrumb-item active" aria-current="page">{{ __('Cow Expenditure') }}</li>
                 </ol><!-- End breadcrumb -->
             </div>
@@ -28,12 +28,14 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label class="form-label required">Enter Date</label>
-                                            <input type="text" onfocus= "(this. type='date')" class="form-control" name="date" value="{{$transaction->date}}">
+                                            <input type="text" onfocus="(this. type='date')" class="form-control"
+                                                   name="date" value="{{$transaction->date}}" required>
                                         </div>
                                         <div class="form-group">
                                             <label class="form-label required">Select Expenditure Type</label>
-                                            <select name="sub_head_id" id="expenseHeads" class="form-control">
-{{--                                                <option style="font-weight: bold">Previous Selected: {{$transaction->accountSubHead->name}}</option>--}}
+                                            <select name="sub_head_id" id="expenseHeads" class="form-control" required>
+                                                <option value="{{$transaction->id}}"
+                                                        selected>{{$transaction->accountSubHead->name}}</option>
                                                 @foreach($expenseHeads as $expenseHead)
                                                     <option value="{{$expenseHead->id}}">{{trim(strstr("$expenseHead->name"," "))}}</option>
                                                 @endforeach
@@ -41,20 +43,25 @@
                                         </div>
                                         <div class="form-group">
                                             <label class="form-label required">Amount</label>
-                                            <input type="number" class="form-control" name="amount" placeholder="Amount" value="{{$transaction->amount}}">
+                                            <input type="number" class="form-control" name="amount" placeholder="Amount"
+                                                   value="{{$transaction->amount}}" required>
                                         </div>
                                         <div class="form-group">
-                                            <label class="form-label">Quantity</label>
-                                            <input type="number" class="form-control" name="quantity" placeholder="quantity" value="{{$transaction->quantity}}">
+                                            <label class="form-label required">Quantity</label>
+                                            <input type="number" class="form-control" name="quantity"
+                                                   placeholder="quantity" value="{{$transaction->quantity}}" required>
                                         </div>
                                         <div class="form-group">
                                             <label class="form-label">Description</label>
-                                            <input type="text" class="form-control" name="description" placeholder="Enter Description" value="{{$transaction->description}}">
+                                            <input type="text" class="form-control" name="description"
+                                                   placeholder="Enter Description"
+                                                   value="{{$transaction->description}}">
                                         </div>
                                     </div>
                                 </div>
                                 <button type="submit" class="btn btn-primary">Submit</button>
-                                <a href="{{route('cow_expenditure.index')}}" type="button" class="btn btn-danger">Back</a>
+                                <a href="{{route('cow_expenditure.index')}}" type="button"
+                                   class="btn btn-danger">Back</a>
                             </form>
                         </div>
                     </div>
