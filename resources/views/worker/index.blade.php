@@ -1,5 +1,5 @@
 @extends('layouts.nav')
-@section('title', 'Worker')
+@section('title', 'Workers')
 @section('app-content', 'app-content')
 
 @section('main-content')
@@ -8,7 +8,7 @@
             <!-- page-header -->
             <div class="page-header">
                 <ol class="breadcrumb"><!-- breadcrumb -->
-                    <li class="breadcrumb-item active" aria-current="page">{{ __('Worker') }}</li>
+                    <li class="breadcrumb-item active" aria-current="page">{{ __('Workers') }}</li>
                 </ol><!-- End breadcrumb -->
                 <div class="ml-auto">
                     <div class="input-group">
@@ -22,7 +22,7 @@
                     <div class="card">
                         @include('partials.message')
                         <div class="card-header">
-                            {{--<h3 class="mb-0 card-title">{{ __('Cow Serial') }} # {{$cow_daily->serial_no}}</h3>--}}
+                            <h3 class="mb-0 card-title">{{ __('Workers') }}</h3>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -50,15 +50,15 @@
                                             {{-- To Show to Delete on last entry --}}
                                             <?php  $lastRow = \App\Models\Worker::pluck('id')->max(); ?>
                                             <td>
-{{-- This to check if Entry have today date:  date('d-m-Y', strtotime($worker->created_at)) == date('d-m-Y') --}}
+                                                {{-- This to check if Entry have today date:  date('d-m-Y', strtotime($worker->created_at)) == date('d-m-Y') --}}
                                                 <a href="{{route('worker.edit',$worker->id)}}" class="btn btn-sm btn-success" data-toggle="tooltip" title="Edit"><i class="fe fe-edit-3"></i></a>
-                                                @if($lastRow == $worker->id )
-                                                <form action="{{ route('worker.destroy',$worker->id ) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this?');" style="display: inline-block;">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-sm btn-danger" data-toggle="tooltip" title="Delete"><i class="fe fe-trash-2"></i></button>
-                                                </form>
-                                                @endif
+{{--                                                @if($lastRow == $worker->id )--}}
+{{--                                                <form action="{{ route('worker.destroy',$worker->id ) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this?');" style="display: inline-block;">--}}
+{{--                                                    @csrf--}}
+{{--                                                    @method('DELETE')--}}
+{{--                                                    <button type="submit" class="btn btn-sm btn-danger" data-toggle="tooltip" title="Delete"><i class="fe fe-trash-2"></i></button>--}}
+{{--                                                </form>--}}
+{{--                                                @endif--}}
                                             </td>
                                         </tr>
                                     @endforeach

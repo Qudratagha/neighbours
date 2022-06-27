@@ -26,83 +26,99 @@
                                 @method('PUT')
                                 <div class="row">
                                     @if($cattle_id->dob == null)
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="form-label">Enter Date</label>
-                                            <input type="text" onfocus= "(this. type='date')" class="form-control" name="date" value="{{$cattle_id->date}}">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="form-label required">Enter Date</label>
+                                                <input type="text" onfocus="(this. type='date')" class="form-control"
+                                                       name="date" value="{{$cattle_id->date}}" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="form-label required">Cow Serial</label>
+                                                <input type="number" class="form-control" name="serial_no"
+                                                       placeholder="Enter Serial No" value="{{$cattle_id->serial_no}}"
+                                                       required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="form-label required">Entry In Farm</label>
+                                                <input type="text" onfocus="(this. type='date')" class="form-control"
+                                                       name="entry_in_farm" placeholder="Entry In Farm"
+                                                       value="{{$cattle_id->entry_in_farm}}" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="form-label required">Age</label>
+                                                <input type="number" class="form-control" name="age"
+                                                       placeholder="Enter Age" value="{{$cattle_id->age}}" required>
+                                            </div>
                                         </div>
-                                        <div class="form-group">
-                                            <label class="form-label">Cow Serial</label>
-                                            <input type="number" class="form-control" name="serial_no" placeholder="Enter Serial No" value="{{$cattle_id->serial_no}}">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="form-label required">Breed</label>
+                                                <input type="text" class="form-control" name="breed"
+                                                       placeholder="Enter Breed" value="{{$cattle_id->breed}}" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="form-label">Weight</label>
+                                                <input type="number" class="form-control" name="weight"
+                                                       placeholder="Enter Weight" value="{{$cattle_id->weight}}">
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="form-label">Height</label>
+                                                <input type="number" class="form-control" name="height"
+                                                       placeholder="Enter Height" value="{{$cattle_id->height}}">
+                                            </div>
                                         </div>
-                                        <div class="form-group">
-                                            <label class="form-label">Entry In Farm</label>
-                                            <input type="text" onfocus= "(this. type='date')" class="form-control" name="entry_in_farm" placeholder="Entry In Farm" value="{{$cattle_id->entry_in_farm}}">
+                                    @else
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="form-label required">Enter Date</label>
+                                                <input type="text" onfocus="(this. type='date')" class="form-control"
+                                                       name="date" value="{{$cattle_id->date}}" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="form-label required">Parent</label>
+                                                <select name="parent_id" id="parent_id" class="form-control" required>
+                                                    <option value="{{$cattle_id->parent->id}}">{{$cattle_id->parent->serial_no}}</option>
+                                                    @foreach($cows as $cow)
+                                                        @if($cow->parent_id)
+                                                            <option value="{{$cow->parent_id}}">{{$cow->serial_no}}</option>
+                                                        @endif
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="form-label required">Cow Serial</label>
+                                                <input type="number" class="form-control" name="serial_no"
+                                                       placeholder="Enter Serial No" value="{{$cattle_id->serial_no}}"
+                                                       required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="form-label required">Date Of Birth</label>
+                                                <input type="text" onfocus="(this. type='date')" class="form-control"
+                                                       name="dob" placeholder="Enter Date Of Birth"
+                                                       value="{{$cattle_id->dob}}" required>
+                                            </div>
                                         </div>
-                                        <div class="form-group">
-                                            <label class="form-label">Age</label>
-                                            <input type="number" class="form-control" name="age" placeholder="Enter Age" value="{{$cattle_id->age}}">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="form-label required">Breed</label>
+                                                <input type="text" class="form-control" name="breed"
+                                                       placeholder="Enter Breed" value="{{$cattle_id->breed}}" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="form-label">Weight</label>
+                                                <input type="number" class="form-control" name="weight"
+                                                       placeholder="Enter Weight" value="{{$cattle_id->weight}}">
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="form-label">Height</label>
+                                                <input type="number" class="form-control" name="height"
+                                                       placeholder="Enter Height" value="{{$cattle_id->height}}">
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="form-label">Breed</label>
-                                            <input type="text" class="form-control" name="breed" placeholder="Enter Breed" value="{{$cattle_id->breed}}">
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="form-label">Weight</label>
-                                            <input type="number" class="form-control" name="weight" placeholder="Enter Weight" value="{{$cattle_id->weight}}">
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="form-label">Height</label>
-                                            <input type="number" class="form-control" name="height" placeholder="Enter Height" value="{{$cattle_id->height}}">
-                                        </div>
-                                    </div>
+                                    @endif
                                 </div>
-                                @else
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="form-label">Enter Date</label>
-                                            <input type="text" onfocus= "(this. type='date')" class="form-control" name="date" value="{{$cattle_id->date}}">
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="form-label">Cow Serial</label>
-                                            <input type="number" class="form-control" name="serial_no" placeholder="Enter Serial No" value="{{$cattle_id->serial_no}}">
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="form-label">Date Of Birth</label>
-                                            <input type="text" onfocus= "(this. type='date')" class="form-control" name="dob" placeholder="Enter Date Of Birth" value="{{$cattle_id->dob}}">
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="form-label">Parent</label>
-                                            <select name="parent_id" id="parent_id" class="form-control">
-                                                <option value="">{{$cattle_id->parent->serial_no}}</option>
-                                                @foreach($cows as $cow)
-                                                    @if($cow->parent_id)
-                                                        <option value="{{$cow->parent_id}}">{{$cow->serial_no}}</option>
-                                                    @endif
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="form-label">Breed</label>
-                                            <input type="text" class="form-control" name="breed" placeholder="Enter Breed" value="{{$cattle_id->breed}}">
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="form-label">Weight</label>
-                                            <input type="number" class="form-control" name="weight" placeholder="Enter Weight" value="{{$cattle_id->weight}}">
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="form-label">Height</label>
-                                            <input type="number" class="form-control" name="height" placeholder="Enter Height" value="{{$cattle_id->height}}">
-                                        </div>
-                                    </div>
-                        </div>
-                                @endif
                                 <button type="submit" name="updateCow" value="1" class="btn btn-primary">Submit</button>
-                                <a href="{{route('cattle.index', 'cow')}}" type="button" class="btn btn-danger">Back</a>
+                                <a href="{{route('cattle.index', 'cow')}}" type="button" class="btn btn-secondary">Back</a>
                             </form>
                         </div>
                     </div>

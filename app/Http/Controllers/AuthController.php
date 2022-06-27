@@ -102,10 +102,12 @@ class AuthController extends Controller
      */
     protected function respondWithToken($token)
     {
+        $role = Auth::user()->roles->pluck('name')->last();
         return response()->json([
-            'access_token' => $token,
-            'token_type' => 'bearer',
-            'expires_in' => config('jwt.ttl')
+            'access_token'  => $token,
+            'token_type'    => 'bearer',
+            'expires_in'    => config('jwt.ttl'),
+            'role'          => $role
         ]);
     }
 }

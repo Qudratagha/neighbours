@@ -13,8 +13,9 @@
                 </ol><!-- End breadcrumb -->
                 <div class="ml-auto">
                     <div class="input-group">
-                        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#addFeed">Feed Cow</button>
-                        <div class="modal fade" id="addFeed" tabindex="-1" role="dialog"  aria-hidden="true">
+                        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#addFeed">Feed Cow
+                        </button>
+                        <div class="modal fade" id="addFeed" tabindex="-1" role="dialog" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -27,16 +28,21 @@
                                         <form method="POST" action="{{route('cow_feed.store')}}">
                                             @csrf
                                             <div class="form-group">
-                                                <label for="recipient-name" class="form-control-label">Date</label>
-                                                <input type="text" onfocus= "(this. type='date')" class="form-control" name="created_at" value="<?php use App\Models\AccountHead;echo date('Y-m-d');?>" required>
+                                                <label for="recipient-name"
+                                                       class="form-control-label required">Date</label>
+                                                <input type="text" onfocus="(this. type='date')" class="form-control"
+                                                       name="created_at" value="<?php use App\Models\Feed;echo date('Y-m-d');?>" required>
                                             </div>
                                             <div class="form-group">
-                                                <label for="message-text" class="form-control-label">Vaccine Quantity</label>
-                                                <input type="text" class="form-control" id="cowFeedQuantity" name="quantity">
-                                                <?php
-                                                $cowDailyFeedStock = \App\Models\Feed::cowDailyFeedStock();
-                                                ?>
-                                                <div id="testing" class="invalid-feedback" style="display: block !important;">
+                                                <label for="message-text" class="form-control-label required">Feed
+                                                    Quantity (In Kg)</label>
+                                                <input type="text" class="form-control" id="cowFeedQuantity"
+                                                       name="quantity" required>
+												<?php
+												$cowDailyFeedStock = Feed::cowDailyFeedStock();
+												?>
+                                                <div id="testing" class="invalid-feedback"
+                                                     style="display: block !important;">
                                                     Avaliable Feed = {{$cowDailyFeedStock}}
                                                 </div>
                                             </div>
@@ -45,8 +51,12 @@
                                                 <input type="text" class="form-control" id="name" name="name">
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="submit" name="submitCowFeed" class="btn btn-primary">Feed Cow</button>
-                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                <button type="submit" name="submitCowFeed" class="btn btn-primary">Feed
+                                                    Cow
+                                                </button>
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                                                    Close
+                                                </button>
                                             </div>
                                         </form>
                                     </div>
@@ -82,10 +92,14 @@
                                             <td>{{$feed->quantity}} Kg</td>
                                             <td>{{$feed->name}}</td>
                                             <td>
-                                                <form action="{{route('cow_feed.destroy', $feed->id)}}" method="POST" onsubmit="return confirm('Are you sure you want to delete this?');" style="display: inline-block;">
+                                                <form action="{{route('cow_feed.destroy', $feed->id)}}" method="POST"
+                                                      onsubmit="return confirm('Are you sure you want to delete this?');"
+                                                      style="display: inline-block;">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="btn btn-sm btn-danger" data-toggle="tooltip" title="Delete"><i class="fe fe-trash-2"></i></button>
+                                                    <button type="submit" class="btn btn-sm btn-danger"
+                                                            data-toggle="tooltip" title="Delete"><i
+                                                                class="fe fe-trash-2"></i></button>
                                                 </form>
                                             </td>
                                         </tr>
@@ -106,12 +120,10 @@
 
 @section('more-script')
     <script>
-        $(function() {
+        $(function () {
             var purchaseFeedMUsedFeed = {{$cowDailyFeedStock}};
-            $('#cowFeedQuantity').change(function()
-            {
-                if(this.value > purchaseFeedMUsedFeed)
-                {
+            $('#cowFeedQuantity').change(function () {
+                if (this.value > purchaseFeedMUsedFeed) {
                     alert('Please do not exceed the Available Quantity');
                     $('#cowFeedQuantity').val(purchaseFeedMUsedFeed);
                 }

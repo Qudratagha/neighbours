@@ -65,7 +65,6 @@
                                                                             <?php
                                                                             $totalEggsCollected = \App\Models\Poultry::totalEggsCollected();
                                                                             $qtyInDozens = floor($totalEggsCollected / 12);
-
                                                                             ?>
                                                                             <div id="testing" class="invalid-feedback" style="display: block !important;">
                                                                                 Avaliable Eggs = {{$qtyInDozens}} Dozens

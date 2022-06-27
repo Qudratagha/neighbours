@@ -83,13 +83,14 @@ class WorkerController extends Controller
 
     public function destroy(Worker $worker)
     {
-        try {
-            //dont delete the entry which contains error or foreign key constraint
-            $worker->delete();
-            $worker->accountHeads()->delete();
-            return redirect()->back()->with('errorMessage','Worker Deleted');
-        }catch (Throwable $e){
-            return redirect()->back()->with('errorMessage','Can\'t Delete this Worker Because It consists of Transactions, But You Can Edit It');
-        }
+//            //dont delete the entry which contains error or foreign key constraint
+//    	dd($worker);
+//        try {
+//	        $worker->accountHeads()->delete();
+//	        $worker->delete();
+//            return redirect()->back()->with('errorMessage','Worker Deleted');
+//        }catch (Exception $e){
+//            return redirect()->back()->with('errorMessage','Can\'t Delete this Worker Because It consists of Transactions, But You Can Edit It');
+//        }
     }
 }

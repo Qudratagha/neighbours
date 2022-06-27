@@ -8,7 +8,8 @@
             <!-- page-header -->
             <div class="page-header">
                 <ol class="breadcrumb"><!-- breadcrumb -->
-                     <li class="breadcrumb-item"><a href="{{route('cow_expenditure.index')}}">Cow Expenditure List</a></li>
+                    <li class="breadcrumb-item"><a href="{{route('cow_expenditure.index')}}">Cow Expenditure List</a>
+                    </li>
                     <li class="breadcrumb-item active" aria-current="page">{{ __('Cow Expenditure') }}</li>
                 </ol><!-- End breadcrumb -->
             </div>
@@ -27,33 +28,38 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label class="form-label required">Enter Date</label>
-                                            <input type="text" onfocus= "(this. type='date')" class="form-control" name="date" value="<?php echo date('Y-m-d')?>" required>
+                                            <input type="text" onfocus="(this. type='date')" class="form-control"
+                                                   name="date" value="<?php echo date('Y-m-d')?>" required>
                                         </div>
                                         <div class="form-group">
                                             <label class="form-label required">Select Expenditure Type</label>
                                             <select name="sub_head_id" id="expenseHeads" class="form-control" required>
                                                 <option style="font-weight: bold">Select Expenditure Type</option>
                                                 @foreach($expenseHeads as $expenseHead)
-                                                        <option value="{{$expenseHead->id}}">{{trim(strstr("$expenseHead->name"," "))}}</option>
+                                                    <option value="{{$expenseHead->id}}">{{trim(strstr("$expenseHead->name"," "))}}</option>
                                                 @endforeach
                                             </select>
                                         </div>
                                         <div class="form-group">
                                             <label class="form-label required">Amount</label>
-                                            <input type="number" class="form-control" name="amount" placeholder="Amount">
+                                            <input type="number" class="form-control" name="amount" placeholder="Amount"
+                                                   required>
                                         </div>
                                         <div class="form-group">
-                                            <label class="form-label">Quantity</label>
-                                            <input type="number" class="form-control" name="quantity" placeholder="quantity">
+                                            <label class="form-label required">Quantity</label>
+                                            <input type="number" class="form-control" name="quantity"
+                                                   placeholder="quantity" required>
                                         </div>
                                         <div class="form-group">
                                             <label class="form-label">Description</label>
-                                            <input type="text" class="form-control" name="description" placeholder="Enter Description">
+                                            <input type="text" class="form-control" name="description"
+                                                   placeholder="Enter Description">
                                         </div>
                                     </div>
                                 </div>
                                 <button type="submit" class="btn btn-primary">Submit</button>
-                                <a href="{{route('cow_expenditure.index')}}" type="button" class="btn btn-danger">Back</a>
+                                <a href="{{route('cow_expenditure.index')}}" type="button"
+                                   class="btn btn-danger">Back</a>
                             </form>
 
                         </div>

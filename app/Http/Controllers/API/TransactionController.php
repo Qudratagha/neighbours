@@ -28,8 +28,17 @@ class TransactionController extends Controller
     public function indexMilkSale()
     {
         abort_if(Gate::denies("cow-read"), Response::HTTP_FORBIDDEN, '403 Forbidden');
-        $soldMilk  = Transaction::whereRaw("account_head_id = 14 AND sub_head_id = 14")->get();
-        return response()->json(['soldMilk'=>$soldMilk]);
+        $soldMilk = Transaction::whereRaw("account_head_id = 14 AND sub_head_id = 14")->get();
+        $milkStock = Transaction::milkStock();
+        return response()->json(['soldMilk' => $soldMilk,'milkStock'=>$milkStock]);
+    }
+
+    public function indexGoatSale()
+    {
+        abort_if(Gate::denies("goat-read"), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        $goats = Cattle::goats()->where('saleStatus', 0)->get();
+        $transaction = Transaction::where('sub_head_id', 18)->where('account_head_id', 7)->where('transaction_type_id', 1)->get();
+        return view('goat_sale.index', compact('goats', 'transaction'));
     }
 
     public function create()
@@ -54,21 +63,39 @@ class TransactionController extends Controller
         }
 
         //sale milk
-        if (isset($_POST['submitMilkSale']))
-        {
+        if (isset($_POST['submitMilkSale'])) {
             $quantity = $request->quantity;
-            $rate = Rate::where('name','milk')->where('status',1)->get('rate')->last();
-            if (!$rate){
-                return response()->json('Please Add Milk Rate First',200);
+            $rate = Rate::where('name', 'milk')->where('status', 1)->get('rate')->last();
+            if (!$rate) {
+                return response()->json('Please Add Milk Rate First', 200);
             }
-            $rate = ($rate->rate)*($quantity);
+            $rate = ($rate->rate) * ($quantity);
             $request['amount'] = $rate;
             $request['transaction_type_id'] = 1;
             $request['account_head_id'] = 14;
             $request['sub_head_id'] = 14;
             Transaction::create($request->except('submitMilkSale'));
-            return response()->json('Milk Sold Successful',200);
+            return response()->json('Milk Sold Successful', 200);
+        }
 
+        //Sale Goat
+        if (isset($_POST['submitGoatSale'])) {
+            foreach ($request->quantity as $quantity) {
+                Cattle::where('serial_no', $quantity)->update(['saleStatus' => 1, 'date' => now()]);
+            }
+            $request['transaction_type_id'] = 1;
+            $request['account_head_id'] = 7;
+
+            $all_Qtys = $request->quantity;
+//          $stringQuantity = collect($all_Qtys)->implode("-");
+            $totalQuantity = count($all_Qtys);
+            $request['quantity'] = $totalQuantity;
+            $request['saleStatus'] = 1;
+            $request['sub_head_id'] = 18;
+
+            Transaction::create($request->except('submitGoatSale', 'saleStatus'));
+
+            return response()->json('Goat Sold Successfully',200);
         }
     }
 

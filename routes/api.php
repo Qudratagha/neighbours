@@ -37,12 +37,10 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::get('meAuth', [AuthController::class, 'meAuth']);
 
     //cattle
-
     Route::get('/cattle/{cattle_type}',[\App\Http\Controllers\API\CattleController::class,'index']);
     Route::get('/cattle/{cattle_type}/create',[\App\Http\Controllers\API\CattleController::class,'create']);
     Route::post('/cattle/{cattle_type}',[\App\Http\Controllers\API\CattleController::class,'store']);
-
-
+    
     //cow_daily
     Route::get('/cow_daily', [CattleController::class, 'index']);
     Route::post('/cow_daily', [CattleController::class, 'store']);
@@ -53,7 +51,7 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::post('/cow_daily/delivery', [DeliveryController::class, 'store']);
     Route::post('/cow_daily/vaccination', [VaccinationController::class, 'store']);
     Route::post('/cow_daily/insemination', [InseminationController::class, 'store']);
-
+    
     //poultry
     Route::get('/poultry',[\App\Http\Controllers\API\PoultryController::class,'poultryIndex']);
     Route::post('/poultry',[\App\Http\Controllers\API\PoultryController::class, 'poultryStore']);
@@ -62,24 +60,27 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::post('/poultry_daily',[\App\Http\Controllers\API\PoultryController::class, 'poultryDailyStore']);
     Route::get('/poultry_expenditure',[\App\Http\Controllers\API\PoultryController::class,'poultryExpenditureIndex']);
     Route::post('/poultry_expenditure_store',[\App\Http\Controllers\API\PoultryController::class,'poultryExpenditureStore']);
-
-    //goat_daily
-    Route::get('/goat_daily', [CattleController::class, 'index']);
-    Route::post('/goat_daily', [CattleController::class, 'store']);
-    Route::get('/goat_daily/{goat_daily}', [CattleController::class, 'goatDaily']);
-    Route::post('/goat_daily/sick', [SickController::class, 'store']);
-    Route::post('/goat_daily/medicine', [MedicinesController::class, 'store']);
-    Route::post('/goat_daily/pregnant', [PregnantController::class, 'store']);
-    Route::post('/goat_daily/delivery', [DeliveryController::class, 'store']);
-    Route::post('/goat_daily/vaccination', [VaccinationController::class, 'store']);
-
-    //cow_sale
-    Route::get('/cow_sale', [TransactionController::class, 'indexCowSale']);
-    Route::post('/cow_sale', [TransactionController::class, 'store']);
-    Route::get('/cow_sale/{cow_sale}', [TransactionController::class, 'showCowSale']);
-
-    //milk_sale
-    Route::get('/milk_sale', [TransactionController::class, 'indexMilkSale']);
-    Route::post('/milk_sale', [TransactionController::class, 'store']);
-
+	
+	
+	//goat_daily
+	Route::get('/goat_daily', [CattleController::class, 'index']);
+	Route::post('/goat_daily', [CattleController::class, 'store']);
+	Route::get('/goat_daily/{goat_daily}', [CattleController::class, 'goatDaily']);
+	Route::post('/goat_daily/sick', [SickController::class, 'store']);
+	Route::post('/goat_daily/medicine', [MedicinesController::class, 'store']);
+	Route::post('/goat_daily/pregnant', [PregnantController::class, 'store']);
+	Route::post('/goat_daily/delivery', [DeliveryController::class, 'store']);
+	Route::post('/goat_daily/vaccination', [VaccinationController::class, 'store']);
+	
+	//goat_sale
+	Route::get('/goat_sale', [TransactionController::class, 'indexGoatSale']);
+	Route::post('/goat_sale', [TransactionController::class, 'store']);
+	
+	//cow_sale
+	Route::get('/cow_sale', [TransactionController::class, 'indexCowSale']);
+	Route::post('/cow_sale', [TransactionController::class, 'store']);
+	
+	//milk_sale
+	Route::get('/milk_sale', [TransactionController::class, 'indexMilkSale']);
+	Route::post('/milk_sale', [TransactionController::class, 'store']);
 });

@@ -1,5 +1,5 @@
 @extends('layouts.nav')
-@section('title', 'Poultry Expenditure')
+@section('title', 'Edit Poultry Expenditure')
 @section('app-content', 'app-content')
 
 @section('main-content')
@@ -8,8 +8,8 @@
             <!-- page-header -->
             <div class="page-header">
                 <ol class="breadcrumb"><!-- breadcrumb -->
-                    {{-- <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Dashboard</a></li>--}}
-                    <li class="breadcrumb-item active" aria-current="page">{{ __('Poultry Expenditure') }}</li>
+                     <li class="breadcrumb-item"><a href="{{route('poultry_expenditure.index')}}">Poultry Expenditure List</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">{{ __('Edit Poultry Expenditure') }}</li>
                 </ol><!-- End breadcrumb -->
             </div>
             <!-- End page-header -->
@@ -18,7 +18,7 @@
                     <div class="card">
                         @include('partials.message')
                         <div class="card-header">
-                            <h3 class="mb-0 card-title">{{ __('') }}</h3>
+                            <h3 class="mb-0 card-title">{{ __('Edit Poultry Expenditure') }}</h3>
                         </div>
                         <div class="card-body">
                             <form method="POST" action="{{route('poultry_expenditure.update',$transaction->id)}}">
@@ -28,11 +28,11 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label class="form-label required">Enter Date</label>
-                                            <input type="text" onfocus= "(this. type='date')" class="form-control" name="date" value="{{$transaction->date}}">
+                                            <input type="text" onfocus= "(this. type='date')" class="form-control" name="date" value="{{$transaction->date}}" required>
                                         </div>
                                         <div class="form-group">
                                             <label class="form-label required">Select Expenditure Type</label>
-                                            <select name="sub_head_id" id="expenseHeads" class="form-control">
+                                            <select name="sub_head_id" id="expenseHeads" class="form-control" required>
 {{--                                                <option style="font-weight: bold">Previous Selected: {{$transaction->accountSubHead->name}}</option>--}}
                                                 @foreach($expenseHeads as $expenseHead)
                                                     <option value="{{$expenseHead->id}}">{{trim(strstr("$expenseHead->name"," "))}}</option>
@@ -41,11 +41,11 @@
                                         </div>
                                         <div class="form-group">
                                             <label class="form-label required">Amount</label>
-                                            <input type="number" class="form-control" name="amount" placeholder="Amount" value="{{$transaction->amount}}">
+                                            <input type="number" class="form-control" name="amount" placeholder="Amount" value="{{$transaction->amount}}" required>
                                         </div>
                                         <div class="form-group">
                                             <label class="form-label">Quantity</label>
-                                            <input type="number" class="form-control" name="quantity" placeholder="quantity" value="{{$transaction->quantity}}">
+                                            <input type="number" class="form-control" name="quantity" placeholder="quantity" value="{{$transaction->quantity}}" required>
                                         </div>
                                         <div class="form-group">
                                             <label class="form-label">Description</label>
@@ -54,7 +54,7 @@
                                     </div>
                                 </div>
                                 <button type="submit" class="btn btn-primary">Submit</button>
-                                <a href="{{route('poultry_expenditure.index')}}" type="button" class="btn btn-danger">Back</a>
+                                <a href="{{route('poultry_expenditure.index')}}" type="button" class="btn btn-secondary">Back</a>
                             </form>
                         </div>
                     </div>

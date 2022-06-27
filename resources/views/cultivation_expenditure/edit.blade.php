@@ -1,5 +1,5 @@
 @extends('layouts.nav')
-@section('title', 'Cultivation Expenditure')
+@section('title', 'Edit Cultivation Expenditure')
 @section('app-content', 'app-content')
 
 @section('main-content')
@@ -8,8 +8,8 @@
             <!-- page-header -->
             <div class="page-header">
                 <ol class="breadcrumb"><!-- breadcrumb -->
-                    {{-- <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Dashboard</a></li>--}}
-                    <li class="breadcrumb-item active" aria-current="page">{{ __('Cultivation Expenditure') }}</li>
+                    <li class="breadcrumb-item"><a href="{{route('cultivation_expenditure.index')}}">Cultivaiton Expenditure List</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">{{ __('Edit Cultivation Expenditure') }}</li>
                 </ol><!-- End breadcrumb -->
             </div>
             <!-- End page-header -->
@@ -43,10 +43,7 @@
                                             <label class="form-label required">Amount</label>
                                             <input type="number" class="form-control" name="amount" placeholder="Amount" value="{{$transaction->amount}}">
                                         </div>
-                                        <div class="form-group">
-                                            <label class="form-label">Quantity</label>
-                                            <input type="number" class="form-control" name="quantity" placeholder="quantity" value="{{$transaction->quantity}}">
-                                        </div>
+                                            <input type="hidden" name="quantity" value="1">
                                         <div class="form-group">
                                             <label class="form-label">Description</label>
                                             <input type="text" class="form-control" name="description" placeholder="Enter Description" value="{{$transaction->description}}">
