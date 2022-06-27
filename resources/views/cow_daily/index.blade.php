@@ -119,7 +119,7 @@
                                                                         </div>
                                                                         <div class="form-group">
                                                                             <label for="message-text"
-                                                                                   class="form-control-label">Quantity: In Liters</label>
+                                                                                   class="form-control-label">Quantity (In Liters)</label>
                                                                             <input type="text" class="form-control"
                                                                                    id="quantity" name="quantity"
                                                                                    required>

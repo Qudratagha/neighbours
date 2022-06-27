@@ -60,8 +60,7 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::post('/poultry_daily',[\App\Http\Controllers\API\PoultryController::class, 'poultryDailyStore']);
     Route::get('/poultry_expenditure',[\App\Http\Controllers\API\PoultryController::class,'poultryExpenditureIndex']);
     Route::post('/poultry_expenditure_store',[\App\Http\Controllers\API\PoultryController::class,'poultryExpenditureStore']);
-	
-	
+    
 	//goat_daily
 	Route::get('/goat_daily', [CattleController::class, 'index']);
 	Route::post('/goat_daily', [CattleController::class, 'store']);
