@@ -31,7 +31,7 @@
                                             <select class="form-control" name="name" id="name">
                                                 <option value="Egg">Egg</option>
                                                 <option value="Milk">Milk</option>
-                                                <option value="Milk">Cucumber</option>
+                                                <option value="Cucumber">Cucumber</option>
                                             </select>
                                         </div>
                                         <div class="form-group">

@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API;
 
-use App\Console\Kernel;
 use App\Models\AccountHead;
 use App\Models\Cultivation;
 use App\Models\CultivationType;
@@ -15,11 +14,6 @@ use Symfony\Component\HttpFoundation\Response;
 
 class CultivationController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-        $this->middleware('auth.gates');
-    }
 
     public function index()
     {
@@ -27,7 +21,7 @@ class CultivationController extends Controller
 
         $cultivation_types = CultivationType::all();
         $cultivations = Cultivation::all();
-        return view('cultivation.index', compact('cultivation_types', 'cultivations'));
+        return response()->json([$cultivation_types, $cultivations], 200);
 
     }
 
@@ -43,7 +37,7 @@ class CultivationController extends Controller
         if (isset($_POST['addCultivation'])){
             $request['account_head_id'] = 9;
             Cultivation::create($request->except('addCultivation'));
-            return redirect()->back()->with('message', 'Cultivation Added Successfully');
+            return response()->json("Cultivation Added Successfully");
         }
 
         //Collect Cultivation
@@ -61,7 +55,7 @@ class CultivationController extends Controller
             $request['transaction_type_id'] = 3;
             $request['account_head_id'] = 9;
             Transaction::create($request->except(['cultivation_type_id', 'collectCultivation']));
-            return redirect()->back()->with('message', 'Cultivation Collected Successfully');
+            return response()->json("Cultivation Collected Successfully");
         }
 
         //Sale Cultivation
@@ -82,7 +76,7 @@ class CultivationController extends Controller
             }
 
             Transaction::create($request->except('saleCultivation', 'cultivation_type_id'));
-            return redirect()->back()->with('message', 'Cucumber Sold Successfully');
+            return response()->json("Cultivation Sold Successfully");
         }
 
     }
@@ -99,14 +93,14 @@ class CultivationController extends Controller
     public function collectCultivation(){
         $collectCultivation = Transaction::where('transaction_type_id', 3)->where('account_head_id', 9)->get();
         $cultivation_types = CultivationType::all();
-        return view('cultivation.collect', compact('collectCultivation', 'cultivation_types'));
+        return response()->json([$collectCultivation,$cultivation_types], 200);
     }
 
     //Sale Cultivation
     public function saleCultivation(){
         $transactions = Transaction::where('transaction_type_id', 1)->where('account_head_id', 13)->get();
         $cultivation_types = CultivationType::all();
-        return view('cultivation.sale', compact('cultivation_types', 'transactions'));
+        return response()->json([$transactions, $cultivation_types], 200);
     }
 
 
@@ -120,7 +114,7 @@ class CultivationController extends Controller
     public function edit(Cultivation $cultivation)
     {
         $cultivation_types = CultivationType::all();
-        return view('cultivation.edit',compact('cultivation','cultivation_types'));
+        return response()->json([$cultivation, $cultivation_types], 200);
     }
 
     // Update Cultivation
@@ -129,20 +123,21 @@ class CultivationController extends Controller
 //        dd($request, $cultivation);
 
         $cultivation->update($request->all());
-        return redirect(route('cultivation.index'));
+        return response()->json("Cultivation Updated Successfully");
     }
 
-	// Edit Collect Cultivation
+    // Edit Collect Cultivation
 
-	public function editCollect(Transaction $cultivation){
+    public function editCollect(Transaction $cultivation){
 
         $ids = [71, 72, 73];
         $cultivationType = AccountHead::whereIn('id', $ids)->get();
-        return view('cultivation.editCollect', compact('cultivation', 'cultivationType'));
+        return response()->json([$cultivation, $cultivationType], 200);
+;
     }
 
-	// Update Collect Cultivation
-	public function updateCollect(Request $request, Transaction $cultivation){
+    // Update Collect Cultivation
+    public function updateCollect(Request $request, Transaction $cultivation){
 //        dd($request->all());
 
         if (isset($_POST['updateCollectCultivation'])){
@@ -161,29 +156,33 @@ class CultivationController extends Controller
         }
 
         $cultivation->update($request->except('cultivation_type_id', 'updateCollectCultivation'));
-        return to_route('cultivation.collectCultivation')->with('Message', 'Collect Cultivation Updated');
+        return response()->json("Cultivation Collect Updated Successfully",200);
+        ;
 
     }
 
-	// Delete Cultivation
-	public function destroy(Cultivation $cultivation)
-	{
-		$cultivation->delete();
-		return redirect(route('cultivation.index'));
-	}
+    // Delete Cultivation
+    public function destroy(Cultivation $cultivation)
+    {
+        $cultivation->delete();
+        return response()->json("Cultivation Deleted Successfully", 200);
+        ;
+    }
 
-	// Delete Collect Cultivation
-	public function destroyCollect(Transaction $cultivation){
+    // Delete Collect Cultivation
+    public function destroyCollect(Transaction $cultivation){
 //        dd($cultivation)
         $cultivation->delete();
-        return redirect()->back()->with('errorMessage', 'Collect Cultivation Deleted');
+        return response()->json("Cultivation Collected Deleted Successfully", 200);
+        ;
     }
 
     //Delete Sale Cultivation
 
     public function destroySale(Transaction $cultivation){
         $cultivation->delete();
-        return redirect()->back()->with('errorMessage', 'Sale Cultivation Deleted');
+        return response()->json("Cultivation Sale Deleted Successfully", 200);
+        ;
     }
 
 }

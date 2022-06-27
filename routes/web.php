@@ -127,7 +127,9 @@ Route::put('/cultivation_collect/{cultivation}', [App\Http\Controllers\Cultivati
 Route::delete('/cultivation_collect/{cultivation}', [App\Http\Controllers\CultivationController::class, 'destroyCollect'])->name('cultivation.destroyCollect');
 
 //Sale Cultivation
+Route::get('/cultivation_sale/rateQuantitySum', [App\Http\Controllers\CultivationController::class, 'rateQuantitySum'])->name('cultivation_sale.rateQuantitySum');
 Route::get('cultivation_sale', [App\Http\Controllers\CultivationController::class, 'saleCultivation'])->name('cultivation.saleCultivation');
+Route::delete('cultivation_sale/{cultivation}', [App\Http\Controllers\CultivationController::class, 'destroySale'])->name('cultivation.destroySale');
 
 //expenditure
 Route::get('/expenditure',[\App\Http\Controllers\TransactionController::class, 'indexExpenditure'])->name('expenditure.index');

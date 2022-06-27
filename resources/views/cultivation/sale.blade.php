@@ -59,15 +59,13 @@
 												$saleCultivation = App\Models\Transaction::where('transaction_type_id', 1)->pluck('id')->last();
 												?>
                                                 @if($transaction->id == $saleCultivation)
-                                                    <form action="{{ route('cultivation.destroy',$transaction->id) }}"
+                                                    <form action="{{ route('cultivation.destroySale',$transaction->id) }}"
                                                           method="POST"
                                                           onsubmit="return confirm('Are you sure you want to delete this?');"
                                                           style="display: inline-block;">
                                                         @csrf
                                                         @method('DELETE')
-                                                        <button type="submit" class="btn btn-sm btn-danger"
-                                                                data-toggle="tooltip" title="Delete"><i
-                                                                    class="fe fe-trash-2"></i></button>
+                                                        <button type="submit" class="btn btn-sm btn-danger" data-toggle="tooltip" title="Delete"><i class="fe fe-trash-2"></i></button>
                                                     </form>
                                                 @endif
                                             </td>
@@ -101,7 +99,7 @@
                         @csrf
                         <div class="form-group">
                             <label class="form-label required">Cultivation Type</label>
-                            <select class="form-control select2 custom-select" id="cultivationType"
+                            <select class="form-control select2 custom-select cultivationType" id="cultivationType"
                                     name="cultivation_type_id" required>
                                 <option value="">Please Select Cultivation Type</option>
                                 @foreach($cultivation_types as $cultivation_type)
@@ -111,18 +109,19 @@
                         </div>
                         <div class="form-group">
 							<?php
-							$totalWheat = App\Models\Transaction::wheatStock();
-							$totalCorn = App\Models\Transaction::cornStock();
-							$totalCucumber = App\Models\Transaction::cucumberStock();
+                                $totalWheat = App\Models\Transaction::wheatStock();
+                                $totalCorn = App\Models\Transaction::cornStock();
+                                $totalCucumber = App\Models\Transaction::cucumberStock();
+                                $cucumberRate = App\Models\Transaction::rateQuantitySum();
 							?>
                             <label for="quantity" class="form-control-label required">Quantity (In kg)</label>
-                            <input type="number" name="quantity" class="form-control" id="quantity" required>
-                            <div class="invalid-feedback" id="available" style="display: block !important;">
+                            <input type="number" name="quantity" class="form-control quantity" id="quantity" required>
+                            <div class="invalid-feedback available"  style="display: block !important;">
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="amount" class="form-control-label required">Amount:</label>
-                            <input type="number" name="amount" class="form-control" required>
+                            <input type="number" name="amount" class="form-control amount" required>
                         </div>
                         <div class="form-group">
                             <label for="date" class="form-control-label required">Date:</label>
@@ -146,10 +145,11 @@
 @endsection
 @section('more-script')
     <script>
-                @parent
+        @parent
         var wheatQty = {{$totalWheat}};
         var cornQty ={{$totalCorn}};
         var cucumberQty = {{$totalCucumber}};
+        var cucumberRate = {{$cucumberRate}};
         $(document).ready(function () {
             $('#mytable').DataTable({});
         });
@@ -157,7 +157,8 @@
         $(function () {
             $('#cultivationType').on('change', function () {
                 if (this.value == 1) {
-                    $('#available').html("Total Stock Available Of Wheat " + wheatQty + " kg");
+                    $('.available').html("Total Stock Available Of Wheat " + wheatQty + " kg");
+
                     $('#quantity').change(function () {
                         if (this.value > wheatQty) {
                             alert('Please do not exceed the Available Stock');
@@ -173,7 +174,7 @@
                 }
 
                 if (this.value == 2) {
-                    $('#available').html("Total Stock Available Of Corn " + cornQty + " kg");
+                    $('.available').html("Total Stock Available Of Corn " + cornQty + " kg");
                     $('#quantity').change(function () {
                         if (this.value > cornQty) {
                             alert('Please do not exceed the Available Stock');
@@ -189,7 +190,7 @@
 
 
                 if (this.value == 3) {
-                    $('#available').html("Total Stock Available Of Cucumber " + cucumberQty + " kg");
+                    $('.available').html("Total Stock Available Of Cucumber " + cucumberQty + " kg" + " || " + " Cucumber Rate " + cucumberRate);
                     $('#quantity').change(function () {
                         // console.log(this.value);
                         if (this.value > cucumberQty) {
@@ -208,6 +209,24 @@
 
 
         });
+
+        $('.quantity').on('change', function(){
+            $.ajax({
+                url:'{{route('cultivation_sale.rateQuantitySum')}}',
+                method:'get',
+                success: function (result){
+                    $cultivationType = $('.cultivationType').val();
+                    if ($cultivationType == 3){
+                        console.log($cultivationType);
+                        $quantity = $('#quantity').val();
+                        $totalAmount = $quantity * result;
+                        $('.amount').val($totalAmount);
+                    }
+                }
+
+            });
+        });
+
 
     </script>
 @endsection

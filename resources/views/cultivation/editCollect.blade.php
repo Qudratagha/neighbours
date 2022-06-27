@@ -33,8 +33,8 @@
                                         <div class="form-group">
                                             <label for="cultivation Type" class="required">Cultivation Type:</label>
                                             <select name="cultivation_type_id" class="form-control select2 " required>
-                                                @foreach($cultivation_types as $cultivation_type)
-                                                    <option value="{{$cultivation_type->id}}">{{$cultivation_type->name}}</option>
+                                                @foreach($cultivationType as $cultivationTypes)
+                                                    <option value="{{$cultivationTypes->id}}" {!! $cultivationTypes->id == $cultivation->sub_head_id ? "selected" : "" !!} >{{$cultivationTypes->name}}</option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -45,7 +45,7 @@
                                                    value="{{$cultivation->quantity}}" required>
                                         </div>
                                         <div class="form-group">
-                                            <button type="submit" class="btn btn-primary">Submit</button>
+                                            <button type="submit" name="updateCollectCultivation" class="btn btn-primary">Submit</button>
                                             <a href="{{route('cultivation.collectCultivation')}}" class="btn btn-secondary">Back</a>
                                         </div>
                                     </div>

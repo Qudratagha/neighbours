@@ -45,12 +45,12 @@ class Transaction extends Model
 
         $totalWheat = Transaction::where('transaction_type_id', 3)
             ->where('account_head_id', 9)
-            ->where('sub_head_id', 73)
+            ->where('sub_head_id', 71)
             ->sum('quantity');
 
         $soldWheat = Transaction::where('transaction_type_id', 1)
-            ->where('account_head_id', 74)
-            ->where('sub_head_id', 76)
+            ->where('account_head_id', 13)
+            ->where('sub_head_id', 74)
             ->sum('quantity');
 
         $stockWheat = $totalWheat - $soldWheat;
@@ -59,35 +59,41 @@ class Transaction extends Model
 
     public static function cornStock(){
 
-        $totalWheat = Transaction::where('transaction_type_id', 3)
-            ->where('account_head_id', 9)
-            ->where('sub_head_id', 74)
-            ->sum('quantity');
-
-        $soldWheat = Transaction::where('transaction_type_id', 1)
-            ->where('account_head_id', 13)
-            ->where('sub_head_id', 77)
-            ->sum('quantity');
-
-        $stockWheat = $totalWheat - $soldWheat;
-        return $stockWheat;
-    }
-
-    public static function cucumberStock(){
-
         $totalCorn = Transaction::where('transaction_type_id', 3)
             ->where('account_head_id', 9)
-            ->where('sub_head_id', 75)
+            ->where('sub_head_id', 72)
             ->sum('quantity');
 
         $soldCorn = Transaction::where('transaction_type_id', 1)
             ->where('account_head_id', 13)
-            ->where('sub_head_id', 78)
+            ->where('sub_head_id', 76)
             ->sum('quantity');
 
         $stockCorn = $totalCorn - $soldCorn;
         return $stockCorn;
     }
+
+    public static function cucumberStock(){
+
+        $totalCucumber = Transaction::where('transaction_type_id', 3)
+            ->where('account_head_id', 9)
+            ->where('sub_head_id', 73)
+            ->sum('quantity');
+
+        $soldCucumber = Transaction::where('transaction_type_id', 1)
+            ->where('account_head_id', 13)
+            ->where('sub_head_id', 75)
+            ->sum('quantity');
+
+        $stockCucumber = $totalCucumber - $soldCucumber;
+        return $stockCucumber;
+    }
+
+    public static function rateQuantitySum(){
+        $cucumberRate = Rate::recentRate()->where('name', 'Cucumber')->pluck('rate');
+        return $cucumberRate;
+    }
+
 
     public function scopeMilkingCows($q) {
         return $q->where('transaction_type_id',3)->where('account_head_id',22)->groupBy('sub_head_id')->get();
