@@ -105,28 +105,29 @@ class AccountSeeder extends Seeder
                 'parent_id' => '6'
             ],
             //Expenditure
+
             [
-            'name'      => 'FARM Salaries',
-            'parent_id' => '5'
-            ],
-            [
-                'name'      => 'FARM Purchases',
+                'name'      => 'FARM Maintenance',
                 'parent_id' => '5'
             ],
             [
-                'name'      => 'FARM Medicines',
+                'name'      => 'FARM PettyCash',
                 'parent_id' => '5'
             ],
             [
-                'name'      => 'FARM Vaccines',
+                'name'      => 'FARM GasBill',
                 'parent_id' => '5'
             ],
             [
-                'name'      => 'FARM Sheds',
+                'name'      => 'FARM ElectricityBill',
                 'parent_id' => '5'
             ],
             [
-                'name'      => 'FARM utilities',
+                'name'      => 'FARM Fuel',
+                'parent_id' => '5'
+            ],
+            [
+                'name'      => 'FARM Miscellaneous',
                 'parent_id' => '5'
             ],
             [
