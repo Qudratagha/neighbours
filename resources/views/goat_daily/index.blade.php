@@ -21,7 +21,7 @@
                             <h3 class="mb-0 card-title">{{ __('Goat Serial') }} # {{$goat_daily->serial_no}}</h3>
                         </div>
                         <div class="card-body">
-                            <table cellpadding="2" cellspacing="2" border="1" class="table thead-dark table-bordered table-striped ">
+                            <table cellpadding="2" cellspacing="2" border="1" class="table thead-dark table-bordered table-striped">
                                 <thead>
                                 <tr>
                                     <th style="font-weight: 600">Goat-Serial</th>
@@ -117,14 +117,14 @@
                                                 </div>
                                             </div>
                                             <div class="table-responsive">
-                                                <table id="" class="table table-striped table-bordered text-nowrap w-100 display">
+                                                <table class="table table-striped table-bordered text-nowrap w-100 display">
                                                     <thead>
                                                     <tr>
                                                         <th class="wd-15p">ID</th>
                                                         <th class="wd-25p">Date</th>
                                                         <th class="wd-15p">Sick</th>
                                                         <th class="wd-15p">Treatment</th>
-                                                        <th class="wd-15p">Actions</th>
+                                                        <th class="wd-15p notExport">Actions</th>
 
                                                     </tr>
                                                     </thead>
@@ -215,14 +215,14 @@
                                                 </div>
                                             </div>
                                             <div class="table-responsive">
-                                                <table id="" class="table table-striped table-bordered text-nowrap w-100 display">
+                                                <table class="table table-striped table-bordered text-nowrap w-100 display">
                                                     <thead>
                                                     <tr>
                                                         <th class="wd-15p">ID</th>
                                                         <th class="wd-25p">Date</th>
                                                         <th class="wd-15p">Medicine</th>
                                                         <th class="wd-15p">Description</th>
-                                                        <th class="wd-15p">Actions</th>
+                                                        <th class="wd-15p notExport">Actions</th>
 
                                                     </tr>
                                                     </thead>
@@ -289,12 +289,12 @@
                                                     </div>
                                                 </div>
                                                 <div class="table-responsive">
-                                                    <table id="" class="table table-striped table-bordered text-nowrap w-100 display">
+                                                    <table class="table table-striped table-bordered text-nowrap w-100 display">
                                                         <thead>
                                                         <tr>
                                                             <th class="wd-15p">ID</th>
                                                             <th class="wd-25p">Date</th>
-                                                            <th class="wd-15p">Pregnant</th>
+                                                            <th class="wd-15p notExport">Pregnant</th>
                                                         </tr>
                                                         </thead>
                                                         <tbody>
@@ -359,12 +359,12 @@
                                                     </div>
                                                 </div>
                                                 <div class="table-responsive">
-                                                    <table id="" class="table table-striped table-bordered text-nowrap w-100 display">
+                                                    <table class="table table-striped table-bordered text-nowrap w-100 display">
                                                         <thead>
                                                         <tr>
                                                             <th class="wd-15p">ID</th>
                                                             <th class="wd-25p">Date</th>
-                                                            <th class="wd-15p">Delivery</th>
+                                                            <th class="wd-15p notExport">Delivery</th>
                                                         </tr>
                                                         </thead>
                                                         <tbody>
@@ -443,13 +443,13 @@
                                                 </div>
                                             </div>
                                             <div class="table-responsive">
-                                                <table id="" class="table table-striped table-bordered text-nowrap w-100 display">
+                                                <table class="table table-striped table-bordered text-nowrap w-100 display">
                                                     <thead>
                                                     <tr>
                                                         <th class="wd-15p">ID</th>
                                                         <th class="wd-25p">Date</th>
                                                         <th class="wd-15p">Vaccination Quantity</th>
-                                                        <th class="wd-15p">Description</th>
+                                                        <th class="wd-15p notExport">Description</th>
                                                     </tr>
                                                     </thead>
                                                     <tbody>

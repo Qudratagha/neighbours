@@ -29,7 +29,7 @@
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table id="example" class="table table-striped table-bordered text-nowrap w-100">
+                                <table class="table table-striped table-bordered text-nowrap w-100 display">
                                     <thead>
                                     <tr>
                                         <th class="wd-15p">ID</th>
@@ -39,7 +39,7 @@
                                         <th class="wd-25p">Breed</th>
                                         <th class="wd-15p">Gender</th>
                                         <th class="wd-15p">Parent</th>
-                                        <th class="wd-25p" style="width: 200px">Actions</th>
+                                        <th class="wd-25p notExport" style="width: 200px">Actions</th>
 
                                     </tr>
                                     </thead>

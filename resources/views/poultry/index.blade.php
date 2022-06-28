@@ -38,7 +38,7 @@
                                         <th>Quantity</th>
                                         <th>Poultry Type</th>
                                         <th>Poultry Status</th>
-                                        <th>Actions</th>
+                                        <th class="notExport">Actions</th>
                                     </tr>
                                     </thead>
                                     <tbody>

@@ -76,13 +76,13 @@
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table id="" class="table table-striped table-bordered text-nowrap w-100 display">
+                                <table class="table table-striped table-bordered text-nowrap w-100 display">
                                     <thead>
                                     <tr>
                                         <th class="wd-30p">Cattle Type</th>
                                         <th class="wd-30p">Quantity</th>
                                         <th class="wd-30p">Description</th>
-                                        <th class="wd-10p">Action</th>
+                                        <th class="wd-10p notExport">Action</th>
                                     </tr>
                                     </thead>
                                     <tbody>

@@ -20,7 +20,7 @@
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <h5 class="modal-title" id="example-Modal3">Milk Collection</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <button type="button" class="close hideModal" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                     </div>
@@ -29,7 +29,7 @@
                                             @csrf
                                             <div class="form-group">
                                                 <label for="recipient-name"
-                                                       class="form-control-label">Date</label>
+                                                       class="form-control-label required">Date</label>
                                                 <input type="text"
                                                        onfocus="(this. type='date')"
                                                        class="form-control" name="date"
@@ -48,7 +48,7 @@
                                             </div>
                                             <div class="form-group">
                                                 <label for="message-text"
-                                                       class="form-control-label">Quantity (In Liters)</label>
+                                                       class="form-control-label  required">Quantity (In Liters)</label>
                                                 <input type="text" class="form-control"
                                                        id="quantity" name="quantity"
                                                        required>
@@ -64,7 +64,7 @@
                                                         class="btn btn-primary">Add Milk
                                                 </button>
                                                 <button type="button"
-                                                        class="btn btn-secondary"
+                                                        class="btn btn-secondary hideModal"
                                                         data-dismiss="modal">Close
                                                 </button>
                                             </div>
@@ -87,14 +87,14 @@
                         <div class="card-body">
                             <h3 class="mb-0 card-title"> Total Milk Stock Available {{ \App\Models\Transaction::milkStock() }}</h3>
                             <div class="table-responsive">
-                                <table id="" class="table table-striped table-bordered text-nowrap w-100 display">
+                                <table class="table table-striped table-bordered text-nowrap w-100 display">
                                     <thead>
                                     <tr>
                                         <th class="wd-30p">S#</th>
                                         <th class="wd-30p">Cow Serial</th>
                                         <th class="wd-30p">Date</th>
                                         <th class="wd-30p">Quantity</th>
-                                        <th class="wd-10p">Action</th>
+                                        <th class="wd-10p notExport">Action</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -130,4 +130,14 @@
         {{--      end side app --}}
     </div>
     {{--   end container area--}}
+@endsection
+@section('more-script')
+    <script>
+        $(window).on('load', function (){
+            $('#addMilk').modal('show');
+        });
+        $('.hideModal').click(function () {
+            $('#addMilk').modal('hide');
+        })
+    </script>
 @endsection
