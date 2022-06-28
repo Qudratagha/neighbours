@@ -69,14 +69,14 @@
                                     </div>
                                 </div>
                                 <div class="table-responsive">
-                                    <table id="" class="table table-striped table-bordered text-nowrap w-100 display">
+                                    <table class="table table-striped table-bordered text-nowrap w-100 display">
                                         <thead>
                                         <tr>
                                             <th class="wd-15p">ID</th>
                                             <th class="wd-25p">Date</th>
                                             <th class="wd-15p">Quantity</th>
                                             <th class="wd-15p">Total Amount</th>
-                                            <th class="wd-15p">Description</th>
+                                            <th class="wd-15p notExport">Description</th>
                                         </tr>
                                         </thead>
                                         <tbody>

@@ -33,7 +33,7 @@
                         <div class="card-body">
                             <!-- DataTables Start -->
                             <div class="table-responsive">
-                                <table id="mytable" class="table table-bordered" style="text-align: center">
+                                <table class="table table-bordered display" style="text-align: center">
                                     <thead>
                                     <tr>
                                         <th>ID</th>
@@ -42,7 +42,7 @@
                                         <th>Amount</th>
                                         <th>Description</th>
                                         <th>Date</th>
-                                        <th>Actions</th>
+                                        <th class="notExport">Actions</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -150,10 +150,6 @@
         var wheatQty = {{$totalWheat}};
         var cornQty ={{$totalCorn}};
         var cucumberQty = {{$totalCucumber}};
-        $(document).ready(function () {
-            $('#mytable').DataTable({});
-        });
-
         $(function () {
             $('#cultivationType').on('change', function () {
                 if (this.value == 1) {
@@ -211,4 +207,3 @@
 
     </script>
 @endsection
-
