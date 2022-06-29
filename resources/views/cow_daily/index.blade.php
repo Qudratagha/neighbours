@@ -61,22 +61,39 @@
                             <div class="panel panel-primary">
                                 <div class="tab-menu-heading">
                                     <div class="tabs-menu">
+                                        <nav class="navbar navbar-expand-sm navbar-light ">
+                                            <a class="navbar-brand" href="#"></a>
+                                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                                                <span class="navbar-toggler-icon"></span>
+                                            </button>
+                                            <div class="collapse navbar-collapse" id="navbarNav">
+                                                <ul class="navbar-nav nav nav-tabs myTab" data-bs-toggle="tab">
+                                                    <li class="nav-item active"><a href="#tab11" data-bs-toggle="tab">Milk</a></li>
+                                                    <li><a href="#tab21" data-bs-toggle="tab">Sick</a></li>
+                                                    <li><a href="#tab31" data-bs-toggle="tab">Medicine</a></li>
+                                                    <li><a href="#tab41" data-bs-toggle="tab">Insemination</a></li>
+                                                    <li><a href="#tab51" data-bs-toggle="tab">Pregnant</a></li>
+                                                    <li><a href="#tab61" data-bs-toggle="tab">Delivery</a></li>
+                                                    <li><a href="#tab71" data-bs-toggle="tab">Vaccination</a></li>
+                                                </ul>
+                                            </div>
+                                        </nav>
                                         <!-- Tabs -->
-                                        <ul class="nav nav-tabs myTab" data-bs-toggle="tab">
-                                            <li><a class="active" href="#tab11" id="hov" data-bs-toggle="tab">Milk</a>
-                                            </li>
-                                            <li class="act"><a href="#tab21" id="hov" data-bs-toggle="tab">Sick</a></li>
-                                            <li class="act"><a href="#tab31" id="hov" data-bs-toggle="tab">Medicine</a>
-                                            </li>
-                                            <li class="act"><a href="#tab41" id="hov"
-                                                               data-bs-toggle="tab">Insemination</a></li>
-                                            <li class="act"><a href="#tab51" id="hov" data-bs-toggle="tab">Pregnant</a>
-                                            </li>
-                                            <li class="act"><a href="#tab61" id="hov" data-bs-toggle="tab">Delivery</a>
-                                            </li>
-                                            <li class="act"><a href="#tab71" id="hov"
-                                                               data-bs-toggle="tab">Vaccination</a></li>
-                                        </ul>
+{{--                                        <ul class="nav nav-tabs myTab" data-bs-toggle="tab">--}}
+{{--                                            <li><a class="active" href="#tab11" id="hov" data-bs-toggle="tab">Milk</a>--}}
+{{--                                            </li>--}}
+{{--                                            <li class="act"><a href="#tab21" id="hov" data-bs-toggle="tab">Sick</a></li>--}}
+{{--                                            <li class="act"><a href="#tab31" id="hov" data-bs-toggle="tab">Medicine</a>--}}
+{{--                                            </li>--}}
+{{--                                            <li class="act"><a href="#tab41" id="hov"--}}
+{{--                                                               data-bs-toggle="tab">Insemination</a></li>--}}
+{{--                                            <li class="act"><a href="#tab51" id="hov" data-bs-toggle="tab">Pregnant</a>--}}
+{{--                                            </li>--}}
+{{--                                            <li class="act"><a href="#tab61" id="hov" data-bs-toggle="tab">Delivery</a>--}}
+{{--                                            </li>--}}
+{{--                                            <li class="act"><a href="#tab71" id="hov"--}}
+{{--                                                               data-bs-toggle="tab">Vaccination</a></li>--}}
+{{--                                        </ul>--}}
                                     </div>
                                 </div>
                                 <div class="panel-body tabs-menu-body">

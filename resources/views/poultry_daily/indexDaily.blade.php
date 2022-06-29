@@ -24,20 +24,28 @@
                                 <div class="tab-menu-heading">
                                     <div class="tabs-menu">
                                         <!-- Tabs -->
-                                        <ul class="nav panel-tabs myTab">
-                                            <li class="@if ($tab == 'egg') active  @endif"><a  href="#tab11" id="hov" data-bs-toggle="tab">Egg</a></li>
-                                            <li class="@if ($tab == 'hen') active  @endif"><a  href="#tab21" id="hov" data-bs-toggle="tab">Hen</a></li>
-                                            <li class="@if ($tab == 'chicks') active  @endif"><a  href="#tab61" id="hov" data-bs-toggle="tab">Chicks</a></li>
-                                            <li class="@if ($tab == 'feed') active  @endif"><a  href="#tab31" id="hov" data-bs-toggle="tab">Feed</a></li>
-                                            <li class="@if ($tab == 'vaccine') active  @endif"><a  href="#tab41" id="hov" data-bs-toggle="tab">Vaccination</a></li>
-                                            <li class="@if ($tab == 'medicine') active  @endif"><a  href="#tab51" id="hov" data-bs-toggle="tab">Medicine</a></li>
-                                        </ul>
+                                        <nav class="navbar navbar-expand-sm navbar-light ">
+                                            <a class="navbar-brand" href="#"></a>
+                                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                                                <span class="navbar-toggler-icon"></span>
+                                            </button>
+                                            <div class="collapse navbar-collapse" id="navbarNav">
+                                                <ul class="navbar-nav nav nav-tabs myTab" data-bs-toggle="tab">
+                                                    <li class="nav-item active"><a href="#tab11" data-bs-toggle="tab">Egg</a></li>
+                                                    <li><a href="#tab21" data-bs-toggle="tab">Hen</a></li>
+                                                    <li><a href="#tab61" data-bs-toggle="tab">Chicks</a></li>
+                                                    <li><a href="#tab31" data-bs-toggle="tab">Feed</a></li>
+                                                    <li><a href="#tab41" data-bs-toggle="tab">Vaccination</a></li>
+                                                    <li><a href="#tab51" data-bs-toggle="tab">Medicine</a></li>
+                                                </ul>
+                                            </div>
+                                        </nav>
                                     </div>
                                 </div>
                                 <div class="panel-body tabs-menu-body">
                                     <div class="tab-content">
 
-{{--                                        this is start of egg--}}
+                                        {{-- Egg Starts Here--}}
                                         <div class="tab-pane show @if ($tab == 'egg') active @endif" id="tab11">
                                             <div class="float-right mb-3">
                                                 <div class="input-group">

@@ -36,7 +36,7 @@ class Poultry extends Model
     // Hen Calculation Starts
     public static function totalPurchaseHen()
     {
-        $totalPurchaseHen = Transaction::where('transaction_type_id', 2)->where('account_head_id', 8)->where('sub_head_id', 53)->sum('quantity');
+        $totalPurchaseHen = Transaction::where('transaction_type_id', 2)->where('account_head_id', 8)->where('sub_head_id', 51)->sum('quantity');
         return $totalPurchaseHen;
     }
     public static function totalSaleHen()

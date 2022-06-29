@@ -15,13 +15,13 @@
                         <div class="card-header">
                             <div class="tabs-menu ">
                                 <!-- Tabs -->
-                                <nav class="navbar navbar-expand-lg navbar-light">
+                                <nav class="navbar navbar-expand-sm navbar-light ">
                                     <a class="navbar-brand" href="#"></a>
                                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                                         <span class="navbar-toggler-icon"></span>
                                     </button>
                                     <div class="collapse navbar-collapse" id="navbarNav">
-                                        <ul class="nav nav-tabs myTab" data-bs-toggle="tab">
+                                        <ul class="navbar-nav nav nav-tabs myTab" data-bs-toggle="tab">
                                             <li class="nav-item active"><a href="#tab11" data-bs-toggle="tab">Cow</a></li>
                                             <li><a href="#tab12" data-bs-toggle="tab">Goat/Sheep</a></li>
                                             <li><a href="#tab13" data-bs-toggle="tab">Poultry</a></li>
@@ -700,18 +700,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        <div class="row">
-                                            <div class="col-12">
-                                                <div class="card">
-                                                    <div class="card-header">
-                                                        <h3 class="card-title">Eggs Collected </h3>
-                                                    </div>
-                                                    <div class="card-body">
-                                                        <canvas id="totalEggsCollectionChart" class="h-400"></canvas>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+
                                         <div class="row">
                                             <div class="col-12">
                                                 <div class="card">
@@ -940,10 +929,165 @@
 
                                     </div>
                                     <div class="tab-pane show" id="tab15">
-                                        <h3>Total Expenditures:</h3>
-                                        <h3>Total Income:</h3>
+{{--                                        <h3>Total Expenditures:</h3>--}}
+{{--                                        <h3>Total Income:</h3>--}}
                                         <hr>
-                                        <h3 class="text-center" style="font-weight: bold">Overall Farm Details</h3>
+                                        <div class="row">
+                                            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+                                                <div class="card card-counter bg-gradient-info">
+                                                    <div class="card-body">
+                                                        <div class="row">
+                                                            <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12 text-center">
+                                                                <h2 class="text-white mt-1 mb-0">Cow Expeniture</h2>
+                                                            </div>
+                                                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 text-center">
+                                                                <div class="mt-2 mb-0 text-white">
+                                                                    <h2 class="mb-0">{{$totalCowExpenditure}}</h2>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div><!-- col end -->
+                                            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+                                                <div class="card card-counter bg-gradient-primary">
+                                                    <div class="card-body">
+                                                        <div class="row">
+                                                            <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12 text-center">
+                                                                <h2 class="text-white mt-1 mb-0">Cow Income</h2>
+                                                            </div>
+                                                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 text-center">
+                                                                <div class="mt-2 mb-0 text-white">
+                                                                    <h2 class="mb-0">{{$totalCowIncome}}</h2>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div><!-- col end -->
+                                        </div>
+
+{{--                                        <h3 class="text-center" style="font-weight: bold">Goat Sheep Details</h3>--}}
+                                        <div class="row">
+                                            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+                                                <div class="card card-counter bg-gradient-info">
+                                                    <div class="card-body">
+                                                        <div class="row">
+                                                            <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12 text-center">
+                                                                <h2 class="text-white mt-1 mb-0">Goat Sheep Expeniture</h2>
+                                                            </div>
+                                                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 text-center">
+                                                                <div class="mt-2 mb-0 text-white">
+                                                                    <h2 class="mb-0">0</h2>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div><!-- col end -->
+                                            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+                                                <div class="card card-counter bg-gradient-primary">
+                                                    <div class="card-body">
+                                                        <div class="row">
+                                                            <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12 text-center">
+                                                                <h2 class="text-white mt-1 mb-0">Goat Sheep Income</h2>
+                                                            </div>
+                                                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 text-center">
+                                                                <div class="mt-2 mb-0 text-white">
+                                                                    <h2 class="mb-0">0</h2>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- col end -->
+
+                                        <div class="row">
+                                            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+                                                <div class="card card-counter bg-gradient-info">
+                                                    <div class="card-body">
+                                                        <div class="row">
+                                                            <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12 text-center">
+                                                                <h2 class="text-white mt-1 mb-0">Poultry Expeniture</h2>
+                                                            </div>
+                                                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 text-center">
+                                                                <div class="mt-2 mb-0 text-white">
+                                                                    <?php
+                                                                    $poultryExpenditure = \App\Models\Poultry:: poultryExpenditure();;
+                                                                    ?>
+                                                                    <h2 class="mb-0">{{$poultryExpenditure}}</h2>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div><!-- col end -->
+                                            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+                                                <div class="card card-counter bg-gradient-primary">
+                                                    <div class="card-body">
+                                                        <div class="row">
+                                                            <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12 text-center">
+                                                                <h2 class="text-white mt-1 mb-0">Poultry Income</h2>
+                                                            </div>
+                                                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 text-center">
+                                                                <div class="mt-2 mb-0 text-white">
+                                                                    <?php
+                                                                    $poultryIncome = \App\Models\Poultry:: poultryIncome();;
+                                                                    ?>
+                                                                    <h2 class="mb-0">{{$poultryIncome}}</h2>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- col end -->
+{{--                                        <h3 class="text-center" style="font-weight: bold">Cultivation Details</h3>--}}
+                                        <div class="row">
+                                            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+                                                <div class="card card-counter bg-gradient-info">
+                                                    <div class="card-body">
+                                                        <div class="row">
+                                                            <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12 text-center">
+                                                                <h2 class="text-white mt-1 mb-0">Cultivation Expeniture</h2>
+                                                            </div>
+                                                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 text-center">
+                                                                <div class="mt-2 mb-0 text-white">
+                                                                    <h2 class="mb-0">0</h2>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div><!-- col end -->
+                                            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+                                                <div class="card card-counter bg-gradient-primary">
+                                                    <div class="card-body">
+                                                        <div class="row">
+                                                            <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12 text-center">
+                                                                <h2 class="text-white mt-1 mb-0">Cultivation Income</h2>
+                                                            </div>
+                                                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 text-center">
+                                                                <div class="mt-2 mb-0 text-white">
+                                                                    <h2 class="mb-0">0</h2>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- col end -->
                                     </div>
                                 </div>
                             </div>
