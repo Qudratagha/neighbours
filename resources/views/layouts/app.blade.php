@@ -67,6 +67,10 @@
             color:red;
             padding-left:5px;
         }
+        .dataTables_wrapper .dt-buttons {
+            float:none;
+            text-align:center;
+        }
     </style>
 </head>
 <body class="@yield('body-class') ">
@@ -171,17 +175,27 @@
 <!-- Custom-charts js-->
 <script src="../assets/js/chartjs.js"></script>
 
+<!-- DataTables Export Buttons-->
+<script src="https://cdn.datatables.net/buttons/1.6.4/js/dataTables.buttons.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.6.4/js/buttons.html5.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.6.4/js/buttons.html5.min.js"></script>
+
 <!-- Custom js-->
 <script src="/assets/js/custom.js"></script>
 
 <script>
-    $(document).ready( function () {
+    $(function () {
         $('table.display').DataTable({
-            dom: 'Bfrtip',
+            dom: 'lBfrtip',
             buttons: [
-                'excel'
-            ]
+                { extend: 'excelHtml5', text: 'Export To Excel', className: 'btn-primary', exportOptions: { columns: ':not(.notExport)'} },
+                { extend: 'pdfHtml5', text: 'Export To PDF', className: 'btn-secondary', exportOptions: { columns: ':not(.notExport)'} }
+            ],
         });
+
     } );
 </script>
 <script>

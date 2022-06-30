@@ -94,7 +94,7 @@
                                                 </div>
                                             </div>
                                             <div class="table-responsive">
-                                                <table id="" class="table table-striped table-bordered text-nowrap w-100 display">
+                                                <table class="table table-striped table-bordered text-nowrap w-100 display">
                                                     <thead>
                                                     <tr>
                                                         <th class="wd-15p">ID</th>
@@ -102,7 +102,7 @@
                                                         <th class="wd-15p">Egg Quantity</th>
                                                         <th class="wd-15p">Amount</th>
                                                         <th class="wd-15p">Description</th>
-                                                        <th class="wd-15p">Delete</th>
+                                                        <th class="wd-15p notExport">Delete</th>
                                                     </tr>
                                                     </thead>
                                                     <tbody>
@@ -182,7 +182,7 @@
                                                 </div>
                                             </div>
                                             <div class="table-responsive">
-                                                <table id="" class="table table-striped table-bordered text-nowrap w-100 display">
+                                                <table class="table table-striped table-bordered text-nowrap w-100 display">
                                                     <thead>
                                                     <tr>
                                                         <th class="wd-15p">ID</th>
@@ -190,7 +190,7 @@
                                                         <th class="wd-15p">Hen Quantity</th>
                                                         <th class="wd-15p">Rate</th>
                                                         <th class="wd-15p">Detail</th>
-                                                        <th class="wd-15p">Delete</th>
+                                                        <th class="wd-15p notExport">Delete</th>
 
                                                     </tr>
                                                     </thead>
@@ -271,7 +271,7 @@
                                                 </div>
                                             </div>
                                             <div class="table-responsive">
-                                                <table id="" class="table table-striped table-bordered text-nowrap w-100 display">
+                                                <table class="table table-striped table-bordered text-nowrap w-100 display">
                                                     <thead>
                                                     <tr>
                                                         <th class="wd-15p">ID</th>
@@ -279,7 +279,7 @@
                                                         <th class="wd-15p">Quantity</th>
                                                         <th class="wd-15p">Amount</th>
                                                         <th class="wd-15p">Detail</th>
-                                                        <th class="wd-15p">Delete</th>
+                                                        <th class="wd-15p notExport">Delete</th>
                                                     </tr>
                                                     </thead>
                                                     <tbody>
@@ -351,13 +351,13 @@
                                                 </div>
                                             </div>
                                             <div class="table-responsive">
-                                                <table id="" class="table table-striped table-bordered text-nowrap w-100 display">
+                                                <table class="table table-striped table-bordered text-nowrap w-100 display">
                                                     <thead>
                                                     <tr>
                                                         <th class="wd-15p">ID</th>
                                                         <th class="wd-25p">Date</th>
                                                         <th class="wd-15p">Quantity</th>
-                                                        <th class="wd-15p">Delete</th>
+                                                        <th class="wd-15p notExport">Delete</th>
                                                     </tr>
                                                     </thead>
                                                     <tbody>
@@ -430,14 +430,14 @@
                                                 </div>
                                             </div>
                                             <div class="table-responsive">
-                                                <table id="" class="table table-striped table-bordered text-nowrap w-100 display">
+                                                <table class="table table-striped table-bordered text-nowrap w-100 display">
                                                     <thead>
                                                     <tr>
                                                         <th class="wd-15p">ID</th>
                                                         <th class="wd-25p">Date</th>
                                                         <th class="wd-15p">Vaccine Quantity</th>
                                                         <th class="wd-15p">DESC</th>
-                                                        <th class="wd-15p">Delete</th>
+                                                        <th class="wd-15p notExport">Delete</th>
                                                     </tr>
                                                     </thead>
                                                     <tbody>
@@ -513,14 +513,14 @@
                                                 </div>
                                             </div>
                                             <div class="table-responsive">
-                                                <table id="" class="table table-striped table-bordered text-nowrap w-100 display">
+                                                <table class="table table-striped table-bordered text-nowrap w-100 display">
                                                     <thead>
                                                     <tr>
                                                         <th class="wd-15p">ID</th>
                                                         <th class="wd-25p">Date</th>
                                                         <th class="wd-15p">Medicine Quantity</th>
                                                         <th class="wd-15p">Description</th>
-                                                        <th class="wd-15p">Delete</th>
+                                                        <th class="wd-15p notExport">Delete</th>
                                                     </tr>
                                                     </thead>
                                                     <tbody>

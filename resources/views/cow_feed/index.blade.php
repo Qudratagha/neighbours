@@ -47,7 +47,7 @@
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label for="message-text" class="form-control-label">Discription</label>
+                                                <label for="message-text" class="form-control-label">Description</label>
                                                 <input type="text" class="form-control" id="name" name="name">
                                             </div>
                                             <div class="modal-footer">
@@ -76,13 +76,13 @@
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table id="" class="table table-striped table-bordered text-nowrap w-100 display">
+                                <table class="table table-striped table-bordered text-nowrap w-100 display">
                                     <thead>
                                     <tr>
                                         <th class="wd-30p">Cattle Type</th>
                                         <th class="wd-30p">Quantity</th>
                                         <th class="wd-30p">Description</th>
-                                        <th class="wd-10p">Action</th>
+                                        <th class="wd-10p notExport">Action</th>
                                     </tr>
                                     </thead>
                                     <tbody>

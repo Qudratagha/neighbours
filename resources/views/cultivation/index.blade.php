@@ -31,7 +31,7 @@
                         <div class="card-body">
                             <!-- DataTables Start -->
                             <div class="table-responsive">
-                                <table id="mytable" class="table table-bordered" style="text-align: center">
+                                <table class="table table-bordered display" style="text-align: center">
                                     <thead>
                                     <tr>
                                         <th>ID</th>
@@ -39,7 +39,7 @@
                                         <th>Fertilizer Name</th>
                                         <th>Total Area Cultivated</th>
                                         <th>Date</th>
-                                        <th>Actions</th>
+                                        <th class="notExport">Actions</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -127,13 +127,5 @@
         </div>
     </div>
 
-@endsection
-@section('more-script')
-    <script>
-        @parent
-        $(document).ready(function () {
-            $('#mytable').DataTable({});
-        });
-    </script>
 @endsection
 

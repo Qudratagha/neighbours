@@ -29,6 +29,16 @@ class CattleController extends Controller
         $this->middleware('auth');
         $this->middleware('auth.gates');
     }
+	
+	public function index(String $cattle_type)
+	{
+		$goats = Cattle::goats()->get();
+		$cows = Cattle::cows()->get();
+		if ($cattle_type == 'cow' || $cattle_type == 'goat') {
+			abort_if(Gate::denies("$cattle_type-read"), Response::HTTP_FORBIDDEN, '403 Forbidden');
+			return view("cattle.$cattle_type.index", compact('goats', 'cows'));
+		}
+	}
 
     public static function cowDaily(Cattle $cow_daily)
     {
@@ -50,6 +60,13 @@ class CattleController extends Controller
         $inseminations = Insemination::where('cattle_id', $cowID)->get();
 
         return view('cow_daily.index', compact('cow_daily', 'transactions', 'sicks', 'medicines', 'pregnants', 'deliveries', 'vaccinations', 'inseminations'));
+    }
+    
+    public static function milkCollection()
+    {
+	    $cows = Cattle::cows()->where('dead_date',null)->where('saleStatus',0)->where('dry_date',null)->get();
+	    $transactions = Transaction::where('account_head_id',22)->get();
+	    return view('milk_collection.index',compact('transactions','cows'));
     }
 
     public function create(string $cattle_type)
@@ -250,16 +267,6 @@ class CattleController extends Controller
             $request['account_head_id'] = 7;
             $cattle_id->update($request->except('updateGoat', 'cattle_type'));
             return CattleController::index($cattle_type);
-        }
-    }
-
-    public function index(String $cattle_type)
-    {
-        $goats = Cattle::goats()->get();
-        $cows = Cattle::cows()->get();
-        if ($cattle_type == 'cow' || $cattle_type == 'goat') {
-            abort_if(Gate::denies("$cattle_type-read"), Response::HTTP_FORBIDDEN, '403 Forbidden');
-            return view("cattle.$cattle_type.index", compact('goats', 'cows'));
         }
     }
 

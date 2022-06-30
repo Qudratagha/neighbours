@@ -136,7 +136,7 @@
                                                                         </div>
                                                                         <div class="form-group">
                                                                             <label for="message-text"
-                                                                                   class="form-control-label">Quantity: In Liters</label>
+                                                                                   class="form-control-label">Quantity (In Liters)</label>
                                                                             <input type="text" class="form-control"
                                                                                    id="quantity" name="quantity"
                                                                                    required>
@@ -171,7 +171,7 @@
                                                         <th class="wd-15p">ID</th>
                                                         <th class="wd-25p">Date</th>
                                                         <th class="wd-15p">Milk Quantity</th>
-                                                        <th style="width: 5px">Action</th>
+                                                        <th style="width: 5px" class="notExport">Action</th>
                                                     </tr>
                                                     </thead>
                                                     <tbody>
@@ -269,7 +269,7 @@
                                                         <th class="wd-25p">Date</th>
                                                         <th class="wd-15p">Sick</th>
                                                         <th class="wd-15p">Treatment</th>
-                                                        <th style="width: 5px !important;">Action</th>
+                                                        <th style="width: 5px !important; " class="notExport">Action</th>
                                                     </tr>
                                                     </thead>
                                                     <tbody>
@@ -400,7 +400,7 @@
                                                         <th class="wd-25p">Date</th>
                                                         <th class="wd-15p">Medicine Quantity</th>
                                                         <th class="wd-15p">Description</th>
-                                                        <th style="width: 5px">Action</th>
+                                                        <th style="width: 5px" class="notExport">Action</th>
                                                     </tr>
                                                     </thead>
                                                     <tbody>
@@ -499,7 +499,7 @@
                                                         <th class="wd-15p">ID</th>
                                                         <th class="wd-25p">Date</th>
                                                         <th class="wd-15p">Insemination</th>
-                                                        <th style="width: 5%">Action</th>
+                                                        <th style="width: 5%" class="notExport">Action</th>
                                                     </tr>
                                                     </thead>
                                                     <tbody>
@@ -595,7 +595,7 @@
                                                         <th class="wd-15p">ID</th>
                                                         <th class="wd-25p">Date</th>
                                                         <th class="wd-15p">Pregnant</th>
-                                                        <th style="width: 5%">Action</th>
+                                                        <th style="width: 5%" class="notExport">Action</th>
                                                     </tr>
                                                     </thead>
                                                     <tbody>
@@ -694,7 +694,7 @@
                                                         <th class="wd-15p">ID</th>
                                                         <th class="wd-25p">Date</th>
                                                         <th class="wd-15p">Delivery</th>
-                                                        <th class="wd-15p">Action</th>
+                                                        <th class="wd-15p notExport">Action</th>
                                                     </tr>
                                                     </thead>
                                                     <tbody>
@@ -809,7 +809,7 @@
                                                         <th class="wd-25p">Date</th>
                                                         <th class="wd-15p">Vaccination Quantity</th>
                                                         <th class="wd-15p">Description</th>
-                                                        <th style="width: 5%;">Action</th>
+                                                        <th style="width: 5%;" class="notExport">Action</th>
                                                     </tr>
                                                     </thead>
                                                     <tbody>
