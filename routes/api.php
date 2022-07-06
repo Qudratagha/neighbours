@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\API\CattleController;
+use App\Http\Controllers\API\CultivationController;
 use App\Http\Controllers\API\DeliveryController;
 use App\Http\Controllers\API\InseminationController;
 use App\Http\Controllers\API\MedicinesController;
@@ -40,7 +41,7 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::get('/cattle/{cattle_type}',[\App\Http\Controllers\API\CattleController::class,'index']);
     Route::get('/cattle/{cattle_type}/create',[\App\Http\Controllers\API\CattleController::class,'create']);
     Route::post('/cattle/{cattle_type}',[\App\Http\Controllers\API\CattleController::class,'store']);
-    
+
     //cow_daily
     Route::get('/cow_daily', [CattleController::class, 'index']);
     Route::post('/cow_daily', [CattleController::class, 'store']);
@@ -51,7 +52,7 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::post('/cow_daily/delivery', [DeliveryController::class, 'store']);
     Route::post('/cow_daily/vaccination', [VaccinationController::class, 'store']);
     Route::post('/cow_daily/insemination', [InseminationController::class, 'store']);
-    
+
     //poultry
     Route::get('/poultry',[\App\Http\Controllers\API\PoultryController::class,'poultryIndex']);
     Route::post('/poultry',[\App\Http\Controllers\API\PoultryController::class, 'poultryStore']);
@@ -60,8 +61,8 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::post('/poultry_daily',[\App\Http\Controllers\API\PoultryController::class, 'poultryDailyStore']);
     Route::get('/poultry_expenditure',[\App\Http\Controllers\API\PoultryController::class,'poultryExpenditureIndex']);
     Route::post('/poultry_expenditure_store',[\App\Http\Controllers\API\PoultryController::class,'poultryExpenditureStore']);
-	
-	
+
+
 	//goat_daily
 	Route::get('/goat_daily', [CattleController::class, 'index']);
 	Route::post('/goat_daily', [CattleController::class, 'store']);
@@ -71,16 +72,32 @@ Route::group(['middleware' => ['jwt.verify']], function () {
 	Route::post('/goat_daily/pregnant', [PregnantController::class, 'store']);
 	Route::post('/goat_daily/delivery', [DeliveryController::class, 'store']);
 	Route::post('/goat_daily/vaccination', [VaccinationController::class, 'store']);
-	
+
 	//goat_sale
 	Route::get('/goat_sale', [TransactionController::class, 'indexGoatSale']);
 	Route::post('/goat_sale', [TransactionController::class, 'store']);
-	
+
 	//cow_sale
 	Route::get('/cow_sale', [TransactionController::class, 'indexCowSale']);
 	Route::post('/cow_sale', [TransactionController::class, 'store']);
-	
+
 	//milk_sale
 	Route::get('/milk_sale', [TransactionController::class, 'indexMilkSale']);
 	Route::post('/milk_sale', [TransactionController::class, 'store']);
+
+    //cultivation
+    Route::resource('/cultivation', CultivationController::class);
+
+//Cultivation Collect
+    Route::get('/cultivation_collect', [App\Http\Controllers\API\CultivationController::class, 'collectCultivation'])->name('cultivation.collectCultivation');
+    Route::get('/cultivation_collect/{cultivation}/editCollect', [App\Http\Controllers\API\CultivationController::class, 'editCollect'])->name('cultivation.editCollect');
+    Route::put('/cultivation_collect/{cultivation}', [App\Http\Controllers\API\CultivationController::class, 'updateCollect'])->name('cultivation.updateCollect');
+    Route::delete('/cultivation_collect/{cultivation}', [App\Http\Controllers\API\CultivationController::class, 'destroyCollect'])->name('cultivation.destroyCollect');
+
+//Sale Cultivation
+    Route::get('/cultivation_sale/rateQuantitySum', [App\Http\Controllers\API\CultivationController::class, 'rateQuantitySum'])->name('cultivation_sale.rateQuantitySum');
+    Route::get('cultivation_sale', [App\Http\Controllers\API\CultivationController::class, 'saleCultivation'])->name('cultivation.saleCultivation');
+    Route::delete('cultivation_sale/{cultivation}', [App\Http\Controllers\API\CultivationController::class, 'destroySale'])->name('cultivation.destroySale');
+
+
 });

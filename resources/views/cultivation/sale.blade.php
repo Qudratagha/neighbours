@@ -166,7 +166,6 @@
                             $('#btn').prop('disabled', true);
 
                         } else {
-
                             $('#btn').prop('disabled', false);
                         }
 
@@ -199,15 +198,13 @@
                             $('#btn').prop('disabled', true);
 
                         } else {
-
                             $('#btn').prop('disabled', false);
                         }
 
                     });
                 }
+                $('#cultivation_type').trigger('change');
             });
-
-
         });
 
         $('.quantity').on('change', function(){
